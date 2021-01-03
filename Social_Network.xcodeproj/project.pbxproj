@@ -61,6 +61,7 @@
 		75557D512534910A001FFCBF /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		756B251F2534D136004483EB /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		756B25262534D32F004483EB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		7575561D25A1F7E300BEF232 /* Social_Network copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Social_Network copy-Info.plist"; path = "Social Network/Social_Network copy-Info.plist"; sourceTree = SOURCE_ROOT; };
 		758AA7662530720A008AE4DC /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		75949EB22527777800A9D65C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		75949EB62527779E00A9D65C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -90,7 +91,7 @@
 		060782A5250CE27700A87020 = {
 			isa = PBXGroup;
 			children = (
-				060782B0250CE27700A87020 /* Navigation */,
+				060782B0250CE27700A87020 /* Social Network */,
 				060782AF250CE27700A87020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,7 +105,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		060782B0250CE27700A87020 /* Navigation */ = {
+		060782B0250CE27700A87020 /* Social Network */ = {
 			isa = PBXGroup;
 			children = (
 				757D2E01258E86FC006B6353 /* Applcation */,
@@ -112,8 +113,9 @@
 				75B47AF72534689A00E4C694 /* Data Sources */,
 				75B47AF3253465B800E4C694 /* Helpers */,
 				060782BF250CE27A00A87020 /* Info.plist */,
+				7575561D25A1F7E300BEF232 /* Social_Network copy-Info.plist */,
 			);
-			path = Navigation;
+			path = "Social Network";
 			sourceTree = "<group>";
 		};
 		753AF8F1258E8B1C00DAA111 /* Work Flows */ = {
@@ -529,7 +531,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Social Network/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -548,7 +550,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Social Network/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -567,7 +569,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "$(SRCROOT)/Navigation/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Social Network/Social_Network copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -586,7 +588,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "$(SRCROOT)/Navigation/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Social Network/Social_Network copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
