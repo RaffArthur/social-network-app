@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/arthur.raff/Desktop/Swift DEV/Netology/Course_Projects/Social_Network/Social_Network.xcodeproj">
+      location = "group:../Social Network/Applcation/Social_Network copy-Info.plist">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
