@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SnapKit
+
 @available(iOS 13.0, *)
 class ProfileHeaderView: UIView {
     
@@ -16,7 +18,6 @@ class ProfileHeaderView: UIView {
         tgr.numberOfTapsRequired = 1
         
         var image = UIImageView()
-        image.toAutoLayout()
         image.isUserInteractionEnabled = true
         image.image = UIImage(named: "haskey_avatar")
         image.layer.masksToBounds = true
@@ -28,7 +29,6 @@ class ProfileHeaderView: UIView {
     }()
     private lazy var nameProfile: UILabel = {
         var nameProfile = UILabel()
-        nameProfile.toAutoLayout()
         nameProfile.font = .systemFont(ofSize: 18, weight: .heavy)
         nameProfile.textAlignment = .left
         nameProfile.text = "Dmitry \"Haskey\""
@@ -38,7 +38,6 @@ class ProfileHeaderView: UIView {
     }()
     private lazy var statusBarProfile: UILabel = {
         var statusBarProfile = UILabel()
-        statusBarProfile.toAutoLayout()
         statusBarProfile.font = .systemFont(ofSize: 14,weight: .regular)
         statusBarProfile.textAlignment = .left
         statusBarProfile.text = "Add your profile status..."
@@ -48,7 +47,6 @@ class ProfileHeaderView: UIView {
     }()
     private lazy var buttonStatusProfile: UIButton = {
         var buttonStatusProfile = UIButton()
-        buttonStatusProfile.toAutoLayout()
         buttonStatusProfile.setTitle("Set my status 👀", for: buttonStatusProfile.state)
         buttonStatusProfile.titleLabel!.font = .systemFont(ofSize: 18, weight: .bold)
         buttonStatusProfile.backgroundColor = UIColor(named: "color_set")
@@ -63,7 +61,6 @@ class ProfileHeaderView: UIView {
     }()
     private lazy var textFieldProfile: UITextField = {
         var textfieldProfile = UITextField()
-        textfieldProfile.toAutoLayout()
         textfieldProfile.clearsOnBeginEditing = true
         textfieldProfile.leftView = UIView(frame: CGRect(
                                             x: 0,
@@ -127,34 +124,38 @@ class ProfileHeaderView: UIView {
         addSubview(textFieldProfile)
         addSubview(photoProfile)
         
-        let constraints = [
-            photoProfile.heightAnchor.constraint(equalToConstant: 100),
-            photoProfile.widthAnchor.constraint(equalToConstant: 100),
-            photoProfile.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            photoProfile.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            
-            nameProfile.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            nameProfile.leadingAnchor.constraint(equalTo: photoProfile.trailingAnchor, constant: 16),
-            nameProfile.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            statusBarProfile.topAnchor.constraint(equalTo: nameProfile.bottomAnchor , constant: 8),
-            statusBarProfile.leadingAnchor.constraint(equalTo: photoProfile.trailingAnchor, constant: 16),
-            statusBarProfile.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            textFieldProfile.heightAnchor.constraint(equalToConstant: 40),
-            textFieldProfile.leadingAnchor.constraint(equalTo: photoProfile.trailingAnchor, constant: 16),
-            textFieldProfile.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            textFieldProfile.bottomAnchor.constraint(equalTo: photoProfile.bottomAnchor),
-            
-            buttonStatusProfile.heightAnchor.constraint(equalToConstant: 50),
-            buttonStatusProfile.topAnchor.constraint(equalTo: photoProfile.bottomAnchor, constant: 16),
-            buttonStatusProfile.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            buttonStatusProfile.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            buttonStatusProfile.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        photoProfile.snp.makeConstraints { (make) -> Void in
+            make.size.equalTo(CGSize(width: 100, height: 100))
+            make.top.equalTo(self.snp.top).offset(16)
+            make.leading.equalTo(self.snp.leading).offset(16)
+        }
         
-        ]
+        nameProfile.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.snp.top).offset(16)
+            make.leading.equalTo(photoProfile.snp.trailing).offset(16)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+        }
         
-        NSLayoutConstraint.activate(constraints)
+        statusBarProfile.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(nameProfile.snp.bottom).offset(8)
+            make.leading.equalTo(photoProfile.snp.trailing).offset(16)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+        }
+        
+        textFieldProfile.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(40)
+            make.leading.equalTo(photoProfile.snp.trailing).offset(16)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.bottom.equalTo(photoProfile.snp.bottom)
+        }
+        
+        buttonStatusProfile.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(50)
+            make.top.equalTo(photoProfile.snp.bottom).offset(16)
+            make.leading.equalTo(self.snp.leading).offset(16)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.bottom.equalTo(self.snp.bottom).offset(-16)
+        }
     }
     
     override func layoutSubviews() {
