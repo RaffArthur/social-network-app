@@ -1,0 +1,18 @@
+{
+  "images" : [
+    {
+      "compression-type" : "automatic",
+      "filename" : "images.jpeg",
+      "idiom" : "iphone"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "automatic",
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "original"
+  }
+}
