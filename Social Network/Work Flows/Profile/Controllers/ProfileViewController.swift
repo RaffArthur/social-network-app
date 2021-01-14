@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 @available(iOS 13.0, *)
 class ProfileViewController: UIViewController {
@@ -13,7 +14,6 @@ class ProfileViewController: UIViewController {
     // MARK: - Properties
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.toAutoLayout()
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
         tableView.delegate = self
@@ -27,14 +27,12 @@ class ProfileViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(tableView)
         
-        let constraints = [
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+        tableView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(view)
+            make.trailing.equalTo(view)
+            make.leading.equalTo(view)
+            make.bottom.equalTo(view)
+        }
     }
     
     override func viewDidLoad() {
