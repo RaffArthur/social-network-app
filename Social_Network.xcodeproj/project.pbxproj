@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,8 +39,22 @@
 		756B25202534D136004483EB /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756B251F2534D136004483EB /* Launch Screen.storyboard */; };
 		756B25272534D32F004483EB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B25262534D32F004483EB /* TabBarViewController.swift */; };
 		758AA7672530720A008AE4DC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758AA7662530720A008AE4DC /* LogInViewController.swift */; };
+		7592F27925B05E47001F2FB8 /* FeedContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7592F27825B05E47001F2FB8 /* FeedContainerView.swift */; };
+		7592F27A25B05E47001F2FB8 /* FeedContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7592F27825B05E47001F2FB8 /* FeedContainerView.swift */; };
+		7592F27E25B07229001F2FB8 /* FeedViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7592F27D25B07229001F2FB8 /* FeedViewOutput.swift */; };
+		7592F27F25B07229001F2FB8 /* FeedViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7592F27D25B07229001F2FB8 /* FeedViewOutput.swift */; };
+		7592F28325B07DB4001F2FB8 /* PostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7592F28225B07DB4001F2FB8 /* PostPresenter.swift */; };
+		7592F28425B07DB4001F2FB8 /* PostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7592F28225B07DB4001F2FB8 /* PostPresenter.swift */; };
 		75949EB32527777800A9D65C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75949EB22527777800A9D65C /* ProfileHeaderView.swift */; };
 		75949EB72527779E00A9D65C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75949EB62527779E00A9D65C /* ProfileViewController.swift */; };
+		75974D5925A9E7D300841370 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75974D5825A9E7D300841370 /* SceneDelegate.swift */; };
+		75974D5A25A9E7D300841370 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75974D5825A9E7D300841370 /* SceneDelegate.swift */; };
+		75974D5F25A9EC8A00841370 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75974D5E25A9EC8A00841370 /* Checker.swift */; };
+		75974D6025A9EC8A00841370 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75974D5E25A9EC8A00841370 /* Checker.swift */; };
+		75974D6D25A9F02600841370 /* LogInViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75974D6C25A9F02600841370 /* LogInViewControllerDelegate.swift */; };
+		75974D6E25A9F02600841370 /* LogInViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75974D6C25A9F02600841370 /* LogInViewControllerDelegate.swift */; };
+		75974D7925A9F30F00841370 /* LoginReviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75974D7825A9F30F00841370 /* LoginReviewer.swift */; };
+		75974D7A25A9F30F00841370 /* LoginReviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75974D7825A9F30F00841370 /* LoginReviewer.swift */; };
 		759FF2F125458C9800F03820 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759FF2F025458C9800F03820 /* PhotosCollectionViewCell.swift */; };
 		75B47AF52534662300E4C694 /* UIViewToAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B47AF42534662300E4C694 /* UIViewToAutoLayout.swift */; };
 		75B47AFF253469C300E4C694 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B47AFE253469C300E4C694 /* Storage.swift */; };
@@ -66,8 +80,15 @@
 		756B25262534D32F004483EB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		7575561D25A1F7E300BEF232 /* Social_Network copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Social_Network copy-Info.plist"; path = "Social Network/Social_Network copy-Info.plist"; sourceTree = SOURCE_ROOT; };
 		758AA7662530720A008AE4DC /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		7592F27825B05E47001F2FB8 /* FeedContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerView.swift; sourceTree = "<group>"; };
+		7592F27D25B07229001F2FB8 /* FeedViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewOutput.swift; sourceTree = "<group>"; };
+		7592F28225B07DB4001F2FB8 /* PostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPresenter.swift; sourceTree = "<group>"; };
 		75949EB22527777800A9D65C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		75949EB62527779E00A9D65C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		75974D5825A9E7D300841370 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		75974D5E25A9EC8A00841370 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		75974D6C25A9F02600841370 /* LogInViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerDelegate.swift; sourceTree = "<group>"; };
+		75974D7825A9F30F00841370 /* LoginReviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReviewer.swift; sourceTree = "<group>"; };
 		759FF2F025458C9800F03820 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		75B47AF42534662300E4C694 /* UIViewToAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewToAutoLayout.swift; sourceTree = "<group>"; };
 		75B47AFE253469C300E4C694 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -147,14 +168,13 @@
 				EE9C3207536DA8F9A8083AFF /* Pods-Social_Network.debug.xcconfig */,
 				0ED7673D80285947C2B45ECA /* Pods-Social_Network.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		753AF8F1258E8B1C00DAA111 /* Work Flows */ = {
 			isa = PBXGroup;
 			children = (
-				753AF8FF258E8CD700DAA111 /* Log In */,
+				753AF8FF258E8CD700DAA111 /* Login */,
 				753AF8FE258E8CA500DAA111 /* Tab Bar */,
 				75949EB12527774900A9D65C /* Profile */,
 				75557D542534C8B0001FFCBF /* Feed */,
@@ -170,12 +190,15 @@
 			path = "Tab Bar";
 			sourceTree = "<group>";
 		};
-		753AF8FF258E8CD700DAA111 /* Log In */ = {
+		753AF8FF258E8CD700DAA111 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				75974D7525A9F29900841370 /* LoginReviewer */,
+				75974D5D25A9EC7400841370 /* LoginChecker */,
+				75974D6B25A9EFEB00841370 /* Delegates */,
 				753AF900258E8CED00DAA111 /* Controllers */,
 			);
-			path = "Log In";
+			path = Login;
 			sourceTree = "<group>";
 		};
 		753AF900258E8CED00DAA111 /* Controllers */ = {
@@ -214,17 +237,45 @@
 			isa = PBXGroup;
 			children = (
 				75940691258648B100D2C67A /* Controllers */,
+				7559DAE625B096EB0014CC10 /* Views */,
+				7559DAEB25B0978E0014CC10 /* PostPresenter */,
+				7559DAE725B097360014CC10 /* FeedViewOutput */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		7559DAE625B096EB0014CC10 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7592F27825B05E47001F2FB8 /* FeedContainerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7559DAE725B097360014CC10 /* FeedViewOutput */ = {
+			isa = PBXGroup;
+			children = (
+				7592F27D25B07229001F2FB8 /* FeedViewOutput.swift */,
+			);
+			path = FeedViewOutput;
+			sourceTree = "<group>";
+		};
+		7559DAEB25B0978E0014CC10 /* PostPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				7592F28225B07DB4001F2FB8 /* PostPresenter.swift */,
+			);
+			path = PostPresenter;
 			sourceTree = "<group>";
 		};
 		757D2E01258E86FC006B6353 /* Applcation */ = {
 			isa = PBXGroup;
 			children = (
 				060782B1250CE27700A87020 /* AppDelegate.swift */,
+				75974D5825A9E7D300841370 /* SceneDelegate.swift */,
+				751B1DCC258FB81B0042ACC6 /* WhateverViewController.swift */,
 				060782BA250CE27A00A87020 /* Assets.xcassets */,
 				756B251F2534D136004483EB /* Launch Screen.storyboard */,
-				751B1DCC258FB81B0042ACC6 /* WhateverViewController.swift */,
 			);
 			path = Applcation;
 			sourceTree = "<group>";
@@ -238,13 +289,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		7594068E2586481700D2C67A /* Table View Cells */ = {
+		7594068E2586481700D2C67A /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
 				75557D3F25347B68001FFCBF /* PostTableViewCell.swift */,
 				754FC8952544480E0089A1A4 /* PhotosTableViewCell.swift */,
 			);
-			path = "Table View Cells";
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		7594068F2586485100D2C67A /* Views */ = {
@@ -255,20 +306,20 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		759406902586487800D2C67A /* Collection VIew Cells */ = {
+		759406902586487800D2C67A /* CollectionVIewCells */ = {
 			isa = PBXGroup;
 			children = (
 				759FF2F025458C9800F03820 /* PhotosCollectionViewCell.swift */,
 			);
-			path = "Collection VIew Cells";
+			path = CollectionVIewCells;
 			sourceTree = "<group>";
 		};
 		75940691258648B100D2C67A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				060782B5250CE27700A87020 /* FeedViewController.swift */,
 				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
 				060782C7250CEE5D00A87020 /* PostViewController.swift */,
-				060782B5250CE27700A87020 /* FeedViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -277,11 +328,35 @@
 			isa = PBXGroup;
 			children = (
 				7594068D2586480A00D2C67A /* Controllers */,
-				7594068E2586481700D2C67A /* Table View Cells */,
-				759406902586487800D2C67A /* Collection VIew Cells */,
 				7594068F2586485100D2C67A /* Views */,
+				7594068E2586481700D2C67A /* TableViewCells */,
+				759406902586487800D2C67A /* CollectionVIewCells */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		75974D5D25A9EC7400841370 /* LoginChecker */ = {
+			isa = PBXGroup;
+			children = (
+				75974D5E25A9EC8A00841370 /* Checker.swift */,
+			);
+			path = LoginChecker;
+			sourceTree = "<group>";
+		};
+		75974D6B25A9EFEB00841370 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				75974D6C25A9F02600841370 /* LogInViewControllerDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		75974D7525A9F29900841370 /* LoginReviewer */ = {
+			isa = PBXGroup;
+			children = (
+				75974D7825A9F30F00841370 /* LoginReviewer.swift */,
+			);
+			path = LoginReviewer;
 			sourceTree = "<group>";
 		};
 		75B47AF3253465B800E4C694 /* Helpers */ = {
@@ -488,17 +563,24 @@
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				756B25272534D32F004483EB /* TabBarViewController.swift in Sources */,
 				758AA7672530720A008AE4DC /* LogInViewController.swift in Sources */,
+				7592F27925B05E47001F2FB8 /* FeedContainerView.swift in Sources */,
+				75974D6D25A9F02600841370 /* LogInViewControllerDelegate.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				75B47AF52534662300E4C694 /* UIViewToAutoLayout.swift in Sources */,
+				75974D5F25A9EC8A00841370 /* Checker.swift in Sources */,
+				75974D5925A9E7D300841370 /* SceneDelegate.swift in Sources */,
 				75949EB32527777800A9D65C /* ProfileHeaderView.swift in Sources */,
 				754FC8962544480E0089A1A4 /* PhotosTableViewCell.swift in Sources */,
 				7552CBA625445F5900F95765 /* PhotosViewController.swift in Sources */,
+				75974D7925A9F30F00841370 /* LoginReviewer.swift in Sources */,
 				75949EB72527779E00A9D65C /* ProfileViewController.swift in Sources */,
+				7592F28325B07DB4001F2FB8 /* PostPresenter.swift in Sources */,
 				75557D522534910A001FFCBF /* UIImage+Alpha.swift in Sources */,
 				751B1DCD258FB81B0042ACC6 /* WhateverViewController.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
 				759FF2F125458C9800F03820 /* PhotosCollectionViewCell.swift in Sources */,
 				75557D4025347B68001FFCBF /* PostTableViewCell.swift in Sources */,
+				7592F27E25B07229001F2FB8 /* FeedViewOutput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,17 +593,24 @@
 				753AF96F258E90A500DAA111 /* AppDelegate.swift in Sources */,
 				753AF970258E90A500DAA111 /* TabBarViewController.swift in Sources */,
 				753AF971258E90A500DAA111 /* LogInViewController.swift in Sources */,
+				7592F27A25B05E47001F2FB8 /* FeedContainerView.swift in Sources */,
+				75974D6E25A9F02600841370 /* LogInViewControllerDelegate.swift in Sources */,
 				753AF972258E90A500DAA111 /* InfoViewController.swift in Sources */,
 				753AF973258E90A500DAA111 /* UIViewToAutoLayout.swift in Sources */,
+				75974D6025A9EC8A00841370 /* Checker.swift in Sources */,
+				75974D5A25A9E7D300841370 /* SceneDelegate.swift in Sources */,
 				753AF974258E90A500DAA111 /* ProfileHeaderView.swift in Sources */,
 				753AF975258E90A500DAA111 /* PhotosTableViewCell.swift in Sources */,
 				753AF976258E90A500DAA111 /* PhotosViewController.swift in Sources */,
+				75974D7A25A9F30F00841370 /* LoginReviewer.swift in Sources */,
 				753AF977258E90A500DAA111 /* ProfileViewController.swift in Sources */,
+				7592F28425B07DB4001F2FB8 /* PostPresenter.swift in Sources */,
 				753AF978258E90A500DAA111 /* UIImage+Alpha.swift in Sources */,
 				751B1DCE258FB81B0042ACC6 /* WhateverViewController.swift in Sources */,
 				753AF979258E90A500DAA111 /* PostViewController.swift in Sources */,
 				753AF97A258E90A500DAA111 /* PhotosCollectionViewCell.swift in Sources */,
 				753AF97B258E90A500DAA111 /* PostTableViewCell.swift in Sources */,
+				7592F27F25B07229001F2FB8 /* FeedViewOutput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
