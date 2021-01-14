@@ -9,13 +9,19 @@ import UIKit
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c3b17c398509699fcd38486a4287819f9557324a
 ///Контроллер отвечающий за подсчет времени работы в фоновом режиме
 =======
 /// Контроллер отвечающий за подсчет времени работы в фоновом режиме
 >>>>>>> feature/applifecycle/implementation
+<<<<<<< HEAD
 =======
 /// Контроллер отвечающий за подсчет времени работы в фоновом режиме
 >>>>>>> feature/DI/initial
+=======
+>>>>>>> c3b17c398509699fcd38486a4287819f9557324a
 class WhateverViewController: UIViewController {
     var resultsLabel: UILabel = {
         let label = UILabel()

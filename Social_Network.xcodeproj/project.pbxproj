@@ -68,6 +68,7 @@
 		759FF2F025458C9800F03820 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		75B47AF42534662300E4C694 /* UIViewToAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewToAutoLayout.swift; sourceTree = "<group>"; };
 		75B47AFE253469C300E4C694 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		75D1E41C25A1EFD700F6E9F9 /* Social_Network copy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Social_Network copy-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +93,11 @@
 			isa = PBXGroup;
 			children = (
 				060782B0250CE27700A87020 /* Social Network */,
+<<<<<<< HEAD
+				060782BF250CE27A00A87020 /* Info.plist */,
+				75D1E41C25A1EFD700F6E9F9 /* Social_Network copy-Info.plist */,
+=======
+>>>>>>> feature/applifecycle/implementation
 				060782AF250CE27700A87020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,8 +118,11 @@
 				753AF8F1258E8B1C00DAA111 /* Work Flows */,
 				75B47AF72534689A00E4C694 /* Data Sources */,
 				75B47AF3253465B800E4C694 /* Helpers */,
+<<<<<<< HEAD
+=======
 				060782BF250CE27A00A87020 /* Info.plist */,
 				7575561D25A1F7E300BEF232 /* Social_Network copy-Info.plist */,
+>>>>>>> feature/applifecycle/implementation
 			);
 			path = "Social Network";
 			sourceTree = "<group>";
@@ -529,9 +538,16 @@
 		060782C3250CE27A00A87020 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7FBKGHVJBQ;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+=======
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Social Network/Info.plist";
+>>>>>>> feature/applifecycle/implementation
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -548,9 +564,16 @@
 		060782C4250CE27A00A87020 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7FBKGHVJBQ;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+=======
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Social Network/Info.plist";
+>>>>>>> feature/applifecycle/implementation
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -567,9 +590,16 @@
 		753AF981258E90A500DAA111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7FBKGHVJBQ;
+				INFOPLIST_FILE = "$(SRCROOT)/Social_Network copy-Info.plist";
+=======
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Social Network/Social_Network copy-Info.plist";
+>>>>>>> feature/applifecycle/implementation
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -586,9 +616,16 @@
 		753AF982258E90A500DAA111 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7FBKGHVJBQ;
+				INFOPLIST_FILE = "$(SRCROOT)/Social_Network copy-Info.plist";
+=======
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Social Network/Social_Network copy-Info.plist";
+>>>>>>> feature/applifecycle/implementation
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
