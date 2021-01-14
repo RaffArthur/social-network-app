@@ -7,7 +7,11 @@
 
 import UIKit
 
+<<<<<<< HEAD
 ///Контроллер отвечающий за подсчет времени работы в фоновом режиме
+=======
+/// Контроллер отвечающий за подсчет времени работы в фоновом режиме
+>>>>>>> feature/applifecycle/implementation
 class WhateverViewController: UIViewController {
     var resultsLabel: UILabel = {
         let label = UILabel()
