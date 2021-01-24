@@ -9,29 +9,26 @@ import UIKit
 class LogInViewController: UIViewController {
     
 // MARK: - Properties
+    weak var authorizationDelegate: LoginViewControllerDelegate?
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.toAutoLayout()
         scrollView.showsVerticalScrollIndicator = false
         
         return scrollView
     }()
     private lazy var contentView: UIView = {
         let view = UIView()
-        view.toAutoLayout()
         
         return view
     }()
     private lazy var logoImage: UIImageView = {
         let logoImage = UIImageView(image: #imageLiteral(resourceName: "vk_logo"))
         logoImage.contentMode = .scaleAspectFit
-        logoImage.toAutoLayout()
         
         return logoImage
     }()
     private lazy var loginContainer: UIView = {
         let loginContainer = UIView()
-        loginContainer.toAutoLayout()
         loginContainer.layer.borderWidth = 0.5
         loginContainer.layer.cornerRadius = 10
         loginContainer.layer.borderColor = UIColor.lightGray.cgColor
@@ -39,9 +36,8 @@ class LogInViewController: UIViewController {
 
         return loginContainer
     }()
-    private lazy var contactsField: UITextField = {
+    lazy var contactsField: UITextField = {
         let contactsField = UITextField()
-        contactsField.toAutoLayout()
         contactsField.clearButtonMode = .whileEditing
         contactsField.contentVerticalAlignment = .center
         contactsField.autocorrectionType = .no
@@ -65,9 +61,8 @@ class LogInViewController: UIViewController {
         
         return contactsField
     }()
-    private lazy var passwordField: UITextField = {
+    lazy var passwordField: UITextField = {
         var passwordField = UITextField()
-        passwordField.toAutoLayout()
         passwordField.clearButtonMode = .whileEditing
         passwordField.contentVerticalAlignment = .center
         passwordField.autocorrectionType = .no
@@ -92,7 +87,6 @@ class LogInViewController: UIViewController {
     }()
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton()
-        loginButton.toAutoLayout()
         loginButton.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(1.0), for: .normal)
         loginButton.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
         loginButton.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .highlighted)
@@ -119,48 +113,58 @@ class LogInViewController: UIViewController {
         loginContainer.addSubview(contactsField)
         loginContainer.addSubview(passwordField)
         
-        let loginViewConstraints = [
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            
-            logoImage.widthAnchor.constraint(equalToConstant: 100),
-            logoImage.heightAnchor.constraint(equalToConstant: 100),
-            logoImage.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 120),
-            logoImage.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
-            
-            loginContainer.heightAnchor.constraint(equalToConstant: 100),
-            loginContainer.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            loginContainer.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            loginContainer.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
-            
-            contactsField.heightAnchor.constraint(equalToConstant: 50),
-            contactsField.topAnchor.constraint(equalTo: loginContainer.topAnchor),
-            contactsField.leadingAnchor.constraint(equalTo: loginContainer.leadingAnchor),
-            contactsField.trailingAnchor.constraint(equalTo: loginContainer.trailingAnchor),
-            contactsField.bottomAnchor.constraint(equalTo: passwordField.topAnchor),
-
-            passwordField.heightAnchor.constraint(equalToConstant: 50),
-            passwordField.topAnchor.constraint(equalTo: contactsField.bottomAnchor),
-            passwordField.leadingAnchor.constraint(equalTo: loginContainer.leadingAnchor),
-            passwordField.trailingAnchor.constraint(equalTo: loginContainer.trailingAnchor),
-            passwordField.bottomAnchor.constraint(equalTo: loginContainer.bottomAnchor),
-            
-            loginButton.heightAnchor.constraint(equalToConstant: 50),
-            loginButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            loginButton.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            loginButton.topAnchor.constraint(equalTo: loginContainer.bottomAnchor, constant: 16),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)
-        ]
+        scrollView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(view.snp.top)
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo(view.snp.bottom)
+        }
         
-        NSLayoutConstraint.activate(loginViewConstraints)
+        contentView.snp.makeConstraints { (make) -> Void in
+            make.width.equalTo(scrollView.snp.width)
+            make.top.equalTo(scrollView.snp.top)
+            make.leading.equalTo(scrollView.snp.leading)
+            make.trailing.equalTo(scrollView.snp.trailing)
+            make.bottom.equalTo(scrollView.snp.bottom)
+        }
+        
+        logoImage.snp.makeConstraints { (make) -> Void in
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+            make.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(120)
+            make.centerX.equalTo(contentView.safeAreaLayoutGuide.snp.centerX)
+        }
+        
+        loginContainer.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(100)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide.snp.trailing).offset(-16)
+            make.top.equalTo(logoImage.snp.bottom).offset(120)
+        }
+        
+        contactsField.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(50)
+            make.top.equalTo(loginContainer.snp.top)
+            make.leading.equalTo(loginContainer.snp.leading)
+            make.trailing.equalTo(loginContainer.snp.trailing)
+            make.bottom.equalTo(passwordField.snp.top)
+        }
+        
+        passwordField.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(50)
+            make.top.equalTo(contactsField.snp.bottom)
+            make.leading.equalTo(loginContainer.snp.leading)
+            make.trailing.equalTo(loginContainer.snp.trailing)
+            make.bottom.equalTo(loginContainer.snp.bottom)
+        }
+        
+        loginButton.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(50)
+            make.top.equalTo(loginContainer.snp.bottom).offset(16)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide.snp.trailing).offset(-16)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom)
+        }
     }
     
     override func viewDidLoad() {
@@ -184,6 +188,23 @@ class LogInViewController: UIViewController {
     }
     
 // MARK: - @objc Actions
+    private func showLoginAlertController() {
+        let alertController = UIAlertController(
+            title: "Неккоректные данные",
+            message: "Введите корректные логин и пароль",
+            preferredStyle: .alert
+        )
+        let alertAction = UIAlertAction(
+            title: "Ок",
+            style: .cancel,
+            handler: .none
+        )
+        alertController.addAction(alertAction)
+        
+        present(alertController, animated: true)
+    }
+    
+// MARK: - @objc Actions
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             print(keyboardSize)
@@ -200,23 +221,34 @@ class LogInViewController: UIViewController {
     
     @objc private func loginButtonTapped() {
         
-        let alertController = UIAlertController(
-            title: "Некорректные данные",
-            message: "Данные введены неверно или отсутствуют",
-            preferredStyle: .alert
-        )
-        let alertAction = UIAlertAction(
-            title: "Ок",
-            style: .cancel,
-            handler: .none
-        )
-        alertController.addAction(alertAction)
-        
-        guard contactsField.hasText && passwordField.hasText else {
-            return self.present(alertController, animated: true, completion: nil)
+        guard let delegate = authorizationDelegate else {
+            print("Delegate was not found")
+            return
         }
         
-        self.navigationController?.pushViewController(TabBarViewController(), animated: true)
+        guard let filledLogin = contactsField.text, !filledLogin.isEmpty else {
+            showLoginAlertController()
+            return
+        }
+        
+        guard let filledPass = passwordField.text, !filledPass.isEmpty else {
+            showLoginAlertController()
+            return
+        }
+        
+        delegate.loginWillBeChecked(filledLogin, completion: { [self] (isLoginCorrect) in
+            if isLoginCorrect {
+                delegate.passWillBeChecked(filledPass, completion: { (isPassCorrect) in
+                    if isPassCorrect {
+                        self.navigationController?.pushViewController(TabBarViewController(), animated: true)
+                    } else {
+                        showLoginAlertController()
+                    }
+                })
+            } else {
+                showLoginAlertController()
+            }
+        })
     }
 }
 
