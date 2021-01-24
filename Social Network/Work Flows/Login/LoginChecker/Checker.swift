@@ -9,7 +9,7 @@ import UIKit
 
 @available(iOS 13.0, *)
 class Checker {
-    static var shared: Checker = {
+    static let shared: Checker = {
         let instance = Checker()
         
         return instance

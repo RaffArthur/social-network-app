@@ -11,11 +11,10 @@ final class FeedViewController: UIViewController {
     
     // MARK: - Properties
     var output: FeedViewOutput?
-    let feedContainerView = FeedContainerView()
+    private let feedContainerView = FeedContainerView()
     
     // MARK: - View Funcs
     private func setupLayout() {
-        
         view.addSubview(feedContainerView)
         
         feedContainerView.snp.makeConstraints { (make) in

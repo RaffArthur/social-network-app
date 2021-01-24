@@ -21,9 +21,7 @@ class FeedContainerView: UIStackView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         button.isEnabled = true
 
-        
         return button
-        
     }()
     private lazy var showPostButtonTwo: UIButton = {
         let button = UIButton()

@@ -222,15 +222,18 @@ class LogInViewController: UIViewController {
     @objc private func loginButtonTapped() {
         
         guard let delegate = authorizationDelegate else {
-            return print("Delegate was not found")
+            print("Delegate was not found")
+            return
         }
         
         guard let filledLogin = contactsField.text, !filledLogin.isEmpty else {
-            return showLoginAlertController()
+            showLoginAlertController()
+            return
         }
         
         guard let filledPass = passwordField.text, !filledPass.isEmpty else {
-            return showLoginAlertController()
+            showLoginAlertController()
+            return
         }
         
         delegate.loginWillBeChecked(filledLogin, completion: { [self] (isLoginCorrect) in
