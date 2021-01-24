@@ -8,7 +8,7 @@
 import UIKit
 
 class PostViewController: UIViewController {
-        
+    // MARK: - Properties
     let showAlertButton: UIButton = {
         let showAlertButton = UIButton()
         showAlertButton.toAutoLayout()
@@ -20,22 +20,8 @@ class PostViewController: UIViewController {
         
         return showAlertButton
     }()
-        
-    @objc func showAlert(_ sender: Any) {
-        let alertController = UIAlertController(title: "Удалить пост?", message: "Пост нельзя будет восстановить", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
-            print("Отмена")
-        }
-        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
-            print("Удалить")
-        }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(deleteAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
     
+    // MARK: - View Funcs
     func setupLayout() {
         view.addSubview(showAlertButton)
 
@@ -56,5 +42,21 @@ class PostViewController: UIViewController {
         view.backgroundColor = UIColor(named: "color_set")
         
         setupLayout()
+    }
+    
+    // MARK: - @objc Actions
+    @objc func showAlert(_ sender: Any) {
+        let alertController = UIAlertController(title: "Удалить пост?", message: "Пост нельзя будет восстановить", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
+            print("Отмена")
+        }
+        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            print("Удалить")
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 }
