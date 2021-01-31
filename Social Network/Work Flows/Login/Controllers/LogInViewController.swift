@@ -187,7 +187,7 @@ class LogInViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-// MARK: - Custom funcs
+// MARK: - @objc Actions
     private func showLoginAlertController() {
         let alertController = UIAlertController(
             title: "Неккоректные данные",
@@ -253,6 +253,7 @@ class LogInViewController: UIViewController {
 }
 
 // MARK: - Extensions
+
 @available(iOS 13.0, *)
 extension LogInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
