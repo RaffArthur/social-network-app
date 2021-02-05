@@ -37,12 +37,12 @@ playground.xcworkspace
 
 # Swift Package Manager
 #
-Packages/
-Package.pins
-Package.resolved
-*.xcodeproj
-.swiftpm
-.build/
+# Packages/
+# Package.pins
+# Package.resolved
+# *.xcodeproj
+# .swiftpm
+# .build/
 
 # CocoaPods
 #
