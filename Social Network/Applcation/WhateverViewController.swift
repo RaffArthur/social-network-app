@@ -12,7 +12,7 @@ class WhateverViewController: UIViewController {
     var resultsLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.toAutoLayout()
+        
         return label
     }()
     var button: UIButton = {
@@ -20,7 +20,6 @@ class WhateverViewController: UIViewController {
         button.setTitle("Начать отсчет", for: .normal)
         button.backgroundColor = .systemGray
         button.addTarget(self, action: #selector(didTapPlayPause(sender:)), for: .touchUpInside)
-        button.toAutoLayout()
         
         return button
         

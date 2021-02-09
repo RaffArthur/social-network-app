@@ -58,8 +58,6 @@
 		75B444E625C70CEE00B3C586 /* LoginReviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AE25C70CED00B3C586 /* LoginReviewer.swift */; };
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
 		75B444E825C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
-		75B444E925C70CEE00B3C586 /* UIViewToAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B325C70CED00B3C586 /* UIViewToAutoLayout.swift */; };
-		75B444EA25C70CEE00B3C586 /* UIViewToAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B325C70CED00B3C586 /* UIViewToAutoLayout.swift */; };
 		B3B7E4A9C8C620DC13007CAC /* Pods_New_Social_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38C3AFBDD855E7FD3CF6010 /* Pods_New_Social_Network.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +91,6 @@
 		75B444AC25C70CED00B3C586 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		75B444AE25C70CED00B3C586 /* LoginReviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginReviewer.swift; sourceTree = "<group>"; };
 		75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
-		75B444B325C70CED00B3C586 /* UIViewToAutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewToAutoLayout.swift; sourceTree = "<group>"; };
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E4FFA143DABAE99DA0BC831 /* Pods-New Social_Network.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New Social_Network.release.xcconfig"; path = "Target Support Files/Pods-New Social_Network/Pods-New Social_Network.release.xcconfig"; sourceTree = "<group>"; };
 		A4C288C8D377A18E38AAA07C /* Pods-New Social_Network.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New Social_Network.debug.xcconfig"; path = "Target Support Files/Pods-New Social_Network/Pods-New Social_Network.debug.xcconfig"; sourceTree = "<group>"; };
@@ -359,7 +356,6 @@
 			isa = PBXGroup;
 			children = (
 				75B444B025C70CED00B3C586 /* Alpha For Images */,
-				75B444B225C70CED00B3C586 /* Auto Layout */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -370,14 +366,6 @@
 				75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */,
 			);
 			path = "Alpha For Images";
-			sourceTree = "<group>";
-		};
-		75B444B225C70CED00B3C586 /* Auto Layout */ = {
-			isa = PBXGroup;
-			children = (
-				75B444B325C70CED00B3C586 /* UIViewToAutoLayout.swift */,
-			);
-			path = "Auto Layout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -576,7 +564,6 @@
 				75B444E325C70CEE00B3C586 /* LogInViewController.swift in Sources */,
 				75B444DF25C70CEE00B3C586 /* Checker.swift in Sources */,
 				75B444BB25C70CEE00B3C586 /* WhateverViewController.swift in Sources */,
-				75B444E925C70CEE00B3C586 /* UIViewToAutoLayout.swift in Sources */,
 				75B444B725C70CEE00B3C586 /* Storage.swift in Sources */,
 				75B444D325C70CEE00B3C586 /* PostPresenter.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* LoginReviewer.swift in Sources */,
@@ -606,7 +593,6 @@
 				75B444E425C70CEE00B3C586 /* LogInViewController.swift in Sources */,
 				75B444E025C70CEE00B3C586 /* Checker.swift in Sources */,
 				75B444BC25C70CEE00B3C586 /* WhateverViewController.swift in Sources */,
-				75B444EA25C70CEE00B3C586 /* UIViewToAutoLayout.swift in Sources */,
 				75B444B825C70CEE00B3C586 /* Storage.swift in Sources */,
 				75B444D425C70CEE00B3C586 /* PostPresenter.swift in Sources */,
 				75B444E625C70CEE00B3C586 /* LoginReviewer.swift in Sources */,

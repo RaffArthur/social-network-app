@@ -28,10 +28,10 @@ class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(view)
-            make.trailing.equalTo(view)
-            make.leading.equalTo(view)
-            make.bottom.equalTo(view)
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
     
