@@ -7,8 +7,12 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class PostViewController: UIViewController {
+    
     // MARK: - Properties
+    weak var coordinator: FeedCoordinator?
+    
     let showAlertButton: UIButton = {
         let showAlertButton = UIButton()
         showAlertButton.backgroundColor = .clear
@@ -40,7 +44,7 @@ class PostViewController: UIViewController {
         
         setupLayout()
     }
-    
+
     // MARK: - @objc Actions
     @objc func showAlert(_ sender: Any) {
         let alertController = UIAlertController(title: "Удалить пост?", message: "Пост нельзя будет восстановить", preferredStyle: .alert)

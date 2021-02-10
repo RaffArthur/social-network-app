@@ -12,6 +12,8 @@ import SnapKit
 class ProfileViewController: UIViewController {
     
     // MARK: - Properties
+    weak var coordinator: ProfileCoordinator?
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
@@ -40,8 +42,9 @@ class ProfileViewController: UIViewController {
         
         title = "Posts"
         view.backgroundColor = .white
-        navigationController?.hidesBarsOnSwipe = true
-
+        
+        coordinator?.navigationController.tabBarController?.tabBar.isHidden = false
+        coordinator?.navigationController.navigationBar.isHidden = true
         setupLayout()
     }
 }
@@ -57,7 +60,7 @@ extension ProfileViewController: UITableViewDelegate {
         
         guard indexPath.section == 0 else { return print("ERROR!!") }
         
-        navigationController?.pushViewController(PhotosViewController(), animated: true)
+        coordinator?.openPhotoGallery()
     }
 }
 

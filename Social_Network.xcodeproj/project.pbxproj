@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6604BBDC19C7BDB28F71B008 /* Pods_Social_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E0182EA0463A16135832F5 /* Pods_Social_Network.framework */; };
+		75597A7D25D300CE00A120A7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A7C25D300CE00A120A7 /* AppCoordinator.swift */; };
+		75597A8125D3012A00A120A7 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A8025D3012A00A120A7 /* FeedCoordinator.swift */; };
+		75597A8525D3013A00A120A7 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A8425D3013A00A120A7 /* ProfileCoordinator.swift */; };
+		75597A8A25D303AC00A120A7 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A8925D303AC00A120A7 /* Coordinators.swift */; };
 		75B444B725C70CEE00B3C586 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4448425C70CED00B3C586 /* Storage.swift */; };
 		75B444B825C70CEE00B3C586 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4448425C70CED00B3C586 /* Storage.swift */; };
 		75B444B925C70CEE00B3C586 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B4448525C70CED00B3C586 /* LaunchScreen.storyboard */; };
@@ -36,12 +40,6 @@
 		75B444D025C70CEE00B3C586 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449825C70CED00B3C586 /* ProfileViewController.swift */; };
 		75B444D125C70CEE00B3C586 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */; };
 		75B444D225C70CEE00B3C586 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */; };
-		75B444D325C70CEE00B3C586 /* PostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449D25C70CED00B3C586 /* PostPresenter.swift */; };
-		75B444D425C70CEE00B3C586 /* PostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449D25C70CED00B3C586 /* PostPresenter.swift */; };
-		75B444D525C70CEE00B3C586 /* FeedViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449F25C70CED00B3C586 /* FeedViewOutput.swift */; };
-		75B444D625C70CEE00B3C586 /* FeedViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449F25C70CED00B3C586 /* FeedViewOutput.swift */; };
-		75B444D725C70CEE00B3C586 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A125C70CED00B3C586 /* InfoViewController.swift */; };
-		75B444D825C70CEE00B3C586 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A125C70CED00B3C586 /* InfoViewController.swift */; };
 		75B444D925C70CEE00B3C586 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A225C70CED00B3C586 /* PostViewController.swift */; };
 		75B444DA25C70CEE00B3C586 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A225C70CED00B3C586 /* PostViewController.swift */; };
 		75B444DB25C70CEE00B3C586 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A325C70CED00B3C586 /* FeedViewController.swift */; };
@@ -65,6 +63,10 @@
 		060782AE250CE27700A87020 /* Social_Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Social_Network.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ED7673D80285947C2B45ECA /* Pods-Social_Network.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social_Network.release.xcconfig"; path = "Target Support Files/Pods-Social_Network/Pods-Social_Network.release.xcconfig"; sourceTree = "<group>"; };
 		753AF983258E90A500DAA111 /* New Social_Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Social_Network.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75597A7C25D300CE00A120A7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		75597A8025D3012A00A120A7 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		75597A8425D3013A00A120A7 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		75597A8925D303AC00A120A7 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
 		75B4448125C70CED00B3C586 /* Social_Network copy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Social_Network copy-Info.plist"; sourceTree = "<group>"; };
 		75B4448425C70CED00B3C586 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		75B4448625C70CED00B3C586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,9 +82,6 @@
 		75B4449725C70CED00B3C586 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		75B4449825C70CED00B3C586 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
-		75B4449D25C70CED00B3C586 /* PostPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPresenter.swift; sourceTree = "<group>"; };
-		75B4449F25C70CED00B3C586 /* FeedViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewOutput.swift; sourceTree = "<group>"; };
-		75B444A125C70CED00B3C586 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		75B444A225C70CED00B3C586 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		75B444A325C70CED00B3C586 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		75B444A525C70CED00B3C586 /* FeedContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedContainerView.swift; sourceTree = "<group>"; };
@@ -158,6 +157,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		75597A8825D3017600A120A7 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				75597A7C25D300CE00A120A7 /* AppCoordinator.swift */,
+				75597A8025D3012A00A120A7 /* FeedCoordinator.swift */,
+				75597A8425D3013A00A120A7 /* ProfileCoordinator.swift */,
+				75597A8925D303AC00A120A7 /* Coordinators.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		75B4448025C70CED00B3C586 /* Social Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +213,7 @@
 		75B4448D25C70CED00B3C586 /* Work Flows */ = {
 			isa = PBXGroup;
 			children = (
+				75597A8825D3017600A120A7 /* Coordinators */,
 				75B4448E25C70CED00B3C586 /* Tab Bar */,
 				75B4449025C70CED00B3C586 /* Profile */,
 				75B4449B25C70CED00B3C586 /* Feed */,
@@ -267,34 +278,15 @@
 		75B4449B25C70CED00B3C586 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				75B4449C25C70CED00B3C586 /* PostPresenter */,
-				75B4449E25C70CED00B3C586 /* FeedViewOutput */,
 				75B444A025C70CED00B3C586 /* Controllers */,
 				75B444A425C70CED00B3C586 /* Views */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
 		};
-		75B4449C25C70CED00B3C586 /* PostPresenter */ = {
-			isa = PBXGroup;
-			children = (
-				75B4449D25C70CED00B3C586 /* PostPresenter.swift */,
-			);
-			path = PostPresenter;
-			sourceTree = "<group>";
-		};
-		75B4449E25C70CED00B3C586 /* FeedViewOutput */ = {
-			isa = PBXGroup;
-			children = (
-				75B4449F25C70CED00B3C586 /* FeedViewOutput.swift */,
-			);
-			path = FeedViewOutput;
-			sourceTree = "<group>";
-		};
 		75B444A025C70CED00B3C586 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				75B444A125C70CED00B3C586 /* InfoViewController.swift */,
 				75B444A225C70CED00B3C586 /* PostViewController.swift */,
 				75B444A325C70CED00B3C586 /* FeedViewController.swift */,
 			);
@@ -554,10 +546,13 @@
 			files = (
 				75B444E125C70CEE00B3C586 /* LogInViewControllerDelegate.swift in Sources */,
 				75B444CD25C70CEE00B3C586 /* PhotosViewController.swift in Sources */,
+				75597A8A25D303AC00A120A7 /* Coordinators.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* PostTableViewCell.swift in Sources */,
+				75597A8525D3013A00A120A7 /* ProfileCoordinator.swift in Sources */,
 				75B444D125C70CEE00B3C586 /* ProfileHeaderView.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
 				75B444C725C70CEE00B3C586 /* PhotosTableViewCell.swift in Sources */,
+				75597A7D25D300CE00A120A7 /* AppCoordinator.swift in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				75B444DB25C70CEE00B3C586 /* FeedViewController.swift in Sources */,
 				75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */,
@@ -565,12 +560,10 @@
 				75B444DF25C70CEE00B3C586 /* Checker.swift in Sources */,
 				75B444BB25C70CEE00B3C586 /* WhateverViewController.swift in Sources */,
 				75B444B725C70CEE00B3C586 /* Storage.swift in Sources */,
-				75B444D325C70CEE00B3C586 /* PostPresenter.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* LoginReviewer.swift in Sources */,
+				75597A8125D3012A00A120A7 /* FeedCoordinator.swift in Sources */,
 				75B444D925C70CEE00B3C586 /* PostViewController.swift in Sources */,
 				75B444DD25C70CEE00B3C586 /* FeedContainerView.swift in Sources */,
-				75B444D525C70CEE00B3C586 /* FeedViewOutput.swift in Sources */,
-				75B444D725C70CEE00B3C586 /* InfoViewController.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75B444C525C70CEE00B3C586 /* TabBarViewController.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,
@@ -594,12 +587,9 @@
 				75B444E025C70CEE00B3C586 /* Checker.swift in Sources */,
 				75B444BC25C70CEE00B3C586 /* WhateverViewController.swift in Sources */,
 				75B444B825C70CEE00B3C586 /* Storage.swift in Sources */,
-				75B444D425C70CEE00B3C586 /* PostPresenter.swift in Sources */,
 				75B444E625C70CEE00B3C586 /* LoginReviewer.swift in Sources */,
 				75B444DA25C70CEE00B3C586 /* PostViewController.swift in Sources */,
 				75B444DE25C70CEE00B3C586 /* FeedContainerView.swift in Sources */,
-				75B444D625C70CEE00B3C586 /* FeedViewOutput.swift in Sources */,
-				75B444D825C70CEE00B3C586 /* InfoViewController.swift in Sources */,
 				75B444CC25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75B444C625C70CEE00B3C586 /* TabBarViewController.swift in Sources */,
 				75B444C425C70CEE00B3C586 /* SceneDelegate.swift in Sources */,

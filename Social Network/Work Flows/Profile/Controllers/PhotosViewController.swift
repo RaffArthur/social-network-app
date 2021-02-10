@@ -10,6 +10,8 @@ import UIKit
 @available(iOS 13.0, *)
 class PhotosViewController: UIViewController {
     // MARK: - Properties
+    weak var coordinator: ProfileCoordinator?
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -39,7 +41,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Photos Gallery"
-        navigationController?.tabBarController?.tabBar.isHidden = true
+        coordinator?.navigationController.tabBarController?.tabBar.isHidden = true
 
         setupLayout()
     }
