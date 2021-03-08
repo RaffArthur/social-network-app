@@ -11,7 +11,7 @@ import UIKit
 class FeedCoordinator: Coordinator{
     
     // MARK: - Properties
-    var navigationController: UINavigationController
+    private(set) var navigationController: UINavigationController
     
     // MARK: - Coordinator Initialization
     init(navigationController: UINavigationController) {
