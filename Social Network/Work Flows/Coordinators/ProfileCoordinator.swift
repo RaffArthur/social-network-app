@@ -12,7 +12,7 @@ class ProfileCoordinator: Coordinator {
     
     // MARK: - Properties
     private let loginReviewer = LoginReviewer()
-    var navigationController: UINavigationController
+    private(set) var navigationController: UINavigationController
     
     // MARK: - Coordinator Initialization
     init(navigationController: UINavigationController) {

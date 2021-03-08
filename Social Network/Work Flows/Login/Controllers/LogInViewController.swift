@@ -176,11 +176,10 @@ class LogInViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
         
-        coordinator?.navigationController.tabBarController?.tabBar.isHidden = true
+        navigationController?.tabBarController?.tabBar.isHidden = true
         
         setupLayout()
         addKeyboardObserver()
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {

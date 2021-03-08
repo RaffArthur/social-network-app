@@ -12,7 +12,7 @@ final class AppCoordinator: TabBarCoordinator {
     
     // MARK: - Properties
     var childCoordinators = [Coordinator]()
-    var tabBarController: UITabBarController
+    private(set) var tabBarController: UITabBarController
     
     // MARK: - Inits
     init(tabBarController: UITabBarController) {

@@ -9,13 +9,13 @@ import UIKit
 
 protocol TabBarCoordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
-    var tabBarController: UITabBarController { get set }
+    var tabBarController: UITabBarController { get }
         
     func start()
 }
 
 protocol Coordinator: AnyObject {
-    var navigationController: UINavigationController { get set }
+    var navigationController: UINavigationController { get }
     
     func start()
 }
