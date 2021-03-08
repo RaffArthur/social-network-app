@@ -10,12 +10,13 @@ import UIKit
 @available(iOS 13.0, *)
 class PhotosViewController: UIViewController {
     // MARK: - Properties
+    weak var coordinator: ProfileCoordinator?
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.toAutoLayout()
         cv.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
         cv.backgroundColor = .white
         cv.dataSource = self
@@ -28,21 +29,19 @@ class PhotosViewController: UIViewController {
     func setupLayout() {
         view.addSubview(collectionView)
         
-        let constraints = [
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+        collectionView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Photos Gallery"
-        navigationController?.tabBarController?.tabBar.isHidden = true
+        coordinator?.navigationController.tabBarController?.tabBar.isHidden = true
 
         setupLayout()
     }

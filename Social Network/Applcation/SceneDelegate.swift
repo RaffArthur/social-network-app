@@ -11,19 +11,22 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private let loginReviewer = LoginReviewer()
+    var coordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let loginVC = LogInViewController()
+        let rootViewController = TabBarViewController()
         
-        loginVC.authorizationDelegate = loginReviewer
-        
+        coordinator = AppCoordinator(tabBarController: rootViewController)
+        rootViewController.coordinator = coordinator
+        rootViewController.tabBarController?.tabBar.isHidden = true
+        coordinator?.start()
+                                
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: loginVC)
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }
 
