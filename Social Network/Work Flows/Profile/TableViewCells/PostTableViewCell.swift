@@ -18,7 +18,6 @@ class PostTableViewCell: UITableViewCell {
     }
     private let authorNameLabel: UILabel = {
         let authorNameLabel = UILabel()
-        authorNameLabel.toAutoLayout()
         authorNameLabel.font = .systemFont(ofSize: 20, weight: .bold)
         authorNameLabel.textColor = .black
         authorNameLabel.numberOfLines = 2
@@ -27,7 +26,6 @@ class PostTableViewCell: UITableViewCell {
     }()
     private let postImageView: UIImageView = {
         let postImageView = UIImageView()
-        postImageView.toAutoLayout()
         postImageView.layer.masksToBounds = true
         postImageView.layer.cornerRadius = 18
         postImageView.contentMode = .scaleAspectFit
@@ -37,7 +35,6 @@ class PostTableViewCell: UITableViewCell {
     }()
     private let descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
-        descriptionLabel.toAutoLayout()
         descriptionLabel.font = .systemFont(ofSize: 14, weight: .regular)
         descriptionLabel.textColor = .systemGray
         descriptionLabel.numberOfLines = 0
@@ -46,7 +43,6 @@ class PostTableViewCell: UITableViewCell {
     }()
     private let likesLabel: UILabel = {
         let likesLabel = UILabel()
-        likesLabel.toAutoLayout()
         likesLabel.font = .systemFont(ofSize: 14, weight: .bold)
         likesLabel.textColor = UIColor(named: "color_set")
         
@@ -54,14 +50,13 @@ class PostTableViewCell: UITableViewCell {
     }()
     private let viewsLabel: UILabel = {
         let viewsLabel = UILabel()
-        viewsLabel.toAutoLayout()
         viewsLabel.font = .systemFont(ofSize: 14, weight: .bold)
         viewsLabel.textColor = UIColor(named: "color_set")
         
         return viewsLabel
     }()
     
-    // MARK: - Custom funcs
+    // MARK: - Layout funcs
     func setupLayout() {
         
         contentView.addSubview(authorNameLabel)
@@ -69,29 +64,35 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(likesLabel)
         contentView.addSubview(viewsLabel)
-
-        let constraints = [
-            authorNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            authorNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            postImageView.topAnchor.constraint(equalTo: authorNameLabel.bottomAnchor, constant: 12),
-            postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            
-            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-        ]
         
-        NSLayoutConstraint.activate(constraints)
+        authorNameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(contentView.snp.top).offset(16)
+            make.leading.equalTo(contentView.snp.leading).offset(16)
+        }
+        
+        postImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(authorNameLabel.snp.bottom).offset(12)
+            make.leading.equalTo(contentView.snp.leading).offset(16)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+        }
+        
+        descriptionLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(postImageView.snp.bottom).offset(16)
+            make.leading.equalTo(contentView.snp.leading).offset(16)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+        }
+        
+        likesLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(16)
+            make.leading.equalTo(contentView.snp.leading).offset(16)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+        }
+        
+        viewsLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(16)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+        }
     }
     
     func configure(_ post: UserPost) {

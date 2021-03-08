@@ -9,7 +9,9 @@ import UIKit
 class LogInViewController: UIViewController {
     
 // MARK: - Properties
-    weak var authorizationDelegate: LoginViewControllerDelegate?
+    weak var delegate: LoginViewControllerDelegate?
+    weak var coordinator: ProfileCoordinator?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -104,6 +106,7 @@ class LogInViewController: UIViewController {
 // MARK: - View Funcs
     private func setupLayout() {
         view.addSubview(scrollView)
+        
         scrollView.addSubview(contentView)
         
         contentView.addSubview(logoImage)
@@ -172,22 +175,20 @@ class LogInViewController: UIViewController {
         
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
-
+        
+        navigationController?.tabBarController?.tabBar.isHidden = true
+        
         setupLayout()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+        addKeyboardObserver()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        removeKeyboardObserver()
     }
     
-// MARK: - Custom funcs
+// MARK: - Custom Funcs
     private func showLoginAlertController() {
         let alertController = UIAlertController(
             title: "Неккоректные данные",
@@ -204,13 +205,27 @@ class LogInViewController: UIViewController {
         present(alertController, animated: true)
     }
     
+    private func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
 // MARK: - @objc Actions
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             print(keyboardSize)
             print(scrollView.frame.size)
+            let insets = UIEdgeInsets(top: 0,
+                                      left: 0,
+                                      bottom: keyboardSize.width,
+                                      right: 0)
             scrollView.contentInset.bottom = keyboardSize.width
-            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.width, right: 0)
+            scrollView.verticalScrollIndicatorInsets = insets
         }
     }
     
@@ -221,7 +236,7 @@ class LogInViewController: UIViewController {
     
     @objc private func loginButtonTapped() {
         
-        guard let delegate = authorizationDelegate else {
+        guard let delegate = delegate else {
             print("Delegate was not found")
             return
         }
@@ -240,7 +255,7 @@ class LogInViewController: UIViewController {
             if isLoginCorrect {
                 delegate.passWillBeChecked(filledPass, completion: { (isPassCorrect) in
                     if isPassCorrect {
-                        self.navigationController?.pushViewController(TabBarViewController(), animated: true)
+                        coordinator?.logIn()
                     } else {
                         showLoginAlertController()
                     }

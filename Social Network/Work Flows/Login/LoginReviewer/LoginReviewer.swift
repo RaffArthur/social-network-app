@@ -9,7 +9,7 @@ import UIKit
 
 @available(iOS 13.0, *)
 class LoginReviewer: LoginViewControllerDelegate {
-
+    
     func loginWillBeChecked(_ login: String, completion: @escaping (Bool) -> Void) {
         return completion(Checker.shared.isNameCorrect(login))
     }

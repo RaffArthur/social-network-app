@@ -7,11 +7,14 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class PostViewController: UIViewController {
+    
     // MARK: - Properties
+    weak var coordinator: FeedCoordinator?
+    
     let showAlertButton: UIButton = {
         let showAlertButton = UIButton()
-        showAlertButton.toAutoLayout()
         showAlertButton.backgroundColor = .clear
         showAlertButton.setTitle("Show Alert", for: showAlertButton.state)
         showAlertButton.titleLabel?.font = .systemFont(ofSize: 28, weight: .heavy)
@@ -24,16 +27,14 @@ class PostViewController: UIViewController {
     // MARK: - View Funcs
     func setupLayout() {
         view.addSubview(showAlertButton)
-
-        let constraints = [
-            showAlertButton.heightAnchor.constraint(equalToConstant: 44),
-            showAlertButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            showAlertButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            showAlertButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            showAlertButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-        ]
         
-        NSLayoutConstraint.activate(constraints)
+        showAlertButton.snp.makeConstraints { (make) in
+            make.height.equalTo(44)
+            make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
+            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(16)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-16)
+        }
     }
 
     override func viewDidLoad() {
@@ -43,7 +44,7 @@ class PostViewController: UIViewController {
         
         setupLayout()
     }
-    
+
     // MARK: - @objc Actions
     @objc func showAlert(_ sender: Any) {
         let alertController = UIAlertController(title: "Удалить пост?", message: "Пост нельзя будет восстановить", preferredStyle: .alert)

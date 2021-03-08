@@ -10,7 +10,8 @@ import UIKit
 final class FeedViewController: UIViewController {
     
     // MARK: - Properties
-    var output: FeedViewOutput?
+    weak var coordinator: FeedCoordinator?
+
     private let feedContainerView = FeedContainerView()
     
     // MARK: - View Funcs
@@ -29,13 +30,11 @@ final class FeedViewController: UIViewController {
         
         view.backgroundColor = .white
         title = "Feed"
-        
+                
         feedContainerView.onTap = { [weak self] in
-            self?.output?.showPost()
+            self?.coordinator?.showPost()
         }
-        
-        output?.navigationController = self.navigationController
-                        
+                                
         setupLayout()
     }
 }
