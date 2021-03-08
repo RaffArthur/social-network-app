@@ -24,7 +24,6 @@ class PhotosViewController: UIViewController {
         
         return cv
     }()
-    
     var photoURLs: [String] = []
     
     // MARK: - Layout Funcs
@@ -51,30 +50,23 @@ class PhotosViewController: UIViewController {
 
         getURLsFromServer()
         
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        self.collectionView.reloadData()
     }
     
     // MARK: - JSON Parsing
-    func getURLsFromServer() {
+    private func getURLsFromServer() {
         if let url = URL(string: "https://jsonplaceholder.typicode.com/photos") {
-            let queue = DispatchQueue.global(qos: .userInitiated)
-            
-            queue.async {
-                let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-                    guard let data = data else { return }
-                    if let vc = self {
-                        vc.parseJSON(data)
-                    }
+            let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+                guard let data = data else { return }
+                if let vc = self {
+                    vc.parseJSON(data)
                 }
-
-                task.resume()
             }
+            task.resume()
         }
     }
     
-    func parseJSON(_ data: Data) {
+    private func parseJSON(_ data: Data) {
         
         let json = JSON(data)
         
@@ -127,7 +119,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 @available(iOS 13.0, *)
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+                
         return photoURLs.count
     }
     
@@ -135,12 +127,8 @@ extension PhotosViewController: UICollectionViewDataSource {
         let cell: PhotosCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
         
         
-        DispatchQueue.global(qos: .utility).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             cell.getPhoto(from: self.photoURLs[indexPath.item])
-        }
-
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
         }
         
         return cell

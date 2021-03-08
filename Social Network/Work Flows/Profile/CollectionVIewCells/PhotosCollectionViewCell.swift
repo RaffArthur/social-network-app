@@ -11,15 +11,7 @@ import SwiftyJSON
 @available(iOS 13.0, *)
 class PhotosCollectionViewCell: UICollectionViewCell {
     
-    // MARK: - Properties
-    var photo: UIImageView? {
-        didSet {
-            guard let photo = photo else { return }
-            
-            photoImageView = photo
-        }
-    }
-    
+    // MARK: - Properties    
     private lazy var photoImageView: UIImageView = {
         let iv = UIImageView()
         iv.layer.masksToBounds = true
@@ -47,9 +39,9 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Get Photo from URL (Parsing)
     func getPhoto(from url: String) {
-        guard let photo = photo else { return }
-        
-        photo.downloaded(from: url)
+        DispatchQueue.main.async { [weak self] in
+            self?.photoImageView.downloaded(from: url)
+        }
     }
 }
 
