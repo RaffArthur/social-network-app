@@ -7,6 +7,7 @@ target 'New Social_Network' do
 
   # Pods for New Social_Network
   pod 'SnapKit', '~> 5.0.0'
+  pod 'SwiftyJSON', '~> 4.0'
 
 end
 
@@ -16,5 +17,5 @@ target 'Social_Network' do
 
   # Pods for Social_Network
   pod 'SnapKit', '~> 5.0.0'
-
+  pod 'SwiftyJSON', '~> 4.0'
 end
