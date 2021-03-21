@@ -176,11 +176,10 @@ class LogInViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
         
-        coordinator?.navigationController.tabBarController?.tabBar.isHidden = true
+        navigationController?.tabBarController?.tabBar.isHidden = true
         
         setupLayout()
         addKeyboardObserver()
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -252,17 +251,17 @@ class LogInViewController: UIViewController {
             return
         }
         
-        delegate.loginWillBeChecked(filledLogin, completion: { [self] (isLoginCorrect) in
+        delegate.loginWillBeChecked(filledLogin, completion: { [weak self] (isLoginCorrect) in
             if isLoginCorrect {
-                delegate.passWillBeChecked(filledPass, completion: { (isPassCorrect) in
+                delegate.passWillBeChecked(filledPass, completion: { [weak self] (isPassCorrect) in
                     if isPassCorrect {
-                        coordinator?.logIn()
+                        self?.coordinator?.logIn()
                     } else {
-                        showLoginAlertController()
+                        self?.showLoginAlertController()
                     }
                 })
             } else {
-                showLoginAlertController()
+                self?.showLoginAlertController()
             }
         })
     }

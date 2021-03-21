@@ -12,6 +12,8 @@
 		75597A8125D3012A00A120A7 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A8025D3012A00A120A7 /* FeedCoordinator.swift */; };
 		75597A8525D3013A00A120A7 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A8425D3013A00A120A7 /* ProfileCoordinator.swift */; };
 		75597A8A25D303AC00A120A7 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A8925D303AC00A120A7 /* Coordinators.swift */; };
+		755ADFC625E51A19008E92A3 /* UIImageViewDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755ADFC525E51A19008E92A3 /* UIImageViewDownloader.swift */; };
+		755ADFC725E51A19008E92A3 /* UIImageViewDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755ADFC525E51A19008E92A3 /* UIImageViewDownloader.swift */; };
 		75B444B725C70CEE00B3C586 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4448425C70CED00B3C586 /* Storage.swift */; };
 		75B444B825C70CEE00B3C586 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4448425C70CED00B3C586 /* Storage.swift */; };
 		75B444B925C70CEE00B3C586 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B4448525C70CED00B3C586 /* LaunchScreen.storyboard */; };
@@ -67,6 +69,7 @@
 		75597A8025D3012A00A120A7 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		75597A8425D3013A00A120A7 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		75597A8925D303AC00A120A7 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
+		755ADFC525E51A19008E92A3 /* UIImageViewDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewDownloader.swift; sourceTree = "<group>"; };
 		75B4448125C70CED00B3C586 /* Social_Network copy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Social_Network copy-Info.plist"; sourceTree = "<group>"; };
 		75B4448425C70CED00B3C586 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		75B4448625C70CED00B3C586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -166,6 +169,14 @@
 				75597A8925D303AC00A120A7 /* Coordinators.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		755ADFC425E51995008E92A3 /* Image Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				755ADFC525E51A19008E92A3 /* UIImageViewDownloader.swift */,
+			);
+			path = "Image Downloader";
 			sourceTree = "<group>";
 		};
 		75B4448025C70CED00B3C586 /* Social Network */ = {
@@ -347,6 +358,7 @@
 		75B444AF25C70CED00B3C586 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				755ADFC425E51995008E92A3 /* Image Downloader */,
 				75B444B025C70CED00B3C586 /* Alpha For Images */,
 			);
 			path = Helpers;
@@ -545,6 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75B444E125C70CEE00B3C586 /* LogInViewControllerDelegate.swift in Sources */,
+				755ADFC625E51A19008E92A3 /* UIImageViewDownloader.swift in Sources */,
 				75B444CD25C70CEE00B3C586 /* PhotosViewController.swift in Sources */,
 				75597A8A25D303AC00A120A7 /* Coordinators.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* PostTableViewCell.swift in Sources */,
@@ -579,6 +592,7 @@
 				75B444CA25C70CEE00B3C586 /* PostTableViewCell.swift in Sources */,
 				75B444D225C70CEE00B3C586 /* ProfileHeaderView.swift in Sources */,
 				75B444D025C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
+				755ADFC725E51A19008E92A3 /* UIImageViewDownloader.swift in Sources */,
 				75B444C825C70CEE00B3C586 /* PhotosTableViewCell.swift in Sources */,
 				75B444C225C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				75B444DC25C70CEE00B3C586 /* FeedViewController.swift in Sources */,

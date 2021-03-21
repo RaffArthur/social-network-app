@@ -6,16 +6,12 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 @available(iOS 13.0, *)
 class PhotosCollectionViewCell: UICollectionViewCell {
-    var photo: UserPhoto? {
-        didSet {
-            guard let photo = photo else { return }
-            
-            configure(photo)
-        }
-    }
+    
+    // MARK: - Properties    
     private lazy var photoImageView: UIImageView = {
         let iv = UIImageView()
         iv.layer.masksToBounds = true
@@ -25,10 +21,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    func configure(_ photo: UserPhoto) {
-        photoImageView.image = UIImage(named: photo.photo)
-    }
-    
+    // MARK: - Layout Funcs
     private func setupLayout() {
         contentView.addSubview(photoImageView)
         
@@ -43,4 +36,12 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         setupLayout()
     }
+    
+    // MARK: - Get Photo from URL (Parsing)
+    func getPhoto(from url: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.photoImageView.downloaded(from: url)
+        }
+    }
 }
+

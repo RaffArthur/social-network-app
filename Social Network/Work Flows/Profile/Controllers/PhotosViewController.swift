@@ -6,12 +6,12 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 @available(iOS 13.0, *)
 class PhotosViewController: UIViewController {
     // MARK: - Properties
     weak var coordinator: ProfileCoordinator?
-    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -24,8 +24,9 @@ class PhotosViewController: UIViewController {
         
         return cv
     }()
+    var photoURLs: [String] = []
     
-    // MARK: - Funcs
+    // MARK: - Layout Funcs
     func setupLayout() {
         view.addSubview(collectionView)
         
@@ -42,10 +43,45 @@ class PhotosViewController: UIViewController {
         
         title = "Photos Gallery"
         coordinator?.navigationController.tabBarController?.tabBar.isHidden = true
-
+        coordinator?.navigationController.navigationBar.isHidden = false
+        coordinator?.navigationController.hidesBarsOnSwipe = true
+        
         setupLayout()
+
+        getURLsFromServer()
+        
+        self.collectionView.reloadData()
+    }
+    
+    // MARK: - JSON Parsing
+    private func getURLsFromServer() {
+        if let url = URL(string: "https://jsonplaceholder.typicode.com/photos") {
+            let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+                guard let data = data else { return }
+                if let vc = self {
+                    vc.parseJSON(data)
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    private func parseJSON(_ data: Data) {
+        
+        let json = JSON(data)
+        
+        for (_, element) in json.enumerated() {
+            if let url = element.1["url"].string {
+                photoURLs.append(url)
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }
+
 
 // MARK: - Extensions
 @available(iOS 13.0, *)
@@ -82,15 +118,15 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
 @available(iOS 13.0, *)
 extension PhotosViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return UsersPhotosStorage.photos.count
+                
+        return photoURLs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PhotosCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
         
-        cell.photo = UsersPhotosStorage.photos[indexPath.item]
+        cell.getPhoto(from: self.photoURLs[indexPath.item])
         
         return cell
     }
