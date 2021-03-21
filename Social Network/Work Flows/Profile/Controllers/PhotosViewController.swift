@@ -126,10 +126,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PhotosCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
         
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            cell.getPhoto(from: self.photoURLs[indexPath.item])
-        }
+        cell.getPhoto(from: self.photoURLs[indexPath.item])
         
         return cell
     }
