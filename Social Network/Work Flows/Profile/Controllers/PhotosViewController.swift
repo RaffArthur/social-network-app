@@ -12,6 +12,7 @@ import SwiftyJSON
 class PhotosViewController: UIViewController {
     // MARK: - Properties
     weak var coordinator: ProfileCoordinator?
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -24,33 +25,69 @@ class PhotosViewController: UIViewController {
         
         return cv
     }()
+    
     var photoURLs: [String] = []
+    
+    private lazy var timer = Timer(timeInterval: 1.0,
+                      target: self,
+                      selector: #selector(fireTimer),
+                      userInfo: nil,
+                      repeats: true)
+    private lazy var timerCounter = 5
+    private lazy var timeDescription: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGray
+        label.textAlignment = .center
+        label.backgroundColor = .white
+        
+        return label
+    }()
     
     // MARK: - Layout Funcs
     func setupLayout() {
+        view.addSubview(timeDescription)
         view.addSubview(collectionView)
         
+        timeDescription.snp.makeConstraints { (make) in
+            make.height.equalTo(40)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
+            make.top.equalTo(timeDescription.snp.bottom).offset(24)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getURLsFromServer()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Photos Gallery"
+        view.backgroundColor = .white
+        
         coordinator?.navigationController.tabBarController?.tabBar.isHidden = true
         coordinator?.navigationController.navigationBar.isHidden = false
         coordinator?.navigationController.hidesBarsOnSwipe = true
         
         setupLayout()
-
-        getURLsFromServer()
-        
+                
         self.collectionView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        startTimer()
     }
     
     // MARK: - JSON Parsing
@@ -79,6 +116,25 @@ class PhotosViewController: UIViewController {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
+    }
+    
+    // MARK: - Timer creating
+    @objc private func fireTimer(_ timer: Timer) {
+        timeDescription.text = "До обовления данных осталось \(timerCounter) секунд"
+        
+        if timerCounter > 0 {
+            timerCounter -= 1
+        } else {
+            self.collectionView.reloadData()
+            
+            timeDescription.text = "Данные обновлены"
+
+            timer.invalidate()
+        }
+    }
+    
+    private func startTimer() {
+        RunLoop.current.add(timer, forMode: .common)
     }
 }
 
