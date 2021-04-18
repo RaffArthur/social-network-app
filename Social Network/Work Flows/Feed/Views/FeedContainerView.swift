@@ -7,9 +7,30 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class FeedContainerView: UIStackView {
     // MARK: - Properties
     public var onTap: (() -> Void)?
+    private lazy var userTitle: UILabel = {
+        var label = UILabel()
+        label.font = .systemFont(ofSize: 30, weight: .black)
+        label.textAlignment = .center
+        label.baselineAdjustment = .alignCenters
+        label.numberOfLines = 2
+        label.textColor = UIColor(named: "color_set")
+        
+        return label
+    }()
+    private lazy var planetOrbitalPeriodLabel: UILabel = {
+        var label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textAlignment = .center
+        label.baselineAdjustment = .alignCenters
+        label.numberOfLines = 2
+        label.textColor = .darkGray
+        
+        return label
+    }()
     private lazy var showPostButtonOne: UIButton = {
         let button = UIButton()
         button.setTitle("Post Button One".uppercased(), for: button.state)
@@ -39,12 +60,26 @@ class FeedContainerView: UIStackView {
     
     // MARK: - View Funcs
     private func setupLayout() {
+        addSubview(userTitle)
+        addSubview(planetOrbitalPeriodLabel)
         addSubview(showPostButtonOne)
         addSubview(showPostButtonTwo)
         
+        userTitle.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().offset(-40)
+            make.bottom.equalTo(planetOrbitalPeriodLabel.snp.top).offset(-24)
+        }
+        
+        planetOrbitalPeriodLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().offset(-40)
+            make.bottom.equalTo(showPostButtonOne.snp.top).offset(-24)
+        }
+        
         showPostButtonOne.snp.makeConstraints { (make) in
             make.height.equalTo(56)
-            make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalTo(showPostButtonTwo.snp.top).offset(-24)
@@ -57,15 +92,67 @@ class FeedContainerView: UIStackView {
             make.bottom.equalToSuperview()
         }
     }
-        
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        setUpTitle()
+        setUpOrbitalPeriod()
         setupLayout()
     }
     
     // MARK: - @objc actions
     @objc func buttonPressed(sender: UIButton!) {
         onTap?()
+    }
+    
+    // MARK: - JSON Parcing
+    private func setUpTitle() {
+        if let url = URL(string: "https://jsonplaceholder.typicode.com/todos/5") {
+            FeedNetworkManager.runDataTask(url: url) { data in
+                if let result = data {
+                    do {
+                        let object = try FeedNetworkManager.returnObject(from: result)
+                        if let dictionary = object {
+                            let userData = UserData(userID: dictionary["userId"] as? Int ?? -1,
+                                                    id: dictionary["id"] as? Int ?? -1,
+                                                    title: dictionary["title"] as? String ?? "error",
+                                                    completed: dictionary["completed"] as? Bool ?? false
+                            )
+                            
+                            DispatchQueue.main.async {
+                                self.userTitle.text = userData.title
+                            }
+                        }
+                    } catch {
+                        self.userTitle.text = "error"
+                    }
+                }
+            }
+        }
+    }
+    
+    private func setUpOrbitalPeriod() {
+        if let url = URL(string: "https://swapi.dev/api/planets/10") {
+            FeedNetworkManager.runDataTask(url: url) { data in
+                if let result = data {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    
+                    if let planet = try? decoder.decode(StarWarsPlanets.self, from: result) {
+                        DispatchQueue.main.async {
+                            
+                            guard let planetName = planet.name, let orbitalPeriod = planet.orbitalPeriod else {
+                                return
+                            }
+                            
+                            self.planetOrbitalPeriodLabel.text = "Planet: \(planetName) | Orbital period: \(orbitalPeriod)"
+                        }
+                    } else {
+                        self.planetOrbitalPeriodLabel.text = "error"
+                    }
+                }
+            }
+        }
     }
 }

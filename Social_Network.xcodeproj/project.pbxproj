@@ -14,8 +14,10 @@
 		75597A8A25D303AC00A120A7 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A8925D303AC00A120A7 /* Coordinators.swift */; };
 		755ADFC625E51A19008E92A3 /* UIImageViewDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755ADFC525E51A19008E92A3 /* UIImageViewDownloader.swift */; };
 		755ADFC725E51A19008E92A3 /* UIImageViewDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755ADFC525E51A19008E92A3 /* UIImageViewDownloader.swift */; };
-		756691F22626027B00B26B8A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* NetworkManager.swift */; };
+		75654295262C7E7B0050BAAA /* StarWarsPlanets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75654294262C7E7B0050BAAA /* StarWarsPlanets.swift */; };
+		756691F22626027B00B26B8A /* FeedNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* FeedNetworkManager.swift */; };
 		756691F82626048400B26B8A /* URLsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F72626048400B26B8A /* URLsDomain.swift */; };
+		756C2646262C651C00CEB305 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C2645262C651C00CEB305 /* UserData.swift */; };
 		7574B7B72610D2F500A349E0 /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7B62610D2F500A349E0 /* ApiErrors.swift */; };
 		7574B7BC2610D2F800A349E0 /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7B62610D2F500A349E0 /* ApiErrors.swift */; };
 		7574B7C02610D30A00A349E0 /* AuthErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7BF2610D30A00A349E0 /* AuthErrors.swift */; };
@@ -76,8 +78,10 @@
 		75597A8425D3013A00A120A7 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		75597A8925D303AC00A120A7 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
 		755ADFC525E51A19008E92A3 /* UIImageViewDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewDownloader.swift; sourceTree = "<group>"; };
-		756691F12626027B00B26B8A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		75654294262C7E7B0050BAAA /* StarWarsPlanets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsPlanets.swift; sourceTree = "<group>"; };
+		756691F12626027B00B26B8A /* FeedNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNetworkManager.swift; sourceTree = "<group>"; };
 		756691F72626048400B26B8A /* URLsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLsDomain.swift; sourceTree = "<group>"; };
+		756C2645262C651C00CEB305 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		7574B7B62610D2F500A349E0 /* ApiErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrors.swift; sourceTree = "<group>"; };
 		7574B7BF2610D30A00A349E0 /* AuthErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrors.swift; sourceTree = "<group>"; };
 		759E14E026188F0800C0BB5A /* ErrorsAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsAlert.swift; sourceTree = "<group>"; };
@@ -189,13 +193,15 @@
 			path = "Image Downloader";
 			sourceTree = "<group>";
 		};
-		756691F02626024F00B26B8A /* Network Manager */ = {
+		756691F02626024F00B26B8A /* Feed Network Manager */ = {
 			isa = PBXGroup;
 			children = (
-				756691F12626027B00B26B8A /* NetworkManager.swift */,
+				756691F12626027B00B26B8A /* FeedNetworkManager.swift */,
 				756691F72626048400B26B8A /* URLsDomain.swift */,
+				756C2645262C651C00CEB305 /* UserData.swift */,
+				75654294262C7E7B0050BAAA /* StarWarsPlanets.swift */,
 			);
-			path = "Network Manager";
+			path = "Feed Network Manager";
 			sourceTree = "<group>";
 		};
 		7574B7B52610D2C700A349E0 /* ErrorDomains */ = {
@@ -211,7 +217,6 @@
 		75B4448025C70CED00B3C586 /* Social Network */ = {
 			isa = PBXGroup;
 			children = (
-				756691F02626024F00B26B8A /* Network Manager */,
 				7574B7B52610D2C700A349E0 /* ErrorDomains */,
 				75B4448725C70CED00B3C586 /* Applcation */,
 				75B4448D25C70CED00B3C586 /* Work Flows */,
@@ -319,6 +324,7 @@
 		75B4449B25C70CED00B3C586 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				756691F02626024F00B26B8A /* Feed Network Manager */,
 				75B444A025C70CED00B3C586 /* Controllers */,
 				75B444A425C70CED00B3C586 /* Views */,
 			);
@@ -593,7 +599,9 @@
 				75B444D125C70CEE00B3C586 /* ProfileHeaderView.swift in Sources */,
 				756691F82626048400B26B8A /* URLsDomain.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
+				75654295262C7E7B0050BAAA /* StarWarsPlanets.swift in Sources */,
 				75B444C725C70CEE00B3C586 /* PhotosTableViewCell.swift in Sources */,
+				756C2646262C651C00CEB305 /* UserData.swift in Sources */,
 				75597A7D25D300CE00A120A7 /* AppCoordinator.swift in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				759E14E126188F0800C0BB5A /* ErrorsAlert.swift in Sources */,
@@ -609,7 +617,7 @@
 				75597A8125D3012A00A120A7 /* FeedCoordinator.swift in Sources */,
 				75B444D925C70CEE00B3C586 /* PostViewController.swift in Sources */,
 				75B444DD25C70CEE00B3C586 /* FeedContainerView.swift in Sources */,
-				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
+				756691F22626027B00B26B8A /* FeedNetworkManager.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75B444C525C70CEE00B3C586 /* TabBarViewController.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,

@@ -30,7 +30,7 @@ final class FeedViewController: UIViewController {
         
         view.backgroundColor = .white
         title = "Feed"
-                
+        
         feedContainerView.onTap = { [weak self] in
             self?.coordinator?.showPost()
         }

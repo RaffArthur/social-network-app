@@ -1,14 +1,14 @@
 //
-//  NetworkManager.swift
+//  FeedNetworkManager.swift
 //  Social_Network
 //
 //  Created by Arthur Raff on 13.04.2021.
 //
 
 import UIKit
-typealias DataCallback = (String?) -> Void
+typealias DataCallback = (Data?) -> Void
 
-struct NetworkManager {
+struct FeedNetworkManager {
     static var session = URLSession.shared
     
     static func runDataTask(url: URL, completion: @escaping DataCallback) {
@@ -29,11 +29,15 @@ struct NetworkManager {
             print("Ошибка (отключенный wi-fi): \(String(describing: error?.localizedDescription))")
             
             if let data = data {
-                completion(String(data: data, encoding: .utf8))
-                print(String(describing: data))
+                completion(data)
             }
         }
-        
         dataTask.resume()
+    }
+    
+    static func returnObject(from json: Data) throws -> [String: Any]? {
+        let jsonObject = try? JSONSerialization.jsonObject(with: json, options: .mutableContainers) as? [String: Any]
+        
+        return jsonObject
     }
 }
