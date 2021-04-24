@@ -34,24 +34,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-        // MARK: - Start URLSesion data tsk
-        let randomURL = getURLFromAppConfiguration(appConfig: urlsList.randomElement())
-        
-        guard let serverURL = randomURL else { return}
-        
-        let endURL = URL(string: serverURL)
-        
-        guard let url = endURL else { return }
-
-        NetworkManager.runDataTask(url: url) { string in
-            guard let string = string else {
-                return
-            }
-            
-            print("Получены данные с сервера: \(string)")
-        }
-       
         // MARK: - Creation of WindowScene and coordinators.
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
