@@ -7,7 +7,9 @@
 
 import UIKit
 
+typealias ThrowsCallback = (Bool) throws -> Void
+
 protocol LoginViewControllerDelegate: class {
-    func loginWillBeChecked(_ login: String, completion: @escaping (Bool) -> Void)
-    func passWillBeChecked(_ pass: String, completion: @escaping (Bool) -> Void)
+    func loginWillBeChecked(_ login: String, vc: UIViewController, completion: @escaping ThrowsCallback) throws
+    func passWillBeChecked(_ pass: String, vc: UIViewController, completion: @escaping ThrowsCallback) throws
 }

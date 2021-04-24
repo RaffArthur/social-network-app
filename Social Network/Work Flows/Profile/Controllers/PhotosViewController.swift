@@ -65,8 +65,19 @@ class PhotosViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        getURLsFromServer()
+                
+        getURLsFromServer { result in
+            switch result {
+            case .success(let urls):
+                self.photoURLs = urls
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                apiErrorHandler(error: error, vc: self)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -80,8 +91,10 @@ class PhotosViewController: UIViewController {
         coordinator?.navigationController.hidesBarsOnSwipe = true
         
         setupLayout()
-                
-        self.collectionView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -90,32 +103,47 @@ class PhotosViewController: UIViewController {
         startTimer()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        stopTimer(timer)
+    }
+    
     // MARK: - JSON Parsing
-    private func getURLsFromServer() {
-        if let url = URL(string: "https://jsonplaceholder.typicode.com/photos") {
+    func getURLsFromServer(completion: @escaping (Result<[String], ApiErrors>) -> Void) {
+        var urlsFromServer: [String] = []
+        
+        if let url = URL(string:"https://jsonplaceholder.typicode.com/photos") {
             let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
                 guard let data = data else { return }
+                
                 if let vc = self {
-                    vc.parseJSON(data)
+                    urlsFromServer = vc.parseJSON(data)
+                }
+                
+                if urlsFromServer.isEmpty {
+                    completion(.failure(.dataNotFound))
+                } else {
+                    completion(.success(urlsFromServer))
                 }
             }
+            
             task.resume()
         }
     }
     
-    private func parseJSON(_ data: Data) {
+    func parseJSON(_ data: Data) -> [String] {
+        var urlsFromJSON: [String] = []
         
         let json = JSON(data)
         
         for (_, element) in json.enumerated() {
             if let url = element.1["url"].string {
-                photoURLs.append(url)
+                urlsFromJSON.append(url)
             }
         }
         
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        return urlsFromJSON
     }
     
     // MARK: - Timer creating
@@ -128,13 +156,17 @@ class PhotosViewController: UIViewController {
             self.collectionView.reloadData()
             
             timeDescription.text = "Данные обновлены"
-
-            timer.invalidate()
+            
+            stopTimer(timer)
         }
     }
     
     private func startTimer() {
         RunLoop.current.add(timer, forMode: .common)
+    }
+    
+    private func stopTimer(_ timer: Timer) {
+        timer.invalidate()
     }
 }
 
@@ -183,7 +215,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         let cell: PhotosCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
         
         cell.getPhoto(from: self.photoURLs[indexPath.item])
-        
+                
         return cell
     }
 }
