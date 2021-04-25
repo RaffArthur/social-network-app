@@ -9,12 +9,15 @@ import UIKit
 
 @available(iOS 13.0, *)
 class LoginReviewer: LoginViewControllerDelegate {
-    
-    func loginWillBeChecked(_ login: String, completion: @escaping (Bool) -> Void) {
-        return completion(Checker.shared.isNameCorrect(login))
+    func loginWillBeChecked(_ login: String,
+                            vc: UIViewController,
+                            completion: @escaping ThrowsCallback) throws {
+        try completion(Checker.shared.isNameCorrect(login))
     }
     
-    func passWillBeChecked(_ pass: String, completion: @escaping (Bool) -> Void) {
-        return completion(Checker.shared.isPassCorrect(pass))
+    func passWillBeChecked(_ pass: String,
+                           vc: UIViewController,
+                           completion: @escaping ThrowsCallback) throws {
+        try completion(Checker.shared.isPassCorrect(pass))
     }
 }

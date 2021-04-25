@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         print("Приложение будет запущено")
 
-        return true
+        return true  
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

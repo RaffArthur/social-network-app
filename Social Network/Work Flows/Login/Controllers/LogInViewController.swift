@@ -189,20 +189,32 @@ class LogInViewController: UIViewController {
     }
     
 // MARK: - Custom Funcs
-    private func showLoginAlertController() {
-        let alertController = UIAlertController(
-            title: "Неккоректные данные",
-            message: "Введите корректные логин и пароль",
-            preferredStyle: .alert
-        )
-        let alertAction = UIAlertAction(
-            title: "Ок",
-            style: .cancel,
-            handler: .none
-        )
-        alertController.addAction(alertAction)
+    private func auth() throws -> Bool {
+        guard let delegate = delegate else {
+            throw AuthErrors.unknownError
+        }
         
-        present(alertController, animated: true)
+        guard let filledLogin = contactsField.text, !filledLogin.isEmpty else {
+            throw AuthErrors.emptyFields
+        }
+        
+        guard let filledPass = passwordField.text, !filledPass.isEmpty else {
+            throw AuthErrors.emptyFields
+        }
+        
+        try delegate.loginWillBeChecked(filledLogin, vc: self, completion: { isLoginCorrect in
+            if isLoginCorrect {
+                try delegate.passWillBeChecked(filledPass, vc: self, completion: { isPassCorrect in
+                    if !isPassCorrect {
+                        throw AuthErrors.incorrectData
+                    }
+                })
+            } else {
+                throw AuthErrors.incorrectData
+            }
+        })
+        
+        return true
     }
     
     private func addKeyboardObserver() {
@@ -235,35 +247,17 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func loginButtonTapped() {
-        
-        guard let delegate = delegate else {
-            print("Delegate was not found")
-            return
+        do {
+            let _ = try auth()
+            coordinator?.logIn()
+            
+        } catch AuthErrors.emptyFields {
+            authErrorHandler(error: .emptyFields, vc: self)
+        } catch AuthErrors.incorrectData {
+            authErrorHandler(error: .incorrectData, vc: self)
+        } catch {
+            authErrorHandler(error: .unknownError, vc: self)
         }
-        
-        guard let filledLogin = contactsField.text, !filledLogin.isEmpty else {
-            showLoginAlertController()
-            return
-        }
-        
-        guard let filledPass = passwordField.text, !filledPass.isEmpty else {
-            showLoginAlertController()
-            return
-        }
-        
-        delegate.loginWillBeChecked(filledLogin, completion: { [weak self] (isLoginCorrect) in
-            if isLoginCorrect {
-                delegate.passWillBeChecked(filledPass, completion: { [weak self] (isPassCorrect) in
-                    if isPassCorrect {
-                        self?.coordinator?.logIn()
-                    } else {
-                        self?.showLoginAlertController()
-                    }
-                })
-            } else {
-                self?.showLoginAlertController()
-            }
-        })
     }
 }
 
