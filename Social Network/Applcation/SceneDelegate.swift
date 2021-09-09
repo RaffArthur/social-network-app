@@ -6,35 +6,17 @@
 //
 
 import UIKit
-import SwiftyJSON
+import Firebase
 
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var coordinator: AppCoordinator?
-    
-    private let urlsList = [AppConfiguration.URLOne("https://swapi.dev/api/films/12"),
-                    AppConfiguration.URLTwo("https://swapi.dev/api/people/2"),
-                    AppConfiguration.URLTwo("http://swapi.dev/api/species/7")]
-    
-    private func getURLFromAppConfiguration(appConfig: AppConfiguration?) -> String? {
-        if case .URLOne(let value) = appConfig {
-            return value
-        }
-
-        if case .URLTwo(let value) = appConfig {
-            return value
-        }
-
-        if case .URLThree(let value) = appConfig {
-            return value
-        }
-
-        return ""
-    }
-    
+        
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // MARK: - Creation of WindowScene and coordinators.
+        
+        FirebaseApp.configure()
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let rootViewController = TabBarViewController()
@@ -48,26 +30,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
-    }
-    
-
-    func sceneDidDisconnect(_ scene: UIScene) {
-
-    }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-
     }
 }
