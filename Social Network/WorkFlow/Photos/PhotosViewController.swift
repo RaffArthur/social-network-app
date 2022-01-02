@@ -126,7 +126,7 @@ extension PhotosViewController: UICollectionViewDataSource {
 }
 
 @available(iOS 13.0, *)
-extension PhotosViewController {
+private extension PhotosViewController {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -138,8 +138,8 @@ extension PhotosViewController {
     }
     
     func setupLayout() {
-        view.addSubview(timeDescription)
-        view.addSubview(collectionView)
+        view.add(subviews: [timeDescription,
+                            collectionView])
         
         timeDescription.snp.makeConstraints { (make) in
             make.height.equalTo(40)
@@ -158,7 +158,7 @@ extension PhotosViewController {
 }
 
 @available(iOS 13.0, *)
-extension PhotosViewController {
+private extension PhotosViewController {
     @objc private func fireTimer(_ timer: Timer) {
         timeDescription.text = "До обовления данных осталось \(timerCounter) секунд"
         

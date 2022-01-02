@@ -45,7 +45,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
 }
 
 @available(iOS 13.0, *)
-extension PhotosCollectionViewCell {
+private extension PhotosCollectionViewCell {
     func setupScreen() {
         setupLayout()
     }

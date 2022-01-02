@@ -7,13 +7,11 @@
 
 import UIKit
 
-protocol LoginViewControllerDelegate: AnyObject {
-    
-    // MARK: - User SignOut
-    /// Метод выхода юзера из профиля
+protocol LoginViewControllerDelegate: AnyObject {    
     func signOut(completion: @escaping (Result<Any, AuthErrors>) -> Void) throws
     
-    // MARK: - User SignIn
-    /// Метод входа юзера в профиль
-    func signIn(vc: UIViewController, email: String, pass: String, completion: @escaping (Result<Any, AuthErrors>) -> Void) throws
+    func signIn(vc: UIViewController,
+                email: String,
+                pass: String,
+                completion: @escaping (Result<Any, AuthErrors>) -> Void) throws
 }

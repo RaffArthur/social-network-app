@@ -9,15 +9,6 @@ import UIKit
 
 @available(iOS 13.0, *)
 extension UITextField {
-    private func setPasswordToggleImage(_ button: UIButton) {
-        if isSecureTextEntry {
-            button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
-        } else {
-            button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
-
-        }
-    }
-    
     func enablePasswordToggle() {
         let button = UIButton(type: .custom)
         setPasswordToggleImage(button)
@@ -33,9 +24,21 @@ extension UITextField {
         self.leftViewMode = .always
         
     }
-    
-    @objc private func togglePasswordView(_ sender: Any) {
+}
+
+@available(iOS 13.0, *)
+private extension UITextField {
+    @objc func togglePasswordView(_ sender: Any) {
         self.isSecureTextEntry = !self.isSecureTextEntry
         setPasswordToggleImage(sender as! UIButton)
+    }
+    
+    func setPasswordToggleImage(_ button: UIButton) {
+        if isSecureTextEntry {
+            button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        } else {
+            button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+
+        }
     }
 }

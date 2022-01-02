@@ -144,7 +144,7 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 @available(iOS 13.0, *)
-extension ProfileViewController {
+private extension ProfileViewController {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -167,7 +167,7 @@ extension ProfileViewController {
 }
 
 @available(iOS 13.0, *)
-extension ProfileViewController {
+private extension ProfileViewController {
     func setupActions() {
         logOutButton.target = self
         logOutButton.action = #selector(logOutButtonTapped)
@@ -175,7 +175,7 @@ extension ProfileViewController {
 }
 
 @available(iOS 13.0, *)
-extension ProfileViewController {
+private extension ProfileViewController {
     @objc func logOutButtonTapped() {
         guard let delegate = delegate else { return }
 

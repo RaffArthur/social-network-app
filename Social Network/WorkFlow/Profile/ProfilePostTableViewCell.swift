@@ -83,18 +83,17 @@ class ProfilePostTableViewCell: UITableViewCell {
 }
 
 @available(iOS 13.0, *)
-extension ProfilePostTableViewCell {
+private extension ProfilePostTableViewCell {
     func setupScreen() {
         setupLayout()
     }
     
     func setupLayout() {
-        
-        contentView.addSubview(postTitle)
-        contentView.addSubview(postPhoto)
-        contentView.addSubview(postDescription)
-        contentView.addSubview(postLikes)
-        contentView.addSubview(postViews)
+        contentView.add(subviews: [postTitle,
+                                   postPhoto,
+                                   postDescription,
+                                   postLikes,
+                                   postViews])
         
         postTitle.snp.makeConstraints { (make) in
             make.top.equalTo(contentView.snp.top).offset(16)

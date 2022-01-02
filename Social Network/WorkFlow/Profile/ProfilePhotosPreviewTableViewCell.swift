@@ -9,6 +9,8 @@ import UIKit
 
 @available(iOS 13.0, *)
 class ProfilePhotosPreviewTableViewCell: UITableViewCell {
+    private lazy var adapter = PhotosAdapter()
+    
     private lazy var photosLabel: UILabel = {
         let photosLabel = UILabel()
         photosLabel.text = "Photos"
@@ -87,7 +89,7 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
 }
 
 @available(iOS 13.0, *)
-extension ProfilePhotosPreviewTableViewCell {
+private extension ProfilePhotosPreviewTableViewCell {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -98,14 +100,14 @@ extension ProfilePhotosPreviewTableViewCell {
     }
     
     func setupLayout() {
-        contentView.addSubview(photosLabel)
-        contentView.addSubview(photosStack)
-        contentView.addSubview(toPhotoStockButton)
+        contentView.add(subviews: [photosLabel,
+                                   photosStack,
+                                   toPhotoStockButton])
         
-        photosStack.addArrangedSubview(photoOne)
-        photosStack.addArrangedSubview(photoTwo)
-        photosStack.addArrangedSubview(photoThree)
-        photosStack.addArrangedSubview(photoFour)
+        photosStack.add(arrangedSubviews: [photoOne,
+                                           photoTwo,
+                                           photoThree,
+                                           photoFour])
         
         photosLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contentView.snp.top).offset(12)

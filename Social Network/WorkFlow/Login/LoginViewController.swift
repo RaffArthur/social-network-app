@@ -51,11 +51,10 @@ class LoginViewController: UIViewController {
         tf.tintColor = UIColor(named: "color_set")
         tf.textColor = .black
         tf.textAlignment = .left
-        tf.leftView = UIView(frame: CGRect(
-                                            x: 0,
-                                            y: 0,
-                                            width: 10,
-                                            height: tf.frame.height))
+        tf.leftView = UIView(frame: CGRect(x: 0,
+                                           y: 0,
+                                           width: 10,
+                                           height: tf.frame.height))
         tf.leftViewMode = .always
         tf.layer.borderWidth = 0.5
         tf.layer.borderColor = UIColor.lightGray.cgColor
@@ -132,7 +131,7 @@ extension LoginViewController: UITextFieldDelegate {
 }
 
 @available(iOS 13.0, *)
-extension LoginViewController {
+private extension LoginViewController {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -143,12 +142,12 @@ extension LoginViewController {
         
         scrollView.addSubview(contentView)
         
-        contentView.addSubview(logoImage)
-        contentView.addSubview(loginContainer)
-        contentView.addSubview(loginButton)
+        contentView.add(subviews: [logoImage,
+                                   loginContainer,
+                                   loginButton])
         
-        loginContainer.addSubview(emailField)
-        loginContainer.addSubview(passwordField)
+        loginContainer.add(subviews: [emailField,
+                                      passwordField])
                 
         scrollView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(view.snp.top)
@@ -211,15 +210,15 @@ extension LoginViewController {
 }
 
 @available(iOS 13.0, *)
-extension LoginViewController {
+private extension LoginViewController {
     func setupActions() {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
 }
 
 @available(iOS 13.0, *)
-extension LoginViewController {
-    @objc private func loginButtonTapped() {
+private extension LoginViewController {
+    @objc func loginButtonTapped() {
         guard let delegate = delegate else { return }
         guard let email = emailField.text else { return }
         guard let pass = passwordField.text else { return }
@@ -251,7 +250,7 @@ extension LoginViewController {
 }
 
 @available(iOS 13.0, *)
-extension LoginViewController {
+private extension LoginViewController {
     func addKeyboardObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),

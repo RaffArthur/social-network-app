@@ -32,16 +32,16 @@ class PostViewController: UIViewController {
         navigationController.tabBarController?.tabBar.isHidden = true
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        
-//        guard let navigationController = navigationController else { return }
-//        navigationController.tabBarController?.tabBar.isHidden = false
-//    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        guard let navigationController = navigationController else { return }
+        navigationController.tabBarController?.tabBar.isHidden = false
+    }
 }
 
 @available(iOS 13.0, *)
-extension PostViewController {
+private extension PostViewController {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -65,7 +65,7 @@ extension PostViewController {
 }
 
 @available(iOS 13.0, *)
-extension PostViewController {
+private extension PostViewController {
     @objc private func showDeletingPostAlert() {
         let alertController = UIAlertController(title: "Удалить пост?", message: "Пост нельзя будет восстановить", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in

@@ -21,7 +21,6 @@ class ProfileHeaderView: UIView {
         iv.layer.masksToBounds = true
         iv.layer.borderColor = UIColor.white.cgColor
         iv.layer.borderWidth = 3
-        iv.layer.cornerRadius = photoProfile.frame.height / 2
         
         return iv
     }()
@@ -111,8 +110,13 @@ class ProfileHeaderView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func setNeedsLayout() {
+        super.setNeedsLayout()
         
+        photoProfile.layer.cornerRadius = photoProfile.frame.height / 2
     }
 }
 
@@ -134,7 +138,7 @@ extension ProfileHeaderView: UIGestureRecognizerDelegate {
 }
 
 @available(iOS 13.0, *)
-extension ProfileHeaderView {
+private extension ProfileHeaderView {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -145,11 +149,11 @@ extension ProfileHeaderView {
     }
     
     func setupLayout() {
-        addSubview(nameProfile)
-        addSubview(statusBarProfile)
-        addSubview(buttonStatusProfile)
-        addSubview(textFieldProfile)
-        addSubview(photoProfile)
+        add(subviews: [nameProfile,
+                       statusBarProfile,
+                       buttonStatusProfile,
+                       textFieldProfile,
+                       photoProfile])
         
         photoProfile.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 100, height: 100))
@@ -187,7 +191,7 @@ extension ProfileHeaderView {
 }
 
 @available(iOS 13.0, *)
-extension ProfileHeaderView {
+private extension ProfileHeaderView {
     @objc private func buttonPressed(_ textField: UITextField) {
         statusBarProfile.text = statusText
         
@@ -254,7 +258,7 @@ extension ProfileHeaderView {
 }
 
 @available(iOS 13.0, *)
-extension ProfileHeaderView {
+private extension ProfileHeaderView {
     func setupActions() {
         let closePhotoTGR  = UITapGestureRecognizer(target: self,
                                                     action: #selector(closedFullScreenPhoto))

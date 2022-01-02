@@ -66,59 +66,54 @@ class FeedContainerView: UIStackView {
 }
 
 @available(iOS 13.0, *)
-extension FeedContainerView {
+private extension FeedContainerView {
     func setupScreen() {
         setupLayout()
-        setupContent()
-    }
-    
-    func setupContent() {
-        
     }
     
     func setupLayout() {
-       addSubview(userTitle)
-       addSubview(planetOrbitalPeriodLabel)
-       addSubview(showPostButtonOne)
-       addSubview(showPostButtonTwo)
-       
-       userTitle.snp.makeConstraints { (make) in
-           make.top.equalToSuperview()
-           make.leading.equalToSuperview().offset(40)
-           make.trailing.equalToSuperview().offset(-40)
-           make.bottom.equalTo(planetOrbitalPeriodLabel.snp.top).offset(-24)
-       }
-       
-       planetOrbitalPeriodLabel.snp.makeConstraints { (make) in
-           make.leading.equalToSuperview().offset(40)
-           make.trailing.equalToSuperview().offset(-40)
-           make.bottom.equalTo(showPostButtonOne.snp.top).offset(-24)
-       }
-       
-       showPostButtonOne.snp.makeConstraints { (make) in
-           make.height.equalTo(56)
-           make.leading.equalToSuperview()
-           make.trailing.equalToSuperview()
-           make.bottom.equalTo(showPostButtonTwo.snp.top).offset(-24)
-       }
-       
-       showPostButtonTwo.snp.makeConstraints { (make) in
-           make.height.equalTo(56)
-           make.leading.equalToSuperview()
-           make.trailing.equalToSuperview()
-           make.bottom.equalToSuperview()
-       }
+        add(subviews: [userTitle,
+                       planetOrbitalPeriodLabel,
+                       showPostButtonOne,
+                       showPostButtonTwo])
+        
+        userTitle.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().offset(-40)
+            make.bottom.equalTo(planetOrbitalPeriodLabel.snp.top).offset(-24)
+        }
+        
+        planetOrbitalPeriodLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().offset(-40)
+            make.bottom.equalTo(showPostButtonOne.snp.top).offset(-24)
+        }
+        
+        showPostButtonOne.snp.makeConstraints { (make) in
+            make.height.equalTo(56)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalTo(showPostButtonTwo.snp.top).offset(-24)
+        }
+        
+        showPostButtonTwo.snp.makeConstraints { (make) in
+            make.height.equalTo(56)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
    }
 }
 
 @available(iOS 13.0, *)
-extension FeedContainerView {
-    private func setupDataInFeed() {
+private extension FeedContainerView {
+    func setupDataInFeed() {
         setupTitle()
         setupOrbitalPeriod()
     }
 
-    private func setupTitle() {
+    func setupTitle() {
         let networkManager = NetworkManager()
         
         if let url = URL(string: "https://jsonplaceholder.typicode.com/todos/5") {
@@ -151,7 +146,7 @@ extension FeedContainerView {
         }
     }
     
-    private func setupOrbitalPeriod() {
+    func setupOrbitalPeriod() {
         let networkManager = NetworkManager()
 
         if let url = URL(string: "https://swapi.dev/api/planets/10") {
@@ -181,23 +176,21 @@ extension FeedContainerView {
         }
     }
         
-    @objc private func buttonOnePressed(sender: UIButton!) {
+    @objc func buttonOnePressed(sender: UIButton!) {
         didSendEventClosure?(.showPostButtonOneTapped)
     }
     
-    @objc private func buttonTwoPressed(sender: UIButton!) {
+    @objc func buttonTwoPressed(sender: UIButton!) {
         didSendEventClosure?(.showPostButtonTwoTapped)
     }
 }
 
 @available(iOS 13.0, *)
-extension FeedContainerView {
+private extension FeedContainerView {
     func setupActions() {
         showPostButtonOne.addTarget(self, action: #selector(buttonOnePressed(sender:)), for: .touchUpInside)
         showPostButtonTwo.addTarget(self, action: #selector(buttonTwoPressed(sender:)), for: .touchUpInside)
     }
-    
-    
 }
 
 @available(iOS 13.0, *)

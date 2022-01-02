@@ -37,7 +37,7 @@ final class FeedViewController: UIViewController {
 }
 
 @available(iOS 13.0, *)
-extension FeedViewController {
+private extension FeedViewController {
     func setupScreen() {
         setupLayout()
         setupContent()

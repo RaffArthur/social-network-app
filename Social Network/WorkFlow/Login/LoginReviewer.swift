@@ -19,11 +19,13 @@ class LoginReviewer: LoginViewControllerDelegate {
         }
     }
     
-    func signIn(vc: UIViewController, email: String, pass: String, completion: @escaping (Result<Any, AuthErrors>) -> Void) throws {
+    func signIn(vc: UIViewController,
+                email: String,
+                pass: String,
+                completion: @escaping (Result<Any, AuthErrors>) -> Void) throws {
         guard !email.isEmpty else { throw AuthErrors.emptyFields }
         guard email.isValidEmail() else { throw AuthErrors.incorrectEmail }
         guard !pass.isEmpty else { throw AuthErrors.emptyFields }
-//        guard pass.isValidPass() else { throw AuthErrors.incorrectPass }
         
         Auth.auth().signIn(withEmail: email, password: pass) { [weak self] authResult, error in
             guard let self = self else { return }
@@ -37,7 +39,9 @@ class LoginReviewer: LoginViewControllerDelegate {
         }
     }
     
-    private func showCreateAccount(vc: UIViewController, email: String, pass: String) {
+    private func showCreateAccount(vc: UIViewController,
+                                   email: String,
+                                   pass: String) {
         let alert = UIAlertController(title: "Такого аккаунта не существует",
                                       message: "Создайте аккаунт или повторите попытку",
                                       preferredStyle: .alert)
