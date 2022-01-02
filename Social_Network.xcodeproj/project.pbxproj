@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6604BBDC19C7BDB28F71B008 /* Pods_Social_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E0182EA0463A16135832F5 /* Pods_Social_Network.framework */; };
 		751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753612717519900C80FB9 /* ProfileCoordinator.swift */; };
 		751753642717528D00C80FB9 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FeedCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
@@ -51,11 +50,12 @@
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
 		75E15D722635BF7000368DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757638F12635BA5300C3F190 /* GoogleService-Info.plist */; };
 		75F2D473271B260B00CC2CE9 /* PasswordToggle_UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2D472271B260B00CC2CE9 /* PasswordToggle_UITextField.swift */; };
+		86ECC11BE302708F7C650D54 /* Pods_Social_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85FB3C493D66CF225774C01 /* Pods_Social_Network.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		060782AE250CE27700A87020 /* Social_Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Social_Network.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0ED7673D80285947C2B45ECA /* Pods-Social_Network.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social_Network.release.xcconfig"; path = "Target Support Files/Pods-Social_Network/Pods-Social_Network.release.xcconfig"; sourceTree = "<group>"; };
+		26A77A9BF191C78ADCD6DB98 /* Pods-Social_Network.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social_Network.debug.xcconfig"; path = "Target Support Files/Pods-Social_Network/Pods-Social_Network.debug.xcconfig"; sourceTree = "<group>"; };
 		751753612717519900C80FB9 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		751753632717528D00C80FB9 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 		75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75F2D472271B260B00CC2CE9 /* PasswordToggle_UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordToggle_UITextField.swift; sourceTree = "<group>"; };
-		D7E0182EA0463A16135832F5 /* Pods_Social_Network.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Social_Network.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE9C3207536DA8F9A8083AFF /* Pods-Social_Network.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social_Network.debug.xcconfig"; path = "Target Support Files/Pods-Social_Network/Pods-Social_Network.debug.xcconfig"; sourceTree = "<group>"; };
+		C85FB3C493D66CF225774C01 /* Pods_Social_Network.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Social_Network.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F745EA5764A6E5A011871E5A /* Pods-Social_Network.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social_Network.release.xcconfig"; path = "Target Support Files/Pods-Social_Network/Pods-Social_Network.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6604BBDC19C7BDB28F71B008 /* Pods_Social_Network.framework in Frameworks */,
+				86ECC11BE302708F7C650D54 /* Pods_Social_Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,8 +121,8 @@
 			children = (
 				75B4448025C70CED00B3C586 /* Social Network */,
 				060782AF250CE27700A87020 /* Products */,
-				31DA01686DA7C113C6841342 /* Pods */,
-				11F40F0E8708BC78C972A880 /* Frameworks */,
+				ADD4D8DB3053A8C152993ED5 /* Pods */,
+				0E6072000BDC3F5081CAE8EE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,21 +134,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		11F40F0E8708BC78C972A880 /* Frameworks */ = {
+		0E6072000BDC3F5081CAE8EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D7E0182EA0463A16135832F5 /* Pods_Social_Network.framework */,
+				C85FB3C493D66CF225774C01 /* Pods_Social_Network.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		31DA01686DA7C113C6841342 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EE9C3207536DA8F9A8083AFF /* Pods-Social_Network.debug.xcconfig */,
-				0ED7673D80285947C2B45ECA /* Pods-Social_Network.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		7538C2A026CC238700935B7C /* NetworkFlow */ = {
@@ -338,6 +329,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		ADD4D8DB3053A8C152993ED5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				26A77A9BF191C78ADCD6DB98 /* Pods-Social_Network.debug.xcconfig */,
+				F745EA5764A6E5A011871E5A /* Pods-Social_Network.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,11 +346,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 060782C2250CE27A00A87020 /* Build configuration list for PBXNativeTarget "Social_Network" */;
 			buildPhases = (
-				797F5746B6B91ED7B9554AB1 /* [CP] Check Pods Manifest.lock */,
+				31D8E2B6936EF70A7B383F09 /* [CP] Check Pods Manifest.lock */,
 				060782AA250CE27700A87020 /* Sources */,
 				060782AB250CE27700A87020 /* Frameworks */,
 				060782AC250CE27700A87020 /* Resources */,
-				62A845C0AC9B3951E5C980A0 /* [CP] Embed Pods Frameworks */,
+				1959EE17321F6B08940006A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -407,7 +408,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		62A845C0AC9B3951E5C980A0 /* [CP] Embed Pods Frameworks */ = {
+		1959EE17321F6B08940006A0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -424,7 +425,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Social_Network/Pods-Social_Network-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		797F5746B6B91ED7B9554AB1 /* [CP] Check Pods Manifest.lock */ = {
+		31D8E2B6936EF70A7B383F09 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -628,7 +629,7 @@
 		};
 		060782C3250CE27A00A87020 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE9C3207536DA8F9A8083AFF /* Pods-Social_Network.debug.xcconfig */;
+			baseConfigurationReference = 26A77A9BF191C78ADCD6DB98 /* Pods-Social_Network.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Social_Network.entitlements;
 				CODE_SIGN_STYLE = Manual;
@@ -649,7 +650,7 @@
 		};
 		060782C4250CE27A00A87020 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0ED7673D80285947C2B45ECA /* Pods-Social_Network.release.xcconfig */;
+			baseConfigurationReference = F745EA5764A6E5A011871E5A /* Pods-Social_Network.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Social_Network.entitlements;
 				CODE_SIGN_STYLE = Manual;
