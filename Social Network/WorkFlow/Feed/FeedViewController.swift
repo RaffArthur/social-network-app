@@ -8,22 +8,36 @@ import UIKit
 
 @available(iOS 13.0, *)
 final class FeedViewController: UIViewController {
-    weak var coordinator: FeedCoordinator?
+    var didSendEventClosure: ((FeedViewController.Event) -> Void)?
     private let feedContainerView = FeedContainerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        feedContainerView.onTap = { [weak self] in
-            self?.coordinator?.showPost()
+        feedContainerView.didSendEventClosure = { [weak self] event in
+            guard let self = self else { return }
+            
+            switch event {
+            case .showPostButtonOneTapped:
+                self.didSendEventClosure?(.postButtonTapped)
+            case .showPostButtonTwoTapped:
+                self.didSendEventClosure?(.postButtonTapped)
+            }
         }
-                                
         setupScreen()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let tabBarController = tabBarController else { return }
+
+        tabBarController.tabBar.isHidden = false
     }
 }
 
 @available(iOS 13.0, *)
-extension FeedViewController: ScreenSetupper {
+extension FeedViewController {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -31,7 +45,6 @@ extension FeedViewController: ScreenSetupper {
     
     func setupContent() {
         view.backgroundColor = .white
-        title = "Feed"
     }
     
     func setupLayout() {
@@ -42,5 +55,12 @@ extension FeedViewController: ScreenSetupper {
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
             make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
         }
+    }
+}
+
+@available(iOS 13.0, *)
+extension FeedViewController {
+    enum Event {
+        case postButtonTapped
     }
 }

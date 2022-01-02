@@ -11,24 +11,21 @@ import Firebase
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    var coordinator: AppCoordinator?
+    var appCoordinator: AppCoordinator?
         
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         FirebaseApp.configure()
-
-        guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let rootViewController = TabBarViewController()
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+    
+        window = UIWindow(windowScene: windowScene)
 
-        coordinator = AppCoordinator(tabBarController: rootViewController)
-        rootViewController.coordinator = coordinator
-        rootViewController.tabBarController?.tabBar.isHidden = true
-        coordinator?.start()
-                                
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = rootViewController
+        let navigationController: UINavigationController = .init()
+                
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+        appCoordinator = AppCoordinator(navigationController)
+        appCoordinator?.start()
     }
 }
