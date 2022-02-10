@@ -1,15 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
-
-target 'New Social_Network' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for New Social_Network
-  pod 'SnapKit', '~> 5.0.0'
-  pod 'SwiftyJSON', '~> 4.0'
-
-end
+platform :ios, '10.0'
 
 target 'Social_Network' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -17,5 +7,7 @@ target 'Social_Network' do
 
   # Pods for Social_Network
   pod 'SnapKit', '~> 5.0.0'
-  pod 'SwiftyJSON', '~> 4.0'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  
 end
