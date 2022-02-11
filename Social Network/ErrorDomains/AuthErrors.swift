@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum AuthErrors: Error {
+enum AuthError: Error {
     case incorrectData
     case incorrectPass
     case incorrectEmail
@@ -15,27 +15,34 @@ enum AuthErrors: Error {
     case unknownError
 }
 
-func authErrorHandler(error: AuthErrors, vc: UIViewController) {
-    switch error {
-    case .incorrectData:
-        ErrorsAlert.showErrorsAlert(title: "Неверный e-mail и/или пароль",
-                                    message: "Повторите попытку и введите корретный e-mail и пароль",
-                                    on: vc)
-    case .emptyFields:
-        ErrorsAlert.showErrorsAlert(title: "Нет данных",
-                                    message: "Логин и/или пароль отсутствуют, введите недостающие данные",
-                                    on: vc)
-    case .unknownError:
-        ErrorsAlert.showErrorsAlert(title: "Ой!",
-                                    message: "Еноты перегрызли провода, подождите немного и мы все исправим",
-                                    on: vc)
-    case .incorrectPass:
-        ErrorsAlert.showErrorsAlert(title: "Неправильный пароль",
-                                    message: "Введен неверный пароль, убедитесь в правильности введенного пароля",
-                                    on: vc)
-    case .incorrectEmail:
-        ErrorsAlert.showErrorsAlert(title: "Неверный e-mail",
-                                    message: "Введен неверный e-mail, убедитесь в правильности введенного e-mail",
-                                    on: vc)
+extension AuthError {
+    var title: String {
+        switch self {
+        case .incorrectData:
+            return "Неверный e-mail и/или пароль"
+        case .incorrectPass:
+            return "Неправильный пароль"
+        case .incorrectEmail:
+            return "Неправильный e-mail"
+        case .emptyFields:
+            return "Введите свои данные"
+        case .unknownError:
+            return "ОЙ!"
+        }
+    }
+    
+    var message: String {
+        switch self {
+        case .incorrectData:
+            return "Повторите попытку и введите корретный e-mail и пароль"
+        case .incorrectPass:
+            return "Введен неверный пароль, убедитесь в правильности введенного пароля"
+        case .incorrectEmail:
+            return "Введен неверный e-mail, убедитесь в правильности введенного e-mail"
+        case .emptyFields:
+            return "Логин и/или пароль отсутствуют, введите недостающие данные"
+        case .unknownError:
+            return "Еноты перегрызли провода, подождите немного и мы все исправим"
+        }
     }
 }

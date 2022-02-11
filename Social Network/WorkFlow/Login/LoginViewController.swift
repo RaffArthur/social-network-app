@@ -232,20 +232,34 @@ private extension LoginViewController {
                 case .success:
                     event(.userLogged)
                 case .failure(let error):
-                    authErrorHandler(error: error, vc: self)
+                    self.show(error: error)
                 }
             }
-        } catch AuthErrors.emptyFields {
-            authErrorHandler(error: .emptyFields, vc: self)
-        } catch AuthErrors.incorrectData {
-            authErrorHandler(error: .incorrectData, vc: self)
-        } catch AuthErrors.incorrectEmail{
-            authErrorHandler(error: .incorrectEmail, vc: self)
-        } catch AuthErrors.incorrectPass{
-            authErrorHandler(error: .incorrectPass, vc: self)
+        } catch AuthError.emptyFields {
+            show(error: .emptyFields)
+        } catch AuthError.incorrectData {
+            show(error: .incorrectData)
+        } catch AuthError.incorrectEmail{
+            show(error: .incorrectEmail)
+        } catch AuthError.incorrectPass{
+            show(error: .incorrectPass)
         } catch {
-            authErrorHandler(error: .unknownError, vc: self)
+            show(error: .unknownError)
         }
+    }
+    
+    func show(error: AuthError) {
+        let alertController = UIAlertController(title: error.title,
+                                                message: error.message,
+                                                preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "ОК",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 

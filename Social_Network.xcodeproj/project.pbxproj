@@ -13,8 +13,6 @@
 		75175368271758EF00C80FB9 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175367271758EF00C80FB9 /* PostCoordinator.swift */; };
 		7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A226CC240600935B7C /* PhotosAdapter.swift */; };
 		7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A426CC241300935B7C /* PostsAdapter.swift */; };
-		7538C2A726CC52C100935B7C /* APIAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A626CC52C100935B7C /* APIAdapter.swift */; };
-		7538C2AA26D401E400935B7C /* URLDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A926D401E400935B7C /* URLDomains.swift */; };
 		754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E727148B0200400F95 /* AppCoordinator.swift */; };
 		754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E927148FF000400F95 /* LoginCoordinator.swift */; };
 		754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754D79B926C6F39500ED19F8 /* PhotoModel.swift */; };
@@ -27,6 +25,7 @@
 		756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C2645262C651C00CEB305 /* UserDataModel.swift */; };
 		7574B7B72610D2F500A349E0 /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7B62610D2F500A349E0 /* ApiErrors.swift */; };
 		7574B7C02610D30A00A349E0 /* AuthErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7BF2610D30A00A349E0 /* AuthErrors.swift */; };
+		7577741B27B56E310021F5EB /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7577741A27B56E310021F5EB /* UIViewController+Error.swift */; };
 		758551E92782285800B04E25 /* AddSubviews+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551E82782285800B04E25 /* AddSubviews+UIView.swift */; };
 		758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */; };
 		759E14E126188F0800C0BB5A /* ErrorsAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759E14E026188F0800C0BB5A /* ErrorsAlert.swift */; };
@@ -64,8 +63,6 @@
 		75175367271758EF00C80FB9 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		7538C2A226CC240600935B7C /* PhotosAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAdapter.swift; sourceTree = "<group>"; };
 		7538C2A426CC241300935B7C /* PostsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsAdapter.swift; sourceTree = "<group>"; };
-		7538C2A626CC52C100935B7C /* APIAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAdapter.swift; sourceTree = "<group>"; };
-		7538C2A926D401E400935B7C /* URLDomains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDomains.swift; sourceTree = "<group>"; };
 		754B85E727148B0200400F95 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		754B85E927148FF000400F95 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		754D79B926C6F39500ED19F8 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
@@ -79,6 +76,7 @@
 		7574B7B62610D2F500A349E0 /* ApiErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrors.swift; sourceTree = "<group>"; };
 		7574B7BF2610D30A00A349E0 /* AuthErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrors.swift; sourceTree = "<group>"; };
 		757638F12635BA5300C3F190 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7577741A27B56E310021F5EB /* UIViewController+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Error.swift"; sourceTree = "<group>"; };
 		758551E82782285800B04E25 /* AddSubviews+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddSubviews+UIView.swift"; sourceTree = "<group>"; };
 		758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddArrangedSubviews+UIStackView.swift"; sourceTree = "<group>"; };
 		759E14E026188F0800C0BB5A /* ErrorsAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsAlert.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 			children = (
 				75B4448225C70CED00B3C586 /* Models */,
 				754D79C326CAE4B100ED19F8 /* NetworkManagers */,
-				7538C2A826D401CB00935B7C /* URLDomains */,
 				7538C2A126CC23E200935B7C /* APIAdapters */,
 			);
 			path = NetworkFlow;
@@ -160,19 +157,10 @@
 		7538C2A126CC23E200935B7C /* APIAdapters */ = {
 			isa = PBXGroup;
 			children = (
-				7538C2A626CC52C100935B7C /* APIAdapter.swift */,
 				7538C2A426CC241300935B7C /* PostsAdapter.swift */,
 				7538C2A226CC240600935B7C /* PhotosAdapter.swift */,
 			);
 			path = APIAdapters;
-			sourceTree = "<group>";
-		};
-		7538C2A826D401CB00935B7C /* URLDomains */ = {
-			isa = PBXGroup;
-			children = (
-				7538C2A926D401E400935B7C /* URLDomains.swift */,
-			);
-			path = URLDomains;
 			sourceTree = "<group>";
 		};
 		754D79B426C1AB3000ED19F8 /* Photos */ = {
@@ -323,6 +311,7 @@
 		75B444AF25C70CED00B3C586 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7577741A27B56E310021F5EB /* UIViewController+Error.swift */,
 				758551E82782285800B04E25 /* AddSubviews+UIView.swift */,
 				758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */,
 				75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */,
@@ -459,9 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7538C2A726CC52C100935B7C /* APIAdapter.swift in Sources */,
 				758551E92782285800B04E25 /* AddSubviews+UIView.swift in Sources */,
-				7538C2AA26D401E400935B7C /* URLDomains.swift in Sources */,
 				75B3732627109B0A00EEE6E8 /* Coordinator.swift in Sources */,
 				75B444E125C70CEE00B3C586 /* LoginViewControllerDelegate.swift in Sources */,
 				751753642717528D00C80FB9 /* FeedCoordinator.swift in Sources */,
@@ -489,6 +476,7 @@
 				75175368271758EF00C80FB9 /* PostCoordinator.swift in Sources */,
 				7574B7B72610D2F500A349E0 /* ApiErrors.swift in Sources */,
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
+				7577741B27B56E310021F5EB /* UIViewController+Error.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* LoginReviewer.swift in Sources */,
 				758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */,
 				75B373292710A5F400EEE6E8 /* TabBarPage.swift in Sources */,

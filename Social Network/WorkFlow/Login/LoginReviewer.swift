@@ -10,7 +10,7 @@ import UIKit
 
 @available(iOS 13.0, *)
 class LoginReviewer: LoginViewControllerDelegate {
-    func signOut(completion: @escaping (Result<Any, AuthErrors>) -> Void) throws {
+    func signOut(completion: @escaping (Result<Any, AuthError>) -> Void) throws {
         do {
             completion(.success(true))
             try Auth.auth().signOut()
@@ -22,10 +22,10 @@ class LoginReviewer: LoginViewControllerDelegate {
     func signIn(vc: UIViewController,
                 email: String,
                 pass: String,
-                completion: @escaping (Result<Any, AuthErrors>) -> Void) throws {
-        guard !email.isEmpty else { throw AuthErrors.emptyFields }
-        guard email.isValidEmail() else { throw AuthErrors.incorrectEmail }
-        guard !pass.isEmpty else { throw AuthErrors.emptyFields }
+                completion: @escaping (Result<Any, AuthError>) -> Void) throws {
+        guard !email.isEmpty else { throw AuthError.emptyFields }
+        guard email.isValidEmail() else { throw AuthError.incorrectEmail }
+        guard !pass.isEmpty else { throw AuthError.emptyFields }
         
         Auth.auth().signIn(withEmail: email, password: pass) { [weak self] authResult, error in
             guard let self = self else { return }
