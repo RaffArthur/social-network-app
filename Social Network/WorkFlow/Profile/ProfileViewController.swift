@@ -118,7 +118,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 { return 1 }
         
-        return adapter.dataSource.count
+        return adapter.posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -128,7 +128,7 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfilePostTableViewCell.self), for: indexPath) as! ProfilePostTableViewCell
-            let post = adapter.dataSource[indexPath.row]
+            let post = adapter.posts[indexPath.row]
             
             cell.post = post
             
@@ -188,12 +188,25 @@ private extension ProfileViewController {
                 case .success:
                     event(.signOut)
                 case .failure(let error):
-                    authErrorHandler(error: error, vc: self)
+                    self.show(error: error)
                 }
             }
         } catch {
-            authErrorHandler(error: .unknownError, vc: self)
+            show(error: .unknownError)
         }
+    }
+    
+    func show(error: AuthError) {
+        let alertController = UIAlertController(title: error.title,
+                                                 message: error.message,
+                                                 preferredStyle: .alert)
+        let action = UIAlertAction(title: "ОК",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 

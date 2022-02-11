@@ -112,12 +112,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 @available(iOS 13.0, *)
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return adapter.dataSource.count
+        return adapter.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PhotosCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
-        let photo = adapter.dataSource[indexPath.row]
+        let photo = adapter.photos[indexPath.row]
         
         cell.photo = photo
                 
