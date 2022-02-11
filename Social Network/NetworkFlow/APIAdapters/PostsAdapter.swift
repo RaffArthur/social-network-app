@@ -7,34 +7,34 @@
 
 import UIKit
 
-class PostsAdapter: APIAdapter {
+class PostsAdapter {
     public var onDataReceive: (() -> Void)?
-    public var dataSource = PostStorage.posts
-    private let url = URLDomains.postsURL
+    public var posts: [Post] = []
+    private let url = "https://jsonplaceholder.typicode.com/posts"
     private let networkManager = NetworkManager()
     
-    func receiveData(from url: URL?) {
-        if let url = url {
-            networkManager.runDataTask(url: url) { [weak self] data in
-                if let result = data {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
+    func getPosts(url: String) {
+        guard let url = URL(string: url) else { return }
 
-                        self.dataSource = try! decoder.decode([Post].self, from: result)
+        networkManager.runDataTask(url: url) { [weak self] data in
+            if let result = data {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
 
-                        self.onDataReceive?()
-                    }
+                    self.posts = try! decoder.decode([Post].self, from: result)
+
+                    self.onDataReceive?()
                 }
             }
         }
     }
     
     func setupData() {
-        if dataSource.isEmpty {
-            receiveData(from: url)
+        if posts.isEmpty {
+            getPosts(url: url)
         } else {
             return
         }

@@ -10,7 +10,6 @@ class NetworkManager {
     private var session = URLSession.shared
     
     public func runDataTask(url: URL, completion: @escaping (Data?) -> Void) {
-        
         let dataTask = session.dataTask(with: url) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else { return }
             guard error == nil else { return }

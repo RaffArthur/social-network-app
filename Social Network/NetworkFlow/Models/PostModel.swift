@@ -13,17 +13,4 @@ struct Post: Codable {
         case userID = "userId"
         case id, title, body
     }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        userID = try container.decode(Int.self, forKey: .userID)
-        id = try container.decode(Int.self, forKey: .id)
-        title = try container.decode(String.self, forKey: .title)
-        body = try container.decode(String.self, forKey: .body)
-    }
-}
-
-struct PostStorage {
-    public static var posts: [Post] = []
 }
