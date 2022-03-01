@@ -228,8 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				7574B7BF2610D30A00A349E0 /* UserAuthError.swift */,
-				75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */,
-				75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */,
+				75D8A24827CEAA8D0056E78B /* AuthErrorCodeConverter */,
 			);
 			path = ErrorDomains;
 			sourceTree = "<group>";
@@ -344,6 +343,15 @@
 				75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */,
 			);
 			path = LoginReviewer;
+			sourceTree = "<group>";
+		};
+		75D8A24827CEAA8D0056E78B /* AuthErrorCodeConverter */ = {
+			isa = PBXGroup;
+			children = (
+				75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */,
+				75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */,
+			);
+			path = AuthErrorCodeConverter;
 			sourceTree = "<group>";
 		};
 		ADD4D8DB3053A8C152993ED5 /* Pods */ = {
