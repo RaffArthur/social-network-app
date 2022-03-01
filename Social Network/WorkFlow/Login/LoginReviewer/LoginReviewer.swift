@@ -10,7 +10,7 @@ import UIKit
 protocol LoginReviewer: AnyObject {
     typealias UserAuthResult = (Result<Any, UserAuthError>) -> Void
     
-    func signOut(completion: UserAuthResult) throws
+    func signOut(completion: UserAuthResult)
     
     func signIn(email: String,
                 pass: String,
