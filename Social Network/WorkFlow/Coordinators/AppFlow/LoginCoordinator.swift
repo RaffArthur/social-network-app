@@ -7,12 +7,8 @@
 
 import UIKit
 
-protocol LoginCoordinatorProtocol: Coordinator {
-    func showLoginScreen()
-}
-
 @available(iOS 13.0, *)
-final class LoginCoordinator: LoginCoordinatorProtocol {
+final class LoginCoordinator: Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
@@ -25,10 +21,6 @@ final class LoginCoordinator: LoginCoordinatorProtocol {
     }
     
     func start() {
-        showLoginScreen()
-    }
-    
-    func showLoginScreen() {
         let loginVC = LoginViewController()
         
         loginReviewer = LoginReviewerImpl()
