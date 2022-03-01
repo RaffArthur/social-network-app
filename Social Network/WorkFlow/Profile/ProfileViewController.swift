@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 @available(iOS 13.0, *)
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     weak var reviewer: LoginReviewer?
     var didSendEventClosure: ((ProfileViewController.Event) -> Void)?
     
