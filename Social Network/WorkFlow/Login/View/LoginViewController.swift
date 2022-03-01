@@ -122,12 +122,12 @@ extension LoginViewController: LoginViewDelegate {
             return
         }
         
-        reviewer?.signIn(email: email, pass: pass) { result in
+        reviewer?.signIn(email: email, pass: pass) { [weak self] result in
             switch result {
             case .success:
-                self.delegate?.userLoggedIn()
+                self?.delegate?.userLoggedIn()
             case .failure(let error):
-                self.show(authError: error)
+                self?.show(authError: error)
             }
         }
     }
