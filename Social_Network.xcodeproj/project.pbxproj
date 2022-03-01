@@ -49,6 +49,8 @@
 		75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */; };
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
 		75D8A24327C530240056E78B /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24227C530240056E78B /* Delegates.swift */; };
+		75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */; };
+		75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */; };
 		75E15D722635BF7000368DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757638F12635BA5300C3F190 /* GoogleService-Info.plist */; };
 		75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */; };
 		86ECC11BE302708F7C650D54 /* Pods_Social_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85FB3C493D66CF225774C01 /* Pods_Social_Network.framework */; };
@@ -101,6 +103,8 @@
 		75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75D8A24227C530240056E78B /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
+		75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverter.swift; sourceTree = "<group>"; };
+		75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
 		75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordToggle+UITextField.swift"; sourceTree = "<group>"; };
 		C85FB3C493D66CF225774C01 /* Pods_Social_Network.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Social_Network.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F745EA5764A6E5A011871E5A /* Pods-Social_Network.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social_Network.release.xcconfig"; path = "Target Support Files/Pods-Social_Network/Pods-Social_Network.release.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				7574B7BF2610D30A00A349E0 /* UserAuthError.swift */,
+				75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */,
+				75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */,
 			);
 			path = ErrorDomains;
 			sourceTree = "<group>";
@@ -469,6 +475,7 @@
 				75B444E125C70CEE00B3C586 /* LoginReviewer.swift in Sources */,
 				751753642717528D00C80FB9 /* FeedCoordinator.swift in Sources */,
 				755ADFC625E51A19008E92A3 /* ImageDownloader+UIImageView.swift in Sources */,
+				75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */,
 				754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */,
 				75B444CD25C70CEE00B3C586 /* PhotosViewController.swift in Sources */,
 				75597A8A25D303AC00A120A7 /* TabCoordinator.swift in Sources */,
@@ -490,6 +497,7 @@
 				7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */,
 				75175368271758EF00C80FB9 /* PostCoordinator.swift in Sources */,
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
+				75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */,
 				7577741B27B56E310021F5EB /* UIViewController+Error.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */,
 				758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */,
