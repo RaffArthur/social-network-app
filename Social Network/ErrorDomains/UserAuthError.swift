@@ -10,15 +10,24 @@ import FirebaseAuth
 
 enum UserAuthError: Error {
     case incorrectData
-    case incorrectPass
-    case incorrectEmail
+    case wrongPassword
+    case invalidEmail
     case tooManyRequests
     case emptyFields
     case userNotFound
     case unknownError
     case passwordMissmatch
-    case weakPass
-    case existingAccount
+    case weakPassword
+    case emailAlreadyInUse
+    case invalidCredential
+    case requiresRecentLogin
+    case userDisabled
+    case networkError
+    case internalError
+    case tokenError
+    case verificationError
+    case authorizationError
+    case applicationError
 }
 
 extension UserAuthError {
@@ -26,24 +35,42 @@ extension UserAuthError {
         switch self {
         case .incorrectData:
             return "Неверный e-mail и/или пароль"
-        case .incorrectPass:
+        case .wrongPassword:
             return "Неправильный пароль"
-        case .incorrectEmail:
-            return"Некорректный e-mail"
+        case .invalidEmail:
+            return "Некорректный e-mail"
         case .emptyFields:
             return "Введите свои данные"
         case .unknownError:
-            return "ОЙ!"
+            return "Неизвестная ошибка"
         case .tooManyRequests:
             return "Слишком частые запросы"
         case .userNotFound:
             return "Пользователь не найден"
-        case .existingAccount:
+        case .emailAlreadyInUse:
             return "Введите другой e-mail"
-        case .weakPass:
+        case .weakPassword:
             return "Ненадежный пароль"
         case .passwordMissmatch:
             return "Пароли не совпадают"
+        case .invalidCredential:
+            return "Учетные данные недействительны"
+        case .userDisabled:
+            return "Учетная запись отключена"
+        case .requiresRecentLogin:
+            return "Требуется выполнить повторный вход"
+        case .networkError:
+            return "Сетевая ошибка"
+        case .internalError:
+            return "Возникла внутренняя ошибка"
+        case .tokenError:
+            return "Ошибка токена"
+        case .verificationError:
+            return "Ошибка верификации"
+        case .authorizationError:
+            return "Ошибка авторизации"
+        case .applicationError:
+            return "Application Error"
         }
     }
     
@@ -51,24 +78,38 @@ extension UserAuthError {
         switch self {
         case .incorrectData:
             return "Повторите попытку и введите корретный e-mail и пароль"
-        case .incorrectPass:
+        case .wrongPassword:
             return "Введен неверный пароль, убедитесь в правильности введенного пароля"
-        case .incorrectEmail:
+        case .invalidEmail:
             return "Введите e-mail в корректном формате и повторие попытку"
         case .emptyFields:
             return "Логин и/или пароль отсутствуют, введите недостающие данные"
         case .unknownError:
             return "Еноты перегрызли провода, подождите немного и мы все исправим"
         case .tooManyRequests:
-            return "Вход временно невозможен, т.к. вы пытались выполнить вход слишком часто"
+            return "Вход в аккаунт временно недоступен из-за частых попыток авторизации"
         case .userNotFound:
             return "Пользователь с таким e-mail не зарегистрирован или был удален"
-        case .existingAccount:
+        case .emailAlreadyInUse:
             return "Аккаунт с таким e-mail уже существует. Введите новый e-mail и повторите попытку."
-        case .weakPass:
+        case .weakPassword:
             return "Ваш пароль ненадежный. Введите пароль состоящий минимум из 6 символов"
         case .passwordMissmatch:
             return "Проверьте корректность введенного пароля"
+        case .networkError:
+            return "Возникла сетевая ошибка"
+        case .invalidCredential:
+            return "Учетная запись недействительна"
+        case .userDisabled:
+            return "Учетная запись была отключена и/или удалена"
+        case .internalError:
+            return "Произошла внутренняя ошибка, мы уже работаем над ее устранением"
+        case .applicationError,
+             .requiresRecentLogin,
+             .tokenError,
+             .verificationError,
+             .authorizationError:
+            return localizedDescription
         }
     }
 }
