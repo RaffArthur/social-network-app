@@ -12,7 +12,7 @@ import Firebase
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
-        
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         FirebaseApp.configure()
         
@@ -21,11 +21,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
 
         let navigationController: UINavigationController = .init()
-                
+        
+        appCoordinator = AppCoordinator(navigationController)
+
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        appCoordinator = AppCoordinator(navigationController)
-        appCoordinator?.start()
+        
+        Auth.auth().addStateDidChangeListener { authResult, user in
+            if user == nil {
+                self.appCoordinator?.showLoginFlow()
+            } else {
+                self.appCoordinator?.showAppFlow()
+            }
+        }
     }
 }

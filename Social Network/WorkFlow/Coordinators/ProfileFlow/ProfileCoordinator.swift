@@ -24,8 +24,8 @@ class ProfileCoordinator: Coordinator {
     func start() {
         let profileVC = ProfileViewController()
         
-        loginReviewer = LoginReviewer()
-        profileVC.delegate = loginReviewer
+        loginReviewer = LoginReviewerImpl()
+        profileVC.reviewer = loginReviewer
         
         profileVC.didSendEventClosure = { [weak self] event in
             guard let self = self else { return }

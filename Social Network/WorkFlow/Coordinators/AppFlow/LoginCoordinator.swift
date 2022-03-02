@@ -7,12 +7,8 @@
 
 import UIKit
 
-protocol LoginCoordinatorProtocol: Coordinator {
-    func showLoginViewController()
-}
-
 @available(iOS 13.0, *)
-class LoginCoordinator: LoginCoordinatorProtocol {
+final class LoginCoordinator: Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
@@ -25,25 +21,20 @@ class LoginCoordinator: LoginCoordinatorProtocol {
     }
     
     func start() {
-        showLoginViewController()
-    }
-    
-    func showLoginViewController() {
         let loginVC = LoginViewController()
         
-        loginReviewer = LoginReviewer()
-        loginVC.delegate = loginReviewer
-        
-        loginVC.didSendEventClosure = { [weak self] event in
-            guard let self = self else { return }
-            
-            switch event {
-            case .userLogged:
-                self.finish()
-            }
-        }
+        loginReviewer = LoginReviewerImpl()
+        loginVC.reviewer = loginReviewer
+        loginVC.delegate = self
         
         navigationController.pushViewController(loginVC, animated: true)
+    }
+}
+
+@available(iOS 13.0, *)
+extension LoginCoordinator: LoginViewConrollerDelegate {
+    func userLoggedIn() {
+        finish()
     }
 }
 

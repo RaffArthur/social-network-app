@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 @available(iOS 13.0, *)
-class ProfileViewController: UIViewController {
-    weak var delegate: LoginViewControllerDelegate?
+final class ProfileViewController: UIViewController {
+    weak var reviewer: LoginReviewer?
     var didSendEventClosure: ((ProfileViewController.Event) -> Void)?
     
     private lazy var adapter = PostsAdapter()
@@ -59,7 +59,6 @@ class ProfileViewController: UIViewController {
         tabBarController.tabBar.isHidden = false
         navigationController.navigationBar.isHidden = false
         navigationController.interactivePopGestureRecognizer?.isEnabled = false
-        navigationItem.leftBarButtonItem = logOutButton
         
         headerView.photoTapped = { [weak self] in
             guard let self = self else { return }
@@ -152,6 +151,8 @@ private extension ProfileViewController {
     
     func setupContent() {
         view.backgroundColor = .white
+        
+        navigationItem.leftBarButtonItem = logOutButton
     }
     
     func setupLayout() {
@@ -177,10 +178,10 @@ private extension ProfileViewController {
 @available(iOS 13.0, *)
 private extension ProfileViewController {
     @objc func logOutButtonTapped() {
-        guard let delegate = delegate else { return }
+        guard let reviewer = reviewer else { return }
 
         do {
-            let _ = try delegate.signOut { [weak self] result in
+            let _ = try reviewer.signOut { [weak self] result in
                 guard let self = self else { return }
                 guard let event = self.didSendEventClosure else { return }
                 
@@ -196,7 +197,7 @@ private extension ProfileViewController {
         }
     }
     
-    func show(error: AuthError) {
+    func show(error: UserAuthError) {
         let alertController = UIAlertController(title: error.title,
                                                  message: error.message,
                                                  preferredStyle: .alert)
