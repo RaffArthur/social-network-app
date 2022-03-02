@@ -33,6 +33,8 @@ final class AuthErrorCodeConverterImpl: AuthErrorCodeConverter {
                 return .networkError
             case .internalError:
                 return .internalError
+            case .keychainError:
+                return .keyсhainError
             case .invalidCustomToken,
                  .customTokenMismatch,
                  .missingAppToken,
@@ -102,7 +104,6 @@ final class AuthErrorCodeConverterImpl: AuthErrorCodeConverter {
                  .emailChangeNeedsVerification,
                  .missingOrInvalidNonce,
                  .missingClientIdentifier,
-                 .keychainError,
                  .malformedJWT:
                 return .applicationError
         }

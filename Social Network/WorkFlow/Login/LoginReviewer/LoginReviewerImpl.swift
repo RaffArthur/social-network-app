@@ -18,7 +18,7 @@ final class LoginReviewerImpl: LoginReviewer {
             completion(.success(true))
             try Auth.auth().signOut()
         } catch {
-            completion(.failure(.unknownError))
+            completion(.failure(.keyсhainError))
         }
     }
     

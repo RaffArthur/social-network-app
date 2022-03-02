@@ -24,6 +24,7 @@ enum UserAuthError: Error {
     case userDisabled
     case networkError
     case internalError
+    case keyсhainError
     case tokenError
     case verificationError
     case authorizationError
@@ -63,6 +64,8 @@ extension UserAuthError {
             return "Сетевая ошибка"
         case .internalError:
             return "Возникла внутренняя ошибка"
+        case .keyсhainError:
+            return "Ошибка связки ключей"
         case .tokenError:
             return "Ошибка токена"
         case .verificationError:
@@ -104,7 +107,8 @@ extension UserAuthError {
             return "Учетная запись была отключена и/или удалена"
         case .internalError:
             return "Произошла внутренняя ошибка, мы уже работаем над ее устранением"
-        case .applicationError,
+        case .keyсhainError,
+             .applicationError,
              .requiresRecentLogin,
              .tokenError,
              .verificationError,
