@@ -7,18 +7,16 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 class ProfilePhotosPreviewTableViewCell: UITableViewCell {
-    private lazy var adapter = PhotosAdapter()
-    
     private lazy var photosLabel: UILabel = {
         let photosLabel = UILabel()
-        photosLabel.text = "Photos"
+        photosLabel.text = "Фотографии"
         photosLabel.font = .systemFont(ofSize: 24, weight: .bold)
         photosLabel.textColor = .black
         
         return photosLabel
     }()
+    
     private lazy var photosStack: UIStackView = {
         let sv = UIStackView()
         sv.distribution = .fillEqually
@@ -28,53 +26,52 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
 
         return sv
     }()
+    
     private lazy var photoOne: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 6
-        iv.image = UIImage(systemName: "photo.fill")
         iv.tintColor = UIColor(named: "color_set")
-
 
         return iv
     }()
+    
     private lazy var photoTwo: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 6
-        iv.image = UIImage(systemName: "photo.fill")
         iv.tintColor = UIColor(named: "color_set")
-
         
         return iv
     }()
+    
     private lazy var photoThree: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 6
-        iv.image = UIImage(systemName: "photo.fill")
         iv.tintColor = UIColor(named: "color_set")
         
         return iv
     }()
+    
     private lazy var photoFour: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 6
-        iv.image = UIImage(systemName: "photo.fill")
         iv.tintColor = UIColor(named: "color_set")
         
         return iv
     }()
-    private lazy var toPhotoStockButton: UIButton = {
-        let toPhotoStockButton = UIButton()
-        toPhotoStockButton.setImage(UIImage(systemName: "arrow.forward"), for: toPhotoStockButton.state)
+    
+    private lazy var photoGalleryButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.forward"), for: .normal)
         
-        return toPhotoStockButton
+        return button
     }()
         
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -86,9 +83,23 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    func configure(photos: [Photo]) {
+        guard let firstPhotoUrl = photos[0].url,
+              let secondPhotoUrl = photos[1].url,
+              let thirdPhotoUrl = photos[2].url,
+              let fourthPhotoUrl = photos[3].url
+        else {
+            return
+        }
+        
+        photoOne.downloaded(from: firstPhotoUrl)
+        photoTwo.downloaded(from: secondPhotoUrl)
+        photoThree.downloaded(from: thirdPhotoUrl)
+        photoFour.downloaded(from: fourthPhotoUrl)
+    }
 }
 
-@available(iOS 13.0, *)
 private extension ProfilePhotosPreviewTableViewCell {
     func setupScreen() {
         setupLayout()
@@ -102,7 +113,7 @@ private extension ProfilePhotosPreviewTableViewCell {
     func setupLayout() {
         contentView.add(subviews: [photosLabel,
                                    photosStack,
-                                   toPhotoStockButton])
+                                   photoGalleryButton])
         
         photosStack.add(arrangedSubviews: [photoOne,
                                            photoTwo,
@@ -111,20 +122,20 @@ private extension ProfilePhotosPreviewTableViewCell {
         
         photosLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contentView.snp.top).offset(12)
-            make.leading.equalTo(contentView.snp.leading).offset(12)
+            make.leading.equalToSuperview().offset(12)
         }
         
-        toPhotoStockButton.snp.makeConstraints { (make) in
+        photoGalleryButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(photosLabel.snp.centerY)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-12)
+            make.trailing.equalToSuperview().offset(-12)
         }
         
         photosStack.snp.makeConstraints { (make) in
             make.height.equalTo((UIScreen.main.bounds.width-48)/4)
             make.top.equalTo(photosLabel.snp.bottom).offset(12)
-            make.leading.equalTo(contentView.snp.leading).offset(12)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-12)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-12)
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().offset(-12)
+            make.bottom.equalToSuperview().offset(-12)
         }
     }
 }
