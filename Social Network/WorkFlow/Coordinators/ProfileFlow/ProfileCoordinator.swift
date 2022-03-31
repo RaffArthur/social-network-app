@@ -7,8 +7,7 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
-class ProfileCoordinator: Coordinator {
+final class ProfileCoordinator: Coordinator {
     var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController 
     var childCoordinators: [Coordinator] = []
@@ -26,20 +25,20 @@ class ProfileCoordinator: Coordinator {
         
         loginReviewer = LoginReviewerImpl()
         profileVC.reviewer = loginReviewer
-        
-        profileVC.didSendEventClosure = { [weak self] event in
-            guard let self = self else { return }
-            
-            switch event {
-            case .openPhotoLibrary:
-                let coordinator = PhotosCoordinator(self.navigationController)
-                coordinator.start()
-                
-            case .signOut:
-                self.logOutted?()
-            }
-        }
+        profileVC.delegate = self
         
         navigationController.pushViewController(profileVC, animated: true)
+    }
+}
+
+extension ProfileCoordinator: ProfileViewControllerDelegate {
+    func logoutButtonWasTapped() {
+        logOutted?()
+    }
+    
+    func photoLibraryWasTapped() {
+        let coordinator = PhotosCoordinator(navigationController)
+        
+        coordinator.start()
     }
 }

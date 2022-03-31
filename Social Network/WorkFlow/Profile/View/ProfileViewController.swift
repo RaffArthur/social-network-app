@@ -8,27 +8,32 @@
 import UIKit
 import SnapKit
 
-@available(iOS 13.0, *)
 final class ProfileViewController: UIViewController {
     weak var reviewer: LoginReviewer?
-    var didSendEventClosure: ((ProfileViewController.Event) -> Void)?
+    weak var delegate: ProfileViewControllerDelegate?
     
-    private lazy var adapter = PostsAdapter()
+    private lazy var postsAdapter = PostsAdapter()
+    private lazy var photosAdapter = PhotosAdapter()
+    
     private lazy var headerView = ProfileHeaderView()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(ProfilePostTableViewCell.self, forCellReuseIdentifier: String(describing: ProfilePostTableViewCell.self))
-        tableView.register(ProfilePhotosPreviewTableViewCell.self, forCellReuseIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self))
+        tableView.register(ProfilePostTableViewCell.self,
+                           forCellReuseIdentifier: String(describing: ProfilePostTableViewCell.self))
+        tableView.register(ProfilePhotosPreviewTableViewCell.self,
+                           forCellReuseIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
                 
         return tableView
     }()
-    private lazy var logOutButton: UIBarButtonItem = {
+    
+    private lazy var logoutButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
         bbi.title = "Выход"
+        bbi.style = .done
         
         return bbi
     }()
@@ -36,113 +41,89 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adapter.setupData()
+        postsAdapter.setupData()
+        photosAdapter.setupData()
         
-        adapter.onDataReceive = {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                
-                self.tableView.reloadData()
-            }
+        postsAdapter.onDataReceive = { [weak self] in
+            self?.tableView.reloadData()
+        }
+        
+        photosAdapter.onDataReceive = { [weak self] in
+            self?.tableView.reloadData()
         }
         
         setupScreen()
         setupActions()
+        
+        headerView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        guard let navigationController = navigationController else { return }
-        guard let tabBarController = tabBarController else { return }
-                
-        tabBarController.tabBar.isHidden = false
-        navigationController.navigationBar.isHidden = false
-        navigationController.interactivePopGestureRecognizer?.isEnabled = false
-        
-        headerView.photoTapped = { [weak self] in
-            guard let self = self else { return }
-
-            self.tableView.isScrollEnabled = false
-            self.tableView.isUserInteractionEnabled = false
-            tabBarController.tabBar.isHidden = true
-            navigationController.navigationBar.isHidden = true
-            navigationController.navigationBar.isTranslucent = false
-        }
-        
-        headerView.closePhotoButtonTapped = { [weak self] in
-            guard let self = self else { return }
-
-            self.tableView.isScrollEnabled = true
-            self.tableView.isUserInteractionEnabled = true
-            tabBarController.tabBar.isHidden = false
-            navigationController.navigationBar.isHidden = false
-            navigationController.navigationBar.isTranslucent = true
-        }
+                        
+        tabBarController?.tabBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 }
 
-@available(iOS 13.0, *)
 extension ProfileViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard indexPath.section == 0 else { return }
-        guard let event = didSendEventClosure else { return }
         
-        event(.openPhotoLibrary)
+        delegate?.photoLibraryWasTapped()
     }
 }
 
-@available(iOS 13.0, *)
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 { return 1 }
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         
-        return adapter.posts.count
+        return section == 0 ? 1 : postsAdapter.posts.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self), for: indexPath) as! ProfilePhotosPreviewTableViewCell
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self), for: indexPath) as? ProfilePhotosPreviewTableViewCell
+                        
+            return cell ?? UITableViewCell()
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfilePostTableViewCell.self), for: indexPath) as! ProfilePostTableViewCell
-            let post = adapter.posts[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfilePostTableViewCell.self), for: indexPath) as? ProfilePostTableViewCell
+            let post = postsAdapter.posts[indexPath.item]
             
-            cell.post = post
+            cell?.configure(post: post)
             
-            return cell
+            return cell ?? UITableViewCell()
         }
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 0 else { return nil }
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        guard section == 0 else { return UIView() }
         
         return headerView
     }
 }
 
-@available(iOS 13.0, *)
 private extension ProfileViewController {
     func setupScreen() {
         setupLayout()
@@ -152,48 +133,30 @@ private extension ProfileViewController {
     func setupContent() {
         view.backgroundColor = .white
         
-        navigationItem.leftBarButtonItem = logOutButton
+        navigationItem.leftBarButtonItem = logoutButton
     }
     
     func setupLayout() {
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
 
-@available(iOS 13.0, *)
-private extension ProfileViewController {
-    func setupActions() {
-        logOutButton.target = self
-        logOutButton.action = #selector(logOutButtonTapped)
-    }
-}
 
-@available(iOS 13.0, *)
 private extension ProfileViewController {
     @objc func logOutButtonTapped() {
         guard let reviewer = reviewer else { return }
-
-        do {
-            let _ = try reviewer.signOut { [weak self] result in
-                guard let self = self else { return }
-                guard let event = self.didSendEventClosure else { return }
-                
-                switch result {
-                case .success:
-                    event(.signOut)
-                case .failure(let error):
-                    self.show(error: error)
-                }
+        
+        reviewer.signOut { [weak self] result in
+            switch result {
+            case .success:
+                self?.delegate?.logoutButtonWasTapped()
+            case .failure(let error):
+                self?.show(error: error)
             }
-        } catch {
-            show(error: .unknownError)
         }
     }
     
@@ -209,12 +172,49 @@ private extension ProfileViewController {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    func setupActions() {
+        logoutButton.target = self
+        logoutButton.action = #selector(logOutButtonTapped)
+    }
 }
 
-@available(iOS 13.0, *)
-extension ProfileViewController {
-    enum Event {
-        case openPhotoLibrary
-        case signOut
+extension ProfileViewController: ProfileHeaderViewDelegate {
+    func setUserStatusButtonTapped() {
+        let alertController = UIAlertController(title: "Обновите свой статус",
+                                   message: "Введите здесь все, что вы думаете",
+                                   preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Отменить",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        let setStatus = UIAlertAction(title: "Обновить",
+                                      style: .default) { action in
+            self.headerView.updateUserStatus(message: alertController.textFields?[0].text ?? String())
+        }
+        
+        alertController.addTextField { textField in
+            textField.placeholder = "Введите свой статус"
+        }
+        
+        alertController.addAction(cancel)
+        alertController.addAction(setStatus)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func userPhotoTapped() {
+        headerView.openFullUserPhoto()
+        
+        navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    func userPhotoCloseButtonTapped() {
+        headerView.closeFullUserPhoto()
+        
+        tabBarController?.tabBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
     }
 }
