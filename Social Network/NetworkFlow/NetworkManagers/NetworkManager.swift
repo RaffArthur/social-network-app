@@ -14,9 +14,7 @@ class NetworkManager {
             guard let httpResponse = response as? HTTPURLResponse else { return }
             guard error == nil else { return }
             guard data == data else { return }
-            
-            print(httpResponse.statusCode)
-            
+                        
             completion(data)
         }
         
