@@ -15,6 +15,9 @@ final class ProfileViewController: UIViewController {
     private lazy var postsAdapter = PostsAdapter()
     private lazy var photosAdapter = PhotosAdapter()
     
+    private var posts: [Post] = []
+    private var photos: [Photo] = []
+    
     private lazy var headerView = ProfileHeaderView()
     
     private lazy var tableView: UITableView = {
@@ -41,16 +44,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        postsAdapter.setupData()
-        photosAdapter.setupData()
-        
-        postsAdapter.onDataReceive = { [weak self] in
-            self?.tableView.reloadData()
-        }
-        
-        photosAdapter.onDataReceive = { [weak self] in
-            self?.tableView.reloadData()
-        }
+        loadFullUserData()
         
         setupScreen()
         setupActions()
@@ -65,11 +59,29 @@ final class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+}
+
+private extension ProfileViewController {
+    func loadFullUserData() {
+        postsAdapter.getPosts { result in
+            let posts = result.posts.map {
+                return Post(title: $0.title, body: $0.body)
+            }
+            
+            self.posts.append(contentsOf: posts)
+            
+            self.tableView.reloadData()
+        }
         
-        tableView.reloadData()
+        photosAdapter.getPhotos { result in
+            let photos = result.photos.map {
+                return Photo(url: $0.url, thumbnailURL: $0.thumbnailURL)
+            }
+            
+            self.photos.append(contentsOf: photos)
+            
+            self.tableView.reloadData()            
+        }
     }
 }
 
@@ -96,19 +108,24 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        
-        return section == 0 ? 1 : postsAdapter.posts.count
+        return section == 0 ? 1 : posts.count
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self), for: indexPath) as? ProfilePhotosPreviewTableViewCell
-                        
+            let identifier = String(describing: ProfilePhotosPreviewTableViewCell.self)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier ,
+                                                     for: indexPath) as? ProfilePhotosPreviewTableViewCell
+            
+//            cell?.configure(photos: photos) /// Не успевают загрузиться 
+            
             return cell ?? UITableViewCell()
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfilePostTableViewCell.self), for: indexPath) as? ProfilePostTableViewCell
-            let post = postsAdapter.posts[indexPath.item]
+            let identifier = String(describing: ProfilePostTableViewCell.self)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
+                                                     for: indexPath) as? ProfilePostTableViewCell
+            let post = posts[indexPath.item]
             
             cell?.configure(post: post)
             
@@ -144,7 +161,6 @@ private extension ProfileViewController {
         }
     }
 }
-
 
 private extension ProfileViewController {
     @objc func logOutButtonTapped() {
