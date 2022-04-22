@@ -9,7 +9,10 @@ import UIKit
 
 @available(iOS 13.0, *)
 class PhotosViewController: UIViewController {    
-    private lazy var adapter = PhotosAdapter()
+    private lazy var photosAdapter = PhotosAdapter()
+    
+    private lazy var photos: [Photo] = []
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -41,14 +44,14 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adapter.setupData()
-        
-        adapter.onDataReceive = { [weak self] in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                
-                self.collectionView.reloadData()
+        photosAdapter.getPhotos { result in
+            let photos = result.photos.map {
+                return Photo(url: $0.url, thumbnailURL: $0.thumbnailURL)
             }
+            
+            self.photos.append(contentsOf: photos)
+            
+            self.collectionView.reloadData()
         }
         
         setupScreen()
@@ -112,12 +115,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 @available(iOS 13.0, *)
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return adapter.photos.count
+        return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PhotosCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
-        let photo = adapter.photos[indexPath.row]
+        let photo = photos[indexPath.row]
         
         cell.photo = photo
                 

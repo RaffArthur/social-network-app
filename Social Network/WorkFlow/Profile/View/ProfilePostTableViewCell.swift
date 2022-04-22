@@ -7,16 +7,7 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 class ProfilePostTableViewCell: UITableViewCell {
-    var post: Post? {
-        didSet {
-            guard let post = post else { return }
-            
-            configure(post)
-        }
-    }
-    
     private lazy var postTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
@@ -25,6 +16,7 @@ class ProfilePostTableViewCell: UITableViewCell {
         
         return label
     }()
+    
     private lazy var postPhoto: UIImageView = {
         let iv = UIImageView()
         iv.layer.masksToBounds = true
@@ -36,6 +28,7 @@ class ProfilePostTableViewCell: UITableViewCell {
         
         return iv
     }()
+    
     private lazy var postDescription: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
@@ -44,6 +37,7 @@ class ProfilePostTableViewCell: UITableViewCell {
         
         return label
     }()
+    
     private lazy var postLikes: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .bold)
@@ -51,6 +45,7 @@ class ProfilePostTableViewCell: UITableViewCell {
         
         return label
     }()
+    
     private lazy var postViews: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .bold)
@@ -62,32 +57,28 @@ class ProfilePostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
                         
-        setupScreen()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    private func configure(_ post: Post) {
-        guard let postTitle = post.title else { return }
-        guard let postDescription = post.body else { return }
-        guard let postLikes = post.userID else { return }
-        guard let postViews = post.id else { return }
-
-        self.postTitle.text = postTitle.firstUppercased
-        self.postDescription.text = postDescription
-        self.postLikes.text = "Likes: \(postLikes)"
-        self.postViews.text = "Vews: \(postViews)"
-    }
-}
-
-@available(iOS 13.0, *)
-private extension ProfilePostTableViewCell {
-    func setupScreen() {
         setupLayout()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(post: Post) {
+        guard let postTitle = post.title,
+              let postDescription = post.body
+        else {
+            return
+        }
+
+        self.postTitle.text = postTitle.firstUppercased
+        self.postDescription.text = postDescription.firstUppercased
+        self.postLikes.text = "Likes: \(Int.random(in: 100...500))"
+        self.postViews.text = "Vews: \(Int.random(in: 200...1000))"
+    }
+}
+
+private extension ProfilePostTableViewCell {
     func setupLayout() {
         contentView.add(subviews: [postTitle,
                                    postPhoto,
@@ -95,36 +86,34 @@ private extension ProfilePostTableViewCell {
                                    postLikes,
                                    postViews])
         
-        postTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView.snp.top).offset(16)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+        postTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
-        postPhoto.snp.makeConstraints { (make) in
-            make.height.equalTo(100)
-            make.width.equalTo(postPhoto.snp.height)
-            make.top.equalTo(postTitle.snp.bottom).offset(12)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+        postPhoto.snp.makeConstraints { make in
+            make.height.equalTo(200)
+            make.top.equalTo(postTitle.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
-        postDescription.snp.makeConstraints { (make) in
+        postDescription.snp.makeConstraints { make in
             make.top.equalTo(postPhoto.snp.bottom).offset(16)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
-        postLikes.snp.makeConstraints { (make) in
+        postLikes.snp.makeConstraints { make in
             make.top.equalTo(postDescription.snp.bottom).offset(16)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-16)
         }
         
-        postViews.snp.makeConstraints { (make) in
-            make.top.equalTo(postDescription.snp.bottom).offset(16)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+        postViews.snp.makeConstraints { make in
+            make.centerY.equalTo(postLikes)
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
 }

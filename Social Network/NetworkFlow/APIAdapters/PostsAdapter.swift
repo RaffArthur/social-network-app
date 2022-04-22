@@ -7,36 +7,32 @@
 
 import UIKit
 
+struct UserPostsSuccessAdapterResult {
+    let posts: [Post]
+}
+
+typealias UserPostSuccessAdapterBlock = (_ result: UserPostsSuccessAdapterResult) -> Void
+
 class PostsAdapter {
-    public var onDataReceive: (() -> Void)?
-    public var posts: [Post] = []
-    private let url = "https://jsonplaceholder.typicode.com/posts"
-    private let networkManager = NetworkManager()
-    
-    func getPosts(url: String) {
-        guard let url = URL(string: url) else { return }
+    func getPosts(success: @escaping UserPostSuccessAdapterBlock) {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts")
+        else {
+            return
+        }
 
-        networkManager.runDataTask(url: url) { [weak self] data in
-            if let result = data {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
+        NetworkManager().runDataTask(url: url) { data in
+            guard let data = data else { return }
+            
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
+            if let posts = try? decoder.decode([Post].self, from: data) {
+                let result = UserPostsSuccessAdapterResult(posts: posts)
                 
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-
-                    self.posts = try! decoder.decode([Post].self, from: result)
-
-                    self.onDataReceive?()
+                DispatchQueue.main.async {
+                    success(result)
                 }
             }
-        }
-    }
-    
-    func setupData() {
-        if posts.isEmpty {
-            getPosts(url: url)
-        } else {
-            return
         }
     }
 }

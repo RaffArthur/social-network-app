@@ -7,36 +7,32 @@
 
 import UIKit
 
-class PhotosAdapter {
-    public var onDataReceive: (() -> Void)?
-    public var photos: [Photo] = []
-    private let url = "https://jsonplaceholder.typicode.com/photos"
-    private let networkManager = NetworkManager()
-    
-    func getPhotos(url: String) {
-        guard let url = URL(string: url) else { return }
-                
-        networkManager.runDataTask(url: url) { [weak self] data in
-            if let result = data {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    
-                    self.photos = try! decoder.decode([Photo].self, from: result)
+struct UserPhotosSuccessAdapterResult {
+    let photos: [Photo]
+}
 
-                    self.onDataReceive?()
+typealias UserPhotosSuccessAdapterBlock = (_ result: UserPhotosSuccessAdapterResult) -> Void
+
+class PhotosAdapter {
+    func getPhotos(success: @escaping UserPhotosSuccessAdapterBlock) {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/photos")
+        else {
+            return
+        }
+
+        NetworkManager().runDataTask(url: url) { data in
+            guard let data = data else { return }
+            
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
+            if let photos = try? decoder.decode([Photo].self, from: data) {
+                let result = UserPhotosSuccessAdapterResult(photos: photos)
+                
+                DispatchQueue.main.async {
+                    success(result)
                 }
             }
-        }
-    }
-    
-    func setupData() {
-        if photos.isEmpty {
-            getPhotos(url: url)
-        } else {
-            return
         }
     }
 }

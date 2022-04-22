@@ -1,5 +1,5 @@
 //
-//  Delegates.swift
+//  LoginDelegates.swift
 //  Social_Network
 //
 //  Created by Arthur Raff on 22.02.2022.
