@@ -26,11 +26,12 @@ class PostsAdapter {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             
-            let posts = try! decoder.decode([Post].self, from: data)
-            let result = UserPostsSuccessAdapterResult(posts: posts)
-            
-            DispatchQueue.main.sync {
-                success(result)
+            if let posts = try? decoder.decode([Post].self, from: data) {
+                let result = UserPostsSuccessAdapterResult(posts: posts)
+                
+                DispatchQueue.main.async {
+                    success(result)
+                }
             }
         }
     }

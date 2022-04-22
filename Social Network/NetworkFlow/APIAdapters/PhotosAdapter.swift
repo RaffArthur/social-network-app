@@ -26,11 +26,12 @@ class PhotosAdapter {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             
-            let photos = try! decoder.decode([Photo].self, from: data)
-            let result = UserPhotosSuccessAdapterResult(photos: photos)
-
-            DispatchQueue.main.sync {
-                success(result)
+            if let photos = try? decoder.decode([Photo].self, from: data) {
+                let result = UserPhotosSuccessAdapterResult(photos: photos)
+                
+                DispatchQueue.main.async {
+                    success(result)
+                }
             }
         }
     }

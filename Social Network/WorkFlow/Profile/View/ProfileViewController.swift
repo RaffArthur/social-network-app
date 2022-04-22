@@ -15,8 +15,8 @@ final class ProfileViewController: UIViewController {
     private lazy var postsAdapter = PostsAdapter()
     private lazy var photosAdapter = PhotosAdapter()
     
-    private var posts: [Post] = []
-    private var photos: [Photo] = []
+    private lazy var posts: [Post] = []
+    private lazy var photos: [Photo] = []
     
     private lazy var headerView = ProfileHeaderView()
     
@@ -54,7 +54,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                        
+        
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -63,24 +63,25 @@ final class ProfileViewController: UIViewController {
 
 private extension ProfileViewController {
     func loadFullUserData() {
-        postsAdapter.getPosts { result in
-            let posts = result.posts.map {
-                return Post(title: $0.title, body: $0.body)
-            }
-            
-            self.posts.append(contentsOf: posts)
-            
-            self.tableView.reloadData()
-        }
-        
-        photosAdapter.getPhotos { result in
+        photosAdapter.getPhotos { [weak self] result in
             let photos = result.photos.map {
                 return Photo(url: $0.url, thumbnailURL: $0.thumbnailURL)
             }
             
-            self.photos.append(contentsOf: photos)
+            self?.photos.append(contentsOf: photos)
             
-            self.tableView.reloadData()            
+            self?.tableView.reloadData()
+            
+        }
+        
+        postsAdapter.getPosts { [weak self] result in
+            let posts = result.posts.map {
+                return Post(title: $0.title, body: $0.body)
+            }
+            
+            self?.posts.append(contentsOf: posts)
+            
+            self?.tableView.reloadData()
         }
     }
 }
@@ -118,14 +119,16 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier ,
                                                      for: indexPath) as? ProfilePhotosPreviewTableViewCell
             
-//            cell?.configure(photos: photos) /// Не успевают загрузиться 
+            if !photos.isEmpty {
+                cell?.configure(photos: photos)
+            }
             
             return cell ?? UITableViewCell()
         } else {
             let identifier = String(describing: ProfilePostTableViewCell.self)
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                      for: indexPath) as? ProfilePostTableViewCell
-            let post = posts[indexPath.item]
+            let post = posts[indexPath.row]
             
             cell?.configure(post: post)
             
