@@ -57,8 +57,8 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
             showProfileFlow(navController: navController)
         case .feed:
             showFeedFlow(navController: navController)
-        case .media:
-            break
+        case .documents:
+            showDocumentsFlow(navController: navController)
         }
         
         return navController
@@ -96,6 +96,13 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
         feedCoordinator.start()
         
         childCoordinators.append(feedCoordinator)
+    }
+    
+    func showDocumentsFlow(navController: UINavigationController) {
+        let documentsCoordinator = DocumentsCoordinator(navController)
+        documentsCoordinator.start()
+        
+        childCoordinators.append(documentsCoordinator)
     }
 }
 
