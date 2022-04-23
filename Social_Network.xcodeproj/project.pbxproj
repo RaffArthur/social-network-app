@@ -50,6 +50,7 @@
 		75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AC25C70CED00B3C586 /* LoginViewController.swift */; };
 		75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */; };
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
+		75B778DC28143C690004B6CC /* DocumentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B778DB28143C690004B6CC /* DocumentsTableViewCell.swift */; };
 		75D8A24327C530240056E78B /* LoginDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24227C530240056E78B /* LoginDelegates.swift */; };
 		75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */; };
 		75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */; };
@@ -107,6 +108,7 @@
 		75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginReviewerImpl.swift; sourceTree = "<group>"; };
 		75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75B778DB28143C690004B6CC /* DocumentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsTableViewCell.swift; sourceTree = "<group>"; };
 		75D8A24227C530240056E78B /* LoginDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDelegates.swift; sourceTree = "<group>"; };
 		75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverter.swift; sourceTree = "<group>"; };
 		75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				7537059728130710003A20A6 /* DocumentsViewController.swift */,
+				75B778DB28143C690004B6CC /* DocumentsTableViewCell.swift */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				75B444C725C70CEE00B3C586 /* ProfilePhotosPreviewTableViewCell.swift in Sources */,
 				756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */,
 				75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */,
+				75B778DC28143C690004B6CC /* DocumentsTableViewCell.swift in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				759E14E126188F0800C0BB5A /* ErrorsAlert.swift in Sources */,
 				75B444DB25C70CEE00B3C586 /* FeedViewController.swift in Sources */,
