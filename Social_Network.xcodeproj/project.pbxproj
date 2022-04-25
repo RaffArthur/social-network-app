@@ -52,6 +52,7 @@
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
 		75B778DC28143C690004B6CC /* DocumentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B778DB28143C690004B6CC /* DocumentsTableViewCell.swift */; };
 		75B778DF28144F010004B6CC /* SocialNetworkFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B778DE28144F010004B6CC /* SocialNetworkFileManager.swift */; };
+		75C3CC2228159F550044FE7C /* FileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C3CC2128159F550044FE7C /* FileModel.swift */; };
 		75D8A24327C530240056E78B /* LoginDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24227C530240056E78B /* LoginDelegates.swift */; };
 		75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */; };
 		75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */; };
@@ -111,6 +112,7 @@
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75B778DB28143C690004B6CC /* DocumentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsTableViewCell.swift; sourceTree = "<group>"; };
 		75B778DE28144F010004B6CC /* SocialNetworkFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetworkFileManager.swift; sourceTree = "<group>"; };
+		75C3CC2128159F550044FE7C /* FileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModel.swift; sourceTree = "<group>"; };
 		75D8A24227C530240056E78B /* LoginDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDelegates.swift; sourceTree = "<group>"; };
 		75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverter.swift; sourceTree = "<group>"; };
 		75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */,
 				754D79B926C6F39500ED19F8 /* PhotoModel.swift */,
 				754D79BD26C9A17F00ED19F8 /* PostModel.swift */,
+				75C3CC2128159F550044FE7C /* FileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */,
 				75B778DF28144F010004B6CC /* SocialNetworkFileManager.swift in Sources */,
 				75B444D925C70CEE00B3C586 /* PostViewController.swift in Sources */,
+				75C3CC2228159F550044FE7C /* FileModel.swift in Sources */,
 				75B444DD25C70CEE00B3C586 /* FeedContainerView.swift in Sources */,
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
 				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
