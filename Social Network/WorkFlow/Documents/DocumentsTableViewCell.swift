@@ -7,11 +7,44 @@
 
 import UIKit
 
-class DocumentsTableViewCell: UITableViewCell {
-    private lazy var image: UIImageView = {
+final class DocumentsTableViewCell: UITableViewCell {
+    private lazy var documentPreview: UIImageView = {
         let iv = UIImageView()
+        iv.contentMode = .scaleToFill
         
         return iv
+    }()
+    
+    private lazy var documentTitle: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    private lazy var documentCreationDate: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .systemGray
+
+        return label
+    }()
+    
+    private lazy var documentType: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .systemGray
+
+        return label
+    }()
+    
+    private lazy var documentSize: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .systemGray
+
+        return label
     }()
     
     override init(style: UITableViewCell.CellStyle,
@@ -26,6 +59,36 @@ class DocumentsTableViewCell: UITableViewCell {
     }
 }
 
+extension DocumentsTableViewCell {
+    func configure(file: File) {
+        guard let fileUrl = file.url,
+              let fullUrl = URL(string: fileUrl),
+              let fileData = try? Data(contentsOf: fullUrl),
+              let fileName = file.name,
+              let fileCreationDate = file.creationDate,
+              let fileSize = file.size,
+              let fileType = file.type
+        else {
+            return
+        }
+        
+        let imageSize = CGSize(width: 120, height: 120)
+        let originalImage = UIImage(data: fileData)
+        let imgRect = CGRect(origin: CGPoint(x:0.0, y:0.0), size: imageSize)
+        
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, 1)
+        originalImage?.draw(in: imgRect)
+        let copied = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        documentPreview.image = copied
+        documentTitle.text = "Имя: \(fileName)"
+        documentCreationDate.text = "Дата создания: \(fileCreationDate)"
+        documentSize.text = "Размер: \(fileSize)"
+        documentType.text = "Тип файла: \(fileType)"
+    }
+}
+
 private extension DocumentsTableViewCell {
     func setupCell() {
         setupLayout()
@@ -33,11 +96,39 @@ private extension DocumentsTableViewCell {
     }
     
     func setupLayout() {
-        contentView.addSubview(image)
+        contentView.add(subviews: [documentPreview,
+                                   documentTitle,
+                                   documentType,
+                                   documentSize,
+                                   documentCreationDate])
         
-        image.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.center.equalToSuperview()
+        documentPreview.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview().offset(-8)
+        }
+        
+        documentTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(8)
+            make.leading.equalTo(documentPreview.snp.trailing).offset(12)
+            make.trailing.equalToSuperview().offset(-8)
+        }
+        
+        documentType.snp.makeConstraints { make in
+            make.top.equalTo(documentTitle.snp.bottom).offset(8)
+            make.leading.equalTo(documentPreview.snp.trailing).offset(12)
+            make.trailing.equalToSuperview().offset(-8)
+        }
+                
+        documentSize.snp.makeConstraints { make in
+            make.top.equalTo(documentType.snp.bottom).offset(8)
+            make.leading.equalTo(documentPreview.snp.trailing).offset(12)
+            make.trailing.equalToSuperview().offset(-8)
+        }
+        
+        documentCreationDate.snp.makeConstraints { make in
+            make.top.equalTo(documentSize.snp.bottom).offset(8)
+            make.leading.equalTo(documentPreview.snp.trailing).offset(12)
+            make.trailing.equalToSuperview().offset(-8)
         }
     }
     
