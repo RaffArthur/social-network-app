@@ -27,7 +27,7 @@ final class DocumentsViewController: UIViewController {
     }()
     
     private lazy var tableView: UITableView = {
-        let tv = UITableView(frame: .zero, style: .grouped)
+        let tv = UITableView(frame: .zero, style: .plain)
         tv.register(DocumentsTableViewCell.self,
                     forCellReuseIdentifier: String(describing: DocumentsTableViewCell.self))
         tv.delegate = self
@@ -39,7 +39,7 @@ final class DocumentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getFiles()
+        getFullFilesData()
         
         setupScreen()
         setupActions()
@@ -56,67 +56,69 @@ private extension DocumentsViewController {
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
     func setupContent() {
         view.backgroundColor = .white
+        
         tableView.backgroundColor = .white
         
         title = "Файлы"
-
+        
         navigationItem.rightBarButtonItem = addFileButton
     }
 }
 
 private extension DocumentsViewController {
-    func getFiles() {
-        fileManager.getFilesFrom(directory: .documentDirectory) { files in
-            let filesData = files?.compactMap {
-                File(url: $0.absoluteString,
-                     name: $0.lastPathComponent,
-                     size: getFileAttributeBy(name: $0.lastPathComponent).size,
-                     type: getFileAttributeBy(name: $0.lastPathComponent).type,
-                     creationDate: getFileAttributeBy(name: $0.lastPathComponent).creationDate)
+    func getFullFilesData() {
+        fileManager.getFilesWithAttributes(directory: .documentDirectory) { fullFilesData in
+            let convertedFullFilesData = fullFilesData.compactMap {
+                File(url:  $0.file.absoluteString,
+                     name: $0.file.lastPathComponent,
+                     size: convert(attribute: .size, in: $0.attributes),
+                     type: $0.file.lastPathComponent.components(separatedBy: ".").last,
+                     creationDate: convert(attribute: .creationDate, in: $0.attributes))
             }
             
-            guard let data = filesData else { return }
-            
-            self.files = data
+            files = convertedFullFilesData
             
             tableView.reloadData()
         }
     }
-    
-    func getFileAttributeBy(name: String) -> (size: String,
-                                              creationDate: String,
-                                              type: String) {
-        var convertedAttributes = (size: String(),
-                                   creationDate: String(),
-                                   type: String())
         
-        fileManager.getFileAttributesFrom(directory: .documentDirectory,
-                                          atName: name) { attributes in
-            
-            guard let creationDate = attributes?[.creationDate] as? Date,
-                  let size = attributes?[.size] as? Double,
-                  let type = attributes?[.type] as? String
-            else {
-                return
+    func convert(attribute: FileAttributeKey, in attributes: [FileAttributeKey: Any]) -> String {
+        for _ in attributes {
+            if attribute == .size {
+                guard let size = attributes[.size],
+                      let sizeDouble = size as? Int64
+                else {
+                    return String()
+                }
+
+                let formattedSize = ByteCountFormatter.string(fromByteCount: sizeDouble, countStyle: .file)
+
+                return "\(formattedSize)"
             }
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .long
-            dateFormatter.timeZone = TimeZone(identifier: "RU")
-            dateFormatter.locale = Locale(identifier: "RU")
-            
-            convertedAttributes.creationDate = dateFormatter.string(from: creationDate)
-            convertedAttributes.size = "\( round(size / 1024)) Кб"
-            convertedAttributes.type = "\(type)"
+            if attribute == .creationDate {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .long
+                dateFormatter.timeZone = TimeZone(identifier: "RU")
+                dateFormatter.locale = Locale(identifier: "RU")
+                
+                guard let creationDate = attributes[.creationDate],
+                      let formattedCreationDate = dateFormatter.string(for: creationDate)
+                else {
+                    return String()
+                }
+                
+                return formattedCreationDate
+            }
         }
         
-        return convertedAttributes
+        return "отсутствует"
     }
 }
 
@@ -175,9 +177,9 @@ extension DocumentsViewController: UITableViewDataSource {
                                           withName: name)
             
             self.files.remove(at: indexPath.row)
-            
+                                    
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            
+                        
             success(true)
         }
         
@@ -188,7 +190,6 @@ extension DocumentsViewController: UITableViewDataSource {
 extension DocumentsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         guard let image = (info[.originalImage] as? UIImage)?.jpegData(compressionQuality: 0.2),
               let name = (info[.imageURL] as? URL)?.lastPathComponent
         else {
@@ -201,6 +202,6 @@ extension DocumentsViewController: UIImagePickerControllerDelegate, UINavigation
         
         picker.dismiss(animated: true)
         
-        getFiles()
+        getFullFilesData()
     }
 }
