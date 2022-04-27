@@ -44,7 +44,7 @@ enum TabBarPage: CaseIterable {
         case .feed:
             return "Лента"
         case .documents:
-            return "Документы"
+            return "Файлы"
         }
     }
     
