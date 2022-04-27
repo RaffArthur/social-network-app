@@ -7,6 +7,9 @@
 
 import Foundation
 
+typealias FullFilesData = ([(file: URL,
+                            attributes: [FileAttributeKey: Any])]) -> Void
+
 enum FileManagerDirectory {
     case documentDirectory
     case userDirectory
@@ -27,7 +30,38 @@ enum FileManagerDirectory {
     }
 }
 
-final class SocialNetworkFileManager {    
+final class SocialNetworkFileManager {
+    func getFilesWithAttributes(directory: FileManagerDirectory,
+                                completion: FullFilesData) {
+        var convertedFullFilesData = [(file: URL,
+                              attributes: [FileAttributeKey: Any])]()
+        
+        guard let directoryUrl = directory.url else { return }
+        
+        let files = try? FileManager.default.contentsOfDirectory(at: directoryUrl,
+                                                                 includingPropertiesForKeys: nil,
+                                                                 options: [.skipsHiddenFiles])
+        
+        files?.forEach {
+            var attributes: [FileAttributeKey : Any] = [:]
+            let fileUrl = directoryUrl.appendingPathComponent($0.lastPathComponent)
+            let fileExist = FileManager.default.fileExists(atPath: fileUrl.path)
+            
+            if fileExist == true {
+                guard let convertedAttributes = try? FileManager.default.attributesOfItem(atPath: fileUrl.path)
+                else {
+                    return
+                }
+                attributes = convertedAttributes
+            }
+            
+            convertedFullFilesData.append((file: $0, attributes: attributes))
+        }
+        
+        completion(convertedFullFilesData)
+    }
+    
+    
     func getFilesFrom(directory: FileManagerDirectory,
                       completion: ([URL]?) -> Void) {
         guard let directoryUrl = directory.url else { return }
