@@ -7,14 +7,18 @@
 
 import UIKit
 import Firebase
+import IQKeyboardManagerSwift
 
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
     
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene,
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions) {
         FirebaseApp.configure()
+        IQKeyboardManager.shared.enable = true
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
     
