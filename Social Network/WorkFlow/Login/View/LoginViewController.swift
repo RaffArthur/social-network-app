@@ -19,18 +19,6 @@ final class LoginViewController: UIViewController {
         
         setupScreen()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        addKeyboardObserver()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        removeKeyboardObserver()
-    }
 }
 
 @available(iOS 13.0, *)
@@ -77,40 +65,6 @@ private extension LoginViewController {
         alertController.addAction(action)
         
         present(alertController, animated: true, completion: nil)
-    }
-}
-
-private extension LoginViewController {
-    func addKeyboardObserver() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-    }
-
-    func removeKeyboardObserver() {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
-    }
-
-    @objc func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue  else { return }
-        
-        loginView.set(contentOffset: keyboardSize.height)
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        loginView.set(contentOffset: .zero)
     }
 }
 

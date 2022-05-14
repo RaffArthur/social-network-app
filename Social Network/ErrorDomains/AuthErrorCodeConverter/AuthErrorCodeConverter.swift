@@ -9,5 +9,5 @@ import Foundation
 import FirebaseAuth
 
 protocol AuthErrorCodeConverter {
-    func convertAuthError(code: AuthErrorCode) -> UserAuthError?
+    func convertAuthError(code: AuthErrorCode.Code) -> UserAuthError?
 }

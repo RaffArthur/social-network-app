@@ -39,7 +39,7 @@ final class LoginReviewerImpl: LoginReviewer {
             
             guard error == nil else {
                 if let nsError = error as NSError?,
-                   let code = AuthErrorCode(rawValue: nsError.code) {
+                   let code = AuthErrorCode.Code(rawValue: nsError.code){
                     
                     guard let bussinesLogicError = self.errorCodeConverter.convertAuthError(code: code) else { return }
                     completion(.failure(bussinesLogicError))
@@ -73,7 +73,7 @@ final class LoginReviewerImpl: LoginReviewer {
             
             guard error == nil else {
                 if let nsError = error as NSError?,
-                   let code = AuthErrorCode(rawValue: nsError.code) {
+                   let code = AuthErrorCode.Code(rawValue: nsError.code) {
                     
                     guard let bussinesLogicError = self.errorCodeConverter.convertAuthError(code: code) else { return }
                     completion(.failure(bussinesLogicError))

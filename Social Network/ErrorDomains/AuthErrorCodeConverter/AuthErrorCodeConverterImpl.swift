@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 
 final class AuthErrorCodeConverterImpl: AuthErrorCodeConverter {
-    func convertAuthError(code: AuthErrorCode) -> UserAuthError? {
+    func convertAuthError(code: AuthErrorCode.Code) -> UserAuthError? {
         switch code {
             case .wrongPassword:
                 return .wrongPassword

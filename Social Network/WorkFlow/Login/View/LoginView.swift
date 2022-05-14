@@ -289,16 +289,6 @@ private extension LoginView {
     }
 }
 
-extension LoginView {
-    func set(contentOffset: CGFloat) {
-        if contentOffset != 0 {
-            scrollView.contentOffset = CGPoint(x: 0, y: contentOffset)
-        } else {
-            scrollView.contentOffset = .zero
-        }
-    }
-}
-
 extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
