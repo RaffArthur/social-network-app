@@ -11,7 +11,10 @@
 		751753642717528D00C80FB9 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FeedCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
 		75175368271758EF00C80FB9 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175367271758EF00C80FB9 /* PostCoordinator.swift */; };
-		752BC256283A7A460063A5E0 /* AuthentificationCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC255283A7A460063A5E0 /* AuthentificationCredentials.swift */; };
+		752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */; };
+		752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25A283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift */; };
+		752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */; };
+		752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25E283AC4380063A5E0 /* UserCredentials.swift */; };
 		7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A226CC240600935B7C /* PhotosAdapter.swift */; };
 		7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A426CC241300935B7C /* PostsAdapter.swift */; };
 		754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E727148B0200400F95 /* AppCoordinator.swift */; };
@@ -65,7 +68,10 @@
 		751753632717528D00C80FB9 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
 		75175367271758EF00C80FB9 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
-		752BC255283A7A460063A5E0 /* AuthentificationCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationCredentials.swift; sourceTree = "<group>"; };
+		752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsCached.swift; sourceTree = "<group>"; };
+		752BC25A283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUserCredentialsDataProvider.swift; sourceTree = "<group>"; };
+		752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUserCredentialsDataProviderImpl.swift; sourceTree = "<group>"; };
+		752BC25E283AC4380063A5E0 /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		7538C2A226CC240600935B7C /* PhotosAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAdapter.swift; sourceTree = "<group>"; };
 		7538C2A426CC241300935B7C /* PostsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsAdapter.swift; sourceTree = "<group>"; };
 		754B85E727148B0200400F95 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -150,6 +156,15 @@
 				681B5DF4387C968CE8B9F91E /* Pods_Social_Network.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		752BC259283AAFC40063A5E0 /* RealmDataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				752BC25A283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift */,
+				752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */,
+			);
+			path = RealmDataProvider;
 			sourceTree = "<group>";
 		};
 		7538C2A026CC238700935B7C /* NetworkFlow */ = {
@@ -243,6 +258,7 @@
 				75B4448725C70CED00B3C586 /* Applcation */,
 				75B4448D25C70CED00B3C586 /* WorkFlow */,
 				7538C2A026CC238700935B7C /* NetworkFlow */,
+				752BC259283AAFC40063A5E0 /* RealmDataProvider */,
 				7574B7B52610D2C700A349E0 /* ErrorDomains */,
 				75B444AF25C70CED00B3C586 /* Helpers */,
 				757638F12635BA5300C3F190 /* GoogleService-Info.plist */,
@@ -258,7 +274,8 @@
 				75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */,
 				754D79B926C6F39500ED19F8 /* PhotoModel.swift */,
 				754D79BD26C9A17F00ED19F8 /* PostModel.swift */,
-				752BC255283A7A460063A5E0 /* AuthentificationCredentials.swift */,
+				752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */,
+				752BC25E283AC4380063A5E0 /* UserCredentials.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -513,6 +530,7 @@
 				759E14E126188F0800C0BB5A /* ErrorsAlert.swift in Sources */,
 				75B444DB25C70CEE00B3C586 /* FeedViewController.swift in Sources */,
 				75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */,
+				752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */,
 				75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */,
 				7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */,
 				751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */,
@@ -520,6 +538,8 @@
 				7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */,
 				75175368271758EF00C80FB9 /* PostCoordinator.swift in Sources */,
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
+				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
+				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
 				75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */,
 				7577741B27B56E310021F5EB /* UIViewController+Error.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */,
@@ -533,7 +553,7 @@
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
 				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
-				752BC256283A7A460063A5E0 /* AuthentificationCredentials.swift in Sources */,
+				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,
 				75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */,
