@@ -9,24 +9,35 @@ import UIKit
 
 import FirebaseAuth
 import FirebaseFirestore
+import RealmSwift
 
 final class LoginReviewerImpl: LoginReviewer {
+    private let realmDataProvider: RealmUserCredentialsDataProvider = RealmUserCredentialsDataProviderImpl()
+    
     private let errorCodeConverter: AuthErrorCodeConverter = AuthErrorCodeConverterImpl()
     
-    func signOut(completion: UserAuthResult) {
+    func signOutWith(credentials: UserCredentials, completion: UserAuthResult) {
         do {
             completion(.success(true))
+            
+            realmDataProvider.updateUser(credentials: credentials)
+                        
             try Auth.auth().signOut()
         } catch {
             completion(.failure(.keyсhainError))
         }
     }
     
-    func signIn(email: String,
-                pass: String,
-                completion: @escaping UserAuthResult) {
+    func signInWith(credentials: UserCredentials,
+                    completion: @escaping UserAuthResult) {
+        guard let email = credentials.email,
+              let password = credentials.password
+        else {
+            return
+        }
+        
         let inputDataValidationError = signInValidation(email: email,
-                                                        pass: pass)
+                                                        pass: password)
         
         guard inputDataValidationError == nil else {
             inputDataValidationError.flatMap { completion(.failure($0))}
@@ -34,7 +45,7 @@ final class LoginReviewerImpl: LoginReviewer {
             return
         }
         
-        Auth.auth().signIn(withEmail: email, password: pass) { [weak self] authResult, error in
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let self = self else { return }
             
             guard error == nil else {
@@ -51,24 +62,38 @@ final class LoginReviewerImpl: LoginReviewer {
             }
             
             guard let user = authResult?.user else { return }
+            
+            let realmUser = self.realmDataProvider.getUserCredentials()
+            
+            self.realmDataProvider.updateUser(credentials: credentials)
+            
+            if realmUser == nil {
+                self.realmDataProvider.addUser(credentials: credentials)
+            }
+            
             completion(.success(user))
         }
     }
     
-    func registration(email: String,
-                      pass: String,
-                      repeatPass: String,
-                      completion: @escaping UserAuthResult) {
+    func registrationWith(credentials: UserCredentials,
+                          completion: @escaping UserAuthResult) {
+        guard let email = credentials.email,
+              let password = credentials.password,
+              let repeatPassword = credentials.repeatPassword
+        else {
+            return
+        }
+        
         let inputDataValidationError = registrationValidation(email: email,
-                                                              pass: pass,
-                                                              repeatPass: repeatPass)
+                                                              pass: password,
+                                                              repeatPass: repeatPassword)
         guard inputDataValidationError == nil else {
             inputDataValidationError.flatMap { completion(.failure($0))}
             
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: pass) { [weak self] authResult, error in
+        Auth.auth().createUser(withEmail: email, password: repeatPassword) { [weak self] authResult, error in
             guard let self = self else { return }
             
             guard error == nil else {
@@ -85,6 +110,9 @@ final class LoginReviewerImpl: LoginReviewer {
             }
             
             guard let user = authResult?.user else { return }
+            
+            self.realmDataProvider.addUser(credentials: credentials)
+            
             completion(.success(user))
         }
     }
