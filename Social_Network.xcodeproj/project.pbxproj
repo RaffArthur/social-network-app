@@ -11,6 +11,7 @@
 		751753642717528D00C80FB9 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FeedCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
 		75175368271758EF00C80FB9 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175367271758EF00C80FB9 /* PostCoordinator.swift */; };
+		752BC256283A7A460063A5E0 /* AuthentificationCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC255283A7A460063A5E0 /* AuthentificationCredentials.swift */; };
 		7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A226CC240600935B7C /* PhotosAdapter.swift */; };
 		7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A426CC241300935B7C /* PostsAdapter.swift */; };
 		754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E727148B0200400F95 /* AppCoordinator.swift */; };
@@ -64,6 +65,7 @@
 		751753632717528D00C80FB9 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
 		75175367271758EF00C80FB9 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
+		752BC255283A7A460063A5E0 /* AuthentificationCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationCredentials.swift; sourceTree = "<group>"; };
 		7538C2A226CC240600935B7C /* PhotosAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAdapter.swift; sourceTree = "<group>"; };
 		7538C2A426CC241300935B7C /* PostsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsAdapter.swift; sourceTree = "<group>"; };
 		754B85E727148B0200400F95 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */,
 				754D79B926C6F39500ED19F8 /* PhotoModel.swift */,
 				754D79BD26C9A17F00ED19F8 /* PostModel.swift */,
+				752BC255283A7A460063A5E0 /* AuthentificationCredentials.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
 				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
+				752BC256283A7A460063A5E0 /* AuthentificationCredentials.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,
 				75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */,
