@@ -10,7 +10,7 @@ import FirebaseAuth
 final class LoginViewController: UIViewController {
     weak var reviewer: LoginReviewer?
     weak var delegate: LoginViewConrollerDelegate?
-        
+    
     private lazy var loginView = LoginView()
         
     override func viewDidLoad() {
@@ -21,7 +21,6 @@ final class LoginViewController: UIViewController {
     }
 }
 
-@available(iOS 13.0, *)
 private extension LoginViewController {
     func setupScreen() {
         setupLayout()
@@ -71,12 +70,17 @@ private extension LoginViewController {
 extension LoginViewController: LoginViewDelegate {
     func loginButtonWasTapped() {
         guard let email = loginView.userEmail,
-              let pass = loginView.userPass
+              let password = loginView.userPass
         else {
             return
         }
         
-        reviewer?.signIn(email: email, pass: pass) { [weak self] result in
+        let credentials = UserCredentials(email: email,
+                                          password: password,
+                                          repeatPassword: nil,
+                                          loggedIn: true)
+        
+        reviewer?.signInWith(credentials: credentials) { [weak self] result in
             switch result {
             case .success:
                 self?.delegate?.userLoggedIn()
@@ -88,13 +92,18 @@ extension LoginViewController: LoginViewDelegate {
     
     func registrationButtonWasTapped() {
         guard let email = loginView.userEmail,
-              let pass = loginView.userPass,
-              let repeatPass = loginView.userRepeatPass
+              let password = loginView.userPass,
+              let repeatPassword = loginView.userRepeatPass
         else {
             return
         }
         
-        reviewer?.registration(email: email, pass: pass, repeatPass: repeatPass) { result in
+        let credentials = UserCredentials(email: email,
+                                          password: password,
+                                          repeatPassword: repeatPassword,
+                                          loggedIn: true)
+        
+        reviewer?.registrationWith(credentials: credentials) { result in
             switch result {
             case .success:
                 self.accountCreated()
