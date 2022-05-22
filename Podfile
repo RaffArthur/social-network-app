@@ -9,6 +9,7 @@ target 'Social_Network' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'RealmSwift'
   pod 'IQKeyboardManagerSwift'
   
 end
