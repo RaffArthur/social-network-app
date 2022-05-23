@@ -9,20 +9,34 @@ import Foundation
 import RealmSwift
 
 final class RealmUserCredentialsDataProviderImpl: RealmUserCredentialsDataProvider {
-    let realm = try? Realm()
-
     func addUser(credentials: UserCredentials) {
         let user = UserCredentialsCached()
         user.email = credentials.email
         user.password = credentials.password
         user.loggedIn = credentials.loggedIn
-                
-        try? realm?.write {
-            realm?.add(user)
+        
+        do {
+            let realm = try Realm()
+            
+            let block: () -> Void = {
+                realm.add(user)
+            }
+            
+            if realm.isInWriteTransaction {
+                block()
+            } else {
+                try realm.write {
+                    block()
+                }
+            }
+        } catch {
+            
         }
     }
     
     func getUserCredentials() -> UserCredentials? {
+        let realm = try? Realm()
+        
         guard let users = realm?.objects(UserCredentialsCached.self) else { return nil }
         
         for user in users {
@@ -36,6 +50,8 @@ final class RealmUserCredentialsDataProviderImpl: RealmUserCredentialsDataProvid
     }
     
     func updateUser(credentials: UserCredentials) {
+        let realm = try? Realm()
+        
         guard let users = realm?.objects(UserCredentialsCached.self) else { return }
         
         for user in users {

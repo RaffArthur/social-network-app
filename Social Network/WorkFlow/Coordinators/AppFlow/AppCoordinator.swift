@@ -25,7 +25,7 @@ class AppCoordinator: AppCoordinatorProtocol {
     var type: CoordinatorType { .app }
     
     private var realmDataProvider: RealmUserCredentialsDataProvider?
-        
+    
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         navigationController.setNavigationBarHidden(true, animated: true)
