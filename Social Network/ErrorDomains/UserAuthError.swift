@@ -5,9 +5,6 @@
 //  Created by Arthur Raff on 28.03.2021.
 //
 
-import UIKit
-import FirebaseAuth
-
 enum UserAuthError: Error {
     case incorrectData
     case wrongPassword

@@ -9,6 +9,8 @@ import Foundation
 import RealmSwift
 
 final class RealmUserCredentialsDataProviderImpl: RealmUserCredentialsDataProvider {
+    private let errorCodeConverter: RealmErrorCodeConverter = RealmErrorCodeConverterImpl()
+
     func addUser(credentials: UserCredentials) {
         let user = UserCredentialsCached()
         user.email = credentials.email
@@ -29,8 +31,14 @@ final class RealmUserCredentialsDataProviderImpl: RealmUserCredentialsDataProvid
                     block()
                 }
             }
-        } catch {
+        } catch let error as NSError {
+            guard let code = Realm.Error.Code(rawValue: error.code) else { return }
             
+            guard let businessLogicError = errorCodeConverter.convertRealmError(code: code) else {
+                return
+            }
+            
+            debugPrint(businessLogicError.localizedDescription)
         }
     }
     
