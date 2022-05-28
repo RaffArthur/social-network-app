@@ -1,5 +1,5 @@
 //
-//  FeedCoordinator.swift
+//  FavouriteCoordinator.swift
 //  Social_Network
 //
 //  Created by Arthur Raff on 13.10.2021.
@@ -8,20 +8,20 @@
 import UIKit
 
 @available(iOS 13.0, *)
-class FeedCoordinator: Coordinator {
+class FavouriteCoordinator: Coordinator {
     var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .feed }
+    var type: CoordinatorType { .favourite }
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let feedVC = FeedViewController()
+        let favouriteVC = FeedViewController()
         
-        feedVC.didSendEventClosure = { event in
+        favouriteVC.didSendEventClosure = { event in
             switch event {
             case .postButtonTapped:
                 let coordinator = PostCoordinator(self.navigationController)
@@ -30,6 +30,6 @@ class FeedCoordinator: Coordinator {
             }
         }
         
-        navigationController.pushViewController(feedVC, animated: true)
+        navigationController.pushViewController(favouriteVC, animated: true)
     }
 }

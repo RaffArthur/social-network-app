@@ -10,7 +10,7 @@ import UIKit
 @available(iOS 13.0, *)
 enum TabBarPage: CaseIterable {    
     case profile
-    case feed
+    case favourite
     case media
     
     init?(index: Int) {
@@ -18,7 +18,7 @@ enum TabBarPage: CaseIterable {
         case 0:
             self = .profile
         case 1:
-            self = .feed
+            self = .favourite
         case 2:
             self = .media
         default:
@@ -30,7 +30,7 @@ enum TabBarPage: CaseIterable {
         switch self {
         case .profile:
             return 0
-        case .feed:
+        case .favourite:
             return 1
         case .media:
             return 2
@@ -41,8 +41,8 @@ enum TabBarPage: CaseIterable {
         switch self {
         case .profile:
             return "Профиль"
-        case .feed:
-            return "Лента"
+        case .favourite:
+            return "Избранное"
         case .media:
             return "Медиа"
         }
@@ -52,8 +52,8 @@ enum TabBarPage: CaseIterable {
         switch self {
         case .profile:
             return UIImage(systemName: "person.fill")!
-        case .feed:
-            return UIImage(systemName: "house.fill")!
+        case .favourite:
+            return UIImage(systemName: "heart.text.square.fill")!
         case .media:
             return UIImage(systemName: "play.tv")!
         }
