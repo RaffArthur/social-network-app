@@ -10,7 +10,6 @@
 		751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753612717519900C80FB9 /* ProfileCoordinator.swift */; };
 		751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FavouriteCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
-		75175368271758EF00C80FB9 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175367271758EF00C80FB9 /* PostCoordinator.swift */; };
 		752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */; };
 		752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25A283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift */; };
 		752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */; };
@@ -70,7 +69,6 @@
 		751753612717519900C80FB9 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		751753632717528D00C80FB9 /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
-		75175367271758EF00C80FB9 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsCached.swift; sourceTree = "<group>"; };
 		752BC25A283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUserCredentialsDataProvider.swift; sourceTree = "<group>"; };
 		752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUserCredentialsDataProviderImpl.swift; sourceTree = "<group>"; };
@@ -216,7 +214,7 @@
 				75B373282710A5F400EEE6E8 /* TabBarPage.swift */,
 				755CD9F82719EF9000EA2239 /* AppFlow */,
 				755CD9F62719EF1900EA2239 /* ProfileFlow */,
-				755CD9F92719F03400EA2239 /* FeedFlow */,
+				755CD9F92719F03400EA2239 /* FavouriteFlow */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -240,13 +238,12 @@
 			path = AppFlow;
 			sourceTree = "<group>";
 		};
-		755CD9F92719F03400EA2239 /* FeedFlow */ = {
+		755CD9F92719F03400EA2239 /* FavouriteFlow */ = {
 			isa = PBXGroup;
 			children = (
 				751753632717528D00C80FB9 /* FavouriteCoordinator.swift */,
-				75175367271758EF00C80FB9 /* PostCoordinator.swift */,
 			);
-			path = FeedFlow;
+			path = FavouriteFlow;
 			sourceTree = "<group>";
 		};
 		7574B7B52610D2C700A349E0 /* ErrorDomains */ = {
@@ -555,7 +552,6 @@
 				751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */,
 				754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */,
 				7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */,
-				75175368271758EF00C80FB9 /* PostCoordinator.swift in Sources */,
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
