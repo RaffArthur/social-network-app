@@ -19,7 +19,7 @@ class FavouriteCoordinator: Coordinator {
     }
     
     func start() {
-        let favouriteVC = FeedViewController()
+        let favouriteVC = FavouriteViewController()
         
         navigationController.pushViewController(favouriteVC, animated: true)
     }

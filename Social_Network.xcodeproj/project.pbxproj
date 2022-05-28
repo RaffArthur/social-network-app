@@ -47,9 +47,7 @@
 		75B444CD25C70CEE00B3C586 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449725C70CED00B3C586 /* PhotosViewController.swift */; };
 		75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449825C70CED00B3C586 /* ProfileViewController.swift */; };
 		75B444D125C70CEE00B3C586 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */; };
-		75B444D925C70CEE00B3C586 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A225C70CED00B3C586 /* PostViewController.swift */; };
-		75B444DB25C70CEE00B3C586 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A325C70CED00B3C586 /* FeedViewController.swift */; };
-		75B444DD25C70CEE00B3C586 /* FeedContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A525C70CED00B3C586 /* FeedContainerView.swift */; };
+		75B444DB25C70CEE00B3C586 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444A325C70CED00B3C586 /* FavouriteViewController.swift */; };
 		75B444E125C70CEE00B3C586 /* LoginReviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AA25C70CED00B3C586 /* LoginReviewer.swift */; };
 		75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AC25C70CED00B3C586 /* LoginViewController.swift */; };
 		75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */; };
@@ -107,9 +105,7 @@
 		75B4449725C70CED00B3C586 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		75B4449825C70CED00B3C586 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
-		75B444A225C70CED00B3C586 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		75B444A325C70CED00B3C586 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		75B444A525C70CED00B3C586 /* FeedContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedContainerView.swift; sourceTree = "<group>"; };
+		75B444A325C70CED00B3C586 /* FavouriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		75B444AA25C70CED00B3C586 /* LoginReviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginReviewer.swift; sourceTree = "<group>"; };
 		75B444AC25C70CED00B3C586 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginReviewerImpl.swift; sourceTree = "<group>"; };
@@ -312,7 +308,7 @@
 				75B444A625C70CED00B3C586 /* Login */,
 				75B4449025C70CED00B3C586 /* Profile */,
 				754D79B426C1AB3000ED19F8 /* Photos */,
-				75B4449B25C70CED00B3C586 /* Feed */,
+				75B4449B25C70CED00B3C586 /* Favourite */,
 			);
 			path = WorkFlow;
 			sourceTree = "<group>";
@@ -326,14 +322,12 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		75B4449B25C70CED00B3C586 /* Feed */ = {
+		75B4449B25C70CED00B3C586 /* Favourite */ = {
 			isa = PBXGroup;
 			children = (
-				75B444A225C70CED00B3C586 /* PostViewController.swift */,
-				75B444A325C70CED00B3C586 /* FeedViewController.swift */,
-				75B444A525C70CED00B3C586 /* FeedContainerView.swift */,
+				75B444A325C70CED00B3C586 /* FavouriteViewController.swift */,
 			);
-			path = Feed;
+			path = Favourite;
 			sourceTree = "<group>";
 		};
 		75B444A625C70CED00B3C586 /* Login */ = {
@@ -543,7 +537,7 @@
 				75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				759E14E126188F0800C0BB5A /* ErrorsAlert.swift in Sources */,
-				75B444DB25C70CEE00B3C586 /* FeedViewController.swift in Sources */,
+				75B444DB25C70CEE00B3C586 /* FavouriteViewController.swift in Sources */,
 				7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */,
 				75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */,
 				752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */,
@@ -563,8 +557,6 @@
 				75D8A24327C530240056E78B /* LoginDelegates.swift in Sources */,
 				7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */,
 				754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */,
-				75B444D925C70CEE00B3C586 /* PostViewController.swift in Sources */,
-				75B444DD25C70CEE00B3C586 /* FeedContainerView.swift in Sources */,
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
 				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
