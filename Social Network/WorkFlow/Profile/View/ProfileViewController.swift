@@ -167,9 +167,12 @@ private extension ProfileViewController {
 
 private extension ProfileViewController {
     @objc func logOutButtonTapped() {
-        guard let reviewer = reviewer else { return }
+        let credentials = UserCredentials(email: nil,
+                                          password: nil,
+                                          repeatPassword: nil,
+                                          loggedIn: false)
         
-        reviewer.signOut { [weak self] result in
+        reviewer?.signOutWith(credentials: credentials) { [weak self] result in
             switch result {
             case .success:
                 self?.delegate?.logoutButtonWasTapped()

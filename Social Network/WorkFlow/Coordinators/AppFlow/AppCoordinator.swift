@@ -24,13 +24,23 @@ class AppCoordinator: AppCoordinatorProtocol {
     var childCoordinators = [Coordinator]()
     var type: CoordinatorType { .app }
     
+    private var realmDataProvider: RealmUserCredentialsDataProvider?
+    
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         navigationController.setNavigationBarHidden(true, animated: true)
     }
     
     func start() {
-        showLoginFlow()
+        realmDataProvider = RealmUserCredentialsDataProviderImpl()
+        
+        guard let credentials = realmDataProvider?.getUserCredentials() else { return }
+                
+        if credentials.loggedIn == false {
+            showLoginFlow()
+        } else {
+            showAppFlow()
+        }
     }
     
     func showLoginFlow() {
