@@ -21,15 +21,6 @@ class FavouriteCoordinator: Coordinator {
     func start() {
         let favouriteVC = FeedViewController()
         
-        favouriteVC.didSendEventClosure = { event in
-            switch event {
-            case .postButtonTapped:
-                let coordinator = PostCoordinator(self.navigationController)
-                
-                coordinator.start()
-            }
-        }
-        
         navigationController.pushViewController(favouriteVC, animated: true)
     }
 }
