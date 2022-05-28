@@ -13,12 +13,19 @@ import IQKeyboardManagerSwift
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
+    var coreDataManager: CoreDataManager?
     
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
+        
+        coreDataManager = CoreDataManagerImpl(modelName: "FavouritePost")
+        
+        coreDataManager?.load {
+            print("Successfull")
+        }
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
     
