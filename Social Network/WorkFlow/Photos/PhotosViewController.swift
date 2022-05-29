@@ -7,12 +7,7 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
-class PhotosViewController: UIViewController {    
-    private lazy var photosAdapter = PhotosAdapter()
-    
-    private lazy var photos: [Photo] = []
-    
+final class PhotosViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -26,17 +21,20 @@ class PhotosViewController: UIViewController {
         
         return cv
     }()
+    
     private lazy var timer = Timer(timeInterval: 1.0,
                       target: self,
                       selector: #selector(fireTimer),
                       userInfo: nil,
                       repeats: true)
+    
     private lazy var timerCounter = 5
+    
     private lazy var timeDescription: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textColor = .systemGray
         label.textAlignment = .center
-        label.backgroundColor = .white
         
         return label
     }()
@@ -44,27 +42,14 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        photosAdapter.getPhotos { result in
-            let photos = result.photos.map {
-                return Photo(url: $0.url, thumbnailURL: $0.thumbnailURL)
-            }
-            
-            self.photos.append(contentsOf: photos)
-            
-            self.collectionView.reloadData()
-        }
-        
         setupScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        guard let navigationController = navigationController else { return }
-        guard let tabBarController = navigationController.tabBarController else { return }
-        
-        tabBarController.tabBar.isHidden = true
-        navigationController.navigationBar.isHidden = false
+                
+        navigationController?.tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,7 +65,6 @@ class PhotosViewController: UIViewController {
     }
 }
 
-@available(iOS 13.0, *)
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     
     var offset: CGFloat { return 8 }
@@ -90,8 +74,8 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = (collectionView.bounds.width - offset * 4) / 3
-        let height: CGFloat = collectionView.bounds.width / 3
+        let width = CGFloat((collectionView.bounds.width - offset * 5) / 4)
+        let height = CGFloat(collectionView.bounds.width / 4)
         
         return .init(width: width, height: height)
     }
@@ -105,22 +89,16 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         
         return offset
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-    }
 }
 
-@available(iOS 13.0, *)
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return Storages.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PhotosCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
-        let photo = photos[indexPath.row]
+        let photo = Storages.photos[indexPath.row]
         
         cell.photo = photo
                 
@@ -128,7 +106,6 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
 }
 
-@available(iOS 13.0, *)
 private extension PhotosViewController {
     func setupScreen() {
         setupLayout()
@@ -144,35 +121,29 @@ private extension PhotosViewController {
         view.add(subviews: [timeDescription,
                             collectionView])
         
-        timeDescription.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+        timeDescription.snp.makeConstraints { make in
+            make.height.equalTo(36)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
+            make.centerX.equalToSuperview()
         }
         
-        collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(timeDescription.snp.bottom).offset(24)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(timeDescription.snp.bottom).offset(8)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(8)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-8)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
 
-@available(iOS 13.0, *)
 private extension PhotosViewController {
     @objc private func fireTimer(_ timer: Timer) {
-        timeDescription.text = "До обовления данных осталось \(timerCounter) секунд"
+        timeDescription.text = "Обновление через \(timerCounter) сек."
         
         if timerCounter > 0 {
             timerCounter -= 1
         } else {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                
-                self.collectionView.reloadData()
-            }
+            collectionView.reloadData()
             
             timeDescription.text = "Данные обновлены"
             
