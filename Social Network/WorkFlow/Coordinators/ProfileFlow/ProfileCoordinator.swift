@@ -15,6 +15,8 @@ final class ProfileCoordinator: Coordinator {
     
     var logOutted: (() -> Void)?
     private var loginReviewer: LoginReviewer?
+    let favouritePosts = CoreDataManager.shared.fetchFavouritePosts()
+
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -32,6 +34,10 @@ final class ProfileCoordinator: Coordinator {
 }
 
 extension ProfileCoordinator: ProfileViewControllerDelegate {
+    func postWasTapped(post: Post) {
+        CoreDataManager.shared.saveToFavourite(post: post)
+    }
+    
     func logoutButtonWasTapped() {
         logOutted?()
     }

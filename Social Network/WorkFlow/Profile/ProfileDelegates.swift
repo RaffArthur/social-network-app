@@ -10,6 +10,7 @@ import Foundation
 protocol ProfileViewControllerDelegate: AnyObject {
     func logoutButtonWasTapped()
     func photoLibraryWasTapped()
+    func postWasTapped(post: Post)
 }
 
 protocol ProfileHeaderViewDelegate: AnyObject {

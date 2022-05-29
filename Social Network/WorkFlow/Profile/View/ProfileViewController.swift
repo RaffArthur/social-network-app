@@ -14,10 +14,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var postsAdapter = PostsAdapter()
     private lazy var photosAdapter = PhotosAdapter()
-    
-    private lazy var posts: [Post] = []
-    private lazy var photos: [Photo] = []
-    
+        
     private lazy var headerView = ProfileHeaderView()
     
     private lazy var tableView: UITableView = {
@@ -68,7 +65,7 @@ private extension ProfileViewController {
                 return Photo(url: $0.url, thumbnailURL: $0.thumbnailURL)
             }
             
-            self?.photos.append(contentsOf: photos)
+            Storages.photos.append(contentsOf: photos)
             
             self?.tableView.reloadData()
             
@@ -79,89 +76,10 @@ private extension ProfileViewController {
                 return Post(title: $0.title, body: $0.body)
             }
             
-            self?.posts.append(contentsOf: posts)
+            Storages.posts.append(contentsOf: posts)
             
             self?.tableView.reloadData()
-        }
-    }
-}
-
-extension ProfileViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView,
-                   heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard indexPath.section == 0 else { return }
-        
-        delegate?.photoLibraryWasTapped()
-    }
-}
-
-extension ProfileViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : posts.count
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let identifier = String(describing: ProfilePhotosPreviewTableViewCell.self)
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier ,
-                                                     for: indexPath) as? ProfilePhotosPreviewTableViewCell
-            
-            if !photos.isEmpty {
-                cell?.configure(photos: photos)
-            }
-            
-            return cell ?? UITableViewCell()
-        } else {
-            let identifier = String(describing: ProfilePostTableViewCell.self)
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
-                                                     for: indexPath) as? ProfilePostTableViewCell
-            let post = posts[indexPath.row]
-            
-            cell?.configure(post: post)
-            
-            return cell ?? UITableViewCell()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 0 else { return UIView() }
-        
-        return headerView
-    }
-}
-
-private extension ProfileViewController {
-    func setupScreen() {
-        setupLayout()
-        setupContent()
-    }
-    
-    func setupContent() {
-        view.backgroundColor = .white
-        
-        navigationItem.leftBarButtonItem = logoutButton
-    }
-    
-    func setupLayout() {
-        view.addSubview(tableView)
-        
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
+        }        
     }
 }
 
@@ -182,6 +100,18 @@ private extension ProfileViewController {
         }
     }
     
+    @objc func didPostTapped(_ sender: UITapGestureRecognizer) {
+        let touchPoint = sender.location(in: tableView)
+        
+        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
+        
+        let post = Storages.posts[indexPath.item]
+        
+        delegate?.postWasTapped(post: post)
+        
+        animateAddToFavouriteTap()
+    }
+    
     func show(error: UserAuthError) {
         let alertController = UIAlertController(title: error.title,
                                                  message: error.message,
@@ -195,9 +125,101 @@ private extension ProfileViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    func animateAddToFavouriteTap() {
+        let addedScale = CGFloat.random(in: 0.8...2.0)
+        
+        let rotationAngle = CGFloat.random(in: -12...36)
+        
+        let imageView = UIImageView(image: UIImage(systemName: "heart.fill"))
+        
+        imageView.tintColor = .red
+                                
+        guard let tabBarView = tabBarController?.view else { return }
+        
+        imageView.center = CGPoint(x: tabBarView.center.x, y: tabBarView.center.y + 240)
+
+        tabBarView.addSubview(imageView)
+
+        UIView.animate(withDuration: 0.1) {
+            imageView.bounds.origin = CGPoint(x: rotationAngle, y: rotationAngle)
+            imageView.transform = CGAffineTransform(scaleX: addedScale, y: addedScale)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5, delay: 0.1) {
+                imageView.center.y -= 60
+                imageView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+                imageView.tintColor = .clear
+                
+            } completion: {_ in
+                imageView.removeFromSuperview()
+            }
+        }
+    }
+    
     func setupActions() {
         logoutButton.target = self
         logoutButton.action = #selector(logOutButtonTapped)
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            delegate?.photoLibraryWasTapped()
+        } else {
+            let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(didPostTapped))
+            doubleTapGestureRecognizer.numberOfTapsRequired = 2
+            tableView.addGestureRecognizer(doubleTapGestureRecognizer)
+        }
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 1 : Storages.posts.count
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let identifier = String(describing: ProfilePhotosPreviewTableViewCell.self)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier ,
+                                                     for: indexPath) as? ProfilePhotosPreviewTableViewCell
+            
+            if !Storages.photos.isEmpty {
+                cell?.configure(photos: Storages.photos)
+            }
+            
+            return cell ?? UITableViewCell()
+        } else {
+            let identifier = String(describing: ProfilePostTableViewCell.self)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
+                                                     for: indexPath) as? ProfilePostTableViewCell
+            let post = Storages.posts[indexPath.row]
+            
+            cell?.configure(post: post)
+            
+            return cell ?? UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        guard section == 0 else { return UIView() }
+        
+        return headerView
     }
 }
 
@@ -238,5 +260,26 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
+    }
+}
+
+private extension ProfileViewController {
+    func setupScreen() {
+        setupLayout()
+        setupContent()
+    }
+    
+    func setupContent() {
+        view.backgroundColor = .white
+        
+        navigationItem.leftBarButtonItem = logoutButton
+    }
+    
+    func setupLayout() {
+        view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
