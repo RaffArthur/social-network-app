@@ -52,9 +52,9 @@
 		75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AC25C70CED00B3C586 /* LoginViewController.swift */; };
 		75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */; };
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
-		75BBAA26284259B4008CF9C1 /* FavouritePost.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA24284259B4008CF9C1 /* FavouritePost.xcdatamodeld */; };
-		75BBAA2828425B49008CF9C1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2728425B49008CF9C1 /* CoreDataManager.swift */; };
-		75BBAA2A28425B55008CF9C1 /* CoreDataManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2928425B55008CF9C1 /* CoreDataManagerImpl.swift */; };
+		75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */; };
+		75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */; };
+		75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2B284288EE008CF9C1 /* Storages.swift */; };
 		75D8A24327C530240056E78B /* LoginDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24227C530240056E78B /* LoginDelegates.swift */; };
 		75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */; };
 		75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */; };
@@ -115,8 +115,8 @@
 		75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75BBAA25284259B4008CF9C1 /* FavouritePost.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouritePost.xcdatamodel; sourceTree = "<group>"; };
-		75BBAA2728425B49008CF9C1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		75BBAA2928425B55008CF9C1 /* CoreDataManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerImpl.swift; sourceTree = "<group>"; };
+		75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		75BBAA2B284288EE008CF9C1 /* Storages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storages.swift; sourceTree = "<group>"; };
 		75D8A24227C530240056E78B /* LoginDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDelegates.swift; sourceTree = "<group>"; };
 		75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverter.swift; sourceTree = "<group>"; };
 		75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
@@ -268,12 +268,21 @@
 			path = RealmErrorCodeConverter;
 			sourceTree = "<group>";
 		};
+		75947F7F28438906004CB3AA /* Storages */ = {
+			isa = PBXGroup;
+			children = (
+				75BBAA2B284288EE008CF9C1 /* Storages.swift */,
+			);
+			path = Storages;
+			sourceTree = "<group>";
+		};
 		75B4448025C70CED00B3C586 /* Social Network */ = {
 			isa = PBXGroup;
 			children = (
 				75B4448725C70CED00B3C586 /* Applcation */,
 				75B4448D25C70CED00B3C586 /* WorkFlow */,
 				7538C2A026CC238700935B7C /* NetworkFlow */,
+				75947F7F28438906004CB3AA /* Storages */,
 				75BBAA2328425979008CF9C1 /* CoreData */,
 				752BC259283AAFC40063A5E0 /* RealmDataProvider */,
 				7574B7B52610D2C700A349E0 /* ErrorDomains */,
@@ -373,9 +382,8 @@
 		75BBAA2328425979008CF9C1 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				75BBAA24284259B4008CF9C1 /* FavouritePost.xcdatamodeld */,
-				75BBAA2728425B49008CF9C1 /* CoreDataManager.swift */,
-				75BBAA2928425B55008CF9C1 /* CoreDataManagerImpl.swift */,
+				75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */,
+				75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -560,20 +568,20 @@
 				75B444C725C70CEE00B3C586 /* ProfilePhotosPreviewTableViewCell.swift in Sources */,
 				756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */,
 				75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */,
-				75BBAA2828425B49008CF9C1 /* CoreDataManager.swift in Sources */,
-				75BBAA26284259B4008CF9C1 /* FavouritePost.xcdatamodeld in Sources */,
+				75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				759E14E126188F0800C0BB5A /* ErrorsAlert.swift in Sources */,
 				75B444DB25C70CEE00B3C586 /* FavouriteViewController.swift in Sources */,
 				7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */,
 				75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */,
 				752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */,
+				75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */,
 				75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */,
 				7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */,
 				751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */,
 				754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */,
 				7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */,
-				75BBAA2A28425B55008CF9C1 /* CoreDataManagerImpl.swift in Sources */,
+				75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */,
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
@@ -792,13 +800,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		75BBAA24284259B4008CF9C1 /* FavouritePost.xcdatamodeld */ = {
+		75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				75BBAA25284259B4008CF9C1 /* FavouritePost.xcdatamodel */,
 			);
 			currentVersion = 75BBAA25284259B4008CF9C1 /* FavouritePost.xcdatamodel */;
-			path = FavouritePost.xcdatamodeld;
+			path = SocialNetworkCoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
