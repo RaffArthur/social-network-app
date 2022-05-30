@@ -1,5 +1,5 @@
 //
-//  PostCoordinator.swift
+//  FavouriteCoordinator.swift
 //  Social_Network
 //
 //  Created by Arthur Raff on 13.10.2021.
@@ -8,19 +8,19 @@
 import UIKit
 
 @available(iOS 13.0, *)
-class PostCoordinator: Coordinator {
+class FavouriteCoordinator: Coordinator {
     var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .post }
+    var type: CoordinatorType { .favourite }
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let postVC = PostViewController()
+        let favouriteVC = FavouriteViewController()
         
-        navigationController.pushViewController(postVC, animated: true)
+        navigationController.pushViewController(favouriteVC, animated: true)
     }
 }

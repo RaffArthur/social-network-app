@@ -76,6 +76,19 @@ class ProfilePostTableViewCell: UITableViewCell {
         self.postLikes.text = "Likes: \(Int.random(in: 100...500))"
         self.postViews.text = "Vews: \(Int.random(in: 200...1000))"
     }
+    
+    func configure(post: FavouritePost) {
+        guard let postTitle = post.title,
+              let postDescription = post.body
+        else {
+            return
+        }
+
+        self.postTitle.text = postTitle.firstUppercased
+        self.postDescription.text = postDescription.firstUppercased
+        self.postLikes.text = "Likes: \(Int.random(in: 100...500))"
+        self.postViews.text = "Vews: \(Int.random(in: 200...1000))"
+    }
 }
 
 private extension ProfilePostTableViewCell {

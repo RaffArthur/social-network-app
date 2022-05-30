@@ -55,8 +55,8 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
         switch page {
         case .profile:
             showProfileFlow(navController: navController)
-        case .feed:
-            showFeedFlow(navController: navController)
+        case .favourite:
+            showFavouriteFlow(navController: navController)
         case .media:
             break
         }
@@ -91,11 +91,11 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
         childCoordinators.append(profileCoordinator)
     }
 
-    func showFeedFlow(navController: UINavigationController) {
-        let feedCoordinator = FeedCoordinator(navController)
-        feedCoordinator.start()
+    func showFavouriteFlow(navController: UINavigationController) {
+        let favouriteCoordinator = FavouriteCoordinator(navController)
+        favouriteCoordinator.start()
         
-        childCoordinators.append(feedCoordinator)
+        childCoordinators.append(favouriteCoordinator)
     }
 }
 

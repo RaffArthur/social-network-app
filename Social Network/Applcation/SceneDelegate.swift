@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
+        CoreDataManager.shared.load(completion: { print("Success")})
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
     
