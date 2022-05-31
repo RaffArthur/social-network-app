@@ -27,14 +27,12 @@
 		756691F22626027B00B26B8A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* NetworkClient.swift */; };
 		756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C2645262C651C00CEB305 /* UserDataModel.swift */; };
 		7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7BF2610D30A00A349E0 /* UserAuthError.swift */; };
-		7577741B27B56E310021F5EB /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7577741A27B56E310021F5EB /* UIViewController+Error.swift */; };
 		758468E427B6CBD5001559A9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758468E327B6CBD5001559A9 /* LoginView.swift */; };
 		758551E92782285800B04E25 /* AddSubviews+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551E82782285800B04E25 /* AddSubviews+UIView.swift */; };
 		758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */; };
 		7593C4B2283C2E9C00EC3426 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593C4B1283C2E9C00EC3426 /* RealmError.swift */; };
 		7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593C4B4283C2F3B00EC3426 /* RealmErrorCodeConverter.swift */; };
 		7593C4B7283C2F4700EC3426 /* RealmErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593C4B6283C2F4700EC3426 /* RealmErrorCodeConverterImpl.swift */; };
-		759E14E126188F0800C0BB5A /* ErrorsAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759E14E026188F0800C0BB5A /* ErrorsAlert.swift */; };
 		75B3732627109B0A00EEE6E8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3732527109B0A00EEE6E8 /* Coordinator.swift */; };
 		75B373292710A5F400EEE6E8 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B373282710A5F400EEE6E8 /* TabBarPage.swift */; };
 		75B444B925C70CEE00B3C586 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B4448525C70CED00B3C586 /* LaunchScreen.storyboard */; };
@@ -55,6 +53,7 @@
 		75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */; };
 		75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */; };
 		75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2B284288EE008CF9C1 /* Storages.swift */; };
+		75CE1E2B2846711E0034C96C /* UIColor+SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */; };
 		75D8A24327C530240056E78B /* LoginDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24227C530240056E78B /* LoginDelegates.swift */; };
 		75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */; };
 		75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */; };
@@ -88,14 +87,12 @@
 		756C2645262C651C00CEB305 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		7574B7BF2610D30A00A349E0 /* UserAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthError.swift; sourceTree = "<group>"; };
 		757638F12635BA5300C3F190 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7577741A27B56E310021F5EB /* UIViewController+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Error.swift"; sourceTree = "<group>"; };
 		758468E327B6CBD5001559A9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		758551E82782285800B04E25 /* AddSubviews+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddSubviews+UIView.swift"; sourceTree = "<group>"; };
 		758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddArrangedSubviews+UIStackView.swift"; sourceTree = "<group>"; };
 		7593C4B1283C2E9C00EC3426 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		7593C4B4283C2F3B00EC3426 /* RealmErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmErrorCodeConverter.swift; sourceTree = "<group>"; };
 		7593C4B6283C2F4700EC3426 /* RealmErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
-		759E14E026188F0800C0BB5A /* ErrorsAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsAlert.swift; sourceTree = "<group>"; };
 		75B3732527109B0A00EEE6E8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		75B373282710A5F400EEE6E8 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		75B4448625C70CED00B3C586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -117,6 +114,7 @@
 		75BBAA25284259B4008CF9C1 /* FavouritePost.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouritePost.xcdatamodel; sourceTree = "<group>"; };
 		75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		75BBAA2B284288EE008CF9C1 /* Storages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storages.swift; sourceTree = "<group>"; };
+		75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+SocialNetwork.swift"; sourceTree = "<group>"; };
 		75D8A24227C530240056E78B /* LoginDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDelegates.swift; sourceTree = "<group>"; };
 		75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverter.swift; sourceTree = "<group>"; };
 		75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
@@ -276,7 +274,7 @@
 				75CE1E29284668080034C96C /* CoreLayer */,
 				75B4448225C70CED00B3C586 /* Models */,
 				7574B7B52610D2C700A349E0 /* ErrorDomains */,
-				75B444AF25C70CED00B3C586 /* Helpers */,
+				75B444AF25C70CED00B3C586 /* DevHelpers */,
 				757638F12635BA5300C3F190 /* GoogleService-Info.plist */,
 				75B444B425C70CED00B3C586 /* Info.plist */,
 			);
@@ -335,19 +333,18 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		75B444AF25C70CED00B3C586 /* Helpers */ = {
+		75B444AF25C70CED00B3C586 /* DevHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				7577741A27B56E310021F5EB /* UIViewController+Error.swift */,
 				758551E82782285800B04E25 /* AddSubviews+UIView.swift */,
 				758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */,
 				75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */,
 				754D79C126CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift */,
 				755ADFC525E51A19008E92A3 /* ImageDownloader+UIImageView.swift */,
 				75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */,
-				759E14E026188F0800C0BB5A /* ErrorsAlert.swift */,
+				75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */,
 			);
-			path = Helpers;
+			path = DevHelpers;
 			sourceTree = "<group>";
 		};
 		75BBAA20284255D3008CF9C1 /* View */ = {
@@ -581,12 +578,12 @@
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
 				75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */,
 				75654295262C7E7B0050BAAA /* StarWarsPlanetsModel.swift in Sources */,
+				75CE1E2B2846711E0034C96C /* UIColor+SocialNetwork.swift in Sources */,
 				75B444C725C70CEE00B3C586 /* ProfilePhotosPreviewTableViewCell.swift in Sources */,
 				756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */,
 				75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */,
 				75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
-				759E14E126188F0800C0BB5A /* ErrorsAlert.swift in Sources */,
 				75B444DB25C70CEE00B3C586 /* FavouriteViewController.swift in Sources */,
 				7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */,
 				75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */,
@@ -602,7 +599,6 @@
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
 				75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */,
-				7577741B27B56E310021F5EB /* UIViewController+Error.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */,
 				758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */,
 				75B373292710A5F400EEE6E8 /* TabBarPage.swift in Sources */,

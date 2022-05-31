@@ -28,7 +28,7 @@ extension UITextField {
 
 private extension UITextField {
     @objc func togglePasswordView(_ sender: Any) {
-        self.isSecureTextEntry = !self.isSecureTextEntry
+        self.isSecureTextEntry.toggle()
         
         guard let button = sender as? UIButton else { return }
         
