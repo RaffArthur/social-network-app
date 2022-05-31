@@ -24,7 +24,7 @@
 		75597A8A25D303AC00A120A7 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75597A8925D303AC00A120A7 /* TabCoordinator.swift */; };
 		755ADFC625E51A19008E92A3 /* ImageDownloader+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755ADFC525E51A19008E92A3 /* ImageDownloader+UIImageView.swift */; };
 		75654295262C7E7B0050BAAA /* StarWarsPlanetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */; };
-		756691F22626027B00B26B8A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* NetworkManager.swift */; };
+		756691F22626027B00B26B8A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* NetworkClient.swift */; };
 		756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C2645262C651C00CEB305 /* UserDataModel.swift */; };
 		7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7BF2610D30A00A349E0 /* UserAuthError.swift */; };
 		7577741B27B56E310021F5EB /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7577741A27B56E310021F5EB /* UIViewController+Error.swift */; };
@@ -84,7 +84,7 @@
 		75597A8925D303AC00A120A7 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		755ADFC525E51A19008E92A3 /* ImageDownloader+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageDownloader+UIImageView.swift"; sourceTree = "<group>"; };
 		75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsPlanetsModel.swift; sourceTree = "<group>"; };
-		756691F12626027B00B26B8A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		756691F12626027B00B26B8A /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		756C2645262C651C00CEB305 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		7574B7BF2610D30A00A349E0 /* UserAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthError.swift; sourceTree = "<group>"; };
 		757638F12635BA5300C3F190 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -173,23 +173,13 @@
 			path = RealmDataProvider;
 			sourceTree = "<group>";
 		};
-		7538C2A026CC238700935B7C /* NetworkFlow */ = {
-			isa = PBXGroup;
-			children = (
-				75B4448225C70CED00B3C586 /* Models */,
-				754D79C326CAE4B100ED19F8 /* NetworkManagers */,
-				7538C2A126CC23E200935B7C /* APIAdapters */,
-			);
-			path = NetworkFlow;
-			sourceTree = "<group>";
-		};
-		7538C2A126CC23E200935B7C /* APIAdapters */ = {
+		7538C2A126CC23E200935B7C /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
 				7538C2A426CC241300935B7C /* PostsAdapter.swift */,
 				7538C2A226CC240600935B7C /* PhotosAdapter.swift */,
 			);
-			path = APIAdapters;
+			path = Adapters;
 			sourceTree = "<group>";
 		};
 		754D79B426C1AB3000ED19F8 /* Photos */ = {
@@ -201,12 +191,12 @@
 			path = Photos;
 			sourceTree = "<group>";
 		};
-		754D79C326CAE4B100ED19F8 /* NetworkManagers */ = {
+		754D79C326CAE4B100ED19F8 /* NetworkClient */ = {
 			isa = PBXGroup;
 			children = (
-				756691F12626027B00B26B8A /* NetworkManager.swift */,
+				756691F12626027B00B26B8A /* NetworkClient.swift */,
 			);
-			path = NetworkManagers;
+			path = NetworkClient;
 			sourceTree = "<group>";
 		};
 		75597A8825D3017600A120A7 /* Coordinators */ = {
@@ -280,11 +270,11 @@
 			isa = PBXGroup;
 			children = (
 				75B4448725C70CED00B3C586 /* Applcation */,
-				75B4448D25C70CED00B3C586 /* WorkFlow */,
-				7538C2A026CC238700935B7C /* NetworkFlow */,
-				75947F7F28438906004CB3AA /* Storages */,
-				75BBAA2328425979008CF9C1 /* CoreData */,
-				752BC259283AAFC40063A5E0 /* RealmDataProvider */,
+				75597A8825D3017600A120A7 /* Coordinators */,
+				75CE1E25284663300034C96C /* PresentationLayer */,
+				75CE1E26284663CE0034C96C /* BusinessLogicLayer */,
+				75CE1E29284668080034C96C /* CoreLayer */,
+				75B4448225C70CED00B3C586 /* Models */,
 				7574B7B52610D2C700A349E0 /* ErrorDomains */,
 				75B444AF25C70CED00B3C586 /* Helpers */,
 				757638F12635BA5300C3F190 /* GoogleService-Info.plist */,
@@ -296,6 +286,7 @@
 		75B4448225C70CED00B3C586 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				75BBAA2328425979008CF9C1 /* CoreData */,
 				756C2645262C651C00CEB305 /* UserDataModel.swift */,
 				75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */,
 				754D79B926C6F39500ED19F8 /* PhotoModel.swift */,
@@ -315,18 +306,6 @@
 				75B4448925C70CED00B3C586 /* Assets.xcassets */,
 			);
 			path = Applcation;
-			sourceTree = "<group>";
-		};
-		75B4448D25C70CED00B3C586 /* WorkFlow */ = {
-			isa = PBXGroup;
-			children = (
-				75597A8825D3017600A120A7 /* Coordinators */,
-				75B444A625C70CED00B3C586 /* Login */,
-				75B4449025C70CED00B3C586 /* Profile */,
-				754D79B426C1AB3000ED19F8 /* Photos */,
-				75B4449B25C70CED00B3C586 /* Favourite */,
-			);
-			path = WorkFlow;
 			sourceTree = "<group>";
 		};
 		75B4449025C70CED00B3C586 /* Profile */ = {
@@ -383,9 +362,46 @@
 			isa = PBXGroup;
 			children = (
 				75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */,
-				75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		75CE1E25284663300034C96C /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				75B444A625C70CED00B3C586 /* Login */,
+				75B4449025C70CED00B3C586 /* Profile */,
+				754D79B426C1AB3000ED19F8 /* Photos */,
+				75B4449B25C70CED00B3C586 /* Favourite */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		75CE1E26284663CE0034C96C /* BusinessLogicLayer */ = {
+			isa = PBXGroup;
+			children = (
+				75CE1E282846650E0034C96C /* CoreDataManagers */,
+				752BC259283AAFC40063A5E0 /* RealmDataProvider */,
+				7538C2A126CC23E200935B7C /* Adapters */,
+			);
+			path = BusinessLogicLayer;
+			sourceTree = "<group>";
+		};
+		75CE1E282846650E0034C96C /* CoreDataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */,
+			);
+			path = CoreDataManagers;
+			sourceTree = "<group>";
+		};
+		75CE1E29284668080034C96C /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				75947F7F28438906004CB3AA /* Storages */,
+				754D79C326CAE4B100ED19F8 /* NetworkClient */,
+			);
+			path = CoreLayer;
 			sourceTree = "<group>";
 		};
 		75D8A24027C52FE80056E78B /* View */ = {
@@ -594,7 +610,7 @@
 				7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */,
 				754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */,
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
-				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
+				756691F22626027B00B26B8A /* NetworkClient.swift in Sources */,
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
 				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
