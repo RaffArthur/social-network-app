@@ -34,9 +34,9 @@ class AppCoordinator: AppCoordinatorProtocol {
     func start() {
         realmDataProvider = RealmUserCredentialsDataProviderImpl()
         
-        guard let credentials = realmDataProvider?.getUserCredentials() else { return }
-                
-        if credentials.loggedIn == false {
+        let userCredentials = realmDataProvider?.getUserCredentials()
+        
+        if userCredentials == nil || userCredentials?.loggedIn == false {
             showLoginFlow()
         } else {
             showAppFlow()
