@@ -45,7 +45,7 @@ final class LoginView: UIView {
     private lazy var loginTitle: UILabel = {
         let label = UILabel()
         label.text = "Регистрация аккаунта"
-        label.textColor = .darkGray
+        label.textColor = .SocialNetworkColor.mainText.set()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24, weight: .bold)
         
@@ -73,8 +73,8 @@ final class LoginView: UIView {
         tf.backgroundColor = .systemGray6
         tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         tf.placeholder = "Введите e-mail"
-        tf.tintColor = UIColor(named: "color_set")
-        tf.textColor = .black
+        tf.tintColor = .SocialNetworkColor.accent.set()
+        tf.textColor = .SocialNetworkColor.mainText.set()
         tf.textAlignment = .left
         tf.leftView = UIView(frame: CGRect(x: 0,
                                            y: 0,
@@ -99,8 +99,8 @@ final class LoginView: UIView {
         tf.backgroundColor = .systemGray6
         tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         tf.placeholder = "Введите пароль"
-        tf.tintColor = UIColor(named: "color_set")
-        tf.textColor = .black
+        tf.tintColor = .SocialNetworkColor.accent.set()
+        tf.textColor = .SocialNetworkColor.mainText.set()
         tf.textAlignment = .left
         tf.layer.borderWidth = 0.5
         tf.layer.borderColor = UIColor.lightGray.cgColor
@@ -119,8 +119,8 @@ final class LoginView: UIView {
         tf.backgroundColor = .systemGray6
         tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         tf.placeholder = "Повторите пароль"
-        tf.tintColor = UIColor(named: "color_set")
-        tf.textColor = .black
+        tf.tintColor = .SocialNetworkColor.accent.set()
+        tf.textColor = .SocialNetworkColor.mainText.set()
         tf.textAlignment = .left
         tf.layer.borderWidth = 0.5
         tf.layer.borderColor = UIColor.lightGray.cgColor
@@ -147,7 +147,7 @@ final class LoginView: UIView {
     private lazy var loginTypeTitle: UILabel = {
         let label = UILabel()
         label.text = "Уже есть аккаунт?"
-        label.textColor = .systemGray
+        label.textColor = .SocialNetworkColor.secondaryText.set()
         label.font = .systemFont(ofSize: 14, weight: .medium)
         
         return label
@@ -156,10 +156,10 @@ final class LoginView: UIView {
     private lazy var loginTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle("Войти", for: button.state)
-        button.setTitleColor(UIColor(named: "color_set")?.withAlphaComponent(1.0), for: .normal)
-        button.setTitleColor(UIColor(named: "color_set")?.withAlphaComponent(0.8), for: .selected)
-        button.setTitleColor(UIColor(named: "color_set")?.withAlphaComponent(0.8), for: .highlighted)
-        button.setTitleColor(UIColor(named: "color_set")?.withAlphaComponent(0.8), for: .disabled)
+        button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(1.0), for: .normal)
+        button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .selected)
+        button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .highlighted)
+        button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .disabled)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         
         return button

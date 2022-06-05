@@ -12,7 +12,7 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         let photosLabel = UILabel()
         photosLabel.text = "Фотографии"
         photosLabel.font = .systemFont(ofSize: 24, weight: .bold)
-        photosLabel.textColor = .black
+        photosLabel.textColor = .SocialNetworkColor.mainText.set()
         
         return photosLabel
     }()
@@ -22,8 +22,7 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         sv.distribution = .fillEqually
         sv.axis = .horizontal
         sv.spacing = 8
-        sv.backgroundColor = .white
-
+        
         return sv
     }()
     
@@ -32,7 +31,6 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 6
-        iv.tintColor = UIColor(named: "color_set")
 
         return iv
     }()
@@ -42,7 +40,6 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 6
-        iv.tintColor = UIColor(named: "color_set")
         
         return iv
     }()
@@ -52,7 +49,6 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 6
-        iv.tintColor = UIColor(named: "color_set")
         
         return iv
     }()
@@ -62,7 +58,6 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 6
-        iv.tintColor = UIColor(named: "color_set")
         
         return iv
     }()
@@ -103,11 +98,6 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
 private extension ProfilePhotosPreviewTableViewCell {
     func setupScreen() {
         setupLayout()
-        setupContent()
-    }
-    
-    func setupContent() {
-        backgroundColor = .white
     }
     
     func setupLayout() {

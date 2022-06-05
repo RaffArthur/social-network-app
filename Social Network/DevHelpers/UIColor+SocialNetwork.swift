@@ -16,14 +16,14 @@ extension UIColor {
         
         func set() -> UIColor {
             let deviceTheme = UITraitCollection.current.userInterfaceStyle
-
+            
             switch self {
             case .accent:
                 return UIColor(r: 85, g: 133, b: 198)
             case .mainText:
                 return deviceTheme == .dark ? UIColor(r: 220, g: 220, b: 230) : UIColor(r: 36, g: 36, b: 36)
             case .secondaryText:
-                return deviceTheme == .dark ? UIColor(r: 80, g: 85, b: 90) : UIColor(r: 138, g: 142, b: 138)
+                return deviceTheme == .dark ? UIColor(r: 82, g: 82, b: 82) : UIColor(r: 165, g: 165, b: 165)
             }
         }
     }

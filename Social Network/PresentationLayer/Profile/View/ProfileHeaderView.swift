@@ -26,7 +26,7 @@ class ProfileHeaderView: UIView {
         label.font = .systemFont(ofSize: 18, weight: .heavy)
         label.textAlignment = .left
         label.text = "Dmitry \"Haskey\""
-        label.textColor = .black
+        label.textColor = .SocialNetworkColor.mainText.set()
         
         return label
     }()
@@ -35,7 +35,7 @@ class ProfileHeaderView: UIView {
         var label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textAlignment = .left
-        label.textColor = .darkGray
+        label.textColor = .SocialNetworkColor.secondaryText.set()
         label.text = "Статуст отсутствует..."
         label.numberOfLines = 0
         
@@ -46,7 +46,7 @@ class ProfileHeaderView: UIView {
         var button = UIButton()
         button.setTitle("Настроить статус 👀", for: button.state)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
-        button.backgroundColor = UIColor(named: "color_set")
+        button.backgroundColor = .SocialNetworkColor.accent.set()
         button.layer.cornerRadius = 12
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowColor = UIColor.black.cgColor

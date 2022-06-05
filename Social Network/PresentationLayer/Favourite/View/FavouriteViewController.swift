@@ -49,7 +49,7 @@ private extension FavouriteViewController {
     func setupContent() {
         navigationItem.rightBarButtonItem = deleteAllButton
         
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
     
     func setupLayout() {

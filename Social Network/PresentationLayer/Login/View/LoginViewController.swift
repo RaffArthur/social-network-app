@@ -8,7 +8,7 @@ import UIKit
 import FirebaseAuth
 
 final class LoginViewController: UIViewController {
-    weak var reviewer: LoginReviewer?
+    weak var reviewer: AuthentificationReviewer?
     weak var delegate: LoginViewConrollerDelegate?
     
     private lazy var loginView = LoginView()
@@ -36,7 +36,7 @@ private extension LoginViewController {
     }
     
     func setupContent() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
 }
 

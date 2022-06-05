@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class ProfileViewController: UIViewController {
-    weak var reviewer: LoginReviewer?
+    weak var reviewer: AuthentificationReviewer?
     weak var delegate: ProfileViewControllerDelegate?
     
     private lazy var postsAdapter = PostsAdapter()
@@ -270,7 +270,7 @@ private extension ProfileViewController {
     }
     
     func setupContent() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         navigationItem.leftBarButtonItem = logoutButton
     }

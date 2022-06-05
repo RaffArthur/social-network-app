@@ -11,7 +11,7 @@ class ProfilePostTableViewCell: UITableViewCell {
     private lazy var postTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.textColor = .SocialNetworkColor.mainText.set()
         label.numberOfLines = 2
         
         return label
@@ -23,7 +23,7 @@ class ProfilePostTableViewCell: UITableViewCell {
         iv.layer.cornerRadius = 18
         iv.contentMode = .scaleAspectFit
         iv.image = UIImage(systemName: "photo.fill")
-        iv.backgroundColor = UIColor(named: "color_set")
+        iv.backgroundColor = .SocialNetworkColor.accent.set()
         iv.tintColor = .white
         
         return iv
@@ -32,7 +32,7 @@ class ProfilePostTableViewCell: UITableViewCell {
     private lazy var postDescription: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .systemGray
+        label.textColor = .SocialNetworkColor.mainText.set()
         label.numberOfLines = 0
         
         return label
@@ -41,7 +41,7 @@ class ProfilePostTableViewCell: UITableViewCell {
     private lazy var postLikes: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .bold)
-        label.textColor = UIColor(named: "color_set")
+        label.textColor = .SocialNetworkColor.accent.set()
         
         return label
     }()
@@ -49,7 +49,7 @@ class ProfilePostTableViewCell: UITableViewCell {
     private lazy var postViews: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .bold)
-        label.textColor = UIColor(named: "color_set")
+        label.textColor = .SocialNetworkColor.accent.set()
         
         return label
     }()
