@@ -11,7 +11,7 @@ import UIKit
 /// Главный координатор, как входная и отправная точка всего приложения
 @available(iOS 13.0, *)
 protocol AppCoordinatorProtocol: Coordinator {
-    func showLoginFlow()
+    func showAuthentificationFlow()
     func showAppFlow()
 }
 
@@ -37,13 +37,13 @@ class AppCoordinator: AppCoordinatorProtocol {
         let userCredentials = realmDataProvider?.getUserCredentials()
         
         if userCredentials == nil || userCredentials?.loggedIn == false {
-            showLoginFlow()
+            showAuthentificationFlow()
         } else {
             showAppFlow()
         }
     }
     
-    func showLoginFlow() {
+    func showAuthentificationFlow() {
         let loginCoordinator = LoginCoordinator(navigationController)
         loginCoordinator.finishDelegate = self
         loginCoordinator.start()
@@ -70,7 +70,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         case .tab:
             navigationController.viewControllers.removeAll()
             
-            showLoginFlow()
+            showAuthentificationFlow()
         case .login:
             navigationController.viewControllers.removeAll()
             

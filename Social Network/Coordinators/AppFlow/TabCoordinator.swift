@@ -80,22 +80,24 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
     
     func showProfileFlow(navController: UINavigationController) {
         let profileCoordinator = ProfileCoordinator(navController)
-        profileCoordinator.start()
-        
+                
         profileCoordinator.logOutted = { [weak self] in
             guard let self = self else { return }
-            
+
             self.finish()
         }
+        
+        profileCoordinator.start()
         
         childCoordinators.append(profileCoordinator)
     }
 
     func showFavouriteFlow(navController: UINavigationController) {
         let favouriteCoordinator = FavouriteCoordinator(navController)
-        favouriteCoordinator.start()
         
         childCoordinators.append(favouriteCoordinator)
+        
+        favouriteCoordinator.start()
     }
 }
 

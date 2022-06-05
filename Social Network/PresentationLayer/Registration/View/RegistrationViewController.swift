@@ -1,35 +1,38 @@
 //
-//  LoginViewController.swift
-//  Navigation
+//  RegistrationViewController.swift
+//  Social_Network
+//
+//  Created by Arthur Raff on 05.06.2022.
 //
 
+import Foundation
 import UIKit
 import FirebaseAuth
 
-final class LoginViewController: UIViewController {
+final class RegistrationViewController: UIViewController {
     weak var reviewer: AuthentificationReviewer?
-    weak var delegate: LoginViewConrollerDelegate?
+    weak var delegate: RegistrationViewConrollerDelegate?
     
-    private lazy var loginView = LoginView()
+    private lazy var registrationView = RegistrationView()
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginView.delegate = self
+        registrationView.delegate = self
         
         setupScreen()
     }
 }
 
-private extension LoginViewController {
+private extension RegistrationViewController {
     func setupScreen() {
         setupLayout()
         setupContent()
     }
     
     func setupLayout() {
-        view.addSubview(loginView)
+        view.addSubview(registrationView)
                 
-        loginView.snp.makeConstraints { make in
+        registrationView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -39,7 +42,18 @@ private extension LoginViewController {
     }
 }
 
-private extension LoginViewController {    
+private extension RegistrationViewController {
+    func accountCreated() {
+        let alert = UIAlertController(title: "Аккаунт создан",
+                                      message: nil,
+                                      preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "ОК",
+                                   style: .cancel)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     func show(authError: UserAuthError) {
         let alertController = UIAlertController(title: authError.title,
                                                 message: authError.message,
@@ -55,23 +69,24 @@ private extension LoginViewController {
     }
 }
 
-extension LoginViewController: LoginViewDelegate {
-    func loginButtonWasTapped() {
-        guard let email = loginView.userEmail,
-              let password = loginView.userPass
+extension RegistrationViewController: RegistrationViewDelegate {
+    func registrationButtonWasTapped() {
+        guard let email = registrationView.userEmail,
+              let password = registrationView.userPass,
+              let repeatPassword = registrationView.userRepeatPass
         else {
             return
         }
         
         let credentials = UserCredentials(email: email,
                                           password: password,
-                                          repeatPassword: nil,
+                                          repeatPassword: repeatPassword,
                                           loggedIn: true)
         
-        reviewer?.signInWith(credentials: credentials) { [weak self] result in
+        reviewer?.registrationWith(credentials: credentials) { [weak self] result in
             switch result {
             case .success:
-                self?.delegate?.didUserLogin()
+                self?.delegate?.didUserRegister()
             case .failure(let error):
                 self?.show(authError: error)
             }
@@ -79,6 +94,6 @@ extension LoginViewController: LoginViewDelegate {
     }
     
     func authTypeButtonWasTapped() {
-        delegate?.didUserChooseRegistration()
+        delegate?.didUserChooseLogin()
     }
 }

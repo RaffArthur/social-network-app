@@ -27,6 +27,10 @@
 		756691F22626027B00B26B8A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* NetworkClient.swift */; };
 		756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C2645262C651C00CEB305 /* UserDataModel.swift */; };
 		7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7BF2610D30A00A349E0 /* UserAuthError.swift */; };
+		7582B466284CF85A0095AC47 /* RegistrationDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7582B465284CF85A0095AC47 /* RegistrationDelegates.swift */; };
+		7582B46F284D0AB50095AC47 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7582B46E284D0AB50095AC47 /* RegistrationViewController.swift */; };
+		7582B471284D0ABE0095AC47 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7582B470284D0ABE0095AC47 /* RegistrationView.swift */; };
+		7582B473284D11470095AC47 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7582B472284D11470095AC47 /* RegistrationCoordinator.swift */; };
 		758468E427B6CBD5001559A9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758468E327B6CBD5001559A9 /* LoginView.swift */; };
 		758551E92782285800B04E25 /* AddSubviews+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551E82782285800B04E25 /* AddSubviews+UIView.swift */; };
 		758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */; };
@@ -87,6 +91,10 @@
 		756C2645262C651C00CEB305 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		7574B7BF2610D30A00A349E0 /* UserAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthError.swift; sourceTree = "<group>"; };
 		757638F12635BA5300C3F190 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7582B465284CF85A0095AC47 /* RegistrationDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDelegates.swift; sourceTree = "<group>"; };
+		7582B46E284D0AB50095AC47 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		7582B470284D0ABE0095AC47 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		7582B472284D11470095AC47 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
 		758468E327B6CBD5001559A9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		758551E82782285800B04E25 /* AddSubviews+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddSubviews+UIView.swift"; sourceTree = "<group>"; };
 		758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddArrangedSubviews+UIStackView.swift"; sourceTree = "<group>"; };
@@ -203,6 +211,7 @@
 				75B3732527109B0A00EEE6E8 /* Coordinator.swift */,
 				75B373282710A5F400EEE6E8 /* TabBarPage.swift */,
 				755CD9F82719EF9000EA2239 /* AppFlow */,
+				7582B474284D39360095AC47 /* AuthentificationFlow */,
 				755CD9F62719EF1900EA2239 /* ProfileFlow */,
 				755CD9F92719F03400EA2239 /* FavouriteFlow */,
 			);
@@ -222,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				754B85E727148B0200400F95 /* AppCoordinator.swift */,
-				754B85E927148FF000400F95 /* LoginCoordinator.swift */,
 				75597A8925D303AC00A120A7 /* TabCoordinator.swift */,
 			);
 			path = AppFlow;
@@ -245,6 +253,42 @@
 				75D8A24827CEAA8D0056E78B /* AuthErrorCodeConverter */,
 			);
 			path = ErrorDomains;
+			sourceTree = "<group>";
+		};
+		7582B463284CF8310095AC47 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				7582B465284CF85A0095AC47 /* RegistrationDelegates.swift */,
+				7582B467284CF85F0095AC47 /* View */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		7582B467284CF85F0095AC47 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7582B46E284D0AB50095AC47 /* RegistrationViewController.swift */,
+				7582B470284D0ABE0095AC47 /* RegistrationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7582B46D284CF9170095AC47 /* AuthentificationReviewer */ = {
+			isa = PBXGroup;
+			children = (
+				75B444AA25C70CED00B3C586 /* LoginReviewer.swift */,
+				75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */,
+			);
+			path = AuthentificationReviewer;
+			sourceTree = "<group>";
+		};
+		7582B474284D39360095AC47 /* AuthentificationFlow */ = {
+			isa = PBXGroup;
+			children = (
+				754B85E927148FF000400F95 /* LoginCoordinator.swift */,
+				7582B472284D11470095AC47 /* RegistrationCoordinator.swift */,
+			);
+			path = AuthentificationFlow;
 			sourceTree = "<group>";
 		};
 		7593C4B3283C2EE000EC3426 /* RealmErrorCodeConverter */ = {
@@ -327,7 +371,6 @@
 			isa = PBXGroup;
 			children = (
 				75D8A24227C530240056E78B /* LoginDelegates.swift */,
-				75D8A24127C530060056E78B /* LoginReviewer */,
 				75D8A24027C52FE80056E78B /* View */,
 			);
 			path = Login;
@@ -366,6 +409,7 @@
 		75CE1E25284663300034C96C /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				7582B463284CF8310095AC47 /* Registration */,
 				75B444A625C70CED00B3C586 /* Login */,
 				75B4449025C70CED00B3C586 /* Profile */,
 				754D79B426C1AB3000ED19F8 /* Photos */,
@@ -378,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				75CE1E282846650E0034C96C /* CoreDataManagers */,
+				7582B46D284CF9170095AC47 /* AuthentificationReviewer */,
 				752BC259283AAFC40063A5E0 /* RealmDataProvider */,
 				7538C2A126CC23E200935B7C /* Adapters */,
 			);
@@ -408,15 +453,6 @@
 				758468E327B6CBD5001559A9 /* LoginView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		75D8A24127C530060056E78B /* LoginReviewer */ = {
-			isa = PBXGroup;
-			children = (
-				75B444AA25C70CED00B3C586 /* LoginReviewer.swift */,
-				75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */,
-			);
-			path = LoginReviewer;
 			sourceTree = "<group>";
 		};
 		75D8A24827CEAA8D0056E78B /* AuthErrorCodeConverter */ = {
@@ -564,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				758551E92782285800B04E25 /* AddSubviews+UIView.swift in Sources */,
+				7582B471284D0ABE0095AC47 /* RegistrationView.swift in Sources */,
 				75B3732627109B0A00EEE6E8 /* Coordinator.swift in Sources */,
 				75B444E125C70CEE00B3C586 /* LoginReviewer.swift in Sources */,
 				751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */,
@@ -591,8 +628,10 @@
 				75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */,
 				75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */,
 				7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */,
+				7582B473284D11470095AC47 /* RegistrationCoordinator.swift in Sources */,
 				751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */,
 				754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */,
+				7582B46F284D0AB50095AC47 /* RegistrationViewController.swift in Sources */,
 				7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */,
 				75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */,
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
@@ -603,6 +642,7 @@
 				758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */,
 				75B373292710A5F400EEE6E8 /* TabBarPage.swift in Sources */,
 				75D8A24327C530240056E78B /* LoginDelegates.swift in Sources */,
+				7582B466284CF85A0095AC47 /* RegistrationDelegates.swift in Sources */,
 				7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */,
 				754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */,
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,

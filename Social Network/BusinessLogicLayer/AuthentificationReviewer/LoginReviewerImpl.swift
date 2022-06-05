@@ -1,5 +1,5 @@
 //
-//  LoginReviewerImpl.swift
+//  AuthentificationReviewerImpl.swift
 //  Social_Network
 //
 //  Created by Arthur Raff on 09.01.2021.
@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import RealmSwift
 
-final class LoginReviewerImpl: LoginReviewer {
+final class AuthentificationReviewerImpl: AuthentificationReviewer {
     private let realmDataProvider: RealmUserCredentialsDataProvider = RealmUserCredentialsDataProviderImpl()
     
     private let errorCodeConverter: AuthErrorCodeConverter = AuthErrorCodeConverterImpl()
@@ -118,7 +118,7 @@ final class LoginReviewerImpl: LoginReviewer {
     }
 }
 
-private extension LoginReviewerImpl {
+private extension AuthentificationReviewerImpl {
     func registrationValidation(email: String,
                                 pass: String,
                                 repeatPass: String) -> UserAuthError? {

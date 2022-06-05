@@ -7,14 +7,13 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 final class LoginCoordinator: Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .login }
     
-    private var loginReviewer: LoginReviewer?
+    private var authentifivationReviewer: AuthentificationReviewer?
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -23,18 +22,25 @@ final class LoginCoordinator: Coordinator {
     func start() {
         let loginVC = LoginViewController()
         
-        loginReviewer = LoginReviewerImpl()
-        loginVC.reviewer = loginReviewer
+        authentifivationReviewer = AuthentificationReviewerImpl()
+        loginVC.reviewer = authentifivationReviewer
         loginVC.delegate = self
         
         navigationController.pushViewController(loginVC, animated: true)
     }
 }
 
-@available(iOS 13.0, *)
 extension LoginCoordinator: LoginViewConrollerDelegate {
-    func userLoggedIn() {
+    func didUserLogin() {
         finish()
+    }
+    
+    func didUserChooseRegistration() {
+        let coordinator = RegistrationCoordinator(navigationController)
+        
+        childCoordinators.append(coordinator)
+                
+        coordinator.start()
     }
 }
 

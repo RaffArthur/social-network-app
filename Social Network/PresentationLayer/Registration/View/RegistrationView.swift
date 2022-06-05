@@ -1,18 +1,19 @@
 //
-//  LoginView.swift
+//  RegistrationView.swift
 //  Social_Network
 //
-//  Created by Arthur Raff on 11.02.2022.
+//  Created by Arthur Raff on 05.06.2022.
 //
 
-import UIKit
 import Foundation
+import UIKit
 
-final class LoginView: UIView {
-    weak var delegate: LoginViewDelegate?
+final class RegistrationView: UIView {
+    weak var delegate: RegistrationViewDelegate?
         
     var userEmail: String? { emailField.text }
     var userPass: String? { passwordField.text }
+    var userRepeatPass: String? { repeatPasswordField.text }
     
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -36,9 +37,9 @@ final class LoginView: UIView {
         return iv
     }()
     
-    private lazy var loginTitle: UILabel = {
+    private lazy var registrationTitle: UILabel = {
         let label = UILabel()
-        label.text = "Вход"
+        label.text = "Регистрация аккаунта"
         label.textColor = .SocialNetworkColor.mainText.set()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24, weight: .bold)
@@ -46,7 +47,7 @@ final class LoginView: UIView {
         return label
     }()
 
-    private lazy var loginContainer: UIStackView = {
+    private lazy var registrationContainer: UIStackView = {
         let sv = UIStackView()
         sv.layer.borderWidth = 0.5
         sv.layer.cornerRadius = 10
@@ -103,13 +104,33 @@ final class LoginView: UIView {
         return tf
     }()
     
-    private lazy var loginButton: UIButton = {
+    private lazy var repeatPasswordField: UITextField = {
+        var tf = UITextField()
+        tf.contentVerticalAlignment = .center
+        tf.autocorrectionType = .no
+        tf.autocapitalizationType = .none
+        tf.isSecureTextEntry = true
+        tf.textContentType = .newPassword
+        tf.backgroundColor = .systemGray6
+        tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        tf.placeholder = "Повторите пароль"
+        tf.tintColor = .SocialNetworkColor.accent.set()
+        tf.textColor = .SocialNetworkColor.mainText.set()
+        tf.textAlignment = .left
+        tf.layer.borderWidth = 0.5
+        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.delegate = self
+        
+        return tf
+    }()
+    
+    private lazy var registrationButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(1.0), for: .normal)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .highlighted)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .disabled)
-        button.setTitle("Войти", for: button.state)
+        button.setTitle("Регистрация", for: button.state)
         button.setTitleColor(.white, for: button.state)
         button.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
         button.layer.masksToBounds = true
@@ -118,18 +139,18 @@ final class LoginView: UIView {
         return button
     }()
     
-    private lazy var loginTypeTitle: UILabel = {
+    private lazy var registrationTypeTitle: UILabel = {
         let label = UILabel()
-        label.text = "Нет аккаунта? Тогда пройдите регистрацию"
+        label.text = "Уже есть аккаунт?"
         label.textColor = .SocialNetworkColor.secondaryText.set()
         label.font = .systemFont(ofSize: 14, weight: .medium)
         
         return label
     }()
     
-    private lazy var loginTypeButton: UIButton = {
+    private lazy var authentificationTypeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Регистрация", for: button.state)
+        button.setTitle("Войти", for: button.state)
         button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(1.0), for: .normal)
         button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .selected)
         button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .highlighted)
@@ -151,7 +172,7 @@ final class LoginView: UIView {
     }
 }
 
-private extension LoginView {
+private extension RegistrationView {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -163,14 +184,15 @@ private extension LoginView {
         scrollView.addSubview(contentView)
         
         contentView.add(subviews: [logoImage,
-                                   loginTitle,
-                                   loginContainer,
-                                   loginButton,
-                                   loginTypeTitle,
-                                   loginTypeButton])
+                                   registrationTitle,
+                                   registrationContainer,
+                                   registrationButton,
+                                   registrationTypeTitle,
+                                   authentificationTypeButton])
         
-        loginContainer.add(arrangedSubviews: [emailField,
-                                              passwordField])
+        registrationContainer.add(arrangedSubviews: [emailField,
+                                              passwordField,
+                                              repeatPasswordField])
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -189,15 +211,15 @@ private extension LoginView {
             make.centerX.equalToSuperview()
         }
         
-        loginTitle.snp.makeConstraints { make in
+        registrationTitle.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(logoImage.snp.bottom).offset(120)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        loginContainer.snp.makeConstraints { make in
-            make.top.equalTo(loginTitle.snp.bottom).offset(24)
+        registrationContainer.snp.makeConstraints { make in
+            make.top.equalTo(registrationTitle.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
@@ -206,20 +228,20 @@ private extension LoginView {
             make.height.equalTo(50)
         }
         
-        loginButton.snp.makeConstraints { make in
+        registrationButton.snp.makeConstraints { make in
             make.height.equalTo(50)
-            make.top.equalTo(loginContainer.snp.bottom).offset(16)
+            make.top.equalTo(registrationContainer.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        loginTypeTitle.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(16)
+        registrationTypeTitle.snp.makeConstraints { make in
+            make.top.equalTo(registrationButton.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
         }
         
-        loginTypeButton.snp.makeConstraints { make in
-            make.top.equalTo(loginTypeTitle.snp.bottom).offset(6)
+        authentificationTypeButton.snp.makeConstraints { make in
+            make.top.equalTo(registrationTypeTitle.snp.bottom).offset(6)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(contentView)
         }
@@ -227,25 +249,34 @@ private extension LoginView {
     
     func setupContent() {
         passwordField.enablePasswordToggle()
+        repeatPasswordField.enablePasswordToggle()
     }
 }
 
-private extension LoginView {
-    @objc func loginButtonWasTapped() {
-        delegate?.loginButtonWasTapped()
+private extension RegistrationView {
+    @objc func registrationButtonWasTapped() {
+        delegate?.registrationButtonWasTapped()
     }
     
     @objc func authentificationTypeButtonWasTapped() {
         delegate?.authTypeButtonWasTapped()
     }
     
+    func displayRegistrationForm() {
+        registrationTitle.text = "Регистрация аккаунта"
+        registrationButton.setTitle("Регистрация", for: .normal)
+        authentificationTypeButton.setTitle("Вход", for: .normal)
+        registrationTypeTitle.text = "Уже есть аккаунт?"
+        repeatPasswordField.isHidden = false
+    }
+    
     func setupActions() {
-        loginButton.addTarget(self, action: #selector(loginButtonWasTapped), for: .touchUpInside)
-        loginTypeButton.addTarget(self, action: #selector(authentificationTypeButtonWasTapped), for: .touchUpInside)
+        registrationButton.addTarget(self, action: #selector(registrationButtonWasTapped), for: .touchUpInside)
+        authentificationTypeButton.addTarget(self, action: #selector(authentificationTypeButtonWasTapped), for: .touchUpInside)
     }
 }
 
-extension LoginView: UITextFieldDelegate {
+extension RegistrationView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
 

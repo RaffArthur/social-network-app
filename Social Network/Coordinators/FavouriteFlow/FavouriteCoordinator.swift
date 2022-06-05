@@ -9,7 +9,7 @@ import UIKit
 
 @available(iOS 13.0, *)
 class FavouriteCoordinator: Coordinator {
-    var finishDelegate: CoordinatorFinishDelegate?
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .favourite }

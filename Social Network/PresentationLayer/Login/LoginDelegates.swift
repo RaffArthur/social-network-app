@@ -9,10 +9,10 @@ import Foundation
 
 protocol LoginViewDelegate: AnyObject {
     func loginButtonWasTapped()
-    func registrationButtonWasTapped()
-    func loginTypeButtonWasTapped()
+    func authTypeButtonWasTapped()
 }
 
 protocol LoginViewConrollerDelegate: AnyObject {
-    func userLoggedIn()
+    func didUserLogin()
+    func didUserChooseRegistration()
 }

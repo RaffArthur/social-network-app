@@ -8,15 +8,13 @@
 import UIKit
 
 final class ProfileCoordinator: Coordinator {
-    var finishDelegate: CoordinatorFinishDelegate?
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController 
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .profile }
     
     var logOutted: (() -> Void)?
-    private var loginReviewer: LoginReviewer?
-    let favouritePosts = CoreDataManager.shared.fetchFavouritePosts()
-
+    private var authentificationReviewer: AuthentificationReviewer?
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -25,8 +23,8 @@ final class ProfileCoordinator: Coordinator {
     func start() {
         let profileVC = ProfileViewController()
         
-        loginReviewer = LoginReviewerImpl()
-        profileVC.reviewer = loginReviewer
+        authentificationReviewer = AuthentificationReviewerImpl()
+        profileVC.reviewer = authentificationReviewer
         profileVC.delegate = self
         
         navigationController.pushViewController(profileVC, animated: true)
@@ -44,6 +42,8 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
     
     func photoLibraryWasTapped() {
         let coordinator = PhotosCoordinator(navigationController)
+        
+        childCoordinators.append(coordinator)
         
         coordinator.start()
     }

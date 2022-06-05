@@ -24,6 +24,7 @@ protocol Coordinator: AnyObject {
 extension Coordinator {
     func finish() {
         childCoordinators.removeAll()
+        
         finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }
 }
@@ -37,6 +38,6 @@ protocol CoordinatorFinishDelegate: AnyObject {
 // MARK: - CoordinatorType
 /// Используя эту структуру, мы можем определить, какой тип потока мы можем использовать в приложении.
 enum CoordinatorType {
-    case app, login, tab, profile, favourite, photos, post
+    case app, login, tab, profile, favourite, photos, post, registration
 }
 
