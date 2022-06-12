@@ -112,13 +112,13 @@ private extension ProfileViewController {
                 if favouritePosts.isEmpty {
                     self?.delegate?.postWasTapped(post: post)
                     self?.animateAddToFavouriteTap()
-                }
-                
-                if favouritePosts.contains(where: { $0.title == post.title }) {
-                    self?.showAlreadyInFavouritesAlert()
                 } else {
-                    self?.delegate?.postWasTapped(post: post)
-                    self?.animateAddToFavouriteTap()
+                    if favouritePosts.contains(where: { $0.title == post.title }) {
+                        self?.showAlreadyInFavouritesAlert()
+                    } else {
+                        self?.delegate?.postWasTapped(post: post)
+                        self?.animateAddToFavouriteTap()
+                    }
                 }
             }
         }
