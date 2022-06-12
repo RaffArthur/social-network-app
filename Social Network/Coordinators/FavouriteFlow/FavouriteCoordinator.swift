@@ -7,8 +7,7 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
-class FavouriteCoordinator: Coordinator {
+final class FavouriteCoordinator: Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
@@ -19,8 +18,8 @@ class FavouriteCoordinator: Coordinator {
     }
     
     func start() {
-        let favouriteVC = FavouriteViewController()
+        let vc = FavouriteViewController()
         
-        navigationController.pushViewController(favouriteVC, animated: true)
+        navigationController.pushViewController(vc, animated: true)
     }
 }

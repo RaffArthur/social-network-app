@@ -5,6 +5,7 @@
 //  Created by Arthur Raff on 11.10.2021.
 //
 
+import Foundation
 import UIKit
 
 final class LoginCoordinator: Coordinator {
@@ -20,13 +21,13 @@ final class LoginCoordinator: Coordinator {
     }
     
     func start() {
-        let loginVC = LoginViewController()
+        let vc = LoginViewController()
         
         authentifivationReviewer = AuthentificationReviewerImpl()
-        loginVC.reviewer = authentifivationReviewer
-        loginVC.delegate = self
+        vc.reviewer = authentifivationReviewer
+        vc.delegate = self
         
-        navigationController.pushViewController(loginVC, animated: true)
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 
@@ -37,10 +38,9 @@ extension LoginCoordinator: LoginViewConrollerDelegate {
     
     func didUserChooseRegistration() {
         let coordinator = RegistrationCoordinator(navigationController)
+        coordinator.start()
         
         childCoordinators.append(coordinator)
-                
-        coordinator.start()
     }
 }
 

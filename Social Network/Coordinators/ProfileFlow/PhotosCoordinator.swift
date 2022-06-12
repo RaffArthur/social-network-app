@@ -7,8 +7,7 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
-class PhotosCoordinator: Coordinator {
+final class PhotosCoordinator: Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
@@ -19,8 +18,8 @@ class PhotosCoordinator: Coordinator {
     }
     
     func start() {
-        let photosVC = PhotosViewController()
+        let vc = PhotosViewController()
         
-        navigationController.pushViewController(photosVC, animated: true)
+        navigationController.pushViewController(vc, animated: true)
     }
 }

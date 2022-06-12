@@ -14,6 +14,7 @@ final class ProfileCoordinator: Coordinator {
     var type: CoordinatorType { .profile }
     
     var logOutted: (() -> Void)?
+    
     private var authentificationReviewer: AuthentificationReviewer?
     
     required init(_ navigationController: UINavigationController) {
@@ -21,13 +22,13 @@ final class ProfileCoordinator: Coordinator {
     }
     
     func start() {
-        let profileVC = ProfileViewController()
+        let vc = ProfileViewController()
         
         authentificationReviewer = AuthentificationReviewerImpl()
-        profileVC.reviewer = authentificationReviewer
-        profileVC.delegate = self
+        vc.reviewer = authentificationReviewer
+        vc.delegate = self
         
-        navigationController.pushViewController(profileVC, animated: true)
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 
@@ -42,9 +43,8 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
     
     func photoLibraryWasTapped() {
         let coordinator = PhotosCoordinator(navigationController)
-        
-        childCoordinators.append(coordinator)
-        
         coordinator.start()
+
+        childCoordinators.append(coordinator)
     }
 }

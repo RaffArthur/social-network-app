@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 enum TabBarPage: CaseIterable {    
     case profile
     case favourite

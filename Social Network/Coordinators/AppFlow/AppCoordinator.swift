@@ -7,18 +7,7 @@
 
 import UIKit
 
-// MARK: - AppCoordinatorProtocol
-/// Главный координатор, как входная и отправная точка всего приложения
-@available(iOS 13.0, *)
-protocol AppCoordinatorProtocol: Coordinator {
-    func showAuthentificationFlow()
-    func showAppFlow()
-}
-
-// MARK: - AppCoordinator
-// Координатор приложения - единственный координатор, который будет существовать весь жизненный цикл приложения
-@available(iOS 13.0, *)
-class AppCoordinator: AppCoordinatorProtocol {
+final class AppCoordinator: Coordinator {
     weak var finishDelegate: CoordinatorFinishDelegate? = nil
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
@@ -42,26 +31,26 @@ class AppCoordinator: AppCoordinatorProtocol {
             showAppFlow()
         }
     }
-    
+}
+
+private extension AppCoordinator {
     func showAuthentificationFlow() {
-        let loginCoordinator = LoginCoordinator(navigationController)
-        loginCoordinator.finishDelegate = self
-        loginCoordinator.start()
+        let coordinator = LoginCoordinator(navigationController)
+        coordinator.finishDelegate = self
+        coordinator.start()
         
-        childCoordinators.append(loginCoordinator)
+        childCoordinators.append(coordinator)
     }
     
     func showAppFlow() {
-        let tabCoordinator = TabCoordinator(navigationController)
-        tabCoordinator.finishDelegate = self
-        tabCoordinator.start()
+        let coordinator = TabCoordinator(navigationController)
+        coordinator.finishDelegate = self
+        coordinator.start()
         
-        childCoordinators.append(tabCoordinator)
+        childCoordinators.append(coordinator)
     }
 }
 
-// MARK: - CoordinatorFinishDelegate extension
-@available(iOS 13.0, *)
 extension AppCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         childCoordinators = childCoordinators.filter { $0.type != childCoordinator.type }
@@ -80,5 +69,3 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         }
     }
 }
-
-

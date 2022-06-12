@@ -7,8 +7,6 @@
 
 import UIKit
 
-// MARK: - Coordinator
-/// Базовый протокол координатора
 protocol Coordinator: AnyObject {
     var finishDelegate: CoordinatorFinishDelegate? { get set }
     var navigationController: UINavigationController { get set }
@@ -29,15 +27,10 @@ extension Coordinator {
     }
 }
 
-// MARK: - CoordinatorOutput
-/// Протокол делегата, помогающий родительскому координатору узнать, когда его дочерний элемент готов к завершению.
 protocol CoordinatorFinishDelegate: AnyObject {
     func coordinatorDidFinish(childCoordinator: Coordinator)
 }
 
-// MARK: - CoordinatorType
-/// Используя эту структуру, мы можем определить, какой тип потока мы можем использовать в приложении.
 enum CoordinatorType {
     case app, login, tab, profile, favourite, photos, post, registration
 }
-

@@ -21,13 +21,13 @@ final class RegistrationCoordinator: Coordinator {
     }
     
     func start() {
-        let registrationVC = RegistrationViewController()
+        let vc = RegistrationViewController()
         
         authentifivationReviewer = AuthentificationReviewerImpl()
-        registrationVC.reviewer = authentifivationReviewer
-        registrationVC.delegate = self
+        vc.reviewer = authentifivationReviewer
+        vc.delegate = self
         
-        navigationController.show(registrationVC, sender: nil)
+        navigationController.show(vc, sender: nil)
     }
 }
 
