@@ -12,6 +12,7 @@ final class CoreDataManager {
     static let shared = CoreDataManager(modelName: "SocialNetworkCoreData")
     
     private let persistentContainer: NSPersistentContainer
+    private lazy var backgroundContext = persistentContainer.newBackgroundContext()
     
     init(modelName: String) {
         persistentContainer = NSPersistentContainer(name: modelName)
@@ -26,9 +27,9 @@ final class CoreDataManager {
     }
     
     private func save() {
-        if persistentContainer.viewContext.hasChanges {
+        if backgroundContext.hasChanges {
             do {
-                try persistentContainer.viewContext.save()
+                try backgroundContext.save()
             } catch {
                 print(error.localizedDescription)
             }
@@ -38,32 +39,42 @@ final class CoreDataManager {
 
 extension CoreDataManager {
     func saveToFavourite(post: Post) {
-        let favouritePost = FavouritePost(context: persistentContainer.viewContext)
-        favouritePost.title = post.title
-        favouritePost.body = post.body
-        
-        save()        
+        backgroundContext.perform { [weak self] in
+            let favouritePost = FavouritePost(context: self?.backgroundContext ?? NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType))
+            favouritePost.title = post.title
+            favouritePost.body = post.body
+            
+            self?.save()
+        }
     }
     
-    func fetchFavouritePosts() -> [FavouritePost] {
-        let request = FavouritePost.fetchRequest()
-        
-        let favouritePosts = try? persistentContainer.viewContext.fetch(request)
-        
-        return favouritePosts ?? []
+    func fetchFavouritePosts(completion: @escaping ([FavouritePost]) -> Void) {
+        backgroundContext.perform { [weak self] in
+            let request = FavouritePost.fetchRequest()
+            
+            request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+            
+            guard let favouritePosts = try? self?.backgroundContext.fetch(request) else { return }
+            
+            completion(favouritePosts)
+        }
     }
     
     func removePostFrom(favouritePosts: FavouritePost) {
-        persistentContainer.viewContext.delete(favouritePosts)
-        
-        save()
+        backgroundContext.perform { [weak self] in
+            self?.backgroundContext.delete(favouritePosts)
+            
+            self?.save()
+        }
     }
     
     func deletAll() {
-        fetchFavouritePosts().forEach {
-            persistentContainer.viewContext.delete($0)
+        backgroundContext.perform { [weak self] in
+            self?.fetchFavouritePosts { [weak self] in
+                $0.forEach { self?.backgroundContext.delete($0) }
+            }
+            
+            self?.save()
         }
-        
-        save()
     }
 }

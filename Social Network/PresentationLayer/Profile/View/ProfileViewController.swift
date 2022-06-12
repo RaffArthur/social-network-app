@@ -100,16 +100,28 @@ private extension ProfileViewController {
         }
     }
     
-    @objc func didPostTapped(_ sender: UITapGestureRecognizer) {
+    @objc func didTapPost(_ sender: UITapGestureRecognizer) {
         let touchPoint = sender.location(in: tableView)
         
         guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
         
         let post = Storages.posts[indexPath.item]
         
-        delegate?.postWasTapped(post: post)
-        
-        animateAddToFavouriteTap()
+        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
+            DispatchQueue.main.async { [weak self] in
+                if favouritePosts.isEmpty {
+                    self?.delegate?.postWasTapped(post: post)
+                    self?.animateAddToFavouriteTap()
+                }
+                
+                if favouritePosts.contains(where: { $0.title == post.title }) {
+                    self?.showAlreadyInFavouritesAlert()
+                } else {
+                    self?.delegate?.postWasTapped(post: post)
+                    self?.animateAddToFavouriteTap()
+                }
+            }
+        }
     }
     
     func show(error: UserAuthError) {
@@ -125,6 +137,24 @@ private extension ProfileViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    func showAlreadyInFavouritesAlert() {
+        let alert = UIAlertController(title: nil,
+                                      message: nil,
+                                      preferredStyle: .alert)
+        
+        let attributedString = NSAttributedString(string: "Уже в избранном",
+                                                  attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: .bold),
+                                                               NSAttributedString.Key.foregroundColor : UIColor.systemRed])
+                
+        alert.setValue(attributedString, forKey: "attributedMessage")
+        
+        present(alert, animated: true)
+                
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     func animateAddToFavouriteTap() {
         let addedScale = CGFloat.random(in: 0.8...2.0)
         
@@ -132,20 +162,20 @@ private extension ProfileViewController {
         
         let imageView = UIImageView(image: UIImage(systemName: "heart.fill"))
         
-        imageView.tintColor = .red
+        imageView.tintColor = .systemRed
                                 
         guard let tabBarView = tabBarController?.view else { return }
         
-        imageView.center = CGPoint(x: tabBarView.center.x, y: tabBarView.center.y + 240)
+        imageView.center = CGPoint(x: tabBarView.center.x, y: tabBarView.center.y)
 
         tabBarView.addSubview(imageView)
 
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 0) {
             imageView.bounds.origin = CGPoint(x: rotationAngle, y: rotationAngle)
             imageView.transform = CGAffineTransform(scaleX: addedScale, y: addedScale)
         } completion: { _ in
             UIView.animate(withDuration: 0.5, delay: 0.1) {
-                imageView.center.y -= 60
+                imageView.center.y -= 100
                 imageView.transform = CGAffineTransform(rotationAngle: rotationAngle)
                 imageView.tintColor = .clear
                 
@@ -174,9 +204,9 @@ extension ProfileViewController: UITableViewDelegate {
         if indexPath.section == 0 {
             delegate?.photoLibraryWasTapped()
         } else {
-            let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(didPostTapped))
-            doubleTapGestureRecognizer.numberOfTapsRequired = 2
-            tableView.addGestureRecognizer(doubleTapGestureRecognizer)
+            let tap = UITapGestureRecognizer(target: self,action: #selector(didTapPost))
+            tap.numberOfTapsRequired = 2
+            tableView.addGestureRecognizer(tap)
         }
     }
 }
