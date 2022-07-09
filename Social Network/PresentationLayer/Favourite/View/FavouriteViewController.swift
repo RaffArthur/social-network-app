@@ -4,9 +4,13 @@
 //
 //
 
+import Foundation
 import UIKit
 
 final class FavouriteViewController: UIViewController {
+    private var favouritePosts: [FavouritePost] = []
+    private var filteredFavouritePosts: [FavouritePost] = []
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(ProfilePostTableViewCell.self,
@@ -26,10 +30,27 @@ final class FavouriteViewController: UIViewController {
         return bbi
     }()
     
+    private lazy var searchController: UISearchController = {
+        let sc = UISearchController(searchResultsController: nil)
+        sc.searchBar.placeholder = "Поиск"
+        sc.obscuresBackgroundDuringPresentation = false
+        sc.searchResultsUpdater = self
+        
+        return sc
+    }()
+    
+    private var serachBarIsEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    private var isFiltering: Bool {
+        return searchController.isActive && !serachBarIsEmpty
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "В избранном \(CoreDataManager.shared.fetchFavouritePosts().count)"
-
-        tableView.reloadData()
+        super.viewWillAppear(animated)
+        
+        fetchFavouritePosts()
     }
     
     override func viewDidLoad() {
@@ -49,6 +70,10 @@ private extension FavouriteViewController {
     func setupContent() {
         navigationItem.rightBarButtonItem = deleteAllButton
         
+        navigationItem.searchController = searchController
+        
+        definesPresentationContext = true
+        
         view.backgroundColor = .systemBackground
     }
     
@@ -63,32 +88,25 @@ private extension FavouriteViewController {
 
 private extension FavouriteViewController {
     @objc func deleteAllButtonTapped() {
-        let manager = CoreDataManager.shared
-        
-        let pathes = manager.fetchFavouritePosts().enumerated().compactMap { IndexPath(row: $0.offset, section: 0) }
+        let pathes = favouritePosts.enumerated().map { IndexPath(row: $0.offset, section: 0) }
         
         CoreDataManager.shared.deletAll()
         
-        navigationItem.title = "В избранном \(manager.fetchFavouritePosts().count)"
-
+        favouritePosts.removeAll()
+        
         tableView.deleteRows(at: pathes, with: .automatic)
         
+        navigationItem.title = "В избранном \(favouritePosts.count)"
     }
     
-    @objc func didPostTapped(_ sender: UITapGestureRecognizer) {
-        let touchPoint = sender.location(in: tableView)
-        
-        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
-        
-        let manager = CoreDataManager.shared
-
-        let favouritePost = manager.fetchFavouritePosts()[indexPath.item]
-        
-        manager.removePostFrom(favouritePosts: favouritePost)
-        
-        navigationItem.title = "В избранном \(manager.fetchFavouritePosts().count)"
-        
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+    @objc func didTapPost(_ sender: UITapGestureRecognizer) {
+        if isFiltering {
+            deleteFilteredFavouritePost(sender)
+        } else {
+            deleteFavouritePost(sender)
+        }
+                                
+        navigationItem.title = "В избранном \(favouritePosts.count)"
     }
     
     func setupActions() {
@@ -97,6 +115,57 @@ private extension FavouriteViewController {
     }
 }
 
+private extension FavouriteViewController {
+    func deleteFavouritePost(_ sender: UITapGestureRecognizer) {
+        let touchPoint = sender.location(in: tableView)
+        
+        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
+        
+        CoreDataManager.shared.removePostFrom(favouritePosts: favouritePosts[indexPath.row])
+
+        favouritePosts.remove(at: indexPath.row)
+        
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func deleteFilteredFavouritePost(_ sender: UITapGestureRecognizer) {
+        let touchPoint = sender.location(in: tableView)
+        
+        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
+        
+        favouritePosts.forEach { favPost in
+            if filteredFavouritePosts.contains(where: { $0.title == favPost.title }) {
+                CoreDataManager.shared.removePostFrom(favouritePosts: favPost)
+            }
+        }
+                
+        filteredFavouritePosts.remove(at: indexPath.row)
+        
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func fetchFavouritePosts() {
+        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
+            DispatchQueue.main.async { [weak self] in
+                self?.favouritePosts = favouritePosts
+                
+                self?.tableView.reloadData()
+                                
+                self?.navigationItem.title = "В избранном \(favouritePosts.count)"
+            }
+        }
+    }
+    
+    func filterContentForSearchBy(text: String) {
+        filteredFavouritePosts = favouritePosts.filter {
+            guard let title = $0.title else { return false }
+            
+            return title.lowercased().contains(text.lowercased())
+        }
+        
+        tableView.reloadData()
+    }
+}
 
 extension FavouriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
@@ -108,7 +177,7 @@ extension FavouriteViewController: UITableViewDelegate {
                    didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(didPostTapped(_:)))
+        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(didTapPost))
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
         tableView.addGestureRecognizer(doubleTapGestureRecognizer)
     }
@@ -117,7 +186,11 @@ extension FavouriteViewController: UITableViewDelegate {
 extension FavouriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return CoreDataManager.shared.fetchFavouritePosts().count
+        if isFiltering {
+            return filteredFavouritePosts.count
+        }
+        
+        return favouritePosts.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -126,8 +199,28 @@ extension FavouriteViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                  for: indexPath) as? ProfilePostTableViewCell
         
-        cell?.configure(post: CoreDataManager.shared.fetchFavouritePosts()[indexPath.row])
+        var favouritePost: FavouritePost
+        
+        if isFiltering {
+            favouritePost = filteredFavouritePosts[indexPath.row]
+        } else {
+            favouritePost = favouritePosts[indexPath.row]
+        }
+        
+        cell?.configure(post: favouritePost)
         
         return cell ?? UITableViewCell()
+    }
+}
+
+extension FavouriteViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if !isFiltering {
+            fetchFavouritePosts()
+        }
+        
+        guard let text = searchController.searchBar.text else { return }
+        
+        filterContentForSearchBy(text: text)
     }
 }
