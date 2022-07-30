@@ -32,5 +32,13 @@ protocol CoordinatorFinishDelegate: AnyObject {
 }
 
 enum CoordinatorType {
-    case app, login, tab, profile, favourite, photos, post, registration
+    case app
+    case login
+    case tab
+    case profile
+    case favourite
+    case photos
+    case post
+    case registration
+    case map
 }
