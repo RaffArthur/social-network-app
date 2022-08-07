@@ -36,7 +36,7 @@ class ProfileHeaderView: UIView {
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textAlignment = .left
         label.textColor = .SocialNetworkColor.secondaryText.set()
-        label.text = "Статуст отсутствует..."
+        label.text = .setLocalizedStringWith(key: .statusPlaceholder)
         label.numberOfLines = 0
         
         return label
@@ -44,7 +44,7 @@ class ProfileHeaderView: UIView {
     
     private lazy var setUserStatusButton: UIButton = {
         var button = UIButton()
-        button.setTitle("Настроить статус 👀", for: button.state)
+        button.setTitle(.setLocalizedStringWith(key: .setUserStatusButton), for: button.state)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.backgroundColor = .SocialNetworkColor.accent.set()
         button.layer.cornerRadius = 12
