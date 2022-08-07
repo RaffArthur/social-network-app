@@ -65,6 +65,9 @@
 		75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */; };
 		75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24C27CFDC850056E78B /* ProfileDelegates.swift */; };
 		75E15D722635BF7000368DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757638F12635BA5300C3F190 /* GoogleService-Info.plist */; };
+		75F0E9A528A0281D00638A81 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75F0E9A728A0281D00638A81 /* Localizable.strings */; };
+		75F0E9AA28A02F5A00638A81 /* Locilizable+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */; };
+		75F0E9B528A042B200638A81 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 75F0E9B728A042B200638A81 /* Localizable.stringsdict */; };
 		75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */; };
 		77A956D350D4D88C3920064D /* Pods_Social_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681B5DF4387C968CE8B9F91E /* Pods_Social_Network.framework */; };
 /* End PBXBuildFile section */
@@ -131,6 +134,12 @@
 		75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverter.swift; sourceTree = "<group>"; };
 		75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
 		75D8A24C27CFDC850056E78B /* ProfileDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDelegates.swift; sourceTree = "<group>"; };
+		75F0E9A228A0274200638A81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		75F0E9A628A0281D00638A81 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		75F0E9A828A0281F00638A81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locilizable+String.swift"; sourceTree = "<group>"; };
+		75F0E9B828A042B500638A81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		75F0E9B928A047D900638A81 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordToggle+UITextField.swift"; sourceTree = "<group>"; };
 		7D749DB5FFFE36FD0645A2D7 /* Pods-Social_Network.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social_Network.release.xcconfig"; path = "Target Support Files/Pods-Social_Network/Pods-Social_Network.release.xcconfig"; sourceTree = "<group>"; };
 		A1E82B6BF4F040F98A52F959 /* Pods-Social_Network.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social_Network.debug.xcconfig"; path = "Target Support Files/Pods-Social_Network/Pods-Social_Network.debug.xcconfig"; sourceTree = "<group>"; };
@@ -367,6 +376,8 @@
 				75B4448B25C70CED00B3C586 /* AppDelegate.swift */,
 				75B4448C25C70CED00B3C586 /* SceneDelegate.swift */,
 				75B4448925C70CED00B3C586 /* Assets.xcassets */,
+				75F0E9A728A0281D00638A81 /* Localizable.strings */,
+				75F0E9B728A042B200638A81 /* Localizable.stringsdict */,
 			);
 			path = Applcation;
 			sourceTree = "<group>";
@@ -407,6 +418,7 @@
 				755ADFC525E51A19008E92A3 /* ImageDownloader+UIImageView.swift */,
 				75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */,
 				75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */,
+				75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */,
 			);
 			path = DevHelpers;
 			sourceTree = "<group>";
@@ -550,6 +562,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 060782A5250CE27700A87020;
 			productRefGroup = 060782AF250CE27700A87020 /* Products */;
@@ -567,7 +580,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				75B444BD25C70CEE00B3C586 /* Assets.xcassets in Resources */,
+				75F0E9A528A0281D00638A81 /* Localizable.strings in Resources */,
 				75B444B925C70CEE00B3C586 /* LaunchScreen.storyboard in Resources */,
+				75F0E9B528A042B200638A81 /* Localizable.stringsdict in Resources */,
 				75E15D722635BF7000368DA8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,6 +674,7 @@
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
+				75F0E9AA28A02F5A00638A81 /* Locilizable+String.swift in Sources */,
 				75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */,
 				758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */,
@@ -687,8 +703,27 @@
 			isa = PBXVariantGroup;
 			children = (
 				75B4448625C70CED00B3C586 /* Base */,
+				75F0E9A228A0274200638A81 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		75F0E9A728A0281D00638A81 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75F0E9A628A0281D00638A81 /* en */,
+				75F0E9A828A0281F00638A81 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		75F0E9B728A042B200638A81 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75F0E9B828A042B500638A81 /* ru */,
+				75F0E9B928A047D900638A81 /* en */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -698,6 +733,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -759,6 +795,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
