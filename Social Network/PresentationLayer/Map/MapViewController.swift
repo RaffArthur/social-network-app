@@ -42,25 +42,26 @@ private extension MapViewController {
 private extension MapViewController {
     func setupActions() {
         let longGesture = UILongPressGestureRecognizer(target: self,
-                                                             action: #selector(addUserPin(longGesture:)))
+                                                       action: #selector(addUserPin(longGesture:)))
         longGesture.delegate = self
-        longGesture.minimumPressDuration = 2.0
         
         mapView.addGestureRecognizer(longGesture)
     }
     
     @objc func addUserPin(longGesture: UILongPressGestureRecognizer) {
-        let location = longGesture.location(in: mapView)
-        
-        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
+        if longGesture.state == .began {
+            let location = longGesture.location(in: mapView)
+            
+            let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
 
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = "Координаты: \(coordinate.latitude)\n\(coordinate.longitude)"
-        
-        mapView.addAnnotation(annotation)
-        
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "Координаты: \(coordinate.latitude)\n\(coordinate.longitude)"
+            
+            mapView.addAnnotation(annotation)
+            
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+        }
     }
     
     func addRoute() {
