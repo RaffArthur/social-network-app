@@ -32,7 +32,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var logoutButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
-        bbi.title = .setLocalizedStringWith(key: .logOutButton)
+        bbi.title = .localized(key: .logOutButton)
         bbi.style = .done
         
         return bbi
@@ -142,7 +142,7 @@ private extension ProfileViewController {
                                       message: nil,
                                       preferredStyle: .alert)
         
-        let attributedString = NSAttributedString(string: .setLocalizedStringWith(key: .alreadyInFavouritesAlertTitle),
+        let attributedString = NSAttributedString(string: .localized(key: .alreadyInFavouritesAlertTitle),
                                                   attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: .bold),
                                                                NSAttributedString.Key.foregroundColor : UIColor.systemRed])
                 
@@ -255,21 +255,21 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func setUserStatusButtonTapped() {
-        let alertController = UIAlertController(title: .setLocalizedStringWith(key: .userStatusAlertTitle),
-                                                message: .setLocalizedStringWith(key: .userStatusAlertMessage),
+        let alertController = UIAlertController(title: .localized(key: .userStatusAlertTitle),
+                                                message: .localized(key: .userStatusAlertMessage),
                                                 preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: .setLocalizedStringWith(key: .userStatusAlertCancelButton),
+        let cancel = UIAlertAction(title: .localized(key: .userStatusAlertCancelButton),
                                    style: .cancel,
                                    handler: nil)
         
-        let setStatus = UIAlertAction(title: .setLocalizedStringWith(key: .userStatusAlertSetStatusSutton),
+        let setStatus = UIAlertAction(title: .localized(key: .userStatusAlertSetStatusSutton),
                                       style: .default) { action in
             self.headerView.updateUserStatus(message: alertController.textFields?[0].text ?? String())
         }
         
         alertController.addTextField { textField in
-            textField.placeholder = .setLocalizedStringWith(key: .userStatusAlertTextfieldPlaceholder)
+            textField.placeholder = .localized(key: .userStatusAlertTextfieldPlaceholder)
         }
         
         alertController.addAction(cancel)

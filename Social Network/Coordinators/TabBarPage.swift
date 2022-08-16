@@ -39,11 +39,11 @@ enum TabBarPage: CaseIterable {
     func pageTitleValue() -> String {
         switch self {
         case .profile:
-            return .setLocalizedStringWith(key: .profileTab)
+            return .localized(key: .profileTab)
         case .favourite:
-            return .setLocalizedStringWith(key: .favouriteTab)
+            return .localized(key: .favouriteTab)
         case .map:
-            return .setLocalizedStringWith(key: .mapTab)
+            return .localized(key: .mapTab)
         }
     }
     

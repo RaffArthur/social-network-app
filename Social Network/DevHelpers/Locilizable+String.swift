@@ -121,14 +121,14 @@ extension SocialNetworkLocalizedStringDictKeys {
 }
 
 extension String {
-    static func setLocalizedStringWith(key: SocialNetworkLocalizedStringKeys) -> String {
-        return NSLocalizedString(key.localizedStringKey, comment: "nil")
-    }
-    
-    static func setLocalizedPluralStringWith(key: SocialNetworkLocalizedStringDictKeys,
+    static func localizedPlural(key: SocialNetworkLocalizedStringDictKeys,
                                              argument: Int) -> String {
         let localized = NSLocalizedString(key.localizedStringKey, comment: "nil")
         
         return String(format: localized, argument)
-    }    
+    }
+    
+    static func localized(key: SocialNetworkLocalizedStringKeys) -> String {
+        return NSLocalizedString(key.localizedStringKey, comment: "nil")
+    }
 }

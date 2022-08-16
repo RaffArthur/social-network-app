@@ -32,7 +32,7 @@ final class FavouriteViewController: UIViewController {
     
     private lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
-        sc.searchBar.placeholder = .setLocalizedStringWith(key: .favouritesSearchPlaceholder)
+        sc.searchBar.placeholder = .localized(key: .favouritesSearchPlaceholder)
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchResultsUpdater = self
         
@@ -96,7 +96,7 @@ private extension FavouriteViewController {
         
         tableView.deleteRows(at: pathes, with: .automatic)
         
-        navigationItem.title = "\(String.setLocalizedStringWith(key: .favouritesCounterTitle)) \(favouritePosts.count)"
+        navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
     }
     
     @objc func didTapPost(_ sender: UITapGestureRecognizer) {
@@ -106,7 +106,7 @@ private extension FavouriteViewController {
             deleteFavouritePost(sender)
         }
                                 
-        navigationItem.title = "\(String.setLocalizedStringWith(key: .favouritesCounterTitle)) \(favouritePosts.count)"
+        navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
     }
     
     func setupActions() {
@@ -151,7 +151,7 @@ private extension FavouriteViewController {
                 
                 self?.tableView.reloadData()
                                 
-                self?.navigationItem.title = "\(String.setLocalizedStringWith(key: .favouritesCounterTitle)) \(favouritePosts.count)"
+                self?.navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
             }
         }
     }

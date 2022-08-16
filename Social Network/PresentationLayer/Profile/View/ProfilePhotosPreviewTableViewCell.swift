@@ -10,7 +10,7 @@ import UIKit
 class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     private lazy var photosLabel: UILabel = {
         let photosLabel = UILabel()
-        photosLabel.text = .setLocalizedStringWith(key: .photosTitle)
+        photosLabel.text = .localized(key: .photosTitle)
         photosLabel.font = .systemFont(ofSize: 24, weight: .bold)
         photosLabel.textColor = .SocialNetworkColor.mainText.set()
         
