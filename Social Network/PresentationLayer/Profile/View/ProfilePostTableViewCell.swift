@@ -73,8 +73,10 @@ class ProfilePostTableViewCell: UITableViewCell {
 
         self.postTitle.text = postTitle.firstUppercased
         self.postDescription.text = postDescription.firstUppercased
-        self.postLikes.text = "Likes: \(Int.random(in: 100...500))"
-        self.postViews.text = "Vews: \(Int.random(in: 200...1000))"
+        self.postLikes.text = .localizedPlural(key: .postLikes,
+                                               argument: Int.random(in: 100...500))
+        self.postViews.text = .localizedPlural(key: .postViews,
+                                               argument: Int.random(in: 200...1000))
     }
     
     func configure(post: FavouritePost) {
@@ -86,8 +88,10 @@ class ProfilePostTableViewCell: UITableViewCell {
 
         self.postTitle.text = postTitle.firstUppercased
         self.postDescription.text = postDescription.firstUppercased
-        self.postLikes.text = "Likes: \(Int.random(in: 100...500))"
-        self.postViews.text = "Vews: \(Int.random(in: 200...1000))"
+        self.postLikes.text = .localizedPlural(key: .postLikes,
+                                               argument: Int.random(in: 100...500))
+        self.postViews.text = .localizedPlural(key: .postViews,
+                                               argument: Int.random(in: 200...1000))
     }
 }
 

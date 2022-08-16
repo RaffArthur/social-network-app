@@ -44,7 +44,7 @@ private extension RegistrationViewController {
 
 private extension RegistrationViewController {
     func accountCreated() {
-        let alert = UIAlertController(title: "Аккаунт создан",
+        let alert = UIAlertController(title: .localized(key: .accountCreatedAlertTitle),
                                       message: nil,
                                       preferredStyle: .alert)
         let cancel = UIAlertAction(title: "ОК",

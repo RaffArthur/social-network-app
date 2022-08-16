@@ -1,0 +1,48 @@
+/* 
+  Localizable.strings
+  Social_Network
+
+  Created by Arthur Raff on 07.08.2022.
+  
+*/
+
+//MARK: - Tabbar flow
+"profile_tab" = "Profile";
+"favourite_tab" = "Favourite";
+"map_tab" = "Map";
+
+//MARK: - Login flow
+"login_title" = "Login";
+"registration_title" = "Registration";
+"email_placeholder" = "Enter e-mail";
+"password_placeholder" = "Enter password";
+"repeat_password_placeholder" = "Repeat password";
+"sign_in_button" = "Sign In";
+"registration_button" = "Sign Up";
+"login_type_login_title" = "Already have an account?";
+"login_type_registration_title" = "Don't have an account? Get registered";
+
+//MARK: - Profile flow
+"log_out_button" = "Log Out";
+"status_placeholder" = "No status...";
+"set_user_status_button" = "Write status 👀";
+"photos_title" = "Photos";
+"posts_likes" = "Likes";
+"posts_views" = "Views";
+
+//MARK: - Favourites flow
+"favourites_search_placeholder" = "Search";
+"favourites_counter_title" = "Favourites";
+
+//MARK: - Map flow
+"coordinates_title" = "Coordinates";
+"kremlin_pin_title" = "Moscow Kremlin";
+
+//MARK: - Custom alerts
+"account_created_alert_title" = "Account created";
+"already_in_favourites_alert_title" = "Already in favourites";
+"user_status_alert_title" = "Update your status";
+"user_status_alert_message" = "Write here whatever you think";
+"user_status_alert_textfield_placeholder" = "Enter your status";
+"user_status_alert_cancel_button" = "Cancel";
+"user_status_alert_set_status_button" = "Update";

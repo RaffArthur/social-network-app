@@ -39,7 +39,7 @@ final class RegistrationView: UIView {
     
     private lazy var registrationTitle: UILabel = {
         let label = UILabel()
-        label.text = "Регистрация аккаунта"
+        label.text = .localized(key: .registrationTitle)
         label.textColor = .SocialNetworkColor.mainText.set()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24, weight: .bold)
@@ -67,7 +67,7 @@ final class RegistrationView: UIView {
         tf.clearsOnBeginEditing = false
         tf.backgroundColor = .systemGray6
         tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        tf.placeholder = "Введите e-mail"
+        tf.placeholder = .localized(key: .emailPlaceholder)
         tf.tintColor = .SocialNetworkColor.accent.set()
         tf.textColor = .SocialNetworkColor.mainText.set()
         tf.textAlignment = .left
@@ -93,7 +93,7 @@ final class RegistrationView: UIView {
         tf.textContentType = .newPassword
         tf.backgroundColor = .systemGray6
         tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        tf.placeholder = "Введите пароль"
+        tf.placeholder = .localized(key: .passwordPlaceholder)
         tf.tintColor = .SocialNetworkColor.accent.set()
         tf.textColor = .SocialNetworkColor.mainText.set()
         tf.textAlignment = .left
@@ -113,7 +113,7 @@ final class RegistrationView: UIView {
         tf.textContentType = .newPassword
         tf.backgroundColor = .systemGray6
         tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        tf.placeholder = "Повторите пароль"
+        tf.placeholder = .localized(key: .repeatPasswordPlaceholder)
         tf.tintColor = .SocialNetworkColor.accent.set()
         tf.textColor = .SocialNetworkColor.mainText.set()
         tf.textAlignment = .left
@@ -130,7 +130,7 @@ final class RegistrationView: UIView {
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .highlighted)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .disabled)
-        button.setTitle("Регистрация", for: button.state)
+        button.setTitle(.localized(key: .registrationButton), for: button.state)
         button.setTitleColor(.white, for: button.state)
         button.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
         button.layer.masksToBounds = true
@@ -141,7 +141,7 @@ final class RegistrationView: UIView {
     
     private lazy var registrationTypeTitle: UILabel = {
         let label = UILabel()
-        label.text = "Уже есть аккаунт?"
+        label.text = .localized(key: .loginTypeLoginTitle)
         label.textColor = .SocialNetworkColor.secondaryText.set()
         label.font = .systemFont(ofSize: 14, weight: .medium)
         
@@ -150,7 +150,7 @@ final class RegistrationView: UIView {
     
     private lazy var authentificationTypeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Войти", for: button.state)
+        button.setTitle(.localized(key: .signInButton), for: button.state)
         button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(1.0), for: .normal)
         button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .selected)
         button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .highlighted)

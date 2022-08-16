@@ -1,0 +1,48 @@
+/* 
+  Localizable.strings
+  Social_Network
+
+  Created by Arthur Raff on 07.08.2022.
+  
+*/
+
+//MARK: - Tabbar flow
+"profile_tab" = "Профиль";
+"favourite_tab" = "Избранное";
+"map_tab" = "Карта";
+
+//MARK: - Login flow
+"login_title" = "Вход в аккаунт";
+"registration_title" = "Регистрация аккаунта";
+"email_placeholder" = "Введите e-mail";
+"password_placeholder" = "Введите пароль";
+"repeat_password_placeholder" = "Повторите пароль";
+"sign_in_button" = "Войти";
+"registration_button" = "Регистрация";
+"login_type_login_title" = "Уже есть аккаунт?";
+"login_type_registration_title" = "Нет аккаунта? Тогда пройдите регистрацию";
+
+//MARK: - Profile flow
+"log_out_button" = "Выход";
+"status_placeholder" = "Статус отсутствует...";
+"set_user_status_button" = "Настроить статус 👀";
+"photos_title" = "Фотографии";
+"posts_likes" = "Лайки";
+"posts_views" = "Просмотры";
+
+//MARK: - Favourites flow
+"favourites_search_placeholder" = "Поиск";
+"favourites_counter_title" = "В избранном";
+
+//MARK: - Map flow
+"coordinates_title" = "Координаты";
+"kremlin_pin_title" = "Московский кремль";
+
+//MARK: - Custom alerts
+"account_created_alert_title" = "Аккаунт создан";
+"already_in_favourites_alert_title" = "Уже в избранном";
+"user_status_alert_title" = "Обновите свой статус";
+"user_status_alert_message" = "Введите здесь все, что вы думаете";
+"user_status_alert_textfield_placeholder" = "Введите свой статус";
+"user_status_alert_cancel_button" = "Отменить";
+"user_status_alert_set_status_button" = "Обновить";

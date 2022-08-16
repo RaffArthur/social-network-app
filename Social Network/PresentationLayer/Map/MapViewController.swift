@@ -56,7 +56,7 @@ private extension MapViewController {
 
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
-            annotation.title = "Координаты: \(coordinate.latitude)\n\(coordinate.longitude)"
+            annotation.title = "\(String.localized(key: .coordinatesTitle)) \(coordinate.latitude)\n\(coordinate.longitude)"
             
             mapView.addAnnotation(annotation)
             
@@ -99,8 +99,7 @@ private extension MapViewController {
 
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = "Московский Кремль"
-        annotation.subtitle = "Конечная точка"
+        annotation.title = .localized(key: .kremlinPinTitle)
         
         mapView.addAnnotation(annotation)
     }
