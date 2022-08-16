@@ -46,3 +46,6 @@
 "user_status_alert_textfield_placeholder" = "Введите свой статус";
 "user_status_alert_cancel_button" = "Отменить";
 "user_status_alert_set_status_button" = "Обновить";
+
+//MARK: - Local Authentification Service
+"local_authentification_reason" = "Авторизутесь для входа";

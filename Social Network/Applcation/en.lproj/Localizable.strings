@@ -46,3 +46,6 @@
 "user_status_alert_textfield_placeholder" = "Enter your status";
 "user_status_alert_cancel_button" = "Cancel";
 "user_status_alert_set_status_button" = "Update";
+
+//MARK: - Local Authentification Service
+"local_authentification_reason" = "Please log in";

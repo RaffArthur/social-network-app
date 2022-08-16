@@ -56,6 +56,8 @@
 		75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AC25C70CED00B3C586 /* LoginViewController.swift */; };
 		75B444E525C70CEE00B3C586 /* LoginReviewerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */; };
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
+		75B6E95B28AC2BDD00A58A32 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6E95A28AC2BDD00A58A32 /* LocalAuthorizationService.swift */; };
+		75B6E95E28AC3ECC00A58A32 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75B6E96028AC3ECC00A58A32 /* InfoPlist.strings */; };
 		75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */; };
 		75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */; };
 		75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2B284288EE008CF9C1 /* Storages.swift */; };
@@ -126,6 +128,9 @@
 		75B444AE25C70CED00B3C586 /* LoginReviewerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginReviewerImpl.swift; sourceTree = "<group>"; };
 		75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75B6E95A28AC2BDD00A58A32 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
+		75B6E95F28AC3ECC00A58A32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		75B6E96128AC3ECD00A58A32 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		75BBAA25284259B4008CF9C1 /* FavouritePost.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouritePost.xcdatamodel; sourceTree = "<group>"; };
 		75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		75BBAA2B284288EE008CF9C1 /* Storages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storages.swift; sourceTree = "<group>"; };
@@ -378,6 +383,7 @@
 				75B4448925C70CED00B3C586 /* Assets.xcassets */,
 				75F0E9A728A0281D00638A81 /* Localizable.strings */,
 				75F0E9B728A042B200638A81 /* Localizable.stringsdict */,
+				75B6E96028AC3ECC00A58A32 /* InfoPlist.strings */,
 			);
 			path = Applcation;
 			sourceTree = "<group>";
@@ -423,6 +429,14 @@
 			path = DevHelpers;
 			sourceTree = "<group>";
 		};
+		75B6E95928AC2BB500A58A32 /* LocalAuthorizationService */ = {
+			isa = PBXGroup;
+			children = (
+				75B6E95A28AC2BDD00A58A32 /* LocalAuthorizationService.swift */,
+			);
+			path = LocalAuthorizationService;
+			sourceTree = "<group>";
+		};
 		75BBAA20284255D3008CF9C1 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				75CE1E282846650E0034C96C /* CoreDataManagers */,
+				75B6E95928AC2BB500A58A32 /* LocalAuthorizationService */,
 				7582B46D284CF9170095AC47 /* AuthentificationReviewer */,
 				752BC259283AAFC40063A5E0 /* RealmDataProvider */,
 				7538C2A126CC23E200935B7C /* Adapters */,
@@ -580,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75B444BD25C70CEE00B3C586 /* Assets.xcassets in Resources */,
+				75B6E95E28AC3ECC00A58A32 /* InfoPlist.strings in Resources */,
 				75F0E9A528A0281D00638A81 /* Localizable.strings in Resources */,
 				75B444B925C70CEE00B3C586 /* LaunchScreen.storyboard in Resources */,
 				75F0E9B528A042B200638A81 /* Localizable.stringsdict in Resources */,
@@ -661,6 +677,7 @@
 				75B444DB25C70CEE00B3C586 /* FavouriteViewController.swift in Sources */,
 				7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */,
 				75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */,
+				75B6E95B28AC2BDD00A58A32 /* LocalAuthorizationService.swift in Sources */,
 				752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */,
 				75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */,
 				75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */,
@@ -706,6 +723,15 @@
 				75F0E9A228A0274200638A81 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		75B6E96028AC3ECC00A58A32 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75B6E95F28AC3ECC00A58A32 /* en */,
+				75B6E96128AC3ECD00A58A32 /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		75F0E9A728A0281D00638A81 /* Localizable.strings */ = {
