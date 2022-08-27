@@ -45,7 +45,7 @@ private extension RegistrationViewController {
 private extension RegistrationViewController {
     func accountCreated() {
         let alert = UIAlertController(title: .localized(key: .accountCreatedAlertTitle),
-                                      message: nil,
+                                      message: .localized(key: .accountCreatedAlertMessage),
                                       preferredStyle: .alert)
         let cancel = UIAlertAction(title: "ОК",
                                    style: .cancel)
@@ -86,6 +86,7 @@ extension RegistrationViewController: RegistrationViewDelegate {
         reviewer?.registrationWith(credentials: credentials) { [weak self] result in
             switch result {
             case .success:
+                self?.accountCreated()
                 self?.delegate?.didUserRegister()
             case .failure(let error):
                 self?.show(authError: error)

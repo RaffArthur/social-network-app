@@ -31,6 +31,7 @@ enum SocialNetworkLocalizedStringKeys {
     case coordinatesTitle
     case kremlinPinTitle
     case accountCreatedAlertTitle
+    case accountCreatedAlertMessage
     case alreadyInFavouritesAlertTitle
     case userStatusAlertTitle
     case userStatusAlertMessage
@@ -89,6 +90,8 @@ extension SocialNetworkLocalizedStringKeys {
             return "kremlin_pin_title"
         case .accountCreatedAlertTitle:
             return "account_created_alert_title"
+        case .accountCreatedAlertMessage:
+            return "account_created_alert_message"
         case .alreadyInFavouritesAlertTitle:
             return "already_in_favourites_alert_title"
         case .userStatusAlertTitle:

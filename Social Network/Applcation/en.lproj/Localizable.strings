@@ -40,6 +40,7 @@
 
 //MARK: - Custom alerts
 "account_created_alert_title" = "Account created";
+"account_created_alert_message" = "Please, sign in";
 "already_in_favourites_alert_title" = "Already in favourites";
 "user_status_alert_title" = "Update your status";
 "user_status_alert_message" = "Write here whatever you think";
