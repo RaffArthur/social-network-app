@@ -12,6 +12,8 @@ import FirebaseFirestore
 import RealmSwift
 
 final class AuthentificationReviewerImpl: AuthentificationReviewer {
+    private let localAuthorizationService = LocalAuthorizationService()
+    
     private let realmDataProvider: RealmUserCredentialsDataProvider = RealmUserCredentialsDataProviderImpl()
     
     private let errorCodeConverter: AuthErrorCodeConverter = AuthErrorCodeConverterImpl()
@@ -61,17 +63,23 @@ final class AuthentificationReviewerImpl: AuthentificationReviewer {
                 return
             }
             
-            guard let user = authResult?.user else { return }
-            
-            let realmUser = self.realmDataProvider.getUserCredentials()
-            
-            self.realmDataProvider.updateUser(credentials: credentials)
-            
-            if realmUser == nil {
-                self.realmDataProvider.addUser(credentials: credentials)
+            self.localAuthorizationService.authorizeIfPossible { success in
+                if success {
+                    guard let user = authResult?.user else { return }
+                    
+                    let realmUser = self.realmDataProvider.getUserCredentials()
+                    
+                    self.realmDataProvider.updateUser(credentials: credentials)
+                    
+                    if realmUser == nil {
+                        self.realmDataProvider.addUser(credentials: credentials)
+                    }
+                    
+                    completion(.success(user))
+                } else {
+                    completion(.failure(.unknownError))
+                }
             }
-            
-            completion(.success(user))
         }
     }
     

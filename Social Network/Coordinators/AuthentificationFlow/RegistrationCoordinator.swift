@@ -37,6 +37,6 @@ extension RegistrationCoordinator: RegistrationViewConrollerDelegate {
     }
     
     func didUserChooseLogin() {
-        navigationController.popViewController(animated: true)        
+        navigationController.popViewController(animated: true)
     }
 }

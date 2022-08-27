@@ -40,9 +40,13 @@
 
 //MARK: - Custom alerts
 "account_created_alert_title" = "Аккаунт создан";
+"account_created_alert_message" = "Пожалуйста, пройдите авторизацию";
 "already_in_favourites_alert_title" = "Уже в избранном";
 "user_status_alert_title" = "Обновите свой статус";
 "user_status_alert_message" = "Введите здесь все, что вы думаете";
 "user_status_alert_textfield_placeholder" = "Введите свой статус";
 "user_status_alert_cancel_button" = "Отменить";
 "user_status_alert_set_status_button" = "Обновить";
+
+//MARK: - Local Authentification Service
+"local_authentification_reason" = "Авторизутесь для входа";
