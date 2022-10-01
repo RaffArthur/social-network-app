@@ -50,7 +50,7 @@ final class AuthenticationReviewerTests: XCTestCase {
                                           repeatPassword: nil,
                                           loggedIn: false)
         
-        let expectation = expectation(description: "Some exp")
+        let expectation = expectation(description: "Singout expectation")
         
         mockAuthReviewer?.signOutWith(credentials: credentials) { result in
             switch result {
@@ -70,7 +70,7 @@ final class AuthenticationReviewerTests: XCTestCase {
     }
     
     func test_registration_response() {
-        let expectation = expectation(description: "Some exp")
+        let expectation = expectation(description: "Registration expectation")
 
         let credentials = UserCredentials(email: "aa@aa.aas",
                                           password: "aaaaaa",
