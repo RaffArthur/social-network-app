@@ -104,7 +104,17 @@ final class AuthErrorCodeConverterImpl: AuthErrorCodeConverter {
                  .emailChangeNeedsVerification,
                  .missingOrInvalidNonce,
                  .missingClientIdentifier,
-                 .malformedJWT:
+                 .malformedJWT,
+                 .blockingCloudFunctionError,
+                 .recaptchaNotEnabled,
+                 .missingRecaptchaToken,
+                 .invalidRecaptchaToken,
+                 .invalidRecaptchaAction,
+                 .missingClientType,
+                 .missingRecaptchaVersion,
+                 .invalidRecaptchaVersion,
+                 .invalidReqType,
+                 .recaptchaSDKNotLinked:
                 return .applicationError
         }
     }
