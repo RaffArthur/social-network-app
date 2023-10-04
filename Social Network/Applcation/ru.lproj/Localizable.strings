@@ -50,3 +50,7 @@
 
 //MARK: - Local Authentification Service
 "local_authentification_reason" = "Авторизутесь для входа";
+
+//MARK: - System messages
+"NSFaceIDUsageDescription" = "Авторизутесь для входа";
+"NSLocationWhenInUseUsageDescription" = "Предоставьте доступ к вашей геолокации";
