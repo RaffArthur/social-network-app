@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,9 @@
 		752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25A283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift */; };
 		752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */; };
 		752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25E283AC4380063A5E0 /* UserCredentials.swift */; };
+		752C6AAE2ACDEE1900C11D7F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 752C6AAD2ACDEE1900C11D7F /* Realm */; };
+		752C6AB02ACDEE1900C11D7F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 752C6AAF2ACDEE1900C11D7F /* RealmSwift */; };
+		752C6AB32ACDEED700C11D7F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 752C6AB22ACDEED700C11D7F /* IQKeyboardManagerSwift */; };
 		7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A226CC240600935B7C /* PhotosAdapter.swift */; };
 		7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A426CC241300935B7C /* PostsAdapter.swift */; };
 		754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E727148B0200400F95 /* AppCoordinator.swift */; };
@@ -72,6 +75,9 @@
 		75F0E9A528A0281D00638A81 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75F0E9A728A0281D00638A81 /* Localizable.strings */; };
 		75F0E9AA28A02F5A00638A81 /* Locilizable+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */; };
 		75F0E9B528A042B200638A81 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 75F0E9B728A042B200638A81 /* Localizable.stringsdict */; };
+		75F1CC732ACDB99C005AD96D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 75F1CC722ACDB99C005AD96D /* FirebaseAuth */; };
+		75F1CC752ACDB99C005AD96D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 75F1CC742ACDB99C005AD96D /* FirebaseFirestore */; };
+		75F1CC782ACDBB72005AD96D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 75F1CC772ACDBB72005AD96D /* SnapKit */; };
 		75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +172,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75F1CC782ACDBB72005AD96D /* SnapKit in Frameworks */,
+				75F1CC732ACDB99C005AD96D /* FirebaseAuth in Frameworks */,
+				752C6AAE2ACDEE1900C11D7F /* Realm in Frameworks */,
+				752C6AB02ACDEE1900C11D7F /* RealmSwift in Frameworks */,
+				75F1CC752ACDB99C005AD96D /* FirebaseFirestore in Frameworks */,
+				752C6AB32ACDEED700C11D7F /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +197,6 @@
 				75B4448025C70CED00B3C586 /* Social Network */,
 				7519215528CCF315006338F7 /* Social_NetworkTests */,
 				060782AF250CE27700A87020 /* Products */,
-				ADD4D8DB3053A8C152993ED5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -543,13 +554,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		ADD4D8DB3053A8C152993ED5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -566,6 +570,14 @@
 			dependencies = (
 			);
 			name = Social_Network;
+			packageProductDependencies = (
+				75F1CC722ACDB99C005AD96D /* FirebaseAuth */,
+				75F1CC742ACDB99C005AD96D /* FirebaseFirestore */,
+				75F1CC772ACDBB72005AD96D /* SnapKit */,
+				752C6AAD2ACDEE1900C11D7F /* Realm */,
+				752C6AAF2ACDEE1900C11D7F /* RealmSwift */,
+				752C6AB22ACDEED700C11D7F /* IQKeyboardManagerSwift */,
+			);
 			productName = Navigation;
 			productReference = 060782AE250CE27700A87020 /* Social_Network.app */;
 			productType = "com.apple.product-type.application";
@@ -608,7 +620,7 @@
 				};
 			};
 			buildConfigurationList = 060782A9250CE27700A87020 /* Build configuration list for PBXProject "Social_Network" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -617,6 +629,12 @@
 				ru,
 			);
 			mainGroup = 060782A5250CE27700A87020;
+			packageReferences = (
+				75F1CC712ACDB99C005AD96D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				75F1CC762ACDBB72005AD96D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				752C6AAC2ACDEE1800C11D7F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				752C6AB12ACDEED700C11D7F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = 060782AF250CE27700A87020 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -827,7 +845,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -883,7 +901,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1004,6 +1022,74 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		752C6AAC2ACDEE1800C11D7F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.43.0;
+			};
+		};
+		752C6AB12ACDEED700C11D7F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.13;
+			};
+		};
+		75F1CC712ACDB99C005AD96D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.16.0;
+			};
+		};
+		75F1CC762ACDBB72005AD96D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		752C6AAD2ACDEE1900C11D7F /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 752C6AAC2ACDEE1800C11D7F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		752C6AAF2ACDEE1900C11D7F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 752C6AAC2ACDEE1800C11D7F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		752C6AB22ACDEED700C11D7F /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 752C6AB12ACDEED700C11D7F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		75F1CC722ACDB99C005AD96D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75F1CC712ACDB99C005AD96D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		75F1CC742ACDB99C005AD96D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75F1CC712ACDB99C005AD96D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		75F1CC772ACDBB72005AD96D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75F1CC762ACDBB72005AD96D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */ = {
