@@ -20,7 +20,16 @@ final class RealmErrorCodeConverterImpl: RealmErrorCodeConverter {
              .fileFormatUpgradeRequired,
              .incompatibleLockFile,
              .alreadyOpen,
-             .invalidInput:
+             .invalidInput,
+             .outOfDiskSpace,
+             .incompatibleSession,
+             .unsupportedFileFormatVersion,
+             .multipleSyncAgents,
+             .subscriptionFailed,
+             .fileOperationFailed,
+             .invalidDatabase,
+             .incompatibleHistories,
+             .noSubscriptionForWrite:
             return .fileFail
         case .addressSpaceExhausted:
             return .addressSpaceFail
