@@ -11,16 +11,7 @@ final class FavouriteViewController: UIViewController {
     private var favouritePosts: [FavouritePost] = []
     private var filteredFavouritePosts: [FavouritePost] = []
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.register(ProfilePostTableViewCell.self,
-                           forCellReuseIdentifier: String(describing: ProfilePostTableViewCell.self))
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.showsVerticalScrollIndicator = false
-                
-        return tableView
-    }()
+    private lazy var favouriteView = FavouriteView()
     
     private lazy var deleteAllButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
@@ -56,17 +47,18 @@ final class FavouriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupScreen()
+        setupContent()
         setupActions()
+        
+        favouriteView.tableView(delegate: self, dataSource: self)
+    }
+    
+    override func loadView() {
+        view = favouriteView
     }
 }
 
 private extension FavouriteViewController {
-    func setupScreen() {
-        setupLayout()
-        setupContent()
-    }
-    
     func setupContent() {
         navigationItem.rightBarButtonItem = deleteAllButton
         
@@ -75,14 +67,6 @@ private extension FavouriteViewController {
         definesPresentationContext = true
         
         view.backgroundColor = .systemBackground
-    }
-    
-    func setupLayout() {
-        view.addSubview(tableView)
-        
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
     }
 }
 
@@ -94,7 +78,7 @@ private extension FavouriteViewController {
         
         favouritePosts.removeAll()
         
-        tableView.deleteRows(at: pathes, with: .automatic)
+        favouriteView.tableViewDeleteRowsAt(indexPath: pathes, withAnimation: .automatic)
         
         navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
     }
@@ -117,31 +101,27 @@ private extension FavouriteViewController {
 
 private extension FavouriteViewController {
     func deleteFavouritePost(_ sender: UITapGestureRecognizer) {
-        let touchPoint = sender.location(in: tableView)
-        
-        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
+        let indexPath = favouriteView.getTableViewTouchPointIndexPath(sender: sender)
         
         CoreDataManager.shared.removePostFrom(favouritePosts: favouritePosts[indexPath.row])
-
+        
         favouritePosts.remove(at: indexPath.row)
         
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        favouriteView.tableViewDeleteRowsAt(indexPath: [indexPath], withAnimation: .automatic)
     }
     
     func deleteFilteredFavouritePost(_ sender: UITapGestureRecognizer) {
-        let touchPoint = sender.location(in: tableView)
-        
-        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
+        let indexPath = favouriteView.getTableViewTouchPointIndexPath(sender: sender)
         
         favouritePosts.forEach { favPost in
             if filteredFavouritePosts.contains(where: { $0.title == favPost.title }) {
                 CoreDataManager.shared.removePostFrom(favouritePosts: favPost)
             }
         }
-                
+        
         filteredFavouritePosts.remove(at: indexPath.row)
         
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        favouriteView.tableViewDeleteRowsAt(indexPath: [indexPath], withAnimation: .automatic)
     }
     
     func fetchFavouritePosts() {
@@ -149,7 +129,7 @@ private extension FavouriteViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.favouritePosts = favouritePosts
                 
-                self?.tableView.reloadData()
+                self?.favouriteView.tableViewReloadData()
                                 
                 self?.navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
             }
@@ -163,7 +143,7 @@ private extension FavouriteViewController {
             return title.lowercased().contains(text.lowercased())
         }
         
-        tableView.reloadData()
+        favouriteView.tableViewReloadData()
     }
 }
 
