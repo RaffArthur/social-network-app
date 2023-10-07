@@ -7,15 +7,7 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
-class PhotosCollectionViewCell: UICollectionViewCell {
-    var photo: Photo? {
-        didSet {
-            guard let photo = photo else { return }
-            
-            configure(photo)
-        }
-    }
+final class PhotosCollectionViewCell: UICollectionViewCell {
     private lazy var photoInPhotos: UIImageView = {
         let iv = UIImageView()
         iv.layer.masksToBounds = true
@@ -36,7 +28,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    private func configure(_ photo: Photo) {
+    func configure(photo: Photo) {
         guard let photo = photo.url else { return }
         
         self.photoInPhotos.downloaded(from: photo)
@@ -44,7 +36,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
 
 }
 
-@available(iOS 13.0, *)
 private extension PhotosCollectionViewCell {
     func setupScreen() {
         setupLayout()
@@ -53,11 +44,8 @@ private extension PhotosCollectionViewCell {
     func setupLayout() {
         contentView.addSubview(photoInPhotos)
         
-        photoInPhotos.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+        photoInPhotos.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
