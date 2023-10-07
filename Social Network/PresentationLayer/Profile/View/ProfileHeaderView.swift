@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UIView {
     weak var delegate: ProfileHeaderViewDelegate?
         
     private lazy var userPhoto: UIImageView = {
@@ -25,7 +25,7 @@ class ProfileHeaderView: UIView {
         var label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .heavy)
         label.textAlignment = .left
-        label.text = "Dmitry \"Haskey\""
+        label.text = "Name Surname"
         label.textColor = .SocialNetworkColor.mainText.set()
         
         return label
