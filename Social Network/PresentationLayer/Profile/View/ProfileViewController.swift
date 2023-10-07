@@ -38,6 +38,13 @@ final class ProfileViewController: UIViewController {
         return bbi
     }()
     
+    private lazy var nickNameButton: UIBarButtonItem = {
+        let bbi = UIBarButtonItem()
+        bbi.title = "@usernickname"
+        
+        return bbi
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +58,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
@@ -84,6 +92,12 @@ private extension ProfileViewController {
 }
 
 private extension ProfileViewController {
+    @objc func userNicknameTapped() {
+        UIPasteboard.general.string = nickNameButton.title
+        
+        showNicknameCopiedToClipboardAlert()
+    }
+    
     @objc func logOutButtonTapped() {
         let credentials = UserCredentials(email: nil,
                                           password: nil,
@@ -155,6 +169,26 @@ private extension ProfileViewController {
         }
     }
     
+    func showNicknameCopiedToClipboardAlert() {
+        let alert = UIAlertController(title: nil,
+                                      message: nil,
+                                      preferredStyle: .alert)
+        
+        let attributedString = NSAttributedString(string: "Ссылка скопирована",
+                                                  attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
+                                                                                                               weight: .bold),
+                                                               NSAttributedString.Key.foregroundColor : UIColor.white])
+                
+        alert.setValue(attributedString, forKey: "attributedMessage")
+        
+        present(alert, animated: true)
+                
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    
     func animateAddToFavouriteTap() {
         let addedScale = CGFloat.random(in: 0.8...2.0)
         
@@ -188,6 +222,9 @@ private extension ProfileViewController {
     func setupActions() {
         logoutButton.target = self
         logoutButton.action = #selector(logOutButtonTapped)
+        
+        nickNameButton.target = self
+        nickNameButton.action = #selector(userNicknameTapped)
     }
 }
 
@@ -302,7 +339,9 @@ private extension ProfileViewController {
     func setupContent() {
         view.backgroundColor = .systemBackground
         
-        navigationItem.leftBarButtonItem = logoutButton
+        navigationItem.rightBarButtonItem = logoutButton
+        navigationItem.leftBarButtonItem = nickNameButton
+        
     }
     
     func setupLayout() {
