@@ -14,6 +14,7 @@
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
 		7519215728CCF315006338F7 /* Social_NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7519215628CCF315006338F7 /* Social_NetworkTests.swift */; };
 		7519215E28CCF50C006338F7 /* AuthenticationReviewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7519215D28CCF50C006338F7 /* AuthenticationReviewerTests.swift */; };
+		752991A62AD1C2F800C65E8C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752991A52AD1C2F800C65E8C /* ProfileView.swift */; };
 		752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */; };
 		752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25A283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift */; };
 		752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */; };
@@ -102,6 +103,7 @@
 		7519215428CCF315006338F7 /* Social_NetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Social_NetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7519215628CCF315006338F7 /* Social_NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Social_NetworkTests.swift; sourceTree = "<group>"; };
 		7519215D28CCF50C006338F7 /* AuthenticationReviewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationReviewerTests.swift; sourceTree = "<group>"; };
+		752991A52AD1C2F800C65E8C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsCached.swift; sourceTree = "<group>"; };
 		752BC25A283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUserCredentialsDataProvider.swift; sourceTree = "<group>"; };
 		752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUserCredentialsDataProviderImpl.swift; sourceTree = "<group>"; };
@@ -562,8 +564,9 @@
 		75D8A24B27CFD1450056E78B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */,
 				75B4449825C70CED00B3C586 /* ProfileViewController.swift */,
+				752991A52AD1C2F800C65E8C /* ProfileView.swift */,
+				75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */,
 				75B4449225C70CED00B3C586 /* ProfilePhotosPreviewTableViewCell.swift */,
 				75B4449325C70CED00B3C586 /* ProfilePostTableViewCell.swift */,
 			);
@@ -710,6 +713,7 @@
 				756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */,
 				75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */,
 				75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */,
+				752991A62AD1C2F800C65E8C /* ProfileView.swift in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				75B444DB25C70CEE00B3C586 /* FavouriteViewController.swift in Sources */,
 				7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */,

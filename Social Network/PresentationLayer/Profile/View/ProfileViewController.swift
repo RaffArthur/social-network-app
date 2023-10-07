@@ -15,20 +15,9 @@ final class ProfileViewController: UIViewController {
     private lazy var postsAdapter = PostsAdapter()
     private lazy var photosAdapter = PhotosAdapter()
         
-    private lazy var headerView = ProfileHeaderView()
+    private lazy var profileHeaderView = ProfileHeaderView()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(ProfilePostTableViewCell.self,
-                           forCellReuseIdentifier: String(describing: ProfilePostTableViewCell.self))
-        tableView.register(ProfilePhotosPreviewTableViewCell.self,
-                           forCellReuseIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self))
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.showsVerticalScrollIndicator = false
-                
-        return tableView
-    }()
+    private lazy var profileView = ProfileView()
     
     private lazy var logoutButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
@@ -50,10 +39,15 @@ final class ProfileViewController: UIViewController {
         
         loadFullUserData()
         
-        setupScreen()
+        setupContent()
         setupActions()
         
-        headerView.delegate = self
+        profileHeaderView.delegate = self
+        profileView.tableView(delegate: self, dataSource: self)
+    }
+    
+    override func loadView() {
+        view = profileView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +69,7 @@ private extension ProfileViewController {
             
             Storages.photos.append(contentsOf: photos)
             
-            self?.tableView.reloadData()
+            self?.profileView.tableViewReloadData()
             
         }
         
@@ -86,8 +80,8 @@ private extension ProfileViewController {
             
             Storages.posts.append(contentsOf: posts)
             
-            self?.tableView.reloadData()
-        }        
+            self?.profileView.tableViewReloadData()
+        }
     }
 }
 
@@ -115,9 +109,7 @@ private extension ProfileViewController {
     }
     
     @objc func didTapPost(_ sender: UITapGestureRecognizer) {
-        let touchPoint = sender.location(in: tableView)
-        
-        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
+        let indexPath = profileView.getTableViewTouchPointIndexPath(sender: sender)
         
         let post = Storages.posts[indexPath.item]
         
@@ -286,7 +278,7 @@ extension ProfileViewController: UITableViewDataSource {
                    viewForHeaderInSection section: Int) -> UIView? {
         guard section == 0 else { return UIView() }
         
-        return headerView
+        return profileHeaderView
     }
 }
 
@@ -302,7 +294,7 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
         
         let setStatus = UIAlertAction(title: .localized(key: .userStatusAlertSetStatusSutton),
                                       style: .default) { action in
-            self.headerView.updateUserStatus(message: alertController.textFields?[0].text ?? String())
+            self.profileHeaderView.updateUserStatus(message: alertController.textFields?[0].text ?? String())
         }
         
         alertController.addTextField { textField in
@@ -316,14 +308,14 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     }
     
     func userPhotoTapped() {
-        headerView.openFullUserPhoto()
+        profileHeaderView.openFullUserPhoto()
         
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
     }
     
     func userPhotoCloseButtonTapped() {
-        headerView.closeFullUserPhoto()
+        profileHeaderView.closeFullUserPhoto()
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
@@ -331,24 +323,10 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 }
 
 private extension ProfileViewController {
-    func setupScreen() {
-        setupLayout()
-        setupContent()
-    }
-    
     func setupContent() {
         view.backgroundColor = .systemBackground
         
         navigationItem.rightBarButtonItem = logoutButton
         navigationItem.leftBarButtonItem = nickNameButton
-        
-    }
-    
-    func setupLayout() {
-        view.addSubview(tableView)
-        
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
     }
 }
