@@ -173,7 +173,9 @@ private extension LoginView {
                                               passwordField])
         
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview {
+                $0.safeAreaLayoutGuide.snp.edges
+            }
         }
 
         contentView.snp.makeConstraints { make in

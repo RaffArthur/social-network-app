@@ -191,11 +191,13 @@ private extension RegistrationView {
                                    authentificationTypeButton])
         
         registrationContainer.add(arrangedSubviews: [emailField,
-                                              passwordField,
-                                              repeatPasswordField])
+                                                     passwordField,
+                                                     repeatPasswordField])
         
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview {
+                $0.safeAreaLayoutGuide.snp.edges
+            }
         }
 
         contentView.snp.makeConstraints { make in
@@ -262,17 +264,13 @@ private extension RegistrationView {
         delegate?.authTypeButtonWasTapped()
     }
     
-    func displayRegistrationForm() {
-        registrationTitle.text = "Регистрация аккаунта"
-        registrationButton.setTitle("Регистрация", for: .normal)
-        authentificationTypeButton.setTitle("Вход", for: .normal)
-        registrationTypeTitle.text = "Уже есть аккаунт?"
-        repeatPasswordField.isHidden = false
-    }
-    
     func setupActions() {
-        registrationButton.addTarget(self, action: #selector(registrationButtonWasTapped), for: .touchUpInside)
-        authentificationTypeButton.addTarget(self, action: #selector(authentificationTypeButtonWasTapped), for: .touchUpInside)
+        registrationButton.addTarget(self,
+                                     action: #selector(registrationButtonWasTapped),
+                                     for: .touchUpInside)
+        authentificationTypeButton.addTarget(self,
+                                             action: #selector(authentificationTypeButtonWasTapped),
+                                             for: .touchUpInside)
     }
 }
 

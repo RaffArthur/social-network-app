@@ -19,31 +19,22 @@ final class RegistrationViewController: UIViewController {
         super.viewDidLoad()
         registrationView.delegate = self
         
-        setupScreen()
+        setupContent()
+    }
+    
+    override func loadView() {
+        view = registrationView
     }
 }
 
 private extension RegistrationViewController {
-    func setupScreen() {
-        setupLayout()
-        setupContent()
-    }
-    
-    func setupLayout() {
-        view.addSubview(registrationView)
-                
-        registrationView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
     func setupContent() {
         view.backgroundColor = .systemBackground
     }
 }
 
 private extension RegistrationViewController {
-    func accountCreated() {
+    func accountCreatedAlert() {
         let alert = UIAlertController(title: .localized(key: .accountCreatedAlertTitle),
                                       message: .localized(key: .accountCreatedAlertMessage),
                                       preferredStyle: .alert)
@@ -54,9 +45,9 @@ private extension RegistrationViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func show(authError: UserAuthError) {
-        let alertController = UIAlertController(title: authError.title,
-                                                message: authError.message,
+    func show(authErrorAlert: UserAuthError) {
+        let alertController = UIAlertController(title: authErrorAlert.title,
+                                                message: authErrorAlert.message,
                                                 preferredStyle: .alert)
         
         let action = UIAlertAction(title: "ОК",
@@ -86,10 +77,10 @@ extension RegistrationViewController: RegistrationViewDelegate {
         reviewer?.registrationWith(credentials: credentials) { [weak self] result in
             switch result {
             case .success:
-                self?.accountCreated()
+                self?.accountCreatedAlert()
                 self?.delegate?.didUserRegister()
             case .failure(let error):
-                self?.show(authError: error)
+                self?.show(authErrorAlert: error)
             }
         }
     }
