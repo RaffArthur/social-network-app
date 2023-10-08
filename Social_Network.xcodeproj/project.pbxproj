@@ -46,6 +46,8 @@
 		758468E427B6CBD5001559A9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758468E327B6CBD5001559A9 /* LoginView.swift */; };
 		758551E92782285800B04E25 /* AddSubviews+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551E82782285800B04E25 /* AddSubviews+UIView.swift */; };
 		758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */; };
+		758CF8952AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758CF8942AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift */; };
+		758CF8972AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758CF8962AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift */; };
 		7593C4B2283C2E9C00EC3426 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593C4B1283C2E9C00EC3426 /* RealmError.swift */; };
 		7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593C4B4283C2F3B00EC3426 /* RealmErrorCodeConverter.swift */; };
 		7593C4B7283C2F4700EC3426 /* RealmErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593C4B6283C2F4700EC3426 /* RealmErrorCodeConverterImpl.swift */; };
@@ -133,6 +135,8 @@
 		758468E327B6CBD5001559A9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		758551E82782285800B04E25 /* AddSubviews+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddSubviews+UIView.swift"; sourceTree = "<group>"; };
 		758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddArrangedSubviews+UIStackView.swift"; sourceTree = "<group>"; };
+		758CF8942AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfographicView.swift; sourceTree = "<group>"; };
+		758CF8962AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserQuickActionsView.swift; sourceTree = "<group>"; };
 		7593C4B1283C2E9C00EC3426 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		7593C4B4283C2F3B00EC3426 /* RealmErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmErrorCodeConverter.swift; sourceTree = "<group>"; };
 		7593C4B6283C2F4700EC3426 /* RealmErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
@@ -375,6 +379,15 @@
 			path = AuthentificationFlow;
 			sourceTree = "<group>";
 		};
+		758CF8932AD2FA73006EEBE0 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				758CF8942AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift */,
+				758CF8962AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		7593C4B3283C2EE000EC3426 /* RealmErrorCodeConverter */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +453,7 @@
 			children = (
 				75D8A24C27CFDC850056E78B /* ProfileDelegates.swift */,
 				75D8A24B27CFD1450056E78B /* View */,
+				758CF8932AD2FA73006EEBE0 /* CustomViews */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -698,10 +712,12 @@
 				75B444E125C70CEE00B3C586 /* AuthenticationReviewer.swift in Sources */,
 				751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */,
 				755ADFC625E51A19008E92A3 /* ImageDownloader+UIImageView.swift in Sources */,
+				758CF8952AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift in Sources */,
 				75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */,
 				7593C4B7283C2F4700EC3426 /* RealmErrorCodeConverterImpl.swift in Sources */,
 				754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */,
 				75B444CD25C70CEE00B3C586 /* PhotosViewController.swift in Sources */,
+				758CF8972AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift in Sources */,
 				75597A8A25D303AC00A120A7 /* TabCoordinator.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* ProfilePostTableViewCell.swift in Sources */,
 				75B444D125C70CEE00B3C586 /* ProfileHeaderView.swift in Sources */,
