@@ -258,7 +258,7 @@ extension ProfileViewController: UITableViewDataSource {
                                                      for: indexPath) as? ProfilePhotosPreviewTableViewCell
             
             if !Storages.photos.isEmpty {
-                cell?.configure(photos: Storages.photos)
+                cell?.configure(photos: Storages.photos, withCount: Storages.photos.count)
             }
             
             return cell ?? UITableViewCell()

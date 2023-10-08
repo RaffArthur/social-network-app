@@ -7,21 +7,29 @@
 
 import UIKit
 
-class ProfilePhotosPreviewTableViewCell: UITableViewCell {
+final class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     private lazy var photosLabel: UILabel = {
         let photosLabel = UILabel()
         photosLabel.text = .localized(key: .photosTitle)
-        photosLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        photosLabel.font = .systemFont(ofSize: 16, weight: .medium)
         photosLabel.textColor = .SocialNetworkColor.mainText.set()
         
         return photosLabel
     }()
     
-    private lazy var photosStack: UIStackView = {
+    private lazy var photosCountLabel: UILabel = {
+        let photosLabel = UILabel()
+        photosLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        photosLabel.textColor = .SocialNetworkColor.secondaryText.set()
+        
+        return photosLabel
+    }()
+    
+    private lazy var photosContainer: UIStackView = {
         let sv = UIStackView()
         sv.distribution = .fillEqually
         sv.axis = .horizontal
-        sv.spacing = 8
+        sv.spacing = 4
         
         return sv
     }()
@@ -62,24 +70,28 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         return iv
     }()
     
-    private lazy var photoGalleryButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.forward"), for: .normal)
+    private lazy var photoGalleryChevron: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(systemName: "chevron.forward")
+        iv.contentMode = .scaleAspectFit
+        iv.tintColor = .black
         
-        return button
+        return iv
     }()
         
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupScreen()
+        setupCell()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configure(photos: [Photo]) {
+}
+
+extension ProfilePhotosPreviewTableViewCell {
+    func configure(photos: [Photo], withCount: Int) {
         guard let firstPhotoUrl = photos[0].url,
               let secondPhotoUrl = photos[1].url,
               let thirdPhotoUrl = photos[2].url,
@@ -92,40 +104,48 @@ class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         photoTwo.downloaded(from: secondPhotoUrl)
         photoThree.downloaded(from: thirdPhotoUrl)
         photoFour.downloaded(from: fourthPhotoUrl)
+        
+        photosCountLabel.text = String(describing: withCount)
     }
 }
 
 private extension ProfilePhotosPreviewTableViewCell {
-    func setupScreen() {
+    func setupCell() {
         setupLayout()
     }
     
     func setupLayout() {
         contentView.add(subviews: [photosLabel,
-                                   photosStack,
-                                   photoGalleryButton])
+                                   photosCountLabel,
+                                   photosContainer,
+                                   photoGalleryChevron])
         
-        photosStack.add(arrangedSubviews: [photoOne,
+        photosContainer.add(arrangedSubviews: [photoOne,
                                            photoTwo,
                                            photoThree,
                                            photoFour])
         
         photosLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView.snp.top).offset(12)
-            make.leading.equalToSuperview().offset(12)
+            make.top.leading.equalToSuperview().offset(16)
         }
         
-        photoGalleryButton.snp.makeConstraints { (make) in
-            make.centerY.equalTo(photosLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-12)
+        photosCountLabel.snp.makeConstraints { make in
+            make.leading.equalTo(photosLabel.snp.trailing).offset(8)
+            make.centerY.equalTo(photosLabel)
         }
         
-        photosStack.snp.makeConstraints { (make) in
-            make.height.equalTo((UIScreen.main.bounds.width-48)/4)
-            make.top.equalTo(photosLabel.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
-            make.bottom.equalToSuperview().offset(-12)
+        photoGalleryChevron.snp.makeConstraints { (make) in
+            make.size.equalTo(24)
+            make.centerY.equalTo(photosLabel)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        photosContainer.snp.makeConstraints { (make) in
+            make.height.equalTo((UIScreen.main.bounds.width)/4)
+            make.top.equalTo(photosLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-16)
         }
     }
 }
