@@ -14,7 +14,6 @@ protocol ProfileViewControllerDelegate: AnyObject {
 }
 
 protocol ProfileHeaderViewDelegate: AnyObject {
-    func userPhotoTapped()
-    func userPhotoCloseButtonTapped()
-    func setUserStatusButtonTapped()
+    func userEditInfoButtonTapped()
+    func userMoreInfoButtonTapped()
 }

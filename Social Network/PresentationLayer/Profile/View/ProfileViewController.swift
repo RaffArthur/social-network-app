@@ -283,42 +283,12 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
-    func setUserStatusButtonTapped() {
-        let alertController = UIAlertController(title: .localized(key: .userStatusAlertTitle),
-                                                message: .localized(key: .userStatusAlertMessage),
-                                                preferredStyle: .alert)
+    func userMoreInfoButtonTapped() {
         
-        let cancel = UIAlertAction(title: .localized(key: .userStatusAlertCancelButton),
-                                   style: .cancel,
-                                   handler: nil)
-        
-        let setStatus = UIAlertAction(title: .localized(key: .userStatusAlertSetStatusSutton),
-                                      style: .default) { action in
-            self.profileHeaderView.updateUserStatus(message: alertController.textFields?[0].text ?? String())
-        }
-        
-        alertController.addTextField { textField in
-            textField.placeholder = .localized(key: .userStatusAlertTextfieldPlaceholder)
-        }
-        
-        alertController.addAction(cancel)
-        alertController.addAction(setStatus)
-        
-        present(alertController, animated: true, completion: nil)
     }
     
-    func userPhotoTapped() {
-        profileHeaderView.openFullUserPhoto()
+    func userEditInfoButtonTapped() {
         
-        navigationController?.navigationBar.isHidden = true
-        tabBarController?.tabBar.isHidden = true
-    }
-    
-    func userPhotoCloseButtonTapped() {
-        profileHeaderView.closeFullUserPhoto()
-        
-        tabBarController?.tabBar.isHidden = false
-        navigationController?.navigationBar.isHidden = false
     }
 }
 

@@ -9,14 +9,17 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
     weak var delegate: ProfileHeaderViewDelegate?
-        
+    
+    private lazy var userInfographicView = ProfileUserInfographicView()
+    private lazy var userQuickActionsView = ProfileUserQuickActionsView()
+    
     private lazy var userPhoto: UIImageView = {
         var iv = UIImageView()
         iv.isUserInteractionEnabled = true
-        iv.image = UIImage(named: "haskey_avatar")
+        iv.image = UIImage(systemName: "photo.circle")
+        iv.backgroundColor = .systemGray3
+        iv.tintColor = .systemGray6
         iv.layer.masksToBounds = true
-        iv.layer.borderColor = UIColor.darkGray.cgColor
-        iv.layer.borderWidth = 2
         
         return iv
     }()
@@ -31,9 +34,9 @@ final class ProfileHeaderView: UIView {
         return label
     }()
     
-    private lazy var userStatus: UILabel = {
+    private lazy var userDescription: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textAlignment = .left
         label.textColor = .SocialNetworkColor.secondaryText.set()
         label.text = .localized(key: .statusPlaceholder)
@@ -42,47 +45,31 @@ final class ProfileHeaderView: UIView {
         return label
     }()
     
-    private lazy var setUserStatusButton: UIButton = {
-        var button = UIButton()
-        button.setTitle(.localized(key: .setUserStatusButton), for: button.state)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+    private lazy var userMoreInfoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "exclamationmark.circle.fill"), for: .normal)
+        button.tintColor = .SocialNetworkColor.accent.set()
+        button.setTitle("Подробная информация", for: .normal)
+        button.setTitleColor(.SocialNetworkColor.mainText.set(), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        button.titleLabel?.textAlignment = .left
+        button.contentHorizontalAlignment = .left
+        button.titleLabel?.lineBreakMode = .byClipping
+        button.titleEdgeInsets.left = 8
+        
+        return button
+    }()
+    
+    private lazy var userEditInfoButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Редактировать", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.backgroundColor = .SocialNetworkColor.accent.set()
-        button.layer.cornerRadius = 12
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowRadius = 4
-        button.layer.shadowOpacity = 0.2
-        button.addTarget(self, action: #selector(setUserStatusButtonPressed), for: .touchUpInside)
-                
-        return button
-    }()
-        
-    private lazy var closeFullUserPhotoButton: UIButton = {
-        var button = UIButton()
-        button.sizeToFit()
-        button.setImage(UIImage(systemName: "multiply"), for: button.state)
-        button.tintColor = #colorLiteral(red: 0.1176327839, green: 0.1176561788, blue: 0.117627643, alpha: 0.9985017123).withAlphaComponent(0)
-        button.isUserInteractionEnabled = true
+        button.layer.cornerRadius = 8
         
         return button
     }()
     
-    private lazy var fullUserPhotoBackground: UIView = {
-        var view = UIView()
-        view.frame = UIScreen.main.bounds
-        
-        var blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
-        var blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.frame
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        view.addSubview(blurEffectView)
-        
-        return view
-    }()
-    
-    private lazy var photo = UIImageView(image: userPhoto.image)
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -127,16 +114,18 @@ private extension ProfileHeaderView {
     }
     
     func setupLayout() {
-        add(subviews: [userName,
-                       userStatus,
-                       setUserStatusButton,
-                       userPhoto])
+        add(subviews: [userPhoto,
+                       userName,
+                       userDescription,
+                       userMoreInfoButton,
+                       userEditInfoButton,
+                       userInfographicView,
+                       userQuickActionsView])
         
         userPhoto.snp.makeConstraints { make in
-            make.size.equalTo(100)
+            make.size.equalTo(60)
             make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-16)
         }
         
         userName.snp.makeConstraints { make in
@@ -145,95 +134,58 @@ private extension ProfileHeaderView {
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        userStatus.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.top.equalTo(userName.snp.bottom).offset(8)
+        userDescription.snp.makeConstraints { make in
+            make.top.equalTo(userName.snp.bottom).offset(4)
             make.leading.equalTo(userPhoto.snp.trailing).offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
-                
-        setUserStatusButton.snp.makeConstraints { make in
-            make.top.equalTo(userStatus.snp.bottom).offset(16)
-            make.leading.equalTo(userPhoto.snp.trailing).offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview().offset(-16)
-        }
-    }
-    
-    func setupActions() {
-        let closePhotoTGR = UITapGestureRecognizer(target: self,
-                                                   action: #selector(fullUserPhotoClosed))
-        closePhotoTGR.delegate = self
-        closeFullUserPhotoButton.addGestureRecognizer(closePhotoTGR)
         
-        let openFullScreenPhotoTGR = UITapGestureRecognizer(target: self,
-                                                            action: #selector(fullUserPhotoOpened))
-        openFullScreenPhotoTGR.delegate = self
-        userPhoto.addGestureRecognizer(openFullScreenPhotoTGR)
+        userMoreInfoButton.snp.makeConstraints { make in
+            make.top.equalTo(userDescription.snp.bottom).offset(4)
+            make.leading.equalTo(userPhoto.snp.trailing).offset(16)
+            make.width.equalTo(200)
+        }
+        
+        userEditInfoButton.snp.makeConstraints { make in
+            make.height.equalTo(48)
+            make.top.equalTo(userMoreInfoButton.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        userInfographicView.snp.makeConstraints { make in
+            make.top.equalTo(userEditInfoButton.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        userQuickActionsView.snp.makeConstraints { make in
+            make.top.equalTo(userInfographicView.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-24)
+        }
     }
 }
 
 private extension ProfileHeaderView {
-    @objc private func setUserStatusButtonPressed() {
-        delegate?.setUserStatusButtonTapped()
-    }
-    
-    @objc private func fullUserPhotoClosed() {
-        delegate?.userPhotoCloseButtonTapped()
-    }
-    
-    @objc private func fullUserPhotoOpened(_ sender: UITapGestureRecognizer) {
-        delegate?.userPhotoTapped()
+    func setupActions() {
+        userEditInfoButton.addTarget(self,
+                                     action: #selector(userEditInfoButtonTapped),
+                                     for: .touchUpInside)
+        userMoreInfoButton.addTarget(self,
+                                     action: #selector(userMoreInfoButtonTapped),
+                                     for: .touchUpInside)
+
     }
 }
 
-extension ProfileHeaderView {
-    func updateUserStatus(message: String) {
-        userStatus.text = message
+private extension ProfileHeaderView {
+    @objc private func userEditInfoButtonTapped() {
+        delegate?.userEditInfoButtonTapped()
     }
     
-    func closeFullUserPhoto() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            fullUserPhotoBackground.alpha = 0.0
-            closeFullUserPhotoButton.alpha = 0.0
-            photo.alpha = 0.0
-            
-            photo.transform = CGAffineTransform(scaleX: 0, y: 0)
-            
-            fullUserPhotoBackground.removeFromSuperview()
-            closeFullUserPhotoButton.removeFromSuperview()
-            photo.removeFromSuperview()
-        }
-    }
-    
-    func openFullUserPhoto() {
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: []) {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
-                addSubview(fullUserPhotoBackground)
-                fullUserPhotoBackground.addSubview(photo)
-                fullUserPhotoBackground.addSubview(closeFullUserPhotoButton)
-                
-                fullUserPhotoBackground.alpha = 1
-                closeFullUserPhotoButton.alpha = 1
-                photo.alpha = 1
-                
-                closeFullUserPhotoButton.frame = CGRect(
-                    x: fullUserPhotoBackground.bounds.maxX - 32,
-                    y: fullUserPhotoBackground.bounds.minY + 16,
-                    width: closeFullUserPhotoButton.frame.width,
-                    height: closeFullUserPhotoButton.frame.height)
-                
-                photo.center = fullUserPhotoBackground.center
-                photo.transform = CGAffineTransform(scaleX: 2, y: 2)
-                photo.contentMode = .scaleAspectFit
-                photo.layer.masksToBounds = false
-                photo.layer.cornerRadius = 0
-                photo.layer.borderWidth = 0
-            }
-        } completion: { _ in
-            UIView.animateKeyframes(withDuration: 0.3, delay: 0.5, options: []) { [self] in
-                closeFullUserPhotoButton.tintColor = #colorLiteral(red: 0.1176327839, green: 0.1176561788, blue: 0.117627643, alpha: 1).withAlphaComponent(0.6)
-            }
-        }
+    @objc private func userMoreInfoButtonTapped() {
+        delegate?.userMoreInfoButtonTapped()
     }
 }
