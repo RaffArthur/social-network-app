@@ -382,10 +382,20 @@
 		758CF8932AD2FA73006EEBE0 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */,
 				758CF8942AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift */,
 				758CF8962AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		758CF8982AD33BD9006EEBE0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				75B4449225C70CED00B3C586 /* ProfilePhotosPreviewTableViewCell.swift */,
+				75B4449325C70CED00B3C586 /* ProfilePostTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		7593C4B3283C2EE000EC3426 /* RealmErrorCodeConverter */ = {
@@ -453,7 +463,6 @@
 			children = (
 				75D8A24C27CFDC850056E78B /* ProfileDelegates.swift */,
 				75D8A24B27CFD1450056E78B /* View */,
-				758CF8932AD2FA73006EEBE0 /* CustomViews */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -580,9 +589,8 @@
 			children = (
 				75B4449825C70CED00B3C586 /* ProfileViewController.swift */,
 				752991A52AD1C2F800C65E8C /* ProfileView.swift */,
-				75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */,
-				75B4449225C70CED00B3C586 /* ProfilePhotosPreviewTableViewCell.swift */,
-				75B4449325C70CED00B3C586 /* ProfilePostTableViewCell.swift */,
+				758CF8982AD33BD9006EEBE0 /* Cells */,
+				758CF8932AD2FA73006EEBE0 /* CustomViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
