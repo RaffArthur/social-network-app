@@ -37,8 +37,8 @@ final class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     private lazy var photoOne: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFit
-        iv.layer.cornerRadius = 6
+        iv.contentMode = .scaleToFill
+        iv.layer.cornerRadius = 8
 
         return iv
     }()
@@ -46,8 +46,8 @@ final class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     private lazy var photoTwo: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFit
-        iv.layer.cornerRadius = 6
+        iv.contentMode = .scaleToFill
+        iv.layer.cornerRadius = 8
         
         return iv
     }()
@@ -55,8 +55,8 @@ final class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     private lazy var photoThree: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFit
-        iv.layer.cornerRadius = 6
+        iv.contentMode = .scaleToFill
+        iv.layer.cornerRadius = 8
         
         return iv
     }()
@@ -64,8 +64,8 @@ final class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     private lazy var photoFour: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFit
-        iv.layer.cornerRadius = 6
+        iv.contentMode = .scaleToFill
+        iv.layer.cornerRadius = 8
         
         return iv
     }()
@@ -141,7 +141,7 @@ private extension ProfilePhotosPreviewTableViewCell {
         }
         
         photosContainer.snp.makeConstraints { (make) in
-            make.height.equalTo((UIScreen.main.bounds.width)/4)
+            make.height.equalTo(photosContainer.snp.width).dividedBy(4)
             make.top.equalTo(photosLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
