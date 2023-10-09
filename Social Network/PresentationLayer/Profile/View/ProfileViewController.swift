@@ -15,20 +15,9 @@ final class ProfileViewController: UIViewController {
     private lazy var postsAdapter = PostsAdapter()
     private lazy var photosAdapter = PhotosAdapter()
         
-    private lazy var headerView = ProfileHeaderView()
+    private lazy var profileUserHeaderView = ProfileUserHeaderView()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(ProfilePostTableViewCell.self,
-                           forCellReuseIdentifier: String(describing: ProfilePostTableViewCell.self))
-        tableView.register(ProfilePhotosPreviewTableViewCell.self,
-                           forCellReuseIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self))
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.showsVerticalScrollIndicator = false
-                
-        return tableView
-    }()
+    private lazy var profileView = ProfileView()
     
     private lazy var logoutButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
@@ -38,19 +27,32 @@ final class ProfileViewController: UIViewController {
         return bbi
     }()
     
+    private lazy var nickNameButton: UIBarButtonItem = {
+        let bbi = UIBarButtonItem()
+        bbi.title = "@usernickname"
+        
+        return bbi
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadFullUserData()
         
-        setupScreen()
+        setupContent()
         setupActions()
         
-        headerView.delegate = self
+        profileUserHeaderView.delegate = self
+        profileView.tableView(delegate: self, dataSource: self)
+    }
+    
+    override func loadView() {
+        view = profileView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
@@ -67,7 +69,7 @@ private extension ProfileViewController {
             
             Storages.photos.append(contentsOf: photos)
             
-            self?.tableView.reloadData()
+            self?.profileView.tableViewReloadData()
             
         }
         
@@ -78,12 +80,18 @@ private extension ProfileViewController {
             
             Storages.posts.append(contentsOf: posts)
             
-            self?.tableView.reloadData()
-        }        
+            self?.profileView.tableViewReloadData()
+        }
     }
 }
 
 private extension ProfileViewController {
+    @objc func userNicknameTapped() {
+        UIPasteboard.general.string = nickNameButton.title
+        
+        showNicknameCopiedToClipboardAlert()
+    }
+    
     @objc func logOutButtonTapped() {
         let credentials = UserCredentials(email: nil,
                                           password: nil,
@@ -101,9 +109,7 @@ private extension ProfileViewController {
     }
     
     @objc func didTapPost(_ sender: UITapGestureRecognizer) {
-        let touchPoint = sender.location(in: tableView)
-        
-        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return }
+        let indexPath = profileView.getTableViewTouchPointIndexPath(sender: sender)
         
         let post = Storages.posts[indexPath.item]
         
@@ -155,6 +161,26 @@ private extension ProfileViewController {
         }
     }
     
+    func showNicknameCopiedToClipboardAlert() {
+        let alert = UIAlertController(title: nil,
+                                      message: nil,
+                                      preferredStyle: .alert)
+        
+        let attributedString = NSAttributedString(string: "Ссылка скопирована",
+                                                  attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
+                                                                                                               weight: .bold),
+                                                               NSAttributedString.Key.foregroundColor : UIColor.white])
+                
+        alert.setValue(attributedString, forKey: "attributedMessage")
+        
+        present(alert, animated: true)
+                
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    
     func animateAddToFavouriteTap() {
         let addedScale = CGFloat.random(in: 0.8...2.0)
         
@@ -188,6 +214,9 @@ private extension ProfileViewController {
     func setupActions() {
         logoutButton.target = self
         logoutButton.action = #selector(logOutButtonTapped)
+        
+        nickNameButton.target = self
+        nickNameButton.action = #selector(userNicknameTapped)
     }
 }
 
@@ -229,7 +258,7 @@ extension ProfileViewController: UITableViewDataSource {
                                                      for: indexPath) as? ProfilePhotosPreviewTableViewCell
             
             if !Storages.photos.isEmpty {
-                cell?.configure(photos: Storages.photos)
+                cell?.configure(photos: Storages.photos, withCount: Storages.photos.count)
             }
             
             return cell ?? UITableViewCell()
@@ -249,67 +278,25 @@ extension ProfileViewController: UITableViewDataSource {
                    viewForHeaderInSection section: Int) -> UIView? {
         guard section == 0 else { return UIView() }
         
-        return headerView
+        return profileUserHeaderView
     }
 }
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
-    func setUserStatusButtonTapped() {
-        let alertController = UIAlertController(title: .localized(key: .userStatusAlertTitle),
-                                                message: .localized(key: .userStatusAlertMessage),
-                                                preferredStyle: .alert)
+    func userMoreInfoButtonTapped() {
         
-        let cancel = UIAlertAction(title: .localized(key: .userStatusAlertCancelButton),
-                                   style: .cancel,
-                                   handler: nil)
-        
-        let setStatus = UIAlertAction(title: .localized(key: .userStatusAlertSetStatusSutton),
-                                      style: .default) { action in
-            self.headerView.updateUserStatus(message: alertController.textFields?[0].text ?? String())
-        }
-        
-        alertController.addTextField { textField in
-            textField.placeholder = .localized(key: .userStatusAlertTextfieldPlaceholder)
-        }
-        
-        alertController.addAction(cancel)
-        alertController.addAction(setStatus)
-        
-        present(alertController, animated: true, completion: nil)
     }
     
-    func userPhotoTapped() {
-        headerView.openFullUserPhoto()
+    func userEditInfoButtonTapped() {
         
-        navigationController?.navigationBar.isHidden = true
-        tabBarController?.tabBar.isHidden = true
-    }
-    
-    func userPhotoCloseButtonTapped() {
-        headerView.closeFullUserPhoto()
-        
-        tabBarController?.tabBar.isHidden = false
-        navigationController?.navigationBar.isHidden = false
     }
 }
 
 private extension ProfileViewController {
-    func setupScreen() {
-        setupLayout()
-        setupContent()
-    }
-    
     func setupContent() {
         view.backgroundColor = .systemBackground
         
-        navigationItem.leftBarButtonItem = logoutButton
-    }
-    
-    func setupLayout() {
-        view.addSubview(tableView)
-        
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
+        navigationItem.rightBarButtonItem = logoutButton
+        navigationItem.leftBarButtonItem = nickNameButton
     }
 }
