@@ -15,7 +15,7 @@ final class ProfileViewController: UIViewController {
     private lazy var postsAdapter = PostsAdapter()
     private lazy var photosAdapter = PhotosAdapter()
         
-    private lazy var profileHeaderView = ProfileHeaderView()
+    private lazy var profileUserHeaderView = ProfileUserHeaderView()
     
     private lazy var profileView = ProfileView()
     
@@ -42,7 +42,7 @@ final class ProfileViewController: UIViewController {
         setupContent()
         setupActions()
         
-        profileHeaderView.delegate = self
+        profileUserHeaderView.delegate = self
         profileView.tableView(delegate: self, dataSource: self)
     }
     
@@ -278,7 +278,7 @@ extension ProfileViewController: UITableViewDataSource {
                    viewForHeaderInSection section: Int) -> UIView? {
         guard section == 0 else { return UIView() }
         
-        return profileHeaderView
+        return profileUserHeaderView
     }
 }
 

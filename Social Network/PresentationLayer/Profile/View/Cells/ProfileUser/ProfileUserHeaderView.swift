@@ -1,5 +1,5 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileUserHeaderView.swift
 //  Navigation
 //
 //  Created by Arthur Raff on 02.10.2020.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileHeaderView: UIView {
+final class ProfileUserHeaderView: UIView {
     weak var delegate: ProfileHeaderViewDelegate?
     
     private lazy var userInfographicView = ProfileUserInfographicView()
@@ -88,7 +88,7 @@ final class ProfileHeaderView: UIView {
     }
 }
 
-extension ProfileHeaderView: UITextFieldDelegate {
+extension ProfileUserHeaderView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
@@ -96,14 +96,14 @@ extension ProfileHeaderView: UITextFieldDelegate {
     }
 }
 
-extension ProfileHeaderView: UIGestureRecognizerDelegate {
+extension ProfileUserHeaderView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
                            shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
 
-private extension ProfileHeaderView {
+private extension ProfileUserHeaderView {
     func setupScreen() {
         setupLayout()
         setupContent()
@@ -168,7 +168,7 @@ private extension ProfileHeaderView {
     }
 }
 
-private extension ProfileHeaderView {
+private extension ProfileUserHeaderView {
     func setupActions() {
         userEditInfoButton.addTarget(self,
                                      action: #selector(userEditInfoButtonTapped),
@@ -180,7 +180,7 @@ private extension ProfileHeaderView {
     }
 }
 
-private extension ProfileHeaderView {
+private extension ProfileUserHeaderView {
     @objc private func userEditInfoButtonTapped() {
         delegate?.userEditInfoButtonTapped()
     }
