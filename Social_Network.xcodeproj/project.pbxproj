@@ -379,23 +379,40 @@
 			path = AuthentificationFlow;
 			sourceTree = "<group>";
 		};
-		758CF8932AD2FA73006EEBE0 /* CustomViews */ = {
+		758CF8982AD33BD9006EEBE0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				758CF89B2AD44987006EEBE0 /* ProfileUser */,
+				758CF89A2AD4496F006EEBE0 /* ProfilePosts */,
+				758CF8992AD44958006EEBE0 /* ProfilePhotos */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		758CF8992AD44958006EEBE0 /* ProfilePhotos */ = {
+			isa = PBXGroup;
+			children = (
+				75B4449225C70CED00B3C586 /* ProfilePhotosPreviewTableViewCell.swift */,
+			);
+			path = ProfilePhotos;
+			sourceTree = "<group>";
+		};
+		758CF89A2AD4496F006EEBE0 /* ProfilePosts */ = {
+			isa = PBXGroup;
+			children = (
+				75B4449325C70CED00B3C586 /* ProfilePostTableViewCell.swift */,
+			);
+			path = ProfilePosts;
+			sourceTree = "<group>";
+		};
+		758CF89B2AD44987006EEBE0 /* ProfileUser */ = {
 			isa = PBXGroup;
 			children = (
 				75B4449A25C70CED00B3C586 /* ProfileHeaderView.swift */,
 				758CF8942AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift */,
 				758CF8962AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift */,
 			);
-			path = CustomViews;
-			sourceTree = "<group>";
-		};
-		758CF8982AD33BD9006EEBE0 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				75B4449225C70CED00B3C586 /* ProfilePhotosPreviewTableViewCell.swift */,
-				75B4449325C70CED00B3C586 /* ProfilePostTableViewCell.swift */,
-			);
-			path = Cells;
+			path = ProfileUser;
 			sourceTree = "<group>";
 		};
 		7593C4B3283C2EE000EC3426 /* RealmErrorCodeConverter */ = {
@@ -590,7 +607,6 @@
 				75B4449825C70CED00B3C586 /* ProfileViewController.swift */,
 				752991A52AD1C2F800C65E8C /* ProfileView.swift */,
 				758CF8982AD33BD9006EEBE0 /* Cells */,
-				758CF8932AD2FA73006EEBE0 /* CustomViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
