@@ -15,7 +15,7 @@ final class ProfilePostUserInfoView: UIView {
         iv.image = UIImage(systemName: "photo.circle")
         iv.backgroundColor = .systemGray3
         iv.tintColor = .systemGray6
-        iv.layer.masksToBounds = true
+        iv.clipsToBounds = true
         
         return iv
     }()
