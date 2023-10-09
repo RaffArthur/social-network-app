@@ -10,7 +10,6 @@ import UIKit
 enum TabBarPage: CaseIterable {    
     case profile
     case favourite
-    case map
     
     init?(index: Int) {
         switch index {
@@ -18,8 +17,6 @@ enum TabBarPage: CaseIterable {
             self = .profile
         case 1:
             self = .favourite
-        case 2:
-            self = .map
         default:
             return nil
         }
@@ -31,8 +28,6 @@ enum TabBarPage: CaseIterable {
             return 0
         case .favourite:
             return 1
-        case .map:
-            return 2
         }
     }
     
@@ -42,8 +37,6 @@ enum TabBarPage: CaseIterable {
             return .localized(key: .profileTab)
         case .favourite:
             return .localized(key: .favouriteTab)
-        case .map:
-            return .localized(key: .mapTab)
         }
     }
     
@@ -53,8 +46,6 @@ enum TabBarPage: CaseIterable {
             return UIImage(systemName: "person.fill")!
         case .favourite:
             return UIImage(systemName: "heart.text.square.fill")!
-        case .map:
-            return UIImage(systemName: "map")!
         }
     }
 }

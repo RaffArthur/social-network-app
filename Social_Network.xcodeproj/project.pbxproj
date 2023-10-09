@@ -34,8 +34,6 @@
 		755BF3A42ACE0A4100D5AF2B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 755BF3A32ACE0A4100D5AF2B /* Localizable.xcstrings */; };
 		755BF3A62ACE0C8800D5AF2B /* LocalizableInfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 755BF3A52ACE0C8800D5AF2B /* LocalizableInfoPlist.xcstrings */; };
 		756691F22626027B00B26B8A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* NetworkManager.swift */; };
-		757193602895403000A4BFC7 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7571935F2895403000A4BFC7 /* MapCoordinator.swift */; };
-		757193632895411900A4BFC7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757193622895411900A4BFC7 /* MapViewController.swift */; };
 		7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7BF2610D30A00A349E0 /* UserAuthError.swift */; };
 		7582B466284CF85A0095AC47 /* RegistrationDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7582B465284CF85A0095AC47 /* RegistrationDelegates.swift */; };
 		7582B46F284D0AB50095AC47 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7582B46E284D0AB50095AC47 /* RegistrationViewController.swift */; };
@@ -122,8 +120,6 @@
 		755BF3A32ACE0A4100D5AF2B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		755BF3A52ACE0C8800D5AF2B /* LocalizableInfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LocalizableInfoPlist.xcstrings; sourceTree = "<group>"; };
 		756691F12626027B00B26B8A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		7571935F2895403000A4BFC7 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
-		757193622895411900A4BFC7 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7574B7BF2610D30A00A349E0 /* UserAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthError.swift; sourceTree = "<group>"; };
 		757638F12635BA5300C3F190 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7582B465284CF85A0095AC47 /* RegistrationDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDelegates.swift; sourceTree = "<group>"; };
@@ -276,7 +272,6 @@
 				7582B474284D39360095AC47 /* AuthentificationFlow */,
 				755CD9F62719EF1900EA2239 /* ProfileFlow */,
 				755CD9F92719F03400EA2239 /* FavouriteFlow */,
-				7571935E2895401400A4BFC7 /* MapFlow */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -314,22 +309,6 @@
 				751753632717528D00C80FB9 /* FavouriteCoordinator.swift */,
 			);
 			path = FavouriteFlow;
-			sourceTree = "<group>";
-		};
-		7571935E2895401400A4BFC7 /* MapFlow */ = {
-			isa = PBXGroup;
-			children = (
-				7571935F2895403000A4BFC7 /* MapCoordinator.swift */,
-			);
-			path = MapFlow;
-			sourceTree = "<group>";
-		};
-		75719361289540E600A4BFC7 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				757193622895411900A4BFC7 /* MapViewController.swift */,
-			);
-			path = Map;
 			sourceTree = "<group>";
 		};
 		7574B7B52610D2C700A349E0 /* ErrorDomains */ = {
@@ -549,7 +528,6 @@
 				75B4449025C70CED00B3C586 /* Profile */,
 				754D79B426C1AB3000ED19F8 /* Photos */,
 				75B4449B25C70CED00B3C586 /* Favourite */,
-				75719361289540E600A4BFC7 /* Map */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -785,14 +763,12 @@
 				754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */,
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
 				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
-				757193602895403000A4BFC7 /* MapCoordinator.swift in Sources */,
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
 				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,
 				75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */,
 				7593C4B2283C2E9C00EC3426 /* RealmError.swift in Sources */,
-				757193632895411900A4BFC7 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

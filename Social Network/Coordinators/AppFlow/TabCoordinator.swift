@@ -51,8 +51,6 @@ private extension TabCoordinator {
             showProfileFlow(navigationController: navigationController)
         case .favourite:
             showFavouriteFlow(navigationController: navigationController)
-        case .map:
-            showMapFlow(navigationController: navigationController)
         }
         
         return navigationController
@@ -71,13 +69,6 @@ private extension TabCoordinator {
 
     func showFavouriteFlow(navigationController: UINavigationController) {
         let coordinator = FavouriteCoordinator(navigationController)
-        coordinator.start()
-        
-        childCoordinators.append(coordinator)
-    }
-    
-    func showMapFlow(navigationController: UINavigationController) {
-        let coordinator = MapCoordinator(navigationController)
         coordinator.start()
         
         childCoordinators.append(coordinator)
