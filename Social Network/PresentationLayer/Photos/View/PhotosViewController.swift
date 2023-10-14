@@ -63,6 +63,7 @@ extension PhotosViewController: UICollectionViewDataSource {
 private extension PhotosViewController {
     func setupContent() {
         title = "Photos Gallery"
-        view.backgroundColor = .white
+        
+        view.backgroundColor = .SocialNetworkColor.mainBackground
     }
 }

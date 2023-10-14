@@ -26,19 +26,19 @@ final class ProfileUserHeaderView: UIView {
     
     private lazy var userName: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .heavy)
+        label.font = .SocialNetworkFont.headline
         label.textAlignment = .left
         label.text = "Name Surname"
-        label.textColor = .SocialNetworkColor.mainText.set()
+        label.textColor = .SocialNetworkColor.primaryText
         
         return label
     }()
     
     private lazy var userDescription: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.font = .SocialNetworkFont.caption1
         label.textAlignment = .left
-        label.textColor = .SocialNetworkColor.secondaryText.set()
+        label.textColor = .SocialNetworkColor.secondaryText
         label.text = .localized(key: .statusPlaceholder)
         label.numberOfLines = 0
         
@@ -48,10 +48,10 @@ final class ProfileUserHeaderView: UIView {
     private lazy var userMoreInfoButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "exclamationmark.circle.fill"), for: .normal)
-        button.tintColor = .SocialNetworkColor.accent.set()
+        button.tintColor = .SocialNetworkColor.primaryBackground
         button.setTitle("Подробная информация", for: .normal)
-        button.setTitleColor(.SocialNetworkColor.mainText.set(), for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        button.setTitleColor(.SocialNetworkColor.primaryText, for: .normal)
+        button.titleLabel?.font = .SocialNetworkFont.subhead
         button.titleLabel?.textAlignment = .left
         button.contentHorizontalAlignment = .left
         button.titleLabel?.lineBreakMode = .byClipping
@@ -63,9 +63,15 @@ final class ProfileUserHeaderView: UIView {
     private lazy var userEditInfoButton: UIButton = {
         let button = UIButton()
         button.setTitle("Редактировать", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-        button.backgroundColor = .SocialNetworkColor.accent.set()
-        button.layer.cornerRadius = 8
+        button.titleLabel?.font = .SocialNetworkFont.t3
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(1.0), for: .normal)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .selected)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .highlighted)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .disabled)
+        button.titleLabel?.font = .SocialNetworkFont.t3
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .SocialNetworkColor.primaryBackground
         
         return button
     }()
@@ -111,6 +117,8 @@ private extension ProfileUserHeaderView {
     
     func setupContent() {
         userPhoto.layer.cornerRadius = userPhoto.frame.height / 2
+        
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
     
     func setupLayout() {

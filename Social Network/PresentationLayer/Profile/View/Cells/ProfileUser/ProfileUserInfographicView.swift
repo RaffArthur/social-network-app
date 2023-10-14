@@ -79,6 +79,6 @@ private extension ProfileUserInfographicView {
     }
     
     func setupContent() {
-        backgroundColor = .clear
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
 }

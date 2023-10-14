@@ -22,6 +22,7 @@ final class ProfileViewController: UIViewController {
     private lazy var logoutButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
         bbi.title = .localized(key: .logOutButton)
+        bbi.tintColor = .SocialNetworkColor.accent
         bbi.style = .done
         
         return bbi
@@ -30,6 +31,7 @@ final class ProfileViewController: UIViewController {
     private lazy var nickNameButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
         bbi.title = "@usernickname"
+        bbi.tintColor = .SocialNetworkColor.accent
         
         return bbi
     }()
@@ -149,8 +151,8 @@ private extension ProfileViewController {
                                       preferredStyle: .alert)
         
         let attributedString = NSAttributedString(string: .localized(key: .alreadyInFavouritesAlertTitle),
-                                                  attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: .bold),
-                                                               NSAttributedString.Key.foregroundColor : UIColor.systemRed])
+                                                  attributes: [NSAttributedString.Key.font : UIFont.SocialNetworkFont.caption1,
+                                                               NSAttributedString.Key.foregroundColor : UIColor.SocialNetworkColor.destructive])
                 
         alert.setValue(attributedString, forKey: "attributedMessage")
         
@@ -167,9 +169,8 @@ private extension ProfileViewController {
                                       preferredStyle: .alert)
         
         let attributedString = NSAttributedString(string: "Ссылка скопирована",
-                                                  attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
-                                                                                                               weight: .bold),
-                                                               NSAttributedString.Key.foregroundColor : UIColor.white])
+                                                  attributes: [NSAttributedString.Key.font : UIFont.SocialNetworkFont.caption1,
+                                                               NSAttributedString.Key.foregroundColor : UIColor.SocialNetworkColor.primaryText])
                 
         alert.setValue(attributedString, forKey: "attributedMessage")
         
@@ -203,7 +204,7 @@ private extension ProfileViewController {
             UIView.animate(withDuration: 0.5, delay: 0.1) {
                 imageView.center.y -= 100
                 imageView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-                imageView.tintColor = .clear
+                imageView.tintColor = .SocialNetworkColor.clearBackground
                 
             } completion: {_ in
                 imageView.removeFromSuperview()
@@ -294,7 +295,7 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 
 private extension ProfileViewController {
     func setupContent() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .SocialNetworkColor.mainBackground
         
         navigationItem.rightBarButtonItem = logoutButton
         navigationItem.leftBarButtonItem = nickNameButton

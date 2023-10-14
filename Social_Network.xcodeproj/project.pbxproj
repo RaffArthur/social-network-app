@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		75026E622AD19CB800A082F3 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75026E612AD19CB800A082F3 /* FavouriteView.swift */; };
 		75026E662AD1A7D500A082F3 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75026E652AD1A7D500A082F3 /* PhotosView.swift */; };
+		75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */; };
 		751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753612717519900C80FB9 /* ProfileCoordinator.swift */; };
 		751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FavouriteCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
@@ -97,6 +98,7 @@
 		060782AE250CE27700A87020 /* Social_Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Social_Network.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75026E612AD19CB800A082F3 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
 		75026E652AD1A7D500A082F3 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
+		75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+SocialNetwork.swift"; sourceTree = "<group>"; };
 		751753612717519900C80FB9 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		751753632717528D00C80FB9 /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
@@ -489,8 +491,9 @@
 				754D79C126CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift */,
 				755ADFC525E51A19008E92A3 /* ImageDownloader+UIImageView.swift */,
 				75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */,
-				75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */,
 				75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */,
+				75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */,
+				75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */,
 			);
 			path = DevHelpers;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				758CF8972AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift in Sources */,
 				75597A8A25D303AC00A120A7 /* TabCoordinator.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* ProfilePostTableViewCell.swift in Sources */,
+				75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */,
 				75B444D125C70CEE00B3C586 /* ProfileUserHeaderView.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
 				75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */,

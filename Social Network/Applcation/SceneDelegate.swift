@@ -27,8 +27,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let navigationController: UINavigationController = .init()
         
+        window?.backgroundColor = .SocialNetworkColor.mainBackground
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont.SocialNetworkFont.t2]
         
         appCoordinator = AppCoordinator(navigationController)
         appCoordinator?.start()

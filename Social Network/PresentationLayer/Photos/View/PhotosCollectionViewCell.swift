@@ -39,6 +39,11 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
 private extension PhotosCollectionViewCell {
     func setupScreen() {
         setupLayout()
+        setupContent()
+    }
+    
+    func setupContent() {
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
     
     func setupLayout() {
