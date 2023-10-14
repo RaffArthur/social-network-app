@@ -16,6 +16,7 @@ final class ProfileView: UIView {
         tableView.register(ProfilePhotosPreviewTableViewCell.self,
                            forCellReuseIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self))
         tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = .SocialNetworkColor.mainBackground
                 
         return tableView
     }()
@@ -67,6 +68,6 @@ private extension ProfileView {
     }
     
     func setupContent() {
-        backgroundColor = .systemBackground
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
 }

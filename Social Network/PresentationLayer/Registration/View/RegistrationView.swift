@@ -40,9 +40,9 @@ final class RegistrationView: UIView {
     private lazy var registrationTitle: UILabel = {
         let label = UILabel()
         label.text = .localized(key: .registrationTitle)
-        label.textColor = .SocialNetworkColor.mainText.set()
+        label.textColor = .SocialNetworkColor.primaryText
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.font = .SocialNetworkFont.t1
         
         return label
     }()
@@ -51,7 +51,7 @@ final class RegistrationView: UIView {
         let sv = UIStackView()
         sv.layer.borderWidth = 0.5
         sv.layer.cornerRadius = 10
-        sv.layer.borderColor = UIColor.lightGray.cgColor
+        sv.layer.borderColor = UIColor.SocialNetworkColor.mainBorder.cgColor
         sv.layer.masksToBounds = true
         sv.axis = .vertical
         sv.distribution = .fillEqually
@@ -65,11 +65,12 @@ final class RegistrationView: UIView {
         tf.autocorrectionType = .no
         tf.autocapitalizationType = .none
         tf.clearsOnBeginEditing = false
-        tf.backgroundColor = .systemGray6
-        tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        tf.placeholder = .localized(key: .emailPlaceholder)
-        tf.tintColor = .SocialNetworkColor.accent.set()
-        tf.textColor = .SocialNetworkColor.mainText.set()
+        tf.backgroundColor = .SocialNetworkColor.formBackground
+        tf.font = .SocialNetworkFont.text
+        tf.attributedPlaceholder = NSAttributedString(string: .localized(key: .emailPlaceholder),
+                                                      attributes: [.foregroundColor: UIColor.SocialNetworkColor.placeholderText])
+        tf.tintColor = .SocialNetworkColor.accent
+        tf.textColor = .SocialNetworkColor.primaryText
         tf.textAlignment = .left
         tf.leftView = UIView(frame: CGRect(x: 0,
                                            y: 0,
@@ -77,7 +78,7 @@ final class RegistrationView: UIView {
                                            height: tf.frame.height))
         tf.leftViewMode = .always
         tf.layer.borderWidth = 0.5
-        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.layer.borderColor = UIColor.SocialNetworkColor.mainBorder.cgColor
         tf.delegate = self
         tf.keyboardType = .emailAddress
         
@@ -91,14 +92,15 @@ final class RegistrationView: UIView {
         tf.autocapitalizationType = .none
         tf.isSecureTextEntry = true
         tf.textContentType = .newPassword
-        tf.backgroundColor = .systemGray6
-        tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        tf.placeholder = .localized(key: .passwordPlaceholder)
-        tf.tintColor = .SocialNetworkColor.accent.set()
-        tf.textColor = .SocialNetworkColor.mainText.set()
+        tf.backgroundColor = .SocialNetworkColor.formBackground
+        tf.font = .SocialNetworkFont.text
+        tf.attributedPlaceholder = NSAttributedString(string: .localized(key: .passwordPlaceholder),
+                                                      attributes: [.foregroundColor: UIColor.SocialNetworkColor.placeholderText])
+        tf.tintColor = .SocialNetworkColor.accent
+        tf.textColor = .SocialNetworkColor.primaryText
         tf.textAlignment = .left
         tf.layer.borderWidth = 0.5
-        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.layer.borderColor = UIColor.SocialNetworkColor.mainBorder.cgColor
         tf.delegate = self
 
         return tf
@@ -111,14 +113,15 @@ final class RegistrationView: UIView {
         tf.autocapitalizationType = .none
         tf.isSecureTextEntry = true
         tf.textContentType = .newPassword
-        tf.backgroundColor = .systemGray6
-        tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        tf.placeholder = .localized(key: .repeatPasswordPlaceholder)
-        tf.tintColor = .SocialNetworkColor.accent.set()
-        tf.textColor = .SocialNetworkColor.mainText.set()
+        tf.backgroundColor = .SocialNetworkColor.formBackground
+        tf.font = .SocialNetworkFont.text
+        tf.attributedPlaceholder = NSAttributedString(string: .localized(key: .repeatPasswordPlaceholder),
+                                                      attributes: [.foregroundColor: UIColor.SocialNetworkColor.placeholderText])
+        tf.tintColor = .SocialNetworkColor.accent
+        tf.textColor = .SocialNetworkColor.primaryText
         tf.textAlignment = .left
         tf.layer.borderWidth = 0.5
-        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.layer.borderColor = UIColor.SocialNetworkColor.mainBorder.cgColor
         tf.delegate = self
         
         return tf
@@ -126,15 +129,15 @@ final class RegistrationView: UIView {
     
     private lazy var registrationButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(1.0), for: .normal)
-        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
-        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .highlighted)
-        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .disabled)
         button.setTitle(.localized(key: .registrationButton), for: button.state)
-        button.setTitleColor(.white, for: button.state)
-        button.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(1.0), for: .normal)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .selected)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .highlighted)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .disabled)
+        button.titleLabel?.font = .SocialNetworkFont.t3
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 10
+        button.backgroundColor = .SocialNetworkColor.primaryBackground
         
         return button
     }()
@@ -142,8 +145,8 @@ final class RegistrationView: UIView {
     private lazy var registrationTypeTitle: UILabel = {
         let label = UILabel()
         label.text = .localized(key: .loginTypeLoginTitle)
-        label.textColor = .SocialNetworkColor.secondaryText.set()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .SocialNetworkColor.secondaryText
+        label.font = .SocialNetworkFont.caption1
         
         return label
     }()
@@ -151,11 +154,11 @@ final class RegistrationView: UIView {
     private lazy var authentificationTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle(.localized(key: .signInButton), for: button.state)
-        button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(1.0), for: .normal)
-        button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .selected)
-        button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .highlighted)
-        button.setTitleColor(UIColor.SocialNetworkColor.accent.set().withAlphaComponent(0.8), for: .disabled)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryBackground.withAlphaComponent(1.0), for: .normal)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryBackground.withAlphaComponent(0.8), for: .selected)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryBackground.withAlphaComponent(0.8), for: .highlighted)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryBackground.withAlphaComponent(0.8), for: .disabled)
+        button.titleLabel?.font = .SocialNetworkFont.text
         
         return button
     }()

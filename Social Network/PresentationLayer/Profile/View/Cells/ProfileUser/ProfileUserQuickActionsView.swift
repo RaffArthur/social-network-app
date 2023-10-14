@@ -13,7 +13,7 @@ final class ProfileUserQuickActionsView: UIView {
         let label = UILabel()
         label.text = "Запись"
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .SocialNetworkFont.subhead
         
         return label
     }()
@@ -22,7 +22,7 @@ final class ProfileUserQuickActionsView: UIView {
         let label = UILabel()
         label.text = "История"
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .SocialNetworkFont.subhead
         
         return label
     }()
@@ -31,7 +31,7 @@ final class ProfileUserQuickActionsView: UIView {
         let label = UILabel()
         label.text = "Фото"
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .SocialNetworkFont.subhead
         
         return label
     }()
@@ -39,7 +39,7 @@ final class ProfileUserQuickActionsView: UIView {
     private lazy var createNoteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-        button.tintColor = .SocialNetworkColor.mainText.set()
+        button.tintColor = .SocialNetworkColor.primaryText
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
@@ -50,7 +50,7 @@ final class ProfileUserQuickActionsView: UIView {
     private lazy var showHistoryButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "camera"), for: .normal)
-        button.tintColor = .SocialNetworkColor.mainText.set()
+        button.tintColor = .SocialNetworkColor.primaryText
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
@@ -61,7 +61,7 @@ final class ProfileUserQuickActionsView: UIView {
     private lazy var showPhotosButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "photo"), for: .normal)
-        button.tintColor = .SocialNetworkColor.mainText.set()
+        button.tintColor = .SocialNetworkColor.primaryText
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
@@ -105,10 +105,7 @@ final class ProfileUserQuickActionsView: UIView {
         sv.distribution = .fillEqually
         sv.spacing = 16
         sv.alignment = .center
-        sv.backgroundColor = .systemGray5
-        sv.layer.cornerRadius = 8
-        sv.layer.masksToBounds = true
-
+        
         return sv
     }()
     
@@ -178,6 +175,8 @@ private extension ProfileUserQuickActionsView {
     }
     
     func setupContent() {
-        backgroundColor = .clear
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
+        backgroundColor = .SocialNetworkColor.secondaryBackground
     }
 }

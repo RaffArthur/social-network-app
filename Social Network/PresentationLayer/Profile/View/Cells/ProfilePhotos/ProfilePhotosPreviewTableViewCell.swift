@@ -11,16 +11,16 @@ final class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     private lazy var photosLabel: UILabel = {
         let photosLabel = UILabel()
         photosLabel.text = .localized(key: .photosTitle)
-        photosLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        photosLabel.textColor = .SocialNetworkColor.mainText.set()
+        photosLabel.font = .SocialNetworkFont.t2
+        photosLabel.textColor = .SocialNetworkColor.primaryText
         
         return photosLabel
     }()
     
     private lazy var photosCountLabel: UILabel = {
         let photosLabel = UILabel()
-        photosLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        photosLabel.textColor = .SocialNetworkColor.secondaryText.set()
+        photosLabel.font = .SocialNetworkFont.t2
+        photosLabel.textColor = .SocialNetworkColor.secondaryText
         
         return photosLabel
     }()
@@ -74,7 +74,7 @@ final class ProfilePhotosPreviewTableViewCell: UITableViewCell {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "chevron.forward")
         iv.contentMode = .scaleAspectFit
-        iv.tintColor = .black
+        iv.tintColor = .SocialNetworkColor.accent
         
         return iv
     }()
@@ -112,6 +112,11 @@ extension ProfilePhotosPreviewTableViewCell {
 private extension ProfilePhotosPreviewTableViewCell {
     func setupCell() {
         setupLayout()
+        setupContent()
+    }
+    
+    func setupContent() {
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
     
     func setupLayout() {

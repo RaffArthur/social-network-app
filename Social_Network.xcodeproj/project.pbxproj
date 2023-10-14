@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		75026E622AD19CB800A082F3 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75026E612AD19CB800A082F3 /* FavouriteView.swift */; };
 		75026E662AD1A7D500A082F3 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75026E652AD1A7D500A082F3 /* PhotosView.swift */; };
+		75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */; };
 		751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753612717519900C80FB9 /* ProfileCoordinator.swift */; };
 		751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FavouriteCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
@@ -33,11 +34,7 @@
 		755ADFC625E51A19008E92A3 /* ImageDownloader+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755ADFC525E51A19008E92A3 /* ImageDownloader+UIImageView.swift */; };
 		755BF3A42ACE0A4100D5AF2B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 755BF3A32ACE0A4100D5AF2B /* Localizable.xcstrings */; };
 		755BF3A62ACE0C8800D5AF2B /* LocalizableInfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 755BF3A52ACE0C8800D5AF2B /* LocalizableInfoPlist.xcstrings */; };
-		75654295262C7E7B0050BAAA /* StarWarsPlanetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */; };
-		756691F22626027B00B26B8A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* NetworkClient.swift */; };
-		756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C2645262C651C00CEB305 /* UserDataModel.swift */; };
-		757193602895403000A4BFC7 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7571935F2895403000A4BFC7 /* MapCoordinator.swift */; };
-		757193632895411900A4BFC7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757193622895411900A4BFC7 /* MapViewController.swift */; };
+		756691F22626027B00B26B8A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756691F12626027B00B26B8A /* NetworkManager.swift */; };
 		7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7BF2610D30A00A349E0 /* UserAuthError.swift */; };
 		7582B466284CF85A0095AC47 /* RegistrationDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7582B465284CF85A0095AC47 /* RegistrationDelegates.swift */; };
 		7582B46F284D0AB50095AC47 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7582B46E284D0AB50095AC47 /* RegistrationViewController.swift */; };
@@ -101,6 +98,7 @@
 		060782AE250CE27700A87020 /* Social_Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Social_Network.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75026E612AD19CB800A082F3 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
 		75026E652AD1A7D500A082F3 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
+		75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+SocialNetwork.swift"; sourceTree = "<group>"; };
 		751753612717519900C80FB9 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		751753632717528D00C80FB9 /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
@@ -123,11 +121,7 @@
 		755ADFC525E51A19008E92A3 /* ImageDownloader+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageDownloader+UIImageView.swift"; sourceTree = "<group>"; };
 		755BF3A32ACE0A4100D5AF2B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		755BF3A52ACE0C8800D5AF2B /* LocalizableInfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LocalizableInfoPlist.xcstrings; sourceTree = "<group>"; };
-		75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsPlanetsModel.swift; sourceTree = "<group>"; };
-		756691F12626027B00B26B8A /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		756C2645262C651C00CEB305 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
-		7571935F2895403000A4BFC7 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
-		757193622895411900A4BFC7 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		756691F12626027B00B26B8A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7574B7BF2610D30A00A349E0 /* UserAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthError.swift; sourceTree = "<group>"; };
 		757638F12635BA5300C3F190 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7582B465284CF85A0095AC47 /* RegistrationDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDelegates.swift; sourceTree = "<group>"; };
@@ -263,12 +257,12 @@
 			path = Photos;
 			sourceTree = "<group>";
 		};
-		754D79C326CAE4B100ED19F8 /* NetworkClient */ = {
+		754D79C326CAE4B100ED19F8 /* NetworkManagers */ = {
 			isa = PBXGroup;
 			children = (
-				756691F12626027B00B26B8A /* NetworkClient.swift */,
+				756691F12626027B00B26B8A /* NetworkManager.swift */,
 			);
-			path = NetworkClient;
+			path = NetworkManagers;
 			sourceTree = "<group>";
 		};
 		75597A8825D3017600A120A7 /* Coordinators */ = {
@@ -280,7 +274,6 @@
 				7582B474284D39360095AC47 /* AuthentificationFlow */,
 				755CD9F62719EF1900EA2239 /* ProfileFlow */,
 				755CD9F92719F03400EA2239 /* FavouriteFlow */,
-				7571935E2895401400A4BFC7 /* MapFlow */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -318,22 +311,6 @@
 				751753632717528D00C80FB9 /* FavouriteCoordinator.swift */,
 			);
 			path = FavouriteFlow;
-			sourceTree = "<group>";
-		};
-		7571935E2895401400A4BFC7 /* MapFlow */ = {
-			isa = PBXGroup;
-			children = (
-				7571935F2895403000A4BFC7 /* MapCoordinator.swift */,
-			);
-			path = MapFlow;
-			sourceTree = "<group>";
-		};
-		75719361289540E600A4BFC7 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				757193622895411900A4BFC7 /* MapViewController.swift */,
-			);
-			path = Map;
 			sourceTree = "<group>";
 		};
 		7574B7B52610D2C700A349E0 /* ErrorDomains */ = {
@@ -459,8 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				75BBAA2328425979008CF9C1 /* CoreData */,
-				756C2645262C651C00CEB305 /* UserDataModel.swift */,
-				75654294262C7E7B0050BAAA /* StarWarsPlanetsModel.swift */,
 				754D79B926C6F39500ED19F8 /* PhotoModel.swift */,
 				754D79BD26C9A17F00ED19F8 /* PostModel.swift */,
 				752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */,
@@ -516,8 +491,9 @@
 				754D79C126CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift */,
 				755ADFC525E51A19008E92A3 /* ImageDownloader+UIImageView.swift */,
 				75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */,
-				75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */,
 				75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */,
+				75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */,
+				75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */,
 			);
 			path = DevHelpers;
 			sourceTree = "<group>";
@@ -555,7 +531,6 @@
 				75B4449025C70CED00B3C586 /* Profile */,
 				754D79B426C1AB3000ED19F8 /* Photos */,
 				75B4449B25C70CED00B3C586 /* Favourite */,
-				75719361289540E600A4BFC7 /* Map */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -584,7 +559,7 @@
 			isa = PBXGroup;
 			children = (
 				75947F7F28438906004CB3AA /* Storages */,
-				754D79C326CAE4B100ED19F8 /* NetworkClient */,
+				754D79C326CAE4B100ED19F8 /* NetworkManagers */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -750,13 +725,12 @@
 				758CF8972AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift in Sources */,
 				75597A8A25D303AC00A120A7 /* TabCoordinator.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* ProfilePostTableViewCell.swift in Sources */,
+				75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */,
 				75B444D125C70CEE00B3C586 /* ProfileUserHeaderView.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
 				75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */,
-				75654295262C7E7B0050BAAA /* StarWarsPlanetsModel.swift in Sources */,
 				75CE1E2B2846711E0034C96C /* UIColor+SocialNetwork.swift in Sources */,
 				75B444C725C70CEE00B3C586 /* ProfilePhotosPreviewTableViewCell.swift in Sources */,
-				756C2646262C651C00CEB305 /* UserDataModel.swift in Sources */,
 				75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */,
 				75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */,
 				752991A62AD1C2F800C65E8C /* ProfileView.swift in Sources */,
@@ -792,15 +766,13 @@
 				758CF89D2AD44BAE006EEBE0 /* ProfilePostUserInfoView.swift in Sources */,
 				754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */,
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
-				756691F22626027B00B26B8A /* NetworkClient.swift in Sources */,
-				757193602895403000A4BFC7 /* MapCoordinator.swift in Sources */,
+				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
 				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,
 				75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */,
 				7593C4B2283C2E9C00EC3426 /* RealmError.swift in Sources */,
-				757193632895411900A4BFC7 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

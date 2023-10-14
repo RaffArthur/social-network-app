@@ -12,7 +12,7 @@ final class ProfilePostQuickActionsPanelView: UIView {
     private lazy var postLikesButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
-        button.tintColor = .SocialNetworkColor.mainText.set()
+        button.tintColor = .SocialNetworkColor.tintIcon
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
@@ -23,7 +23,7 @@ final class ProfilePostQuickActionsPanelView: UIView {
     private lazy var postCommentsButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "message"), for: .normal)
-        button.tintColor = .SocialNetworkColor.mainText.set()
+        button.tintColor = .SocialNetworkColor.tintIcon
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
@@ -34,7 +34,7 @@ final class ProfilePostQuickActionsPanelView: UIView {
     private lazy var postAddToFavouritesButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "bookmark"), for: .normal)
-        button.tintColor = .SocialNetworkColor.mainText.set()
+        button.tintColor = .SocialNetworkColor.tintIcon
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
@@ -45,7 +45,7 @@ final class ProfilePostQuickActionsPanelView: UIView {
     private lazy var postLikesLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .SocialNetworkColor.mainText.set()
+        label.textColor = .SocialNetworkColor.primaryText
         
         return label
     }()
@@ -53,7 +53,7 @@ final class ProfilePostQuickActionsPanelView: UIView {
     private lazy var postCommentsLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .SocialNetworkColor.mainText.set()
+        label.textColor = .SocialNetworkColor.primaryText
         
         return label
     }()
@@ -113,6 +113,8 @@ private extension ProfilePostQuickActionsPanelView {
     }
     
     func setupContent() {
+        backgroundColor = .SocialNetworkColor.mainBackground
+
         postLikesLabel.text = String(describing: Int.random(in: 100...500))
         postCommentsLabel.text = String(describing: Int.random(in: 200...1000))
     }

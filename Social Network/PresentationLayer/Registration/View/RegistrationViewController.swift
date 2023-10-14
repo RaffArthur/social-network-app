@@ -29,7 +29,7 @@ final class RegistrationViewController: UIViewController {
 
 private extension RegistrationViewController {
     func setupContent() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .SocialNetworkColor.mainBackground
     }
 }
 

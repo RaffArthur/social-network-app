@@ -16,7 +16,7 @@ final class PhotosView: UIView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(PhotosCollectionViewCell.self,
                     forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
-        cv.backgroundColor = .white
+        cv.backgroundColor = .SocialNetworkColor.mainBackground
         
         return cv
     }()
@@ -24,7 +24,7 @@ final class PhotosView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupScreen()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -40,13 +40,13 @@ extension PhotosView {
 }
 
 private extension PhotosView {
-    func setupScreen() {
+    func setupView() {
         setupLayout()
         setupContent()
     }
     
     func setupContent() {
-        backgroundColor = .systemBackground
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
     
     func setupLayout() {

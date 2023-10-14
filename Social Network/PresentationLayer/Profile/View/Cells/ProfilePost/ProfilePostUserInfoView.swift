@@ -22,19 +22,19 @@ final class ProfilePostUserInfoView: UIView {
     
     private lazy var userPostNameLabel: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .heavy)
+        label.font = .SocialNetworkFont.headline
         label.textAlignment = .left
         label.text = "Name Surname"
-        label.textColor = .SocialNetworkColor.mainText.set()
+        label.textColor = .SocialNetworkColor.primaryText
         
         return label
     }()
     
     private lazy var userPostRegaliaLabel: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .SocialNetworkFont.caption1
         label.textAlignment = .left
-        label.textColor = .SocialNetworkColor.secondaryText.set()
+        label.textColor = .SocialNetworkColor.secondaryText
         label.text = .localized(key: .statusPlaceholder)
         label.numberOfLines = 0
         
@@ -44,7 +44,7 @@ final class ProfilePostUserInfoView: UIView {
     private lazy var userPostQuickMenuButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        button.tintColor = .SocialNetworkColor.accent.set()
+        button.tintColor = .SocialNetworkColor.accent
         button.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .fill
@@ -104,7 +104,7 @@ private extension ProfilePostUserInfoView {
     }
     
     func setupContent() {
-        backgroundColor = .systemBackground
+        backgroundColor = .SocialNetworkColor.mainBackground
         
         userPostPhotoImageView.layer.cornerRadius = userPostPhotoImageView.frame.height / 2
     }

@@ -14,8 +14,8 @@ final class ProfilePostTableViewCell: UITableViewCell {
     
     private lazy var postTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .bold)
-        label.textColor = .SocialNetworkColor.mainText.set()
+        label.font = .SocialNetworkFont.t3
+        label.textColor = .SocialNetworkColor.primaryText
         label.numberOfLines = 2
         label.lineBreakMode = .byClipping
         
@@ -24,8 +24,8 @@ final class ProfilePostTableViewCell: UITableViewCell {
     
     private lazy var postDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .SocialNetworkColor.mainText.set()
+        label.font = .SocialNetworkFont.text
+        label.textColor = .SocialNetworkColor.primaryText
         label.numberOfLines = 0
         
         return label
@@ -37,7 +37,7 @@ final class ProfilePostTableViewCell: UITableViewCell {
         iv.layer.cornerRadius = 18
         iv.contentMode = .scaleAspectFit
         iv.image = UIImage(systemName: "photo.fill")
-        iv.backgroundColor = .SocialNetworkColor.accent.set()
+        iv.backgroundColor = .SocialNetworkColor.accent
         iv.tintColor = .white
         
         return iv
@@ -46,7 +46,7 @@ final class ProfilePostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
                         
-        setupLayout()
+        setupScreen()
     }
     
     required init?(coder: NSCoder) {
@@ -79,6 +79,15 @@ extension ProfilePostTableViewCell {
 }
 
 private extension ProfilePostTableViewCell {
+    func setupScreen() {
+        setupLayout()
+        setupContent()
+    }
+    
+    func setupContent() {
+        backgroundColor = .SocialNetworkColor.mainBackground
+    }
+    
     func setupLayout() {
         contentView.add(subviews: [postUserInfoView,
                                    postTitleLabel,

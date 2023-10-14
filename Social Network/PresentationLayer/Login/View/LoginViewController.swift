@@ -26,7 +26,7 @@ final class LoginViewController: UIViewController {
 
 private extension LoginViewController {
     func setupContent() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .SocialNetworkColor.mainBackground
     }
 }
 
