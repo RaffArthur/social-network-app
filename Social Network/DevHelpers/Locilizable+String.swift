@@ -39,6 +39,14 @@ enum SocialNetworkLocalizedStringKeys {
     case userStatusAlertCancelButton
     case userStatusAlertSetStatusSutton
     case localAuthentificationReason
+    case mainProfileInfoVcTitle
+    case mainProfileInfoNameTitle
+    case mainProfileInfoSurnameTitle
+    case mainProfileInfoHometownTitle
+    case mainProfileInfoGenderTitle
+    case mainProfileInfoBirthDateTitle
+    case mainProfileInfoMaleButtonTitle
+    case mainProfileInfoFemaleButtonTitle
 }
 
 extension SocialNetworkLocalizedStringKeys {
@@ -106,6 +114,22 @@ extension SocialNetworkLocalizedStringKeys {
             return "user_status_alert_set_status_button"
         case .localAuthentificationReason:
             return "local_authentification_reason"
+        case .mainProfileInfoVcTitle:
+            return "main_profile_info_vc_title"
+        case .mainProfileInfoNameTitle:
+            return "main_profile_info_name_title"
+        case .mainProfileInfoSurnameTitle:
+            return "main_profile_info_surname_title"
+        case .mainProfileInfoHometownTitle:
+            return "main_profile_info_hometown_title"
+        case .mainProfileInfoGenderTitle:
+            return "main_profile_info_gender_title"
+        case .mainProfileInfoBirthDateTitle:
+            return "main_profile_info_birthDate_title"
+        case .mainProfileInfoMaleButtonTitle:
+            return "main_profile_info_male_button_title"
+        case .mainProfileInfoFemaleButtonTitle:
+            return "main_profile_info_female_button_title"
         }
     }
 }
