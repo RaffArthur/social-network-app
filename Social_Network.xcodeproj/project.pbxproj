@@ -10,6 +10,8 @@
 		75026E622AD19CB800A082F3 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75026E612AD19CB800A082F3 /* FavouriteView.swift */; };
 		75026E662AD1A7D500A082F3 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75026E652AD1A7D500A082F3 /* PhotosView.swift */; };
 		75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */; };
+		75098DC72ADC432000D928ED /* MainProfileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC62ADC432000D928ED /* MainProfileInfoViewController.swift */; };
+		75098DC92ADC432D00D928ED /* MainProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC82ADC432D00D928ED /* MainProfileInfoView.swift */; };
 		751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753612717519900C80FB9 /* ProfileCoordinator.swift */; };
 		751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FavouriteCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
@@ -99,6 +101,8 @@
 		75026E612AD19CB800A082F3 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
 		75026E652AD1A7D500A082F3 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 		75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+SocialNetwork.swift"; sourceTree = "<group>"; };
+		75098DC62ADC432000D928ED /* MainProfileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoViewController.swift; sourceTree = "<group>"; };
+		75098DC82ADC432D00D928ED /* MainProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoView.swift; sourceTree = "<group>"; };
 		751753612717519900C80FB9 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		751753632717528D00C80FB9 /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
@@ -218,6 +222,23 @@
 				75B4449725C70CED00B3C586 /* PhotosViewController.swift */,
 				75026E652AD1A7D500A082F3 /* PhotosView.swift */,
 				75B4449525C70CED00B3C586 /* PhotosCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		75098DC52ADC429200D928ED /* MainProfileInfo */ = {
+			isa = PBXGroup;
+			children = (
+				75098DCA2ADC58D400D928ED /* View */,
+			);
+			path = MainProfileInfo;
+			sourceTree = "<group>";
+		};
+		75098DCA2ADC58D400D928ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				75098DC62ADC432000D928ED /* MainProfileInfoViewController.swift */,
+				75098DC82ADC432D00D928ED /* MainProfileInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -529,6 +550,7 @@
 				7582B463284CF8310095AC47 /* Registration */,
 				75B444A625C70CED00B3C586 /* Login */,
 				75B4449025C70CED00B3C586 /* Profile */,
+				75098DC52ADC429200D928ED /* MainProfileInfo */,
 				754D79B426C1AB3000ED19F8 /* Photos */,
 				75B4449B25C70CED00B3C586 /* Favourite */,
 			);
@@ -744,6 +766,7 @@
 				758CF89F2AD4607E006EEBE0 /* ProfilePostQuickActionsPanelView.swift in Sources */,
 				75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */,
 				7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */,
+				75098DC92ADC432D00D928ED /* MainProfileInfoView.swift in Sources */,
 				7582B473284D11470095AC47 /* RegistrationCoordinator.swift in Sources */,
 				751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */,
 				75026E622AD19CB800A082F3 /* FavouriteView.swift in Sources */,
@@ -770,6 +793,7 @@
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
 				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
+				75098DC72ADC432000D928ED /* MainProfileInfoViewController.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,
 				75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */,
 				7593C4B2283C2E9C00EC3426 /* RealmError.swift in Sources */,
