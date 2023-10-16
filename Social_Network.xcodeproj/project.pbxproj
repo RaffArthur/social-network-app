@@ -12,6 +12,8 @@
 		75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */; };
 		75098DC72ADC432000D928ED /* MainProfileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC62ADC432000D928ED /* MainProfileInfoViewController.swift */; };
 		75098DC92ADC432D00D928ED /* MainProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC82ADC432D00D928ED /* MainProfileInfoView.swift */; };
+		75098DCD2ADC602100D928ED /* MainProfileInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DCC2ADC602100D928ED /* MainProfileInfoCoordinator.swift */; };
+		75098DCF2ADC67EC00D928ED /* MainProfileInfoDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DCE2ADC67EC00D928ED /* MainProfileInfoDelegates.swift */; };
 		751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753612717519900C80FB9 /* ProfileCoordinator.swift */; };
 		751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FavouriteCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
@@ -103,6 +105,8 @@
 		75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+SocialNetwork.swift"; sourceTree = "<group>"; };
 		75098DC62ADC432000D928ED /* MainProfileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoViewController.swift; sourceTree = "<group>"; };
 		75098DC82ADC432D00D928ED /* MainProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoView.swift; sourceTree = "<group>"; };
+		75098DCC2ADC602100D928ED /* MainProfileInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoCoordinator.swift; sourceTree = "<group>"; };
+		75098DCE2ADC67EC00D928ED /* MainProfileInfoDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoDelegates.swift; sourceTree = "<group>"; };
 		751753612717519900C80FB9 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		751753632717528D00C80FB9 /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 		75098DC52ADC429200D928ED /* MainProfileInfo */ = {
 			isa = PBXGroup;
 			children = (
+				75098DCE2ADC67EC00D928ED /* MainProfileInfoDelegates.swift */,
 				75098DCA2ADC58D400D928ED /* View */,
 			);
 			path = MainProfileInfo;
@@ -313,6 +318,7 @@
 			children = (
 				751753612717519900C80FB9 /* ProfileCoordinator.swift */,
 				75175365271758C200C80FB9 /* PhotosCoordinator.swift */,
+				75098DCC2ADC602100D928ED /* MainProfileInfoCoordinator.swift */,
 			);
 			path = ProfileFlow;
 			sourceTree = "<group>";
@@ -748,6 +754,7 @@
 				75597A8A25D303AC00A120A7 /* TabCoordinator.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* ProfilePostTableViewCell.swift in Sources */,
 				75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */,
+				75098DCF2ADC67EC00D928ED /* MainProfileInfoDelegates.swift in Sources */,
 				75B444D125C70CEE00B3C586 /* ProfileUserHeaderView.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
 				75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */,
@@ -778,6 +785,7 @@
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
 				75F0E9AA28A02F5A00638A81 /* Locilizable+String.swift in Sources */,
+				75098DCD2ADC602100D928ED /* MainProfileInfoCoordinator.swift in Sources */,
 				75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* AuthenticationReviewerImpl.swift in Sources */,
 				758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */,

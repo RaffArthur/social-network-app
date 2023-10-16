@@ -40,5 +40,5 @@ enum CoordinatorType {
     case photos
     case post
     case registration
-    case map
+    case mainProfileInfo
 }

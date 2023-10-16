@@ -285,11 +285,11 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func userMoreInfoButtonTapped() {
-        
+        delegate?.userMoreInfoButtonWasTapped()
     }
     
     func userEditInfoButtonTapped() {
-        
+        delegate?.userEditInfoButtonWasTapped()
     }
 }
 
