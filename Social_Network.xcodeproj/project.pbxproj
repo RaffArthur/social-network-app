@@ -10,6 +10,11 @@
 		75026E622AD19CB800A082F3 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75026E612AD19CB800A082F3 /* FavouriteView.swift */; };
 		75026E662AD1A7D500A082F3 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75026E652AD1A7D500A082F3 /* PhotosView.swift */; };
 		75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */; };
+		75098DC72ADC432000D928ED /* MainProfileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC62ADC432000D928ED /* MainProfileInfoViewController.swift */; };
+		75098DC92ADC432D00D928ED /* MainProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DC82ADC432D00D928ED /* MainProfileInfoView.swift */; };
+		75098DCD2ADC602100D928ED /* MainProfileInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DCC2ADC602100D928ED /* MainProfileInfoCoordinator.swift */; };
+		75098DCF2ADC67EC00D928ED /* MainProfileInfoDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DCE2ADC67EC00D928ED /* MainProfileInfoDelegates.swift */; };
+		75098DD32ADDB7D500D928ED /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75098DD22ADDB7D500D928ED /* UserDataService.swift */; };
 		751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753612717519900C80FB9 /* ProfileCoordinator.swift */; };
 		751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751753632717528D00C80FB9 /* FavouriteCoordinator.swift */; };
 		75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75175365271758C200C80FB9 /* PhotosCoordinator.swift */; };
@@ -77,6 +82,10 @@
 		75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */; };
 		75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D8A24C27CFDC850056E78B /* ProfileDelegates.swift */; };
 		75E15D722635BF7000368DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757638F12635BA5300C3F190 /* GoogleService-Info.plist */; };
+		75E564702ADDC1A7004496C9 /* UserDataServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E5646F2ADDC1A7004496C9 /* UserDataServiceImpl.swift */; };
+		75E564722ADDC497004496C9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 75E564712ADDC497004496C9 /* FirebaseDatabase */; };
+		75E564742ADDE678004496C9 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E564732ADDE678004496C9 /* Services.swift */; };
+		75E564762ADEC124004496C9 /* UserMainProfileInfoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E564752ADEC124004496C9 /* UserMainProfileInfoError.swift */; };
 		75F0E9AA28A02F5A00638A81 /* Locilizable+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */; };
 		75F1CC732ACDB99C005AD96D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 75F1CC722ACDB99C005AD96D /* FirebaseAuth */; };
 		75F1CC752ACDB99C005AD96D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 75F1CC742ACDB99C005AD96D /* FirebaseFirestore */; };
@@ -99,6 +108,11 @@
 		75026E612AD19CB800A082F3 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
 		75026E652AD1A7D500A082F3 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 		75098DC32ADAD10200D928ED /* UIFont+SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+SocialNetwork.swift"; sourceTree = "<group>"; };
+		75098DC62ADC432000D928ED /* MainProfileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoViewController.swift; sourceTree = "<group>"; };
+		75098DC82ADC432D00D928ED /* MainProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoView.swift; sourceTree = "<group>"; };
+		75098DCC2ADC602100D928ED /* MainProfileInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoCoordinator.swift; sourceTree = "<group>"; };
+		75098DCE2ADC67EC00D928ED /* MainProfileInfoDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileInfoDelegates.swift; sourceTree = "<group>"; };
+		75098DD22ADDB7D500D928ED /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		751753612717519900C80FB9 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		751753632717528D00C80FB9 /* FavouriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCoordinator.swift; sourceTree = "<group>"; };
 		75175365271758C200C80FB9 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
@@ -165,6 +179,9 @@
 		75D8A24427CE81600056E78B /* AuthErrorCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverter.swift; sourceTree = "<group>"; };
 		75D8A24627CE81700056E78B /* AuthErrorCodeConverterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCodeConverterImpl.swift; sourceTree = "<group>"; };
 		75D8A24C27CFDC850056E78B /* ProfileDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDelegates.swift; sourceTree = "<group>"; };
+		75E5646F2ADDC1A7004496C9 /* UserDataServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataServiceImpl.swift; sourceTree = "<group>"; };
+		75E564732ADDE678004496C9 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		75E564752ADEC124004496C9 /* UserMainProfileInfoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMainProfileInfoError.swift; sourceTree = "<group>"; };
 		75F0E9A228A0274200638A81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locilizable+String.swift"; sourceTree = "<group>"; };
 		75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordToggle+UITextField.swift"; sourceTree = "<group>"; };
@@ -180,6 +197,7 @@
 				752C6AAE2ACDEE1900C11D7F /* Realm in Frameworks */,
 				752C6AB02ACDEE1900C11D7F /* RealmSwift in Frameworks */,
 				75F1CC752ACDB99C005AD96D /* FirebaseFirestore in Frameworks */,
+				75E564722ADDC497004496C9 /* FirebaseDatabase in Frameworks */,
 				752C6AB32ACDEED700C11D7F /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +238,42 @@
 				75B4449525C70CED00B3C586 /* PhotosCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		75098DC52ADC429200D928ED /* MainProfileInfo */ = {
+			isa = PBXGroup;
+			children = (
+				75098DCE2ADC67EC00D928ED /* MainProfileInfoDelegates.swift */,
+				75098DCA2ADC58D400D928ED /* View */,
+			);
+			path = MainProfileInfo;
+			sourceTree = "<group>";
+		};
+		75098DCA2ADC58D400D928ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				75098DC62ADC432000D928ED /* MainProfileInfoViewController.swift */,
+				75098DC82ADC432D00D928ED /* MainProfileInfoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		75098DD02ADDB74400D928ED /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				75E564732ADDE678004496C9 /* Services.swift */,
+				75098DD12ADDB7B100D928ED /* UserData */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		75098DD12ADDB7B100D928ED /* UserData */ = {
+			isa = PBXGroup;
+			children = (
+				75098DD22ADDB7D500D928ED /* UserDataService.swift */,
+				75E5646E2ADDC185004496C9 /* Implementation */,
+			);
+			path = UserData;
 			sourceTree = "<group>";
 		};
 		7519215528CCF315006338F7 /* Social_NetworkTests */ = {
@@ -292,6 +346,7 @@
 			children = (
 				751753612717519900C80FB9 /* ProfileCoordinator.swift */,
 				75175365271758C200C80FB9 /* PhotosCoordinator.swift */,
+				75098DCC2ADC602100D928ED /* MainProfileInfoCoordinator.swift */,
 			);
 			path = ProfileFlow;
 			sourceTree = "<group>";
@@ -317,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				7574B7BF2610D30A00A349E0 /* UserAuthError.swift */,
+				75E564752ADEC124004496C9 /* UserMainProfileInfoError.swift */,
 				7593C4B1283C2E9C00EC3426 /* RealmError.swift */,
 				7593C4B3283C2EE000EC3426 /* RealmErrorCodeConverter */,
 				75D8A24827CEAA8D0056E78B /* AuthErrorCodeConverter */,
@@ -529,6 +585,7 @@
 				7582B463284CF8310095AC47 /* Registration */,
 				75B444A625C70CED00B3C586 /* Login */,
 				75B4449025C70CED00B3C586 /* Profile */,
+				75098DC52ADC429200D928ED /* MainProfileInfo */,
 				754D79B426C1AB3000ED19F8 /* Photos */,
 				75B4449B25C70CED00B3C586 /* Favourite */,
 			);
@@ -538,6 +595,7 @@
 		75CE1E26284663CE0034C96C /* BusinessLogicLayer */ = {
 			isa = PBXGroup;
 			children = (
+				75098DD02ADDB74400D928ED /* Services */,
 				75CE1E282846650E0034C96C /* CoreDataManagers */,
 				75B6E95928AC2BB500A58A32 /* LocalAuthorizationService */,
 				7582B46D284CF9170095AC47 /* AuthentificationReviewer */,
@@ -592,6 +650,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		75E5646E2ADDC185004496C9 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				75E5646F2ADDC1A7004496C9 /* UserDataServiceImpl.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -615,6 +681,7 @@
 				752C6AAD2ACDEE1900C11D7F /* Realm */,
 				752C6AAF2ACDEE1900C11D7F /* RealmSwift */,
 				752C6AB22ACDEED700C11D7F /* IQKeyboardManagerSwift */,
+				75E564712ADDC497004496C9 /* FirebaseDatabase */,
 			);
 			productName = Navigation;
 			productReference = 060782AE250CE27700A87020 /* Social_Network.app */;
@@ -711,6 +778,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75E564702ADDC1A7004496C9 /* UserDataServiceImpl.swift in Sources */,
 				758551E92782285800B04E25 /* AddSubviews+UIView.swift in Sources */,
 				7582B471284D0ABE0095AC47 /* RegistrationView.swift in Sources */,
 				75B3732627109B0A00EEE6E8 /* Coordinator.swift in Sources */,
@@ -724,8 +792,10 @@
 				75B444CD25C70CEE00B3C586 /* PhotosViewController.swift in Sources */,
 				758CF8972AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift in Sources */,
 				75597A8A25D303AC00A120A7 /* TabCoordinator.swift in Sources */,
+				75E564762ADEC124004496C9 /* UserMainProfileInfoError.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* ProfilePostTableViewCell.swift in Sources */,
 				75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */,
+				75098DCF2ADC67EC00D928ED /* MainProfileInfoDelegates.swift in Sources */,
 				75B444D125C70CEE00B3C586 /* ProfileUserHeaderView.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
 				75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */,
@@ -744,6 +814,7 @@
 				758CF89F2AD4607E006EEBE0 /* ProfilePostQuickActionsPanelView.swift in Sources */,
 				75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */,
 				7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */,
+				75098DC92ADC432D00D928ED /* MainProfileInfoView.swift in Sources */,
 				7582B473284D11470095AC47 /* RegistrationCoordinator.swift in Sources */,
 				751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */,
 				75026E622AD19CB800A082F3 /* FavouriteView.swift in Sources */,
@@ -755,12 +826,14 @@
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
 				75F0E9AA28A02F5A00638A81 /* Locilizable+String.swift in Sources */,
+				75098DCD2ADC602100D928ED /* MainProfileInfoCoordinator.swift in Sources */,
 				75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */,
 				75B444E525C70CEE00B3C586 /* AuthenticationReviewerImpl.swift in Sources */,
 				758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */,
 				75B373292710A5F400EEE6E8 /* TabBarPage.swift in Sources */,
 				75D8A24327C530240056E78B /* LoginDelegates.swift in Sources */,
 				7582B466284CF85A0095AC47 /* RegistrationDelegates.swift in Sources */,
+				75098DD32ADDB7D500D928ED /* UserDataService.swift in Sources */,
 				75026E662AD1A7D500A082F3 /* PhotosView.swift in Sources */,
 				7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */,
 				758CF89D2AD44BAE006EEBE0 /* ProfilePostUserInfoView.swift in Sources */,
@@ -770,8 +843,10 @@
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
 				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
+				75098DC72ADC432000D928ED /* MainProfileInfoViewController.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,
 				75175366271758C200C80FB9 /* PhotosCoordinator.swift in Sources */,
+				75E564742ADDE678004496C9 /* Services.swift in Sources */,
 				7593C4B2283C2E9C00EC3426 /* RealmError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1092,6 +1167,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 752C6AB12ACDEED700C11D7F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		75E564712ADDC497004496C9 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75F1CC712ACDB99C005AD96D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 		75F1CC722ACDB99C005AD96D /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

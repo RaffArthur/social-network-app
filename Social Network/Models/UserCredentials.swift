@@ -13,3 +13,14 @@ struct UserCredentials: Codable {
     let repeatPassword: String?
     let loggedIn: Bool?
 }
+
+struct UserData: Codable {
+    let name: String?
+    let surname: String?
+    let nickname: String?
+    let regalia: String?
+    let hometown: String?
+    let birthDate: String?
+    let gender: String?
+    let isGenderSelected: Bool?
+}
