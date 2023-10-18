@@ -341,6 +341,23 @@
         }
       }
     },
+    "main_profile_info_regalia_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regalia"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Должность"
+          }
+        }
+      }
+    },
     "main_profile_info_surname_title" : {
       "extractionState" : "manual",
       "localizations" : {

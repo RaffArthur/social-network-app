@@ -7,13 +7,4 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="views" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="UserData" representedClassName="UserData" syncable="YES" codeGenerationType="class">
-        <attribute name="birthDate" optional="YES" attributeType="String"/>
-        <attribute name="gender" optional="YES" attributeType="String"/>
-        <attribute name="hometown" optional="YES" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="nickname" optional="YES" attributeType="String"/>
-        <attribute name="regalia" optional="YES" attributeType="String"/>
-        <attribute name="surname" optional="YES" attributeType="String"/>
-    </entity>
 </model>

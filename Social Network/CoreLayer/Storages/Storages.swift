@@ -10,4 +10,5 @@ import Foundation
 struct Storages {
     static var posts = [Post]()
     static var photos = [Photo]()
+    static var userData = [UserData]()
 }

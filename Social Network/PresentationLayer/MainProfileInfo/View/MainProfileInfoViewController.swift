@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 final class MainProfileInfoViewController: UIViewController {
+    private let service = Services.userDataService()
+    
     weak var delegate: MainProfileInfoViewControllerDelegate?
     
     private lazy var mainProfileInfoView = MainProfileInfoView()
@@ -28,6 +30,34 @@ final class MainProfileInfoViewController: UIViewController {
         
         return bbi
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        service.getUserData { [weak self] result in
+            switch result {
+            case .success(let result):
+                guard let name = result.name,
+                      let surname = result.surname,
+                      let regalia = result.regalia,
+                      let birthDate = result.birthDate,
+                      let hometown = result.hometown,
+                      let gender = result.gender
+                else {
+                    return
+                }
+                
+                self?.mainProfileInfoView.setupUserMainInfoFields(userName: name,
+                                                                 userSurname: surname,
+                                                                 userRegalia: regalia,
+                                                                 userBirthDate: birthDate,
+                                                                 userHometown: hometown,
+                                                                 userGender: gender)
+            case .failure(let error):
+                self?.show(userMainProfileInfoErrorAlert: error)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +89,14 @@ private extension MainProfileInfoViewController {
     }
     
     @objc func saveProfileInfoButtonWasTapped() {
-        delegate?.saveProfileInfoButtonWasTapped()
+        service.saveUserData(userData: mainProfileInfoView.getUserMainInfo()) { [weak self] result in
+            switch result {
+            case .success:
+                self?.delegate?.saveProfileInfoButtonWasTapped()
+            case .failure(let error):
+                self?.show(userMainProfileInfoErrorAlert: error)
+            }
+        }
     }
     
     func setupActions() {
@@ -68,6 +105,22 @@ private extension MainProfileInfoViewController {
         
         saveProfileInfoButton.action = #selector(saveProfileInfoButtonWasTapped)
         saveProfileInfoButton.target = self
+    }
+}
+
+private extension MainProfileInfoViewController {
+    func show(userMainProfileInfoErrorAlert: UserMainProfileInfoError) {
+        let alertController = UIAlertController(title: userMainProfileInfoErrorAlert.title,
+                                                message: userMainProfileInfoErrorAlert.message,
+                                                preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "ОК",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 

@@ -47,6 +47,7 @@ enum SocialNetworkLocalizedStringKeys {
     case mainProfileInfoBirthDateTitle
     case mainProfileInfoMaleButtonTitle
     case mainProfileInfoFemaleButtonTitle
+    case mainProfileInfoRegaliaTitle
 }
 
 extension SocialNetworkLocalizedStringKeys {
@@ -130,6 +131,8 @@ extension SocialNetworkLocalizedStringKeys {
             return "main_profile_info_male_button_title"
         case .mainProfileInfoFemaleButtonTitle:
             return "main_profile_info_female_button_title"
+        case .mainProfileInfoRegaliaTitle:
+            return "main_profile_info_regalia_title"
         }
     }
 }

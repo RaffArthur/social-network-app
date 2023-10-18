@@ -11,8 +11,8 @@ import UIKit
 final class MainProfileInfoView: UIView {
     weak var delegate: MainProfileInfoViewDelegate?
     
-    var userBirthDate: String?
-        
+    var userBirthDate: String? = String()
+    
     private lazy var userNameTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .SocialNetworkFont.caption2
@@ -194,6 +194,39 @@ final class MainProfileInfoView: UIView {
         return tf
     }()
     
+    private lazy var userRegaliaTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .SocialNetworkFont.caption2
+        label.textColor = .SocialNetworkColor.primaryText
+        label.text = .localized(key: .mainProfileInfoRegaliaTitle)
+        
+        return label
+    }()
+    
+    private lazy var userRegaliaField: UITextField = {
+        var tf = UITextField()
+        tf.contentVerticalAlignment = .center
+        tf.autocorrectionType = .no
+        tf.autocapitalizationType = .none
+        tf.textContentType = .addressCity
+        tf.backgroundColor = .SocialNetworkColor.formBackground
+        tf.font = .SocialNetworkFont.text
+        tf.attributedPlaceholder = NSAttributedString(string: .localized(key: .mainProfileInfoRegaliaTitle),
+                                                      attributes: [.foregroundColor: UIColor.SocialNetworkColor.placeholderText])
+        tf.tintColor = .SocialNetworkColor.accent
+        tf.textColor = .SocialNetworkColor.primaryText
+        tf.textAlignment = .left
+        tf.leftView = UIView(frame: CGRect(x: 0,
+                                           y: 0,
+                                           width: 10,
+                                           height: tf.frame.height))
+        tf.leftViewMode = .always
+        tf.layer.cornerRadius = 10
+        tf.layer.masksToBounds = true
+        
+        return tf
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -223,7 +256,9 @@ private extension MainProfileInfoView {
                        userBirthDateTitleLabel,
                        userBirthDateField,
                        userHometownTitleLabel,
-                       userHometownField])
+                       userHometownField,
+                       userRegaliaTitleLabel,
+                       userRegaliaField])
         
         userNameTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview {
@@ -296,6 +331,19 @@ private extension MainProfileInfoView {
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
+        
+        userRegaliaTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(userHometownField.snp.bottom).offset(14)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        userRegaliaField.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.top.equalTo(userRegaliaTitleLabel.snp.bottom).offset(6)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
     }
     
     func setupContent() {
@@ -304,6 +352,16 @@ private extension MainProfileInfoView {
 }
 
 private extension MainProfileInfoView {
+    @objc func genderSelect(sender: UIButton) {
+        if sender == userMaleButton {
+            userMaleButton.isSelected = true
+            userFemaleButton.isSelected = false
+        } else {
+            userMaleButton.isSelected = false
+            userFemaleButton.isSelected = true
+        }
+    }
+    
     @objc func userBirthDateChanged(sender: UIDatePicker) {
         delegate?.birthDateWillBeSaved(date: sender.date)
         
@@ -312,5 +370,76 @@ private extension MainProfileInfoView {
     
     func setupActions() {
         datePicker.addTarget(self, action: #selector(userBirthDateChanged), for: .valueChanged)
+        userMaleButton.addTarget(self, action: #selector(genderSelect(sender:)), for: .touchUpInside)
+        userFemaleButton.addTarget(self, action: #selector(genderSelect(sender:)), for: .touchUpInside)
+    }
+}
+
+extension MainProfileInfoView {
+    func getUserMainInfo() -> UserData {
+        guard let userName = userNameField.text,
+              let userSurname = userSurnameField.text,
+              let userRegalia = userRegaliaField.text,
+              let maleGender = userMaleButton.titleLabel?.text,
+              let femaleGender = userFemaleButton.titleLabel?.text
+        else {
+            return UserData(name: nil,
+                            surname: nil,
+                            nickname: nil,
+                            regalia: nil,
+                            hometown: nil,
+                            birthDate: nil,
+                            gender: nil,
+                            isGenderSelected: nil)
+        }
+        
+        var selectedGender = String()
+        var isGenderSelected = false
+        
+        if userMaleButton.isSelected {
+            isGenderSelected = true
+            selectedGender = maleGender
+        }
+        
+        if userFemaleButton.isSelected {
+            isGenderSelected = true
+            selectedGender = femaleGender
+        }
+        
+        return UserData(name: userNameField.text,
+                        surname: userSurnameField.text,
+                        nickname: "@\(userName)_\(userSurname)".lowercased(),
+                        regalia: userRegalia,
+                        hometown: userHometownField.text,
+                        birthDate: userBirthDateField.text,
+                        gender: selectedGender,
+                        isGenderSelected: isGenderSelected)
+    }
+    
+    func setupUserMainInfoFields(userName: String,
+                                 userSurname: String,
+                                 userRegalia: String,
+                                 userBirthDate: String,
+                                 userHometown: String,
+                                 userGender: String) {
+        
+        userNameField.text = userName
+        userSurnameField.text = userSurname
+        userBirthDateField.text = userRegalia
+        userRegaliaField.text = userBirthDate
+        userHometownField.text = userHometown
+        
+        let maleGender = userMaleButton.titleLabel?.text
+        let femaleGender = userFemaleButton.titleLabel?.text
+        
+        if userGender == maleGender {
+            userMaleButton.isSelected = true
+            userFemaleButton.isSelected = false
+        } 
+        
+        if userGender == femaleGender {
+            userMaleButton.isSelected = false
+            userFemaleButton.isSelected = true
+        }
     }
 }
