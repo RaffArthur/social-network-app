@@ -16,7 +16,7 @@ final class ProfileView: UIView {
         tableView.register(ProfilePhotosPreviewTableViewCell.self,
                            forCellReuseIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self))
         tableView.showsVerticalScrollIndicator = false
-        tableView.backgroundColor = .SocialNetworkColor.mainBackground
+        tableView.backgroundColor = .SocialNetworkColor.clearBackground
                 
         return tableView
     }()
@@ -42,10 +42,16 @@ extension ProfileView {
         tableView.dataSource = dataSource
     }
     
-    func getTableViewTouchPointIndexPath(sender: UITapGestureRecognizer) -> IndexPath {
-        let touchPoint = sender.location(in: tableView)
+    func tableViewIndexPath(sender: UIButton) -> IndexPath {
+        var superView = sender.superview
         
-        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return IndexPath() }
+        while !(superView is UITableViewCell) {
+            superView = superView?.superview
+        }
+        
+        let cell = superView as! UITableViewCell
+                
+        guard let indexPath = tableView.indexPath(for: cell) else { return IndexPath() }
         
         return indexPath
     }
@@ -68,6 +74,6 @@ private extension ProfileView {
     }
     
     func setupContent() {
-        backgroundColor = .SocialNetworkColor.mainBackground
+        backgroundColor = .SocialNetworkColor.clearBackground
     }
 }

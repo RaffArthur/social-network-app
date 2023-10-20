@@ -48,8 +48,6 @@
 		758468E427B6CBD5001559A9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758468E327B6CBD5001559A9 /* LoginView.swift */; };
 		758551E92782285800B04E25 /* AddSubviews+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551E82782285800B04E25 /* AddSubviews+UIView.swift */; };
 		758551EB27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */; };
-		758CF8952AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758CF8942AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift */; };
-		758CF8972AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758CF8962AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift */; };
 		758CF89D2AD44BAE006EEBE0 /* ProfilePostUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758CF89C2AD44BAE006EEBE0 /* ProfilePostUserInfoView.swift */; };
 		758CF89F2AD4607E006EEBE0 /* ProfilePostQuickActionsPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758CF89E2AD4607E006EEBE0 /* ProfilePostQuickActionsPanelView.swift */; };
 		7593C4B2283C2E9C00EC3426 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593C4B1283C2E9C00EC3426 /* RealmError.swift */; };
@@ -145,8 +143,6 @@
 		758468E327B6CBD5001559A9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		758551E82782285800B04E25 /* AddSubviews+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddSubviews+UIView.swift"; sourceTree = "<group>"; };
 		758551EA27822F5900B04E25 /* AddArrangedSubviews+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddArrangedSubviews+UIStackView.swift"; sourceTree = "<group>"; };
-		758CF8942AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfographicView.swift; sourceTree = "<group>"; };
-		758CF8962AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserQuickActionsView.swift; sourceTree = "<group>"; };
 		758CF89C2AD44BAE006EEBE0 /* ProfilePostUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostUserInfoView.swift; sourceTree = "<group>"; };
 		758CF89E2AD4607E006EEBE0 /* ProfilePostQuickActionsPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostQuickActionsPanelView.swift; sourceTree = "<group>"; };
 		7593C4B1283C2E9C00EC3426 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
@@ -448,8 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				75B4449A25C70CED00B3C586 /* ProfileUserHeaderView.swift */,
-				758CF8942AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift */,
-				758CF8962AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift */,
 			);
 			path = ProfileUser;
 			sourceTree = "<group>";
@@ -785,12 +779,10 @@
 				75B444E125C70CEE00B3C586 /* AuthenticationReviewer.swift in Sources */,
 				751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */,
 				755ADFC625E51A19008E92A3 /* ImageDownloader+UIImageView.swift in Sources */,
-				758CF8952AD2FB0C006EEBE0 /* ProfileUserInfographicView.swift in Sources */,
 				75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */,
 				7593C4B7283C2F4700EC3426 /* RealmErrorCodeConverterImpl.swift in Sources */,
 				754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */,
 				75B444CD25C70CEE00B3C586 /* PhotosViewController.swift in Sources */,
-				758CF8972AD2FBB9006EEBE0 /* ProfileUserQuickActionsView.swift in Sources */,
 				75597A8A25D303AC00A120A7 /* TabCoordinator.swift in Sources */,
 				75E564762ADEC124004496C9 /* UserMainProfileInfoError.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* ProfilePostTableViewCell.swift in Sources */,

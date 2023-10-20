@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func logoutButtonWasTapped()
     func photoLibraryWasTapped()
-    func postWasTapped(post: Post)
+    func postWasAddedToFavourite(post: Post)
     func userEditInfoButtonWasTapped()
     func userMoreInfoButtonWasTapped()
 }
@@ -18,4 +19,16 @@ protocol ProfileViewControllerDelegate: AnyObject {
 protocol ProfileHeaderViewDelegate: AnyObject {
     func userEditInfoButtonTapped()
     func userMoreInfoButtonTapped()
+}
+
+protocol ProfilePostQuickActionsPanelViewDelegate: AnyObject {
+    func postLikesButtonWasTapped(sender: UIButton)
+    func postCommentsButtonWasTapped(sender: UIButton)
+    func postAddToFavouritesButtonWasTapped(sender: UIButton)
+}
+
+protocol ProfilePostTableViewCellDelegate: AnyObject {
+    func postLikesButtonWasTapped(sender: UIButton)
+    func postCommentsButtonWasTapped(sender: UIButton)
+    func postAddToFavouritesButtonWasTapped(sender: UIButton)
 }

@@ -10,9 +10,6 @@ import UIKit
 final class ProfileUserHeaderView: UIView {
     weak var delegate: ProfileHeaderViewDelegate?
     
-    private lazy var userInfographicView = ProfileUserInfographicView()
-    private lazy var userQuickActionsView = ProfileUserQuickActionsView()
-    
     private lazy var userPhoto: UIImageView = {
         var iv = UIImageView()
         iv.isUserInteractionEnabled = true
@@ -34,7 +31,7 @@ final class ProfileUserHeaderView: UIView {
         return label
     }()
     
-    private lazy var userDescription: UILabel = {
+    private lazy var userRegalia: UILabel = {
         var label = UILabel()
         label.font = .SocialNetworkFont.caption1
         label.textAlignment = .left
@@ -94,6 +91,13 @@ final class ProfileUserHeaderView: UIView {
     }
 }
 
+extension ProfileUserHeaderView {
+    func setupUserInfo(name: String, regalia: String) {
+        userName.text = name
+        userRegalia.text = regalia
+    }
+}
+
 extension ProfileUserHeaderView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -124,11 +128,11 @@ private extension ProfileUserHeaderView {
     func setupLayout() {
         add(subviews: [userPhoto,
                        userName,
-                       userDescription,
+                       userRegalia,
                        userMoreInfoButton,
-                       userEditInfoButton,
-                       userInfographicView,
-                       userQuickActionsView])
+                       userEditInfoButton])
+        
+        userPhoto.snp.contentHuggingVerticalPriority = 999
         
         userPhoto.snp.makeConstraints { make in
             make.size.equalTo(60)
@@ -142,14 +146,14 @@ private extension ProfileUserHeaderView {
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        userDescription.snp.makeConstraints { make in
+        userRegalia.snp.makeConstraints { make in
             make.top.equalTo(userName.snp.bottom).offset(4)
             make.leading.equalTo(userPhoto.snp.trailing).offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
         
         userMoreInfoButton.snp.makeConstraints { make in
-            make.top.equalTo(userDescription.snp.bottom).offset(4)
+            make.top.equalTo(userRegalia.snp.bottom).offset(4)
             make.leading.equalTo(userPhoto.snp.trailing).offset(16)
             make.width.equalTo(200)
         }
@@ -157,18 +161,6 @@ private extension ProfileUserHeaderView {
         userEditInfoButton.snp.makeConstraints { make in
             make.height.equalTo(48)
             make.top.equalTo(userMoreInfoButton.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        
-        userInfographicView.snp.makeConstraints { make in
-            make.top.equalTo(userEditInfoButton.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        
-        userQuickActionsView.snp.makeConstraints { make in
-            make.top.equalTo(userInfographicView.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview().offset(-24)

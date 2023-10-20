@@ -27,7 +27,7 @@ extension UIColor {
         static let errorBackground = UIColor(rgba: 250, 235, 235, 1)
         
         // MARK: - Foreground Colors
-        static let primaryForeground = theme == .light ? UIColor(rgba: 255, 255, 255) : UIColor(rgba: 44, 45, 46)
+        static let primaryForeground = theme == .light ? UIColor(rgba: 242, 243, 245) : UIColor(rgba: 44, 45, 46)
         static let secondaryForeground = theme == .light ? UIColor(rgba: 38, 136, 235) : UIColor(rgba: 255, 255, 255)
         static let mutedForeground = UIColor(rgba: 38, 136, 235)
         static let tertiaryForeground = UIColor(rgba:45, 129, 224)
@@ -44,7 +44,7 @@ extension UIColor {
         static let errorBorder = UIColor(rgba: 230, 70, 70)
         
         // MARK: - Icon Colors
-        static let tintIcon = theme == .light ? UIColor(rgba: 0, 0, 0) : UIColor(rgba: 225, 227, 230)
+        static let tintIcon = theme == .light ? UIColor(rgba: 184, 193, 204) : UIColor(rgba: 135, 135, 135)
     }
 }
 

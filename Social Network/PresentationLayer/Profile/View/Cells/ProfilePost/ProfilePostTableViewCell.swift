@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 final class ProfilePostTableViewCell: UITableViewCell {
+    weak var delegate: ProfilePostTableViewCellDelegate?
+    
     private lazy var postUserInfoView = ProfilePostUserInfoView()
     private lazy var postQuickActionsPanelView = ProfilePostQuickActionsPanelView()
     
@@ -47,34 +49,73 @@ final class ProfilePostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
                         
         setupScreen()
+        
+        postQuickActionsPanelView.delegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
 extension ProfilePostTableViewCell {
-    func configure(post: Post) {
+    func configure(post: Post, userName: String, userRegalia: String) {
         guard let postTitle = post.title,
-              let postDescription = post.body
+              let postDescription = post.body,
+              let postLikes = post.likes,
+              let postComments = post.comments,
+              let isPostLiked = post.isPostLiked,
+              let isPostAddedToFavourite = post.isPostAddedToFavourite
         else {
             return
         }
+        
+        postQuickActionsPanelView.setupQuiackActionsPanelInfo(postLikes: postLikes,
+                                                              postComments: postComments,
+                                                              isPostLiked: isPostLiked,
+                                                              isPostAddedToFavourite: isPostAddedToFavourite)
+        
+        postUserInfoView.setupProfileUserInfo(name: userName,
+                                              regalia: userRegalia)
         
         self.postTitleLabel.text = postTitle.firstUppercased
         self.postDescriptionLabel.text = postDescription.firstUppercased
     }
     
-    func configure(post: FavouritePost) {
+    func configure(post: FavouritePost, userName: String, userRegalia: String) {
         guard let postTitle = post.title,
-              let postDescription = post.body
+              let postDescription = post.body,
+              let postLikes = post.likes,
+              let postComments = post.comments
         else {
             return
         }
-
+        
+        postQuickActionsPanelView.setupQuiackActionsPanelInfo(postLikes: postLikes,
+                                                              postComments: postComments,
+                                                              isPostLiked: post.isPostLiked,
+                                                              isPostAddedToFavourite: post.isPostAddedToFavurite)
+        
+        postUserInfoView.setupProfileUserInfo(name: userName, 
+                                              regalia: userRegalia)
+        
         self.postTitleLabel.text = postTitle.firstUppercased
         self.postDescriptionLabel.text = postDescription.firstUppercased
+    }
+}
+
+extension ProfilePostTableViewCell: ProfilePostQuickActionsPanelViewDelegate {
+    func postLikesButtonWasTapped(sender: UIButton) {
+        delegate?.postLikesButtonWasTapped(sender: sender)
+    }
+    
+    func postCommentsButtonWasTapped(sender: UIButton) {
+        delegate?.postCommentsButtonWasTapped(sender: sender)
+    }
+    
+    func postAddToFavouritesButtonWasTapped(sender: UIButton) {
+        delegate?.postAddToFavouritesButtonWasTapped(sender: sender)
     }
 }
 

@@ -14,10 +14,17 @@ final class ProfileViewController: UIViewController {
     
     private lazy var postsAdapter = PostsAdapter()
     private lazy var photosAdapter = PhotosAdapter()
+    private lazy var service = Services.userDataService()
         
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
-    
     private lazy var profileView = ProfileView()
+    
+    private lazy var nickName = String()
+    private lazy var userName = String()
+    private lazy var userSurname = String()
+    private lazy var userRegalia = String()
+    private lazy var postLikes = Int()
+    private lazy var postComments = Int()
     
     private lazy var logoutButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
@@ -36,6 +43,43 @@ final class ProfileViewController: UIViewController {
         return bbi
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        tabBarController?.tabBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        service.getUserData { [weak self] result in
+            switch result {
+            case .success(let data):
+                guard let nickname = data.nickname,
+                      let name = data.name,
+                      let surname = data.surname,
+                      let regalia = data.regalia
+                else {
+                    return
+                }
+                
+                self?.nickName = nickname
+                self?.userName = name
+                self?.userSurname = surname
+                self?.userRegalia = regalia
+                
+                self?.nickNameButton.title = nickname
+                
+                self?.profileUserHeaderView.setupUserInfo(name: "\(name) \(surname)",
+                                                          regalia: regalia)
+                
+                self?.profileView.tableViewReloadData()
+
+            case .failure(let error):
+                self?.show(mainProfileError: error)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,15 +94,6 @@ final class ProfileViewController: UIViewController {
     
     override func loadView() {
         view = profileView
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        tabBarController?.tabBar.isHidden = false
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
 }
 
@@ -75,9 +110,15 @@ private extension ProfileViewController {
             
         }
         
+        // Нужно поправить данные
         postsAdapter.getPosts { [weak self] result in
             let posts = result.posts.map {
-                return Post(title: $0.title, body: $0.body)
+                return Post(title: $0.title,
+                            body: $0.body,
+                            isPostLiked: true,
+                            isPostAddedToFavourite: true,
+                            likes: String(describing: self?.postLikes),
+                            comments: String(describing: self?.postComments))
             }
             
             Storages.posts.append(contentsOf: posts)
@@ -110,31 +151,22 @@ private extension ProfileViewController {
         }
     }
     
-    @objc func didTapPost(_ sender: UITapGestureRecognizer) {
-        let indexPath = profileView.getTableViewTouchPointIndexPath(sender: sender)
-        
-        let post = Storages.posts[indexPath.item]
-        
-        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
-            DispatchQueue.main.async { [weak self] in
-                if favouritePosts.isEmpty {
-                    self?.delegate?.postWasTapped(post: post)
-                    self?.animateAddToFavouriteTap()
-                } else {
-                    if favouritePosts.contains(where: { $0.title == post.title }) {
-                        self?.showAlreadyInFavouritesAlert()
-                    } else {
-                        self?.delegate?.postWasTapped(post: post)
-                        self?.animateAddToFavouriteTap()
-                    }
-                }
-            }
-        }
-    }
-    
     func show(error: UserAuthError) {
         let alertController = UIAlertController(title: error.title,
                                                  message: error.message,
+                                                 preferredStyle: .alert)
+        let action = UIAlertAction(title: "ОК",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func show(mainProfileError: UserMainProfileInfoError) {
+        let alertController = UIAlertController(title: mainProfileError.title,
+                                                 message: mainProfileError.message,
                                                  preferredStyle: .alert)
         let action = UIAlertAction(title: "ОК",
                                    style: .cancel,
@@ -166,7 +198,7 @@ private extension ProfileViewController {
     func showNicknameCopiedToClipboardAlert() {
         let alert = UIAlertController(title: nil,
                                       message: nil,
-                                      preferredStyle: .alert)
+                                      preferredStyle: .actionSheet)
         
         let attributedString = NSAttributedString(string: "Ссылка скопирована",
                                                   attributes: [NSAttributedString.Key.font : UIFont.SocialNetworkFont.caption1,
@@ -178,37 +210,6 @@ private extension ProfileViewController {
                 
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
             alert.dismiss(animated: true, completion: nil)
-        }
-    }
-
-    
-    func animateAddToFavouriteTap() {
-        let addedScale = CGFloat.random(in: 0.8...2.0)
-        
-        let rotationAngle = CGFloat.random(in: -12...36)
-        
-        let imageView = UIImageView(image: UIImage(systemName: "heart.fill"))
-        
-        imageView.tintColor = .systemRed
-                                
-        guard let tabBarView = tabBarController?.view else { return }
-        
-        imageView.center = CGPoint(x: tabBarView.center.x, y: tabBarView.center.y)
-
-        tabBarView.addSubview(imageView)
-
-        UIView.animate(withDuration: 0) {
-            imageView.bounds.origin = CGPoint(x: rotationAngle, y: rotationAngle)
-            imageView.transform = CGAffineTransform(scaleX: addedScale, y: addedScale)
-        } completion: { _ in
-            UIView.animate(withDuration: 0.5, delay: 0.1) {
-                imageView.center.y -= 100
-                imageView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-                imageView.tintColor = .SocialNetworkColor.clearBackground
-                
-            } completion: {_ in
-                imageView.removeFromSuperview()
-            }
         }
     }
     
@@ -231,13 +232,9 @@ extension ProfileViewController: UITableViewDelegate {
                    didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 0 {
-            delegate?.photoLibraryWasTapped()
-        } else {
-            let tap = UITapGestureRecognizer(target: self,action: #selector(didTapPost))
-            tap.numberOfTapsRequired = 2
-            tableView.addGestureRecognizer(tap)
-        }
+        guard indexPath.section == 0 else { return }
+        
+        delegate?.photoLibraryWasTapped()
     }
 }
 
@@ -258,6 +255,8 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier ,
                                                      for: indexPath) as? ProfilePhotosPreviewTableViewCell
             
+            cell?.selectionStyle = .none
+            
             if !Storages.photos.isEmpty {
                 cell?.configure(photos: Storages.photos, withCount: Storages.photos.count)
             }
@@ -267,19 +266,35 @@ extension ProfileViewController: UITableViewDataSource {
             let identifier = String(describing: ProfilePostTableViewCell.self)
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                      for: indexPath) as? ProfilePostTableViewCell
+            
+            cell?.delegate = self
+            
+            cell?.selectionStyle = .none
+                        
             let post = Storages.posts[indexPath.row]
             
-            cell?.configure(post: post)
+            cell?.configure(post: post, userName: "\(userName) \(userSurname)", userRegalia: userRegalia)
             
             return cell ?? UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView,
-                   viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 0 else { return UIView() }
-        
-        return profileUserHeaderView
+                   viewForHeaderInSection section: Int) -> UIView? {        
+        if section == 0 {
+            return profileUserHeaderView
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   viewForFooterInSection section: Int) -> UIView? {
+        if section == 0 {
+            return nil
+        } else {
+            return nil
+        }
     }
 }
 
@@ -293,10 +308,49 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     }
 }
 
+extension ProfileViewController: ProfilePostTableViewCellDelegate {
+    func postLikesButtonWasTapped(sender: UIButton) {
+        let indexPath = profileView.tableViewIndexPath(sender: sender)
+        
+        postLikes += 1
+        
+        profileView.tableViewReloadData()
+    }
+    
+    func postCommentsButtonWasTapped(sender: UIButton) {
+        let indexPath = profileView.tableViewIndexPath(sender: sender)
+        
+        postComments += 1
+                
+        profileView.tableViewReloadData()
+    }
+    
+    func postAddToFavouritesButtonWasTapped(sender: UIButton) {
+        let indexPath = profileView.tableViewIndexPath(sender: sender)
+        
+        print(indexPath)
+        
+        let post = Storages.posts[indexPath.item]
+        
+        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
+            DispatchQueue.main.async { [weak self] in
+                if favouritePosts.isEmpty {
+                    self?.delegate?.postWasAddedToFavourite(post: post)
+                } else {
+                    if favouritePosts.contains(where: { $0.title == post.title }) {
+                        self?.showAlreadyInFavouritesAlert()
+                    } else {
+                        self?.delegate?.postWasAddedToFavourite(post: post)
+                    }
+                }
+            }
+        }
+    }
+}
+
 private extension ProfileViewController {
     func setupContent() {
         view.backgroundColor = .SocialNetworkColor.mainBackground
-        
         navigationItem.rightBarButtonItem = logoutButton
         navigationItem.leftBarButtonItem = nickNameButton
     }

@@ -425,8 +425,8 @@ extension MainProfileInfoView {
         
         userNameField.text = userName
         userSurnameField.text = userSurname
-        userBirthDateField.text = userRegalia
-        userRegaliaField.text = userBirthDate
+        userBirthDateField.text = userBirthDate
+        userRegaliaField.text = userRegalia
         userHometownField.text = userHometown
         
         let maleGender = userMaleButton.titleLabel?.text
