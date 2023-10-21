@@ -28,13 +28,15 @@ final class ProfileViewController: UIViewController {
     private lazy var postLikes = Int()
     private lazy var postComments = Int()
     
-    private lazy var logoutButton: UIBarButtonItem = {
-        let bbi = UIBarButtonItem()
-        bbi.title = .localized(key: .logOutButton)
-        bbi.tintColor = .SocialNetworkColor.accent
-        bbi.style = .done
+    private lazy var menuButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "line.horizontal.3"), for: .normal)
+        button.tintColor = .SocialNetworkColor.accent
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
         
-        return bbi
+                
+        return button
     }()
     
     private lazy var nickNameButton: UIBarButtonItem = {
@@ -137,20 +139,8 @@ private extension ProfileViewController {
         showNicknameCopiedToClipboardAlert()
     }
     
-    @objc func logOutButtonTapped() {
-        let credentials = UserCredentials(email: nil,
-                                          password: nil,
-                                          repeatPassword: nil,
-                                          loggedIn: false)
-        
-        reviewer?.signOutWith(credentials: credentials) { [weak self] result in
-            switch result {
-            case .success:
-                self?.delegate?.logoutButtonWasTapped()
-            case .failure(let error):
-                self?.show(error: error)
-            }
-        }
+    @objc func menuButtonTapped() {
+        delegate?.menuButtonWasTapped()
     }
     
     func show(error: UserAuthError) {
@@ -216,8 +206,9 @@ private extension ProfileViewController {
     }
     
     func setupActions() {
-        logoutButton.target = self
-        logoutButton.action = #selector(logOutButtonTapped)
+        menuButton.addTarget(self,
+                             action: #selector(menuButtonTapped),
+                             for: .touchUpInside)
         
         nickNameButton.target = self
         nickNameButton.action = #selector(userNicknameTapped)
@@ -344,7 +335,11 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
 private extension ProfileViewController {
     func setupContent() {
         view.backgroundColor = .SocialNetworkColor.mainBackground
-        navigationItem.rightBarButtonItem = logoutButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: menuButton)
         navigationItem.leftBarButtonItem = nickNameButton
+        
+        menuButton.snp.makeConstraints { make in
+            make.size.equalTo(24)
+        }
     }
 }

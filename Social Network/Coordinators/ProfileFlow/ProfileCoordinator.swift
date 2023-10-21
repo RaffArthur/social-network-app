@@ -14,7 +14,7 @@ final class ProfileCoordinator: Coordinator {
     var type: CoordinatorType { .profile }
     
     var logOutted: (() -> Void)?
-    
+        
     private var authentificationReviewer: AuthentificationReviewer?
     
     required init(_ navigationController: UINavigationController) {
@@ -33,12 +33,20 @@ final class ProfileCoordinator: Coordinator {
 }
 
 extension ProfileCoordinator: ProfileViewControllerDelegate {
-    func postWasAddedToFavourite(post: Post) {
-        CoreDataManager.shared.saveToFavourite(post: post)
+    func menuButtonWasTapped() {
+        let coordinator = ProfileMenuCoordinator(navigationController)
+        coordinator.start()
+        
+        coordinator.logOutted = { [weak self] in
+            self?.logOutted?()
+            self?.finish()
+        }
+        
+        childCoordinators.append(coordinator)
     }
     
-    func logoutButtonWasTapped() {
-        logOutted?()
+    func postWasAddedToFavourite(post: Post) {
+        CoreDataManager.shared.saveToFavourite(post: post)
     }
     
     func photoLibraryWasTapped() {
