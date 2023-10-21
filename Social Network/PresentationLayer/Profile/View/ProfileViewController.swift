@@ -17,6 +17,8 @@ final class ProfileViewController: UIViewController {
     private lazy var service = Services.userDataService()
         
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
+    private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
+
     private lazy var profileView = ProfileView()
     
     private lazy var nickName = String()
@@ -284,16 +286,7 @@ extension ProfileViewController: UITableViewDataSource {
         if section == 0 {
             return profileUserHeaderView
         } else {
-            return nil
-        }
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   viewForFooterInSection section: Int) -> UIView? {
-        if section == 0 {
-            return nil
-        } else {
-            return nil
+            return profilePostsHeaderView
         }
     }
 }

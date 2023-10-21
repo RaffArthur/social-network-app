@@ -17,6 +17,8 @@ final class ProfileView: UIView {
                            forCellReuseIdentifier: String(describing: ProfilePhotosPreviewTableViewCell.self))
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .SocialNetworkColor.clearBackground
+        tableView.separatorColor = .SocialNetworkColor.secondaryBackground
+        tableView.separatorInsetReference = .fromCellEdges
                 
         return tableView
     }()

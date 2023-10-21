@@ -15,6 +15,7 @@ extension UIFont {
         static let t3 = UIFont.systemFont(ofSize: 17, weight: .medium)
         static let subhead = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let headline = UIFont.systemFont(ofSize: 16, weight: .bold)
+        static let headlineMedium = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let text = UIFont.systemFont(ofSize: 15, weight: .regular)
         static let caption1 = UIFont.systemFont(ofSize: 13, weight: .medium)
         static let caption2 = UIFont.systemFont(ofSize: 12, weight: .semibold)
