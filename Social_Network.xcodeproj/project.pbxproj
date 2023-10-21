@@ -33,6 +33,10 @@
 		754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E727148B0200400F95 /* AppCoordinator.swift */; };
 		754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E927148FF000400F95 /* LoginCoordinator.swift */; };
 		754CC8B82AE3016B00CC5499 /* ProfilePostsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CC8B72AE3016B00CC5499 /* ProfilePostsHeaderView.swift */; };
+		754CC8BC2AE4163B00CC5499 /* ProfileMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CC8BB2AE4163B00CC5499 /* ProfileMenuViewController.swift */; };
+		754CC8BE2AE4164700CC5499 /* ProfileMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CC8BD2AE4164700CC5499 /* ProfileMenuView.swift */; };
+		754CC8C02AE4186F00CC5499 /* ProfileMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CC8BF2AE4186F00CC5499 /* ProfileMenuModel.swift */; };
+		754CC8C32AE41D0800CC5499 /* ProfileMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CC8C22AE41D0800CC5499 /* ProfileMenuTableViewCell.swift */; };
 		754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754D79B926C6F39500ED19F8 /* PhotoModel.swift */; };
 		754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754D79BD26C9A17F00ED19F8 /* PostModel.swift */; };
 		754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754D79C126CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift */; };
@@ -128,6 +132,10 @@
 		754B85E727148B0200400F95 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		754B85E927148FF000400F95 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		754CC8B72AE3016B00CC5499 /* ProfilePostsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostsHeaderView.swift; sourceTree = "<group>"; };
+		754CC8BB2AE4163B00CC5499 /* ProfileMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuViewController.swift; sourceTree = "<group>"; };
+		754CC8BD2AE4164700CC5499 /* ProfileMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuView.swift; sourceTree = "<group>"; };
+		754CC8BF2AE4186F00CC5499 /* ProfileMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuModel.swift; sourceTree = "<group>"; };
+		754CC8C22AE41D0800CC5499 /* ProfileMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuTableViewCell.swift; sourceTree = "<group>"; };
 		754D79B926C6F39500ED19F8 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		754D79BD26C9A17F00ED19F8 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		754D79C126CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringFirstUppercasedAndCapitalized+StringProtocol.swift"; sourceTree = "<group>"; };
@@ -299,6 +307,32 @@
 				7538C2A226CC240600935B7C /* PhotosAdapter.swift */,
 			);
 			path = Adapters;
+			sourceTree = "<group>";
+		};
+		754CC8B92AE414B600CC5499 /* ProfileMenu */ = {
+			isa = PBXGroup;
+			children = (
+				754CC8BA2AE414CC00CC5499 /* View */,
+				754CC8C12AE41CB300CC5499 /* Cells */,
+			);
+			path = ProfileMenu;
+			sourceTree = "<group>";
+		};
+		754CC8BA2AE414CC00CC5499 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				754CC8BB2AE4163B00CC5499 /* ProfileMenuViewController.swift */,
+				754CC8BD2AE4164700CC5499 /* ProfileMenuView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		754CC8C12AE41CB300CC5499 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				754CC8C22AE41D0800CC5499 /* ProfileMenuTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		754D79B426C1AB3000ED19F8 /* Photos */ = {
@@ -493,6 +527,7 @@
 				754D79BD26C9A17F00ED19F8 /* PostModel.swift */,
 				752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */,
 				752BC25E283AC4380063A5E0 /* UserCredentials.swift */,
+				754CC8BF2AE4186F00CC5499 /* ProfileMenuModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -579,6 +614,7 @@
 		75CE1E25284663300034C96C /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				754CC8B92AE414B600CC5499 /* ProfileMenu */,
 				7582B463284CF8310095AC47 /* Registration */,
 				75B444A625C70CED00B3C586 /* Login */,
 				75B4449025C70CED00B3C586 /* Profile */,
@@ -790,7 +826,9 @@
 				75E564762ADEC124004496C9 /* UserMainProfileInfoError.swift in Sources */,
 				75B444C925C70CEE00B3C586 /* ProfilePostTableViewCell.swift in Sources */,
 				75098DC42ADAD10200D928ED /* UIFont+SocialNetwork.swift in Sources */,
+				754CC8C32AE41D0800CC5499 /* ProfileMenuTableViewCell.swift in Sources */,
 				75098DCF2ADC67EC00D928ED /* MainProfileInfoDelegates.swift in Sources */,
+				754CC8C02AE4186F00CC5499 /* ProfileMenuModel.swift in Sources */,
 				75B444D125C70CEE00B3C586 /* ProfileUserHeaderView.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
 				75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */,
@@ -814,6 +852,7 @@
 				751753622717519900C80FB9 /* ProfileCoordinator.swift in Sources */,
 				75026E622AD19CB800A082F3 /* FavouriteView.swift in Sources */,
 				754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */,
+				754CC8BC2AE4163B00CC5499 /* ProfileMenuViewController.swift in Sources */,
 				7582B46F284D0AB50095AC47 /* RegistrationViewController.swift in Sources */,
 				7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */,
 				75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */,
@@ -834,6 +873,7 @@
 				758CF89D2AD44BAE006EEBE0 /* ProfilePostUserInfoView.swift in Sources */,
 				754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */,
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
+				754CC8BE2AE4164700CC5499 /* ProfileMenuView.swift in Sources */,
 				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
 				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
