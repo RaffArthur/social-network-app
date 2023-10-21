@@ -10,13 +10,12 @@ import UIKit
 
 final class ProfileMenuView: UIView {
     private lazy var tableView: UITableView = {
-        let tv = UITableView()
+        let tv = UITableView(frame: .zero, style: .grouped)
         tv.register(ProfileMenuTableViewCell.self,
                     forCellReuseIdentifier: String(describing: ProfileMenuTableViewCell.self))
         tv.showsVerticalScrollIndicator = true
-        tv.backgroundColor = .SocialNetworkColor.clearBackground
-        tv.separatorColor = .SocialNetworkColor.secondaryBackground
-        tv.separatorInsetReference = .fromCellEdges
+        tv.separatorStyle = .none
+        tv.backgroundColor = .SocialNetworkColor.mainBackground
         
         return tv
     }()
@@ -60,6 +59,6 @@ private extension ProfileMenuView {
     }
     
     func setupContent() {
-        
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
 }

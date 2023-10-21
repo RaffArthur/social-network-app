@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol ProfileViewControllerDelegate: AnyObject {
-    func logoutButtonWasTapped()
+    func menuButtonWasTapped()
     func photoLibraryWasTapped()
     func postWasAddedToFavourite(post: Post)
     func userEditInfoButtonWasTapped()

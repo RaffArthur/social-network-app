@@ -41,4 +41,5 @@ enum CoordinatorType {
     case post
     case registration
     case mainProfileInfo
+    case profileMenu
 }

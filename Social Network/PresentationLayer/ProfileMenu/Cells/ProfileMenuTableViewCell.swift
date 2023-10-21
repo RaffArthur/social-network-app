@@ -12,13 +12,14 @@ final class ProfileMenuTableViewCell: UITableViewCell {
     private lazy var menuIconImageView: UIImageView = {
         let iv = UIImageView()
         iv.tintColor = .SocialNetworkColor.accent
-        
+        iv.contentMode = .scaleAspectFit
+
         return iv
     }()
     
     private lazy var menuTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .SocialNetworkFont.t1
+        label.font = .SocialNetworkFont.headlineMedium
         label.textColor = .SocialNetworkColor.primaryText
         
         return label
@@ -27,8 +28,18 @@ final class ProfileMenuTableViewCell: UITableViewCell {
     private lazy var menuChevron: UIImageView = {
         let iv = UIImageView()
         iv.tintColor = .SocialNetworkColor.tintIcon
+        iv.contentMode = .scaleAspectFit
         
         return iv
+    }()
+    
+    private lazy var menuContainer: UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .horizontal
+        sv.alignment = .center
+        sv.distribution = .fillProportionally
+        
+        return sv
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -49,47 +60,66 @@ private extension ProfileMenuTableViewCell {
     }
     
     func setupLayout() {
-        add(subviews: [menuIconImageView,
-                       menuTitleLabel,
-                       menuChevron])
+        menuContainer.add(arrangedSubviews: [menuIconImageView,
+                                             menuTitleLabel,
+                                             menuChevron])
+        
+        addSubview(menuContainer)
+        
+        menuContainer.setCustomSpacing(8, after: menuIconImageView)
+        
+        menuContainer.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-12)
+        }
         
         menuIconImageView.snp.makeConstraints { make in
-            make.size.equalTo(36)
+            make.size.equalTo(24)
             make.leading.equalToSuperview()
-            make.top.equalToSuperview().offset(8)
-            make.bottom.equalToSuperview().offset(-8)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         
         menuTitleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(menuIconImageView.snp.trailing).offset(8)
-            make.centerX.equalTo(menuIconImageView)
+            make.centerY.equalTo(menuIconImageView)
         }
         
         menuChevron.snp.makeConstraints { make in
-            make.size.equalTo(24)
-            make.trailing.equalToSuperview().offset(-8)
-            make.centerX.equalTo(menuIconImageView)
+            make.size.equalTo(16)
+            make.trailing.equalToSuperview()
+            make.centerY.equalTo(menuIconImageView)
         }
     }
     
     func setupContent() {
-        
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
 }
 
 extension ProfileMenuTableViewCell {
-    func configure(withModel: [ProfileMenuModel]) {
-        withModel.forEach {
-            guard let icon = $0.icon,
-                  let title = $0.title,
-                  let chevron = $0.chevron
-            else {
-                return
+    func configure(withModel: ProfileMenuModel) {
+        if let icon = withModel.icon {
+            menuIconImageView.image = UIImage(systemName: icon)
+        } else {
+            menuIconImageView.isHidden = true
+        }
+        
+        if let title = withModel.title {
+            if title.contains("Выход") {
+                menuTitleLabel.textColor = .SocialNetworkColor.destructive
             }
             
-            menuIconImageView.image = UIImage(named: icon)
             menuTitleLabel.text = title
-            menuChevron.image = UIImage(named: chevron)
+        } else {
+            menuTitleLabel.isHidden = true
+        }
+        
+        if let chevron = withModel.chevron {
+            menuChevron.image = UIImage(systemName: chevron)
+        } else {
+            menuChevron.isHidden = true
         }
     }
 }

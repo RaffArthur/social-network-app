@@ -13,19 +13,23 @@ final class TabCoordinator: NSObject, Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .tab }
-    
+        
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = .init()
     }
     
     func start() {
-        prepareTabBarController()
+        prepareTabBarController(withPage: 0)
+    }
+    
+    func start(withPage: Int) {
+        prepareTabBarController(withPage: withPage)
     }
 }
 
 private extension TabCoordinator {
-    func prepareTabBarController() {
+    func prepareTabBarController(withPage: Int) {
         let controllers = TabBarPage.allCases.sorted {
             $0.pageOrderNumber() < $1.pageOrderNumber()
         }.map {
@@ -33,7 +37,7 @@ private extension TabCoordinator {
         }
         
         tabBarController.setViewControllers(controllers, animated: true)
-        tabBarController.selectedIndex = TabBarPage.profile.pageOrderNumber()
+        tabBarController.selectedIndex = withPage
         tabBarController.tabBar.isTranslucent = true
         
         navigationController.viewControllers = [tabBarController]
@@ -43,8 +47,8 @@ private extension TabCoordinator {
         let navigationController = UINavigationController()
         navigationController.setNavigationBarHidden(false, animated: true)
         navigationController.tabBarItem = UITabBarItem(title: page.pageTitleValue(),
-                                                image: page.pageIconValue(),
-                                                tag: page.pageOrderNumber())
+                                                       image: page.pageIconValue(),
+                                                       tag: page.pageOrderNumber())
         
         switch page {
         case .profile:
