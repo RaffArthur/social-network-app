@@ -40,9 +40,19 @@ final class CoreDataManager {
 extension CoreDataManager {
     func saveToFavourite(post: Post) {
         backgroundContext.perform { [weak self] in
+            guard let isPostAddedToFavourite = post.isPostAddedToFavourite,
+                  let isPostLiked = post.isPostLiked
+            else {
+                return
+            }
+            
             let favouritePost = FavouritePost(context: self?.backgroundContext ?? NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType))
             favouritePost.title = post.title
             favouritePost.body = post.body
+            favouritePost.likes = post.likes
+            favouritePost.comments = post.comments
+            favouritePost.isPostAddedToFavurite = isPostAddedToFavourite
+            favouritePost.isPostLiked = isPostLiked
             
             self?.save()
         }

@@ -48,11 +48,11 @@ final class MainProfileInfoViewController: UIViewController {
                 }
                 
                 self?.mainProfileInfoView.setupUserMainInfoFields(userName: name,
-                                                                 userSurname: surname,
-                                                                 userRegalia: regalia,
-                                                                 userBirthDate: birthDate,
-                                                                 userHometown: hometown,
-                                                                 userGender: gender)
+                                                                  userSurname: surname,
+                                                                  userRegalia: regalia,
+                                                                  userBirthDate: birthDate,
+                                                                  userHometown: hometown,
+                                                                  userGender: gender)
             case .failure(let error):
                 self?.show(userMainProfileInfoErrorAlert: error)
             }

@@ -11,7 +11,13 @@ final class FavouriteViewController: UIViewController {
     private var favouritePosts: [FavouritePost] = []
     private var filteredFavouritePosts: [FavouritePost] = []
     
+    private lazy var service = Services.userDataService()
+    
     private lazy var favouriteView = FavouriteView()
+    
+    private lazy var userName = String()
+    private lazy var userSurname = String()
+    private lazy var userRegalia = String()
     
     private lazy var deleteAllButton: UIBarButtonItem = {
         let bbi = UIBarButtonItem()
@@ -42,6 +48,27 @@ final class FavouriteViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchFavouritePosts()
+        
+        service.getUserData { [weak self] result in
+            switch result {
+            case .success(let data):
+                guard let name = data.name,
+                      let surname = data.surname,
+                      let regalia = data.regalia
+                else {
+                    return
+                }
+                
+                self?.userName = name
+                self?.userSurname = surname
+                self?.userRegalia = regalia
+                
+                self?.favouriteView.tableViewReloadData()
+
+            case .failure(let error):
+                self?.show(mainProfileError: error)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -187,8 +214,8 @@ extension FavouriteViewController: UITableViewDataSource {
             favouritePost = favouritePosts[indexPath.row]
         }
         
-        cell?.configure(post: favouritePost)
-        
+        cell?.configure(post: favouritePost, userName: "\(userName) \(userSurname)", userRegalia: userRegalia)
+
         return cell ?? UITableViewCell()
     }
 }
@@ -202,5 +229,20 @@ extension FavouriteViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else { return }
         
         filterContentForSearchBy(text: text)
+    }
+}
+
+extension FavouriteViewController {
+    func show(mainProfileError: UserMainProfileInfoError) {
+        let alertController = UIAlertController(title: mainProfileError.title,
+                                                 message: mainProfileError.message,
+                                                 preferredStyle: .alert)
+        let action = UIAlertAction(title: "ОК",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }

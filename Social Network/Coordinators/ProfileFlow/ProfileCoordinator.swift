@@ -33,7 +33,7 @@ final class ProfileCoordinator: Coordinator {
 }
 
 extension ProfileCoordinator: ProfileViewControllerDelegate {
-    func postWasTapped(post: Post) {
+    func postWasAddedToFavourite(post: Post) {
         CoreDataManager.shared.saveToFavourite(post: post)
     }
     
