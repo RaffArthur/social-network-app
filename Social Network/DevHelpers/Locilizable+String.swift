@@ -49,6 +49,7 @@ enum SocialNetworkLocalizedStringKeys {
     case mainProfileInfoFemaleButtonTitle
     case mainProfileInfoRegaliaTitle
     case profileMenuTitle
+    case profileDetailedInfoTitle
 }
 
 extension SocialNetworkLocalizedStringKeys {
@@ -136,6 +137,8 @@ extension SocialNetworkLocalizedStringKeys {
             return "main_profile_info_regalia_title"
         case .profileMenuTitle:
             return "profile_menu_title"
+        case .profileDetailedInfoTitle:
+            return "profile_detailed_info_title"
         }
     }
 }
@@ -143,6 +146,7 @@ extension SocialNetworkLocalizedStringKeys {
 enum SocialNetworkLocalizedStringDictKeys {
     case postViews
     case postLikes
+    case userSubscribers
 }
 
 extension SocialNetworkLocalizedStringDictKeys {
@@ -152,6 +156,8 @@ extension SocialNetworkLocalizedStringDictKeys {
             return "post_views"
         case .postLikes:
             return "post_likes"
+        case .userSubscribers:
+            return "user_subscribers"
         }
     }
 }

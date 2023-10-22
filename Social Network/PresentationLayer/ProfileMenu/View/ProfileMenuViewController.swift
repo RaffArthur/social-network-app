@@ -118,7 +118,6 @@ extension ProfileMenuViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier ,
                                                  for: indexPath) as? ProfileMenuTableViewCell
         
-        
         cell?.configure(withModel: profileMenuRows[indexPath.row])
         
         return cell ?? UITableViewCell()

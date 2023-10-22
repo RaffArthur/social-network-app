@@ -64,6 +64,9 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
     }
     
     func userMoreInfoButtonWasTapped() {
+        let coordinator = ProfileDetailedInfoCoodinator(navigationController)
+        coordinator.start()
         
+        childCoordinators.append(coordinator)
     }
 }
