@@ -97,6 +97,11 @@
 		75F1CC752ACDB99C005AD96D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 75F1CC742ACDB99C005AD96D /* FirebaseFirestore */; };
 		75F1CC782ACDBB72005AD96D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 75F1CC772ACDBB72005AD96D /* SnapKit */; };
 		75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */; };
+		75F9D97C2AE46814004C2C5C /* ProfileDetailedInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F9D97B2AE46814004C2C5C /* ProfileDetailedInfoViewController.swift */; };
+		75F9D97E2AE4682C004C2C5C /* ProfileDetailedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F9D97D2AE4682C004C2C5C /* ProfileDetailedInfoView.swift */; };
+		75F9D9822AE54BF4004C2C5C /* ProfileDetailedInfoMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F9D9812AE54BF4004C2C5C /* ProfileDetailedInfoMenuModel.swift */; };
+		75F9D9842AE54E23004C2C5C /* ProfileDetailedInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F9D9832AE54E23004C2C5C /* ProfileDetailedInfoTableViewCell.swift */; };
+		75F9D9862AE55584004C2C5C /* ProfileDetailedInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F9D9852AE55584004C2C5C /* ProfileDetailedInfoCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +202,11 @@
 		75F0E9A228A0274200638A81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locilizable+String.swift"; sourceTree = "<group>"; };
 		75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordToggle+UITextField.swift"; sourceTree = "<group>"; };
+		75F9D97B2AE46814004C2C5C /* ProfileDetailedInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailedInfoViewController.swift; sourceTree = "<group>"; };
+		75F9D97D2AE4682C004C2C5C /* ProfileDetailedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailedInfoView.swift; sourceTree = "<group>"; };
+		75F9D9812AE54BF4004C2C5C /* ProfileDetailedInfoMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailedInfoMenuModel.swift; sourceTree = "<group>"; };
+		75F9D9832AE54E23004C2C5C /* ProfileDetailedInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailedInfoTableViewCell.swift; sourceTree = "<group>"; };
+		75F9D9852AE55584004C2C5C /* ProfileDetailedInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailedInfoCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,6 +398,7 @@
 				75175365271758C200C80FB9 /* PhotosCoordinator.swift */,
 				75098DCC2ADC602100D928ED /* MainProfileInfoCoordinator.swift */,
 				754CC8C42AE426A500CC5499 /* ProfileMenuCoordinator.swift */,
+				75F9D9852AE55584004C2C5C /* ProfileDetailedInfoCoordinator.swift */,
 			);
 			path = ProfileFlow;
 			sourceTree = "<group>";
@@ -537,6 +548,7 @@
 				752BC255283A7A460063A5E0 /* UserCredentialsCached.swift */,
 				752BC25E283AC4380063A5E0 /* UserCredentials.swift */,
 				754CC8BF2AE4186F00CC5499 /* ProfileMenuModel.swift */,
+				75F9D9812AE54BF4004C2C5C /* ProfileDetailedInfoMenuModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -623,6 +635,7 @@
 		75CE1E25284663300034C96C /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				75F9D97A2AE467D2004C2C5C /* ProfileDetailedInfo */,
 				754CC8B92AE414B600CC5499 /* ProfileMenu */,
 				7582B463284CF8310095AC47 /* Registration */,
 				75B444A625C70CED00B3C586 /* Login */,
@@ -698,6 +711,32 @@
 				75E5646F2ADDC1A7004496C9 /* UserDataServiceImpl.swift */,
 			);
 			path = Implementation;
+			sourceTree = "<group>";
+		};
+		75F9D97A2AE467D2004C2C5C /* ProfileDetailedInfo */ = {
+			isa = PBXGroup;
+			children = (
+				75F9D97F2AE548CD004C2C5C /* View */,
+				75F9D9802AE548D7004C2C5C /* Cells */,
+			);
+			path = ProfileDetailedInfo;
+			sourceTree = "<group>";
+		};
+		75F9D97F2AE548CD004C2C5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				75F9D97B2AE46814004C2C5C /* ProfileDetailedInfoViewController.swift */,
+				75F9D97D2AE4682C004C2C5C /* ProfileDetailedInfoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		75F9D9802AE548D7004C2C5C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				75F9D9832AE54E23004C2C5C /* ProfileDetailedInfoTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -840,6 +879,7 @@
 				754CC8C02AE4186F00CC5499 /* ProfileMenuModel.swift in Sources */,
 				75B444D125C70CEE00B3C586 /* ProfileUserHeaderView.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
+				75F9D97C2AE46814004C2C5C /* ProfileDetailedInfoViewController.swift in Sources */,
 				75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */,
 				75CE1E2B2846711E0034C96C /* UIColor+SocialNetwork.swift in Sources */,
 				75B444C725C70CEE00B3C586 /* ProfilePhotosPreviewTableViewCell.swift in Sources */,
@@ -848,7 +888,9 @@
 				752991A62AD1C2F800C65E8C /* ProfileView.swift in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				75B444DB25C70CEE00B3C586 /* FavouriteViewController.swift in Sources */,
+				75F9D9842AE54E23004C2C5C /* ProfileDetailedInfoTableViewCell.swift in Sources */,
 				7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */,
+				75F9D97E2AE4682C004C2C5C /* ProfileDetailedInfoView.swift in Sources */,
 				75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */,
 				75B6E95B28AC2BDD00A58A32 /* LocalAuthorizationService.swift in Sources */,
 				752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */,
@@ -867,6 +909,7 @@
 				7582B46F284D0AB50095AC47 /* RegistrationViewController.swift in Sources */,
 				7574B7C02610D30A00A349E0 /* UserAuthError.swift in Sources */,
 				75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */,
+				75F9D9822AE54BF4004C2C5C /* ProfileDetailedInfoMenuModel.swift in Sources */,
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
@@ -888,6 +931,7 @@
 				754CC8BE2AE4164700CC5499 /* ProfileMenuView.swift in Sources */,
 				756691F22626027B00B26B8A /* NetworkManager.swift in Sources */,
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
+				75F9D9862AE55584004C2C5C /* ProfileDetailedInfoCoordinator.swift in Sources */,
 				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75098DC72ADC432000D928ED /* MainProfileInfoViewController.swift in Sources */,
