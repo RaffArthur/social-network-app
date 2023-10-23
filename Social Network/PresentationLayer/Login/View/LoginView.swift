@@ -30,7 +30,7 @@ final class LoginView: UIView {
     }()
     
     private lazy var logoImage: UIImageView = {
-        let iv = UIImageView(image: #imageLiteral(resourceName: "vk_logo"))
+        let iv = UIImageView(image: #imageLiteral(resourceName: "VKLogo_Colored"))
         iv.contentMode = .scaleAspectFit
         
         return iv

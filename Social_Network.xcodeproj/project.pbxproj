@@ -199,7 +199,6 @@
 		75E5646F2ADDC1A7004496C9 /* UserDataServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataServiceImpl.swift; sourceTree = "<group>"; };
 		75E564732ADDE678004496C9 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		75E564752ADEC124004496C9 /* UserMainProfileInfoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMainProfileInfoError.swift; sourceTree = "<group>"; };
-		75F0E9A228A0274200638A81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		75F0E9A928A02F5A00638A81 /* Locilizable+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locilizable+String.swift"; sourceTree = "<group>"; };
 		75F2D472271B260B00CC2CE9 /* PasswordToggle+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordToggle+UITextField.swift"; sourceTree = "<group>"; };
 		75F9D97B2AE46814004C2C5C /* ProfileDetailedInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailedInfoViewController.swift; sourceTree = "<group>"; };
@@ -975,7 +974,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				75B4448625C70CED00B3C586 /* Base */,
-				75F0E9A228A0274200638A81 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

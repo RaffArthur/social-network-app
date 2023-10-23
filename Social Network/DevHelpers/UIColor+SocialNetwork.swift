@@ -13,7 +13,7 @@ extension UIColor {
         private static let theme = UITraitCollection.current.userInterfaceStyle
         
         // MARK: - Default Colors
-        static let accent = UIColor(rgba: 38, 136, 235)
+        static let accent = UIColor(rgba: 0, 119, 255)
         static let destructive = UIColor(rgba: 230, 70, 70)
         
         // MARK: - Background Colors
