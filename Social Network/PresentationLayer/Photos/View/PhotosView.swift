@@ -17,6 +17,7 @@ final class PhotosView: UIView {
         cv.register(PhotosCollectionViewCell.self,
                     forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
         cv.backgroundColor = .SocialNetworkColor.mainBackground
+        cv.showsVerticalScrollIndicator = true
         
         return cv
     }()
@@ -53,14 +54,9 @@ private extension PhotosView {
         addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalToSuperview {
-                $0.safeAreaLayoutGuide.snp.top
+            make.edges.equalToSuperview {
+                $0.safeAreaLayoutGuide
             }
-            make.bottom.equalToSuperview {
-                $0.safeAreaLayoutGuide.snp.bottom
-            }
-            make.leading.equalToSuperview().offset(15)
-            make.trailing.equalToSuperview().offset(-15)
         }
     }
 }

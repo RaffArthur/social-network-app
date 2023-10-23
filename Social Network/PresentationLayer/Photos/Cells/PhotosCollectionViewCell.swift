@@ -25,15 +25,23 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        photoInPhotos.image = .none
+    }
+}
+
+extension PhotosCollectionViewCell {
     func configure(photo: Photo) {
         guard let photo = photo.url else { return }
         
-        self.photoInPhotos.downloaded(from: photo)
+        photoInPhotos.downloaded(from: photo)
     }
-
 }
 
 private extension PhotosCollectionViewCell {
@@ -50,7 +58,8 @@ private extension PhotosCollectionViewCell {
         contentView.addSubview(photoInPhotos)
         
         photoInPhotos.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.leading.equalToSuperview()
+            make.bottom.trailing.equalToSuperview().priority(999)
         }
     }
 }

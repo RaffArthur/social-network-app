@@ -26,7 +26,6 @@ final class PhotosViewController: UIViewController {
         super.viewWillAppear(animated)
                 
         navigationController?.tabBarController?.tabBar.isHidden = true
-        navigationController?.navigationBar.isHidden = false
     }
 }
 
@@ -35,7 +34,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 108, height: 80)
+        return CGSize(width: UIScreen.main.bounds.width/3 - 12, height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -52,7 +51,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PhotosCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
-        let photo = Storages.photos[indexPath.row]
+        let photo = Storages.photos[indexPath.item]
         
         cell.configure(photo: photo)
                 

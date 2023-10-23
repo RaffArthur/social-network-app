@@ -257,7 +257,6 @@
 			children = (
 				75B4449725C70CED00B3C586 /* PhotosViewController.swift */,
 				75026E652AD1A7D500A082F3 /* PhotosView.swift */,
-				75B4449525C70CED00B3C586 /* PhotosCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -357,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				75026E672AD1A83800A082F3 /* View */,
+				75F9D9872AE6C380004C2C5C /* Cells */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -735,6 +735,14 @@
 			isa = PBXGroup;
 			children = (
 				75F9D9832AE54E23004C2C5C /* ProfileDetailedInfoTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		75F9D9872AE6C380004C2C5C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				75B4449525C70CED00B3C586 /* PhotosCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
