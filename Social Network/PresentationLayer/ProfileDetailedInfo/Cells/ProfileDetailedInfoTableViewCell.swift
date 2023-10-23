@@ -43,6 +43,14 @@ final class ProfileDetailedInfoTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        detailedInfoIconImageView.isHidden = false
+        detailedInfoIconImageView.image = .none
+        detailedInfoTitleLabel.text = .none
+    }
 }
 extension ProfileDetailedInfoTableViewCell {
     func configure(withModel: ProfileDetailedInfoMenuModel) {
