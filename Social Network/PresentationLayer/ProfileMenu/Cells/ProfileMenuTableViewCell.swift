@@ -51,6 +51,19 @@ final class ProfileMenuTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        menuIconImageView.isHidden = false
+        menuTitleLabel.isHidden = false
+        menuChevron.isHidden = false
+        menuIconImageView.image = .none
+        menuIconImageView.tintColor = .none
+        menuTitleLabel.text = .none
+        menuTitleLabel.textColor = .none
+        menuChevron.image = .none
+    }
 }
 
 private extension ProfileMenuTableViewCell {
