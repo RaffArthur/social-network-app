@@ -9,7 +9,6 @@ import UIKit
 import Firebase
 import IQKeyboardManagerSwift
 
-@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
