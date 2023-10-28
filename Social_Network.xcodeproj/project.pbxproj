@@ -32,6 +32,10 @@
 		7537680C2AED4E6200D6B6A4 /* UserPostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537680B2AED4E6200D6B6A4 /* UserPostsService.swift */; };
 		7537680F2AED4EF600D6B6A4 /* UserPostsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537680E2AED4EF600D6B6A4 /* UserPostsServiceImpl.swift */; };
 		753768112AED540F00D6B6A4 /* UserPostError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768102AED540F00D6B6A4 /* UserPostError.swift */; };
+		753768142AED65B000D6B6A4 /* PostCreatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768132AED65B000D6B6A4 /* PostCreatingView.swift */; };
+		753768162AED65BE00D6B6A4 /* PostCreatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768152AED65BE00D6B6A4 /* PostCreatingViewController.swift */; };
+		753768192AED6F2100D6B6A4 /* PostCreatingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768182AED6F2100D6B6A4 /* PostCreatingCoordinator.swift */; };
+		7537681B2AED8CAB00D6B6A4 /* PostCreatingDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537681A2AED8CAB00D6B6A4 /* PostCreatingDelegates.swift */; };
 		7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A226CC240600935B7C /* PhotosAdapter.swift */; };
 		754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E727148B0200400F95 /* AppCoordinator.swift */; };
 		754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E927148FF000400F95 /* LoginCoordinator.swift */; };
@@ -142,6 +146,10 @@
 		7537680B2AED4E6200D6B6A4 /* UserPostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsService.swift; sourceTree = "<group>"; };
 		7537680E2AED4EF600D6B6A4 /* UserPostsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsServiceImpl.swift; sourceTree = "<group>"; };
 		753768102AED540F00D6B6A4 /* UserPostError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostError.swift; sourceTree = "<group>"; };
+		753768132AED65B000D6B6A4 /* PostCreatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatingView.swift; sourceTree = "<group>"; };
+		753768152AED65BE00D6B6A4 /* PostCreatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatingViewController.swift; sourceTree = "<group>"; };
+		753768182AED6F2100D6B6A4 /* PostCreatingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatingCoordinator.swift; sourceTree = "<group>"; };
+		7537681A2AED8CAB00D6B6A4 /* PostCreatingDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatingDelegates.swift; sourceTree = "<group>"; };
 		7538C2A226CC240600935B7C /* PhotosAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAdapter.swift; sourceTree = "<group>"; };
 		754B85E727148B0200400F95 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		754B85E927148FF000400F95 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -348,6 +356,24 @@
 			path = Implementation;
 			sourceTree = "<group>";
 		};
+		753768122AED657000D6B6A4 /* PostCreating */ = {
+			isa = PBXGroup;
+			children = (
+				7537681A2AED8CAB00D6B6A4 /* PostCreatingDelegates.swift */,
+				753768172AED6A6A00D6B6A4 /* View */,
+			);
+			path = PostCreating;
+			sourceTree = "<group>";
+		};
+		753768172AED6A6A00D6B6A4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				753768152AED65BE00D6B6A4 /* PostCreatingViewController.swift */,
+				753768132AED65B000D6B6A4 /* PostCreatingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7538C2A126CC23E200935B7C /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +457,7 @@
 				75098DCC2ADC602100D928ED /* MainProfileInfoCoordinator.swift */,
 				754CC8C42AE426A500CC5499 /* ProfileMenuCoordinator.swift */,
 				75F9D9852AE55584004C2C5C /* ProfileDetailedInfoCoordinator.swift */,
+				753768182AED6F2100D6B6A4 /* PostCreatingCoordinator.swift */,
 			);
 			path = ProfileFlow;
 			sourceTree = "<group>";
@@ -667,6 +694,7 @@
 		75CE1E25284663300034C96C /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				753768122AED657000D6B6A4 /* PostCreating */,
 				75F9D97A2AE467D2004C2C5C /* ProfileDetailedInfo */,
 				754CC8B92AE414B600CC5499 /* ProfileMenu */,
 				7582B463284CF8310095AC47 /* Registration */,
@@ -928,6 +956,7 @@
 				75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */,
 				752991A62AD1C2F800C65E8C /* ProfileView.swift in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
+				753768192AED6F2100D6B6A4 /* PostCreatingCoordinator.swift in Sources */,
 				75B444DB25C70CEE00B3C586 /* FavouriteViewController.swift in Sources */,
 				75F9D9842AE54E23004C2C5C /* ProfileDetailedInfoTableViewCell.swift in Sources */,
 				7593C4B5283C2F3B00EC3426 /* RealmErrorCodeConverter.swift in Sources */,
@@ -935,7 +964,9 @@
 				75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */,
 				75B6E95B28AC2BDD00A58A32 /* LocalAuthorizationService.swift in Sources */,
 				752BC25D283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift in Sources */,
+				753768142AED65B000D6B6A4 /* PostCreatingView.swift in Sources */,
 				754CC8C92AE4588100CC5499 /* ProfileMenuHeaderView.swift in Sources */,
+				7537681B2AED8CAB00D6B6A4 /* PostCreatingDelegates.swift in Sources */,
 				75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */,
 				758CF89F2AD4607E006EEBE0 /* ProfilePostQuickActionsPanelView.swift in Sources */,
 				75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */,
@@ -976,6 +1007,7 @@
 				754D79BE26C9A17F00ED19F8 /* PostModel.swift in Sources */,
 				75F9D9862AE55584004C2C5C /* ProfileDetailedInfoCoordinator.swift in Sources */,
 				752BC256283A7A460063A5E0 /* UserCredentialsCached.swift in Sources */,
+				753768162AED65BE00D6B6A4 /* PostCreatingViewController.swift in Sources */,
 				75B444CB25C70CEE00B3C586 /* PhotosCollectionViewCell.swift in Sources */,
 				75098DC72ADC432000D928ED /* MainProfileInfoViewController.swift in Sources */,
 				75B444C325C70CEE00B3C586 /* SceneDelegate.swift in Sources */,

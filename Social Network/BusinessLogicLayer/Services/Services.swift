@@ -8,11 +8,11 @@
 import Foundation
 
 struct Services {
-    static func userDataService() -> UserDataService{
+    static func userDataService() -> UserDataService {
         return UserDataServiceImpl()
     }
     
-    static func userPostsService() -> UserPostsService{
+    static func userPostsService() -> UserPostsService {
         return UserPostsServiceImpl()
     }
 }

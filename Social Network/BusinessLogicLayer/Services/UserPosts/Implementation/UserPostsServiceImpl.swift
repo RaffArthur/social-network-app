@@ -18,11 +18,7 @@ final class UserPostsServiceImpl: UserPostsService {
 
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference().child("userStorage")
         
-        guard let title  = userPost.title,
-              let body = userPost.body,
-              let images = userPost.images,
-              let likeCount = userPost.likeCount,
-              let commentCount = userPost.commentCount
+        guard let body = userPost.body
         else {
             return
         }
@@ -37,11 +33,11 @@ final class UserPostsServiceImpl: UserPostsService {
         
         let postID = UUID().uuidString
         
-        ref.child("user").child(uid).child("posts").child("id:\(postID)").setValue(["title": title,
-                                                                                    "body": body,
-                                                                                    "images": images,
-                                                                                    "likeCount": likeCount,
-                                                                                    "commentCount": commentCount])
+        ref.child("user").child(uid).child("posts").child("id:\(postID)").setValue(["body": body,
+                                                                                    "images": userPost.images ?? [String](),
+                                                                                    "likeCount": userPost.likeCount ?? Int(),
+                                                                                    "commentCount": userPost.commentCount ?? Int()])
+        
         completion(.success(userPost))
     }
     
@@ -53,14 +49,12 @@ final class UserPostsServiceImpl: UserPostsService {
         ref.child("user").child(uid).child("posts").observeSingleEvent(of: .value) { snapshot in
             let value = snapshot.value as? NSDictionary
             
-            let title = value?["title"] as? String ?? ""
             let body = value?["body"] as? String ?? ""
             let images = value?["images"] as? [String] ?? [""]
             let likeCount = value?["likeCount"] as? Int ?? 0
             let commentCount = value?["commentCount"] as? Int ?? 0
             
-            let userPost = UserPost(title: title,
-                                    body: body,
+            let userPost = UserPost(body: body,
                                     images: images,
                                     likeCount: likeCount,
                                     commentCount: commentCount)

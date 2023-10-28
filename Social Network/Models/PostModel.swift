@@ -6,7 +6,6 @@
 //
 
 struct UserPost: Codable {
-    let title: String?
     let body: String?
     let images: [String]?
     let likeCount: Int?
