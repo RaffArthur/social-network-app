@@ -9,16 +9,6 @@ import Foundation
 import UIKit
 
 final class ProfilePostMainInfoView: UIView {
-    private lazy var postTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .SocialNetworkFont.t3
-        label.textColor = .SocialNetworkColor.primaryText
-        label.numberOfLines = 2
-        label.lineBreakMode = .byClipping
-        
-        return label
-    }()
-    
     private lazy var postDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .SocialNetworkFont.text
@@ -61,14 +51,8 @@ final class ProfilePostMainInfoView: UIView {
 }
 
 extension ProfilePostMainInfoView {
-    func configurePostMainInfo(title: String?, description: String, image: String?) {
-        if let title = title {
-            postTitleLabel.text = title
-        } else {
-            postTitleLabel.isHidden = true
-        }
-        
-        postDescriptionLabel.text = description
+    func configurePostMainInfo(body: String, image: String?) {
+        postDescriptionLabel.text = body
         
         if let image = image {
             postPhoto.image = UIImage(systemName: image)
@@ -82,8 +66,7 @@ private extension ProfilePostMainInfoView {
     func setupLayout() {
         addSubview(postMainInfoContainer)
         
-        postMainInfoContainer.add(arrangedSubviews: [postTitleLabel,
-                                                     postDescriptionLabel,
+        postMainInfoContainer.add(arrangedSubviews: [postDescriptionLabel,
                                                      postPhoto])
                 
         postMainInfoContainer.snp.makeConstraints { make in

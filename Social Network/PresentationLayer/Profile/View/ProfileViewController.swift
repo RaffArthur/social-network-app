@@ -13,8 +13,8 @@ final class ProfileViewController: UIViewController {
     weak var delegate: ProfileViewControllerDelegate?
     
     private lazy var photosAdapter = PhotosAdapter()
-    private lazy var service = Services.userDataService()
-    private lazy var postServicce = Services.userPostsService()
+    private lazy var userDataService = Services.userDataService()
+    private lazy var userPostServicce = Services.userPostsService()
         
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
@@ -28,8 +28,8 @@ final class ProfileViewController: UIViewController {
     private lazy var userName = String()
     private lazy var userSurname = String()
     private lazy var userRegalia = String()
-    private lazy var postLikes = Int()
-    private lazy var postComments = Int()
+    
+    private lazy var userPosts: [UserPost] = []
     
     private lazy var menuButton: UIButton = {
         let button = UIButton()
@@ -57,7 +57,7 @@ final class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
-        service.getUserData { [weak self] result in
+        userDataService.getUserData { [weak self] result in
             switch result {
             case .success(let data):
                 guard let nickname = data.nickname,
@@ -84,6 +84,18 @@ final class ProfileViewController: UIViewController {
                 self?.show(mainProfileError: error)
             }
         }
+        
+        userPostServicce.getUserPosts { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.userPosts = data
+                self?.profileView.tableViewReloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        
     }
     
     override func viewDidLoad() {
@@ -224,7 +236,7 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : Storages.posts.count
+        return section == 0 ? 1 : userPosts.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -250,7 +262,7 @@ extension ProfileViewController: UITableViewDataSource {
             
             cell?.selectionStyle = .none
                         
-            let post = Storages.posts[indexPath.row]
+            let post = userPosts[indexPath.row]
             
             cell?.configure(userPost: post,
                             userName: "\(userName) \(userSurname)",
@@ -287,12 +299,6 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
     func postLikesButtonWasTapped(indexPath: IndexPath) {
         if indexPath.row == 0 {
             isPostLiked.toggle()
-            postLikes = 1
-//            if postLikes == 0 {
-//                postLikes += 1
-//            } else {
-//                postLikes -= 1
-//            }
             profileView.tableViewReloadData()
         }
     }

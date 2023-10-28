@@ -31,35 +31,42 @@ final class UserPostsServiceImpl: UserPostsService {
             return
         }
         
-        let postID = UUID().uuidString
+        let postUUID = UUID().uuidString
         
-        ref.child("user").child(uid).child("posts").child("id:\(postID)").setValue(["body": body,
-                                                                                    "images": userPost.images ?? [String](),
-                                                                                    "likeCount": userPost.likeCount ?? Int(),
-                                                                                    "commentCount": userPost.commentCount ?? Int()])
+        ref.child("user").child(uid).child("posts").child("\(postUUID)").setValue(["body": body,
+                                                                                   "images": userPost.images ?? [String](),
+                                                                                   "likeCount": userPost.likeCount ?? Int(),
+                                                                                   "commentCount": userPost.commentCount ?? Int()])
         
         completion(.success(userPost))
     }
     
-    func getUserPosts(completion: @escaping GetUserPostResult) {
+    func getUserPosts(completion: @escaping GetUserPostsResult) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference().child("userStorage")
-
+        
+        
         ref.child("user").child(uid).child("posts").observeSingleEvent(of: .value) { snapshot in
-            let value = snapshot.value as? NSDictionary
+            let values = snapshot.value as? NSDictionary
             
-            let body = value?["body"] as? String ?? ""
-            let images = value?["images"] as? [String] ?? [""]
-            let likeCount = value?["likeCount"] as? Int ?? 0
-            let commentCount = value?["commentCount"] as? Int ?? 0
+            var userPosts = [UserPost]()
             
-            let userPost = UserPost(body: body,
-                                    images: images,
-                                    likeCount: likeCount,
-                                    commentCount: commentCount)
+            values?.forEach { key, value in
+                let value = value as? NSDictionary
+                
+                let body = value?["body"] as? String ?? ""
+                let images = value?["images"] as? [String] ?? [""]
+                let likeCount = value?["likeCount"] as? Int ?? 0
+                let commentCount = value?["commentCount"] as? Int ?? 0
+                
+                userPosts.insert(UserPost(body: body,
+                                          images: images,
+                                          likeCount: likeCount,
+                                          commentCount: commentCount), at: 0)
+            }
             
-            completion(.success(userPost))
+            completion(.success(userPosts))
         } withCancel: { error in
             completion(.failure(.unknownError))
         }

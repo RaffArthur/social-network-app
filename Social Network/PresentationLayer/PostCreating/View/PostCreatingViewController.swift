@@ -67,7 +67,7 @@ private extension PostCreatingViewController {
             case .success:
                 self?.delegate?.publishPostButtonWasTapped()
             case .failure(let error):
-                print(error)
+                self?.show(error: error)
             }
         }
     }
@@ -78,5 +78,18 @@ private extension PostCreatingViewController {
         
         publishPostButton.action = #selector(publishPostButtonWasTapped)
         publishPostButton.target = self
+    }
+    
+    func show(error: UserPostError) {
+        let alertController = UIAlertController(title: error.title,
+                                                 message: error.message,
+                                                 preferredStyle: .alert)
+        let action = UIAlertAction(title: "ОК",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }

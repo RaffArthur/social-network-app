@@ -7,10 +7,10 @@
 
 import Foundation
 
-typealias GetUserPostResult = (Result<UserPost, UserPostError>) -> Void
+typealias GetUserPostsResult = (Result<[UserPost], UserPostError>) -> Void
 typealias SaveUserPostResult = (Result<Any, UserPostError>) -> Void
 
 protocol UserPostsService: AnyObject {
     func saveUserPost(userPost: UserPost, completion: @escaping SaveUserPostResult)
-    func getUserPosts(completion: @escaping GetUserPostResult)
+    func getUserPosts(completion: @escaping GetUserPostsResult)
 }

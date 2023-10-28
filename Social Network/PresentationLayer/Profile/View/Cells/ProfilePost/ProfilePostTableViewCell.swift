@@ -56,17 +56,16 @@ extension ProfilePostTableViewCell {
                    indexPath: IndexPath,
                    isPostLiked: Bool,
                    isPostAddedToFavourite: Bool) {
-        guard let postTitle = userPost.title,
-              let postbody = userPost.body,
+        guard let postbody = userPost.body,
+              let postImages = userPost.images,
               let postLikeCount = userPost.likeCount,
               let postCommentCount = userPost.commentCount
         else {
             return
         }
         
-        postMainInfoView.configurePostMainInfo(title: postTitle,
-                                               description: postbody.firstUppercased,
-                                               image: "photo.fill")
+        postMainInfoView.configurePostMainInfo(body: postbody.firstUppercased,
+                                               image: nil)
         
         postQuickActionsPanelView.configurePostQuickActionsPanel(postLikes: String(describing: postLikeCount),
                                                                  postComments: String(describing: postCommentCount),
