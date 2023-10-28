@@ -12,37 +12,23 @@ final class ProfilePostTableViewCell: UITableViewCell {
     weak var delegate: ProfilePostTableViewCellDelegate?
     
     private lazy var postUserInfoView = ProfilePostUserInfoView()
+    private lazy var postMainInfoView = ProfilePostMainInfoView()
     private lazy var postQuickActionsPanelView = ProfilePostQuickActionsPanelView()
     
-    private lazy var postTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .SocialNetworkFont.t3
-        label.textColor = .SocialNetworkColor.primaryText
-        label.numberOfLines = 2
-        label.lineBreakMode = .byClipping
+    private lazy var postContainer: UIView = {
+        let view = UIView()
         
-        return label
+        return view
     }()
     
-    private lazy var postDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .SocialNetworkFont.text
-        label.textColor = .SocialNetworkColor.primaryText
-        label.numberOfLines = 0
+    private lazy var postStackView: UIStackView = {
+        let sv = UIStackView()
+        sv.alignment = .fill
+        sv.distribution = .equalSpacing
+        sv.axis = .vertical
+        sv.spacing = 16
         
-        return label
-    }()
-
-    private lazy var postPhoto: UIImageView = {
-        let iv = UIImageView()
-        iv.layer.masksToBounds = true
-        iv.layer.cornerRadius = 18
-        iv.contentMode = .scaleAspectFit
-        iv.image = UIImage(systemName: "photo.fill")
-        iv.backgroundColor = .SocialNetworkColor.accent
-        iv.tintColor = .white
-        
-        return iv
+        return sv
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -56,34 +42,21 @@ final class ProfilePostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
 
 }
 
 extension ProfilePostTableViewCell {
-    func configure(post: Post, userName: String, userRegalia: String) {
-        guard let postTitle = post.title,
-              let postDescription = post.body,
-              let postLikes = post.likes,
-              let postComments = post.comments,
-              let isPostLiked = post.isPostLiked,
-              let isPostAddedToFavourite = post.isPostAddedToFavourite
-        else {
-            return
-        }
-        
-        postQuickActionsPanelView.setupQuiackActionsPanelInfo(postLikes: postLikes,
-                                                              postComments: postComments,
-                                                              isPostLiked: isPostLiked,
-                                                              isPostAddedToFavourite: isPostAddedToFavourite)
-        
-        postUserInfoView.setupProfileUserInfo(name: userName,
-                                              regalia: userRegalia)
-        
-        self.postTitleLabel.text = postTitle.firstUppercased
-        self.postDescriptionLabel.text = postDescription.firstUppercased
-    }
-    
-    func configure(post: FavouritePost, userName: String, userRegalia: String) {
+    func configure(post: Post,
+                   userName: String,
+                   userRegalia: String,
+                   indexPath: IndexPath,
+                   isPostLiked: Bool,
+                   isPostAddedToFavourite: Bool) {
         guard let postTitle = post.title,
               let postDescription = post.body,
               let postLikes = post.likes,
@@ -92,30 +65,62 @@ extension ProfilePostTableViewCell {
             return
         }
         
-        postQuickActionsPanelView.setupQuiackActionsPanelInfo(postLikes: postLikes,
-                                                              postComments: postComments,
-                                                              isPostLiked: post.isPostLiked,
-                                                              isPostAddedToFavourite: post.isPostAddedToFavurite)
+        postMainInfoView.configurePostMainInfo(title: postTitle,
+                                               description: postDescription.firstUppercased,
+                                               image: "photo.fill")
         
-        postUserInfoView.setupProfileUserInfo(name: userName, 
-                                              regalia: userRegalia)
+        postQuickActionsPanelView.configurePostQuickActionsPanel(postLikes: postLikes,
+                                                                 postComments: postComments,
+                                                                 indexPath: indexPath,
+                                                                 isPostLiked: isPostLiked,
+                                                                 isPostAddedToFavourite: isPostAddedToFavourite)
         
-        self.postTitleLabel.text = postTitle.firstUppercased
-        self.postDescriptionLabel.text = postDescription.firstUppercased
+        postUserInfoView.configurePostUserInfo(name: userName,
+                                               regalia: userRegalia)
+    }
+    
+    func configure(post: FavouritePost,
+                   userName: String,
+                   userRegalia: String,
+                   indexPath: IndexPath,
+                   isPostLiked: Bool,
+                   isPostAddedToFavourite: Bool) {
+        guard let postTitle = post.title,
+              let postDescription = post.body,
+              let postLikes = post.likes,
+              let postComments = post.comments
+        else {
+            return
+        }
+        
+        postMainInfoView.configurePostMainInfo(title: postTitle,
+                                               description: postDescription.firstUppercased,
+                                               image: "photo.fill")
+        
+        postQuickActionsPanelView.configurePostQuickActionsPanel(postLikes: postLikes,
+                                                                 postComments: postComments, 
+                                                                 indexPath: indexPath,
+                                                                 isPostLiked: isPostLiked,
+                                                                 isPostAddedToFavourite: isPostAddedToFavourite)
+        
+        postUserInfoView.configurePostUserInfo(name: userName,
+                                               regalia: userRegalia)
     }
 }
 
 extension ProfilePostTableViewCell: ProfilePostQuickActionsPanelViewDelegate {
-    func postLikesButtonWasTapped(sender: UIButton) {
-        delegate?.postLikesButtonWasTapped(sender: sender)
+    func postLikesButtonWasTapped(indexPath: IndexPath) {
+        delegate?.postLikesButtonWasTapped(indexPath: indexPath)
+
     }
     
-    func postCommentsButtonWasTapped(sender: UIButton) {
-        delegate?.postCommentsButtonWasTapped(sender: sender)
+    func postCommentsButtonWasTapped(indexPath: IndexPath) {
+        delegate?.postCommentsButtonWasTapped(indexPath: indexPath)
     }
     
-    func postAddToFavouritesButtonWasTapped(sender: UIButton) {
-        delegate?.postAddToFavouritesButtonWasTapped(sender: sender)
+    func postAddToFavouritesButtonWasTapped(indexPath: IndexPath) {
+        delegate?.postAddToFavouritesButtonWasTapped(indexPath: indexPath)
+
     }
 }
 
@@ -130,44 +135,21 @@ private extension ProfilePostTableViewCell {
     }
     
     func setupLayout() {
-        contentView.add(subviews: [postUserInfoView,
-                                   postTitleLabel,
-                                   postDescriptionLabel,
-                                   postPhoto,
-                                   postQuickActionsPanelView])
+        contentView.addSubview(postContainer)
         
-        postTitleLabel.snp.contentHuggingVerticalPriority = 999
+        postContainer.addSubview(postStackView)
         
-        postUserInfoView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+        postStackView.add(arrangedSubviews: [postUserInfoView,
+                                             postMainInfoView,
+                                             postQuickActionsPanelView])
+                
+        postContainer.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().offset(16)
+            make.bottom.trailing.equalToSuperview().offset(-16)
         }
         
-        postTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(postUserInfoView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        
-        postDescriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(postTitleLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        
-        postPhoto.snp.makeConstraints { make in
-            make.height.equalTo(125)
-            make.top.equalTo(postDescriptionLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        
-        postQuickActionsPanelView.snp.makeConstraints { make in
-            make.top.equalTo(postPhoto.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview().offset(-16)
+        postStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }

@@ -25,6 +25,8 @@ extension UIColor {
         static let clearBackground = UIColor(rgba: 0, 0, 0, 0)
         static let commerceBackground = UIColor(rgba: 75, 179, 75)
         static let errorBackground = UIColor(rgba: 250, 235, 235, 1)
+        static let likedBackground = UIColor(rgba: 231, 54, 70, 0.2)
+        static let favouriteBackground = UIColor(rgba: 0, 119, 255, 0.2)
         
         // MARK: - Foreground Colors
         static let primaryForeground = theme == .light ? UIColor(rgba: 242, 243, 245) : UIColor(rgba: 44, 45, 46)
@@ -32,12 +34,15 @@ extension UIColor {
         static let mutedForeground = UIColor(rgba: 38, 136, 235)
         static let tertiaryForeground = UIColor(rgba:45, 129, 224)
         static let commerceForeground = UIColor(rgba: 255, 255, 255)
+        static let likedForeground = UIColor(rgba: 231, 54, 70, 1)
         
         // MARK: - Text Colors
         static let primaryText = theme == .light ? UIColor(rgba: 0, 0, 0) : UIColor(rgba: 225, 227, 230)
         static let secondaryText = theme == .light ? UIColor(rgba: 129, 140, 153) : UIColor(rgba: 118, 120, 122)
         static let subheadText = theme == .light ? UIColor(rgba: 109, 120, 133) : UIColor(rgba: 118, 120, 122)
         static let placeholderText = UIColor(rgba: 129, 140, 153)
+        static let likedText = UIColor(rgba: 215, 78, 94)
+
         
         // MARK: - Border Colors
         static let mainBorder = theme == .light ? UIColor(rgba: 0, 0, 0, 0.12) : UIColor(rgba: 255, 255, 255, 0.2)

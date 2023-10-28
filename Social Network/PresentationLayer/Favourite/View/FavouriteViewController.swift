@@ -130,7 +130,7 @@ private extension FavouriteViewController {
     func deleteFavouritePost(_ sender: UITapGestureRecognizer) {
         let indexPath = favouriteView.getTableViewTouchPointIndexPath(sender: sender)
         
-        CoreDataManager.shared.removePostFrom(favouritePosts: favouritePosts[indexPath.row])
+        CoreDataManager.shared.removePostFrom(favouritePosts: favouritePosts[indexPath.item])
         
         favouritePosts.remove(at: indexPath.row)
         
@@ -214,7 +214,7 @@ extension FavouriteViewController: UITableViewDataSource {
             favouritePost = favouritePosts[indexPath.row]
         }
         
-        cell?.configure(post: favouritePost, userName: "\(userName) \(userSurname)", userRegalia: userRegalia)
+//        cell?.configure(post: favouritePost, userName: "\(userName) \(userSurname)", userRegalia: userRegalia)
 
         return cell ?? UITableViewCell()
     }

@@ -70,7 +70,7 @@ final class ProfilePostUserInfoView: UIView {
 }
 
 extension ProfilePostUserInfoView {
-    func setupProfileUserInfo(name: String, regalia: String) {
+    func configurePostUserInfo(name: String, regalia: String) {
         userPostNameLabel.text = name
         userPostRegaliaLabel.text = regalia
     }

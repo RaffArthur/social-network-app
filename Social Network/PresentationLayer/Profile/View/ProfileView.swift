@@ -43,20 +43,6 @@ extension ProfileView {
         tableView.delegate = delegate
         tableView.dataSource = dataSource
     }
-    
-    func tableViewIndexPath(sender: UIButton) -> IndexPath {
-        var superView = sender.superview
-        
-        while !(superView is UITableViewCell) {
-            superView = superView?.superview
-        }
-        
-        let cell = superView as! UITableViewCell
-                
-        guard let indexPath = tableView.indexPath(for: cell) else { return IndexPath() }
-        
-        return indexPath
-    }
 }
 
 private extension ProfileView {
