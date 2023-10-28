@@ -12,9 +12,9 @@ final class ProfileViewController: UIViewController {
     weak var reviewer: AuthentificationReviewer?
     weak var delegate: ProfileViewControllerDelegate?
     
-    private lazy var postsAdapter = PostsAdapter()
     private lazy var photosAdapter = PhotosAdapter()
     private lazy var service = Services.userDataService()
+    private lazy var postServicce = Services.userPostsService()
         
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
@@ -114,22 +114,6 @@ private extension ProfileViewController {
             
             self?.profileView.tableViewReloadData()
             
-        }
-        
-        // Нужно поправить данные
-        postsAdapter.getPosts { [weak self] result in
-            let posts = result.posts.map {
-                return Post(title: $0.title,
-                            body: $0.body,
-                            isPostLiked: true,
-                            isPostAddedToFavourite: true,
-                            likes: String(describing: self?.postLikes),
-                            comments: String(describing: self?.postComments))
-            }
-            
-            Storages.posts.append(contentsOf: posts)
-            
-            self?.profileView.tableViewReloadData()
         }
     }
 }
@@ -268,7 +252,7 @@ extension ProfileViewController: UITableViewDataSource {
                         
             let post = Storages.posts[indexPath.row]
             
-            cell?.configure(post: post,
+            cell?.configure(userPost: post,
                             userName: "\(userName) \(userSurname)",
                             userRegalia: userRegalia,
                             indexPath: indexPath,

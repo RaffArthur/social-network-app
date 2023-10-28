@@ -11,7 +11,7 @@ import UIKit
 protocol ProfileViewControllerDelegate: AnyObject {
     func menuButtonWasTapped()
     func photoLibraryWasTapped()
-    func postWasAddedToFavourite(post: Post)
+//    func postWasAddedToFavourite(post: Post)
     func userEditInfoButtonWasTapped()
     func userMoreInfoButtonWasTapped()
 }

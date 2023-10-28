@@ -29,8 +29,10 @@
 		752C6AB02ACDEE1900C11D7F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 752C6AAF2ACDEE1900C11D7F /* RealmSwift */; };
 		752C6AB32ACDEED700C11D7F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 752C6AB22ACDEED700C11D7F /* IQKeyboardManagerSwift */; };
 		753768082AE6F42000D6B6A4 /* ProfilePostMainInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768072AE6F42000D6B6A4 /* ProfilePostMainInfoView.swift */; };
+		7537680C2AED4E6200D6B6A4 /* UserPostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537680B2AED4E6200D6B6A4 /* UserPostsService.swift */; };
+		7537680F2AED4EF600D6B6A4 /* UserPostsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537680E2AED4EF600D6B6A4 /* UserPostsServiceImpl.swift */; };
+		753768112AED540F00D6B6A4 /* UserPostError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768102AED540F00D6B6A4 /* UserPostError.swift */; };
 		7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A226CC240600935B7C /* PhotosAdapter.swift */; };
-		7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A426CC241300935B7C /* PostsAdapter.swift */; };
 		754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E727148B0200400F95 /* AppCoordinator.swift */; };
 		754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E927148FF000400F95 /* LoginCoordinator.swift */; };
 		754CC8B82AE3016B00CC5499 /* ProfilePostsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CC8B72AE3016B00CC5499 /* ProfilePostsHeaderView.swift */; };
@@ -137,8 +139,10 @@
 		752BC25C283AAFF40063A5E0 /* RealmUserCredentialsDataProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUserCredentialsDataProviderImpl.swift; sourceTree = "<group>"; };
 		752BC25E283AC4380063A5E0 /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		753768072AE6F42000D6B6A4 /* ProfilePostMainInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostMainInfoView.swift; sourceTree = "<group>"; };
+		7537680B2AED4E6200D6B6A4 /* UserPostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsService.swift; sourceTree = "<group>"; };
+		7537680E2AED4EF600D6B6A4 /* UserPostsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsServiceImpl.swift; sourceTree = "<group>"; };
+		753768102AED540F00D6B6A4 /* UserPostError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostError.swift; sourceTree = "<group>"; };
 		7538C2A226CC240600935B7C /* PhotosAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAdapter.swift; sourceTree = "<group>"; };
-		7538C2A426CC241300935B7C /* PostsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsAdapter.swift; sourceTree = "<group>"; };
 		754B85E727148B0200400F95 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		754B85E927148FF000400F95 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		754CC8B72AE3016B00CC5499 /* ProfilePostsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostsHeaderView.swift; sourceTree = "<group>"; };
@@ -284,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				75E564732ADDE678004496C9 /* Services.swift */,
+				7537680A2AED4DBF00D6B6A4 /* UserPosts */,
 				75098DD12ADDB7B100D928ED /* UserData */,
 			);
 			path = Services;
@@ -326,10 +331,26 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		7537680A2AED4DBF00D6B6A4 /* UserPosts */ = {
+			isa = PBXGroup;
+			children = (
+				7537680B2AED4E6200D6B6A4 /* UserPostsService.swift */,
+				7537680D2AED4EE100D6B6A4 /* Implementation */,
+			);
+			path = UserPosts;
+			sourceTree = "<group>";
+		};
+		7537680D2AED4EE100D6B6A4 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				7537680E2AED4EF600D6B6A4 /* UserPostsServiceImpl.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
 		7538C2A126CC23E200935B7C /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
-				7538C2A426CC241300935B7C /* PostsAdapter.swift */,
 				7538C2A226CC240600935B7C /* PhotosAdapter.swift */,
 			);
 			path = Adapters;
@@ -436,6 +457,7 @@
 			children = (
 				7574B7BF2610D30A00A349E0 /* UserAuthError.swift */,
 				75E564752ADEC124004496C9 /* UserMainProfileInfoError.swift */,
+				753768102AED540F00D6B6A4 /* UserPostError.swift */,
 				7593C4B1283C2E9C00EC3426 /* RealmError.swift */,
 				7593C4B3283C2EE000EC3426 /* RealmErrorCodeConverter */,
 				75D8A24827CEAA8D0056E78B /* AuthErrorCodeConverter */,
@@ -882,6 +904,7 @@
 				7582B471284D0ABE0095AC47 /* RegistrationView.swift in Sources */,
 				75B3732627109B0A00EEE6E8 /* Coordinator.swift in Sources */,
 				75B444E125C70CEE00B3C586 /* AuthenticationReviewer.swift in Sources */,
+				753768112AED540F00D6B6A4 /* UserPostError.swift in Sources */,
 				751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */,
 				755ADFC625E51A19008E92A3 /* ImageDownloader+UIImageView.swift in Sources */,
 				75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */,
@@ -917,6 +940,7 @@
 				758CF89F2AD4607E006EEBE0 /* ProfilePostQuickActionsPanelView.swift in Sources */,
 				75B444E325C70CEE00B3C586 /* LoginViewController.swift in Sources */,
 				754CC8C52AE426A500CC5499 /* ProfileMenuCoordinator.swift in Sources */,
+				7537680F2AED4EF600D6B6A4 /* UserPostsServiceImpl.swift in Sources */,
 				7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */,
 				75098DC92ADC432D00D928ED /* MainProfileInfoView.swift in Sources */,
 				7582B473284D11470095AC47 /* RegistrationCoordinator.swift in Sources */,
@@ -931,6 +955,7 @@
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
+				7537680C2AED4E6200D6B6A4 /* UserPostsService.swift in Sources */,
 				75F0E9AA28A02F5A00638A81 /* Locilizable+String.swift in Sources */,
 				75098DCD2ADC602100D928ED /* MainProfileInfoCoordinator.swift in Sources */,
 				75D8A24527CE81600056E78B /* AuthErrorCodeConverter.swift in Sources */,
@@ -942,7 +967,6 @@
 				75098DD32ADDB7D500D928ED /* UserDataService.swift in Sources */,
 				754CC8C72AE43B9000CC5499 /* ProfileMenuDelegates.swift in Sources */,
 				75026E662AD1A7D500A082F3 /* PhotosView.swift in Sources */,
-				7538C2A526CC241300935B7C /* PostsAdapter.swift in Sources */,
 				758CF89D2AD44BAE006EEBE0 /* ProfilePostUserInfoView.swift in Sources */,
 				754D79C226CADBE600ED19F8 /* StringFirstUppercasedAndCapitalized+StringProtocol.swift in Sources */,
 				758468E427B6CBD5001559A9 /* LoginView.swift in Sources */,
