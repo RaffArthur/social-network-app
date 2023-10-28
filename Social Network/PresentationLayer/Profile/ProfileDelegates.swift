@@ -22,13 +22,13 @@ protocol ProfileHeaderViewDelegate: AnyObject {
 }
 
 protocol ProfilePostQuickActionsPanelViewDelegate: AnyObject {
-    func postLikesButtonWasTapped(sender: UIButton)
-    func postCommentsButtonWasTapped(sender: UIButton)
-    func postAddToFavouritesButtonWasTapped(sender: UIButton)
+    func postLikesButtonWasTapped(indexPath: IndexPath)
+    func postCommentsButtonWasTapped(indexPath: IndexPath)
+    func postAddToFavouritesButtonWasTapped(indexPath: IndexPath)
 }
 
 protocol ProfilePostTableViewCellDelegate: AnyObject {
-    func postLikesButtonWasTapped(sender: UIButton)
-    func postCommentsButtonWasTapped(sender: UIButton)
-    func postAddToFavouritesButtonWasTapped(sender: UIButton)
+    func postLikesButtonWasTapped(indexPath: IndexPath)
+    func postCommentsButtonWasTapped(indexPath: IndexPath)
+    func postAddToFavouritesButtonWasTapped(indexPath: IndexPath)
 }

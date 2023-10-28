@@ -18,7 +18,10 @@ final class ProfileViewController: UIViewController {
         
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
-
+    
+    private lazy var isPostLiked: Bool = false
+    private lazy var isPostAddedToFavourite: Bool = false
+    
     private lazy var profileView = ProfileView()
     
     private lazy var nickName = String()
@@ -49,7 +52,6 @@ final class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
@@ -200,7 +202,7 @@ private extension ProfileViewController {
         
         present(alert, animated: true)
                 
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
             alert.dismiss(animated: true, completion: nil)
         }
     }
@@ -266,7 +268,12 @@ extension ProfileViewController: UITableViewDataSource {
                         
             let post = Storages.posts[indexPath.row]
             
-            cell?.configure(post: post, userName: "\(userName) \(userSurname)", userRegalia: userRegalia)
+            cell?.configure(post: post,
+                            userName: "\(userName) \(userSurname)",
+                            userRegalia: userRegalia,
+                            indexPath: indexPath,
+                            isPostLiked: isPostLiked,
+                            isPostAddedToFavourite: isPostAddedToFavourite)
             
             return cell ?? UITableViewCell()
         }
@@ -293,42 +300,43 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 }
 
 extension ProfileViewController: ProfilePostTableViewCellDelegate {
-    func postLikesButtonWasTapped(sender: UIButton) {
-        let indexPath = profileView.tableViewIndexPath(sender: sender)
-        
-        postLikes += 1
-        
-        profileView.tableViewReloadData()
-    }
-    
-    func postCommentsButtonWasTapped(sender: UIButton) {
-        let indexPath = profileView.tableViewIndexPath(sender: sender)
-        
-        postComments += 1
-                
-        profileView.tableViewReloadData()
-    }
-    
-    func postAddToFavouritesButtonWasTapped(sender: UIButton) {
-        let indexPath = profileView.tableViewIndexPath(sender: sender)
-        
-        print(indexPath)
-        
-        let post = Storages.posts[indexPath.item]
-        
-        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
-            DispatchQueue.main.async { [weak self] in
-                if favouritePosts.isEmpty {
-                    self?.delegate?.postWasAddedToFavourite(post: post)
-                } else {
-                    if favouritePosts.contains(where: { $0.title == post.title }) {
-                        self?.showAlreadyInFavouritesAlert()
-                    } else {
-                        self?.delegate?.postWasAddedToFavourite(post: post)
-                    }
-                }
-            }
+    func postLikesButtonWasTapped(indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            isPostLiked.toggle()
+            postLikes = 1
+//            if postLikes == 0 {
+//                postLikes += 1
+//            } else {
+//                postLikes -= 1
+//            }
+            profileView.tableViewReloadData()
         }
+    }
+    
+    func postCommentsButtonWasTapped(indexPath: IndexPath) {
+        
+    }
+    
+    func postAddToFavouritesButtonWasTapped(indexPath: IndexPath) {
+//        let indexPath = profileView.tableViewIndexPath(sender: sender)
+//        
+//        print(indexPath)
+//        
+//        let post = Storages.posts[indexPath.item]
+//        
+//        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
+//            DispatchQueue.main.async { [weak self] in
+//                if favouritePosts.isEmpty {
+//                    self?.delegate?.postWasAddedToFavourite(post: post)
+//                } else {
+//                    if favouritePosts.contains(where: { $0.title == post.title }) {
+//                        self?.showAlreadyInFavouritesAlert()
+//                    } else {
+//                        self?.delegate?.postWasAddedToFavourite(post: post)
+//                    }
+//                }
+//            }
+//        }
     }
 }
 

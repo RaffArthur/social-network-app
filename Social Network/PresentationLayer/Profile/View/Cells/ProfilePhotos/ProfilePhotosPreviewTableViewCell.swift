@@ -88,6 +88,20 @@ final class ProfilePhotosPreviewTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photosLabel.isHidden = false
+        photosCountLabel.isHidden = false
+        photosContainer.isHidden = false
+        photoOne.image = .none
+        photoTwo.image = .none
+        photoThree.image = .none
+        photoFour.image = .none
+        photosLabel.textColor = .none
+        photosLabel.textColor = .none
+        photoGalleryChevron.image = .none
+    }
 }
 
 extension ProfilePhotosPreviewTableViewCell {
@@ -126,9 +140,9 @@ private extension ProfilePhotosPreviewTableViewCell {
                                    photoGalleryChevron])
         
         photosContainer.add(arrangedSubviews: [photoOne,
-                                           photoTwo,
-                                           photoThree,
-                                           photoFour])
+                                               photoTwo,
+                                               photoThree,
+                                               photoFour])
         
         photosLabel.snp.makeConstraints { (make) in
             make.top.leading.equalToSuperview().offset(16)
