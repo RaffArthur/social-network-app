@@ -76,34 +76,6 @@ extension ProfilePostTableViewCell {
         postUserInfoView.configurePostUserInfo(name: userName,
                                                regalia: userRegalia)
     }
-    
-//    func configure(post: FavouritePost,
-//                   userName: String,
-//                   userRegalia: String,
-//                   indexPath: IndexPath,
-//                   isPostLiked: Bool,
-//                   isPostAddedToFavourite: Bool) {
-//        guard let postTitle = post.title,
-//              let postDescription = post.body,
-//              let postLikes = post.likes,
-//              let postComments = post.comments
-//        else {
-//            return
-//        }
-//        
-//        postMainInfoView.configurePostMainInfo(title: postTitle,
-//                                               description: postDescription.firstUppercased,
-//                                               image: "photo.fill")
-//        
-//        postQuickActionsPanelView.configurePostQuickActionsPanel(postLikes: postLikes,
-//                                                                 postComments: postComments, 
-//                                                                 indexPath: indexPath,
-//                                                                 isPostLiked: isPostLiked,
-//                                                                 isPostAddedToFavourite: isPostAddedToFavourite)
-//        
-//        postUserInfoView.configurePostUserInfo(name: userName,
-//                                               regalia: userRegalia)
-//    }
 }
 
 extension ProfilePostTableViewCell: ProfilePostQuickActionsPanelViewDelegate {
