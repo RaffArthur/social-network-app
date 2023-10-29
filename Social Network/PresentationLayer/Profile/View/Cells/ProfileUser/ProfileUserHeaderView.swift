@@ -57,18 +57,24 @@ final class ProfileUserHeaderView: UIView {
         return button
     }()
     
-    private lazy var userEditInfoButton: UIButton = {
+    private lazy var userPublishPostButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Редактировать", for: .normal)
-        button.titleLabel?.font = .SocialNetworkFont.t3
-        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(1.0), for: .normal)
-        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .selected)
-        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .highlighted)
-        button.setTitleColor(UIColor.SocialNetworkColor.primaryForeground.withAlphaComponent(0.8), for: .disabled)
-        button.titleLabel?.font = .SocialNetworkFont.t3
+        button.setTitle("Опубликовать запись", for: .normal)
+        button.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        button.setTitleColor(.SocialNetworkColor.primaryText, for: .normal)
+        button.tintColor = .SocialNetworkColor.primaryBackground
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryText.withAlphaComponent(1.0), for: .normal)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryText.withAlphaComponent(0.8), for: .selected)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryText.withAlphaComponent(0.8), for: .highlighted)
+        button.setTitleColor(UIColor.SocialNetworkColor.primaryText.withAlphaComponent(0.8), for: .disabled)
+        button.titleLabel?.font = .SocialNetworkFont.subhead
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 10
-        button.backgroundColor = .SocialNetworkColor.primaryBackground
+        button.backgroundColor = .SocialNetworkColor.primaryForeground
+        button.titleLabel?.textAlignment = .left
+        button.contentHorizontalAlignment = .center
+        button.titleLabel?.lineBreakMode = .byClipping
+        button.titleEdgeInsets.left = 8
         
         return button
     }()
@@ -130,7 +136,7 @@ private extension ProfileUserHeaderView {
                        userName,
                        userRegalia,
                        userMoreInfoButton,
-                       userEditInfoButton])
+                       userPublishPostButton])
         
         userPhoto.snp.contentHuggingVerticalPriority = 999
         
@@ -158,8 +164,8 @@ private extension ProfileUserHeaderView {
             make.width.equalTo(200)
         }
         
-        userEditInfoButton.snp.makeConstraints { make in
-            make.height.equalTo(48)
+        userPublishPostButton.snp.makeConstraints { make in
+            make.height.equalTo(32)
             make.top.equalTo(userMoreInfoButton.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
@@ -170,8 +176,8 @@ private extension ProfileUserHeaderView {
 
 private extension ProfileUserHeaderView {
     func setupActions() {
-        userEditInfoButton.addTarget(self,
-                                     action: #selector(userEditInfoButtonTapped),
+        userPublishPostButton.addTarget(self,
+                                     action: #selector(userPublishPostButtonWasTapped),
                                      for: .touchUpInside)
         userMoreInfoButton.addTarget(self,
                                      action: #selector(userMoreInfoButtonTapped),
@@ -181,8 +187,8 @@ private extension ProfileUserHeaderView {
 }
 
 private extension ProfileUserHeaderView {
-    @objc private func userEditInfoButtonTapped() {
-        delegate?.userEditInfoButtonTapped()
+    @objc private func userPublishPostButtonWasTapped() {
+        delegate?.userPublishPostButtonWasTapped()
     }
     
     @objc private func userMoreInfoButtonTapped() {

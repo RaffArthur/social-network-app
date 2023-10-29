@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class ProfilePostUserInfoView: UIView {
-    private lazy var userPostPhotoImageView: UIImageView = {
+    private lazy var userPhotoImage: UIImageView = {
         var iv = UIImageView()
         iv.isUserInteractionEnabled = true
         iv.image = UIImage(systemName: "photo.circle")
@@ -20,7 +20,7 @@ final class ProfilePostUserInfoView: UIView {
         return iv
     }()
     
-    private lazy var userPostNameLabel: UILabel = {
+    private lazy var userNameLabel: UILabel = {
         var label = UILabel()
         label.font = .SocialNetworkFont.subhead
         label.textAlignment = .left
@@ -30,7 +30,7 @@ final class ProfilePostUserInfoView: UIView {
         return label
     }()
     
-    private lazy var userPostRegaliaLabel: UILabel = {
+    private lazy var userRegaliaLabel: UILabel = {
         var label = UILabel()
         label.font = .SocialNetworkFont.caption2
         label.textAlignment = .left
@@ -41,7 +41,7 @@ final class ProfilePostUserInfoView: UIView {
         return label
     }()
     
-    private lazy var userPostQuickMenuButton: UIButton = {
+    private lazy var userPostMenuButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.tintColor = .SocialNetworkColor.tintIcon
@@ -65,14 +65,14 @@ final class ProfilePostUserInfoView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        userPostPhotoImageView.layer.cornerRadius = userPostPhotoImageView.frame.height / 2
+        userPhotoImage.layer.cornerRadius = userPhotoImage.frame.height / 2
     }
 }
 
 extension ProfilePostUserInfoView {
     func configurePostUserInfo(name: String, regalia: String) {
-        userPostNameLabel.text = name
-        userPostRegaliaLabel.text = regalia
+        userNameLabel.text = name
+        userRegaliaLabel.text = regalia
     }
 }
 
@@ -80,31 +80,32 @@ private extension ProfilePostUserInfoView {
     func setupView() {
         setupLayout()
         setupContent()
+        setupUserPostButtonMenu()
     }
     
     func setupLayout() {
-        add(subviews: [userPostPhotoImageView,
-                       userPostNameLabel,
-                       userPostRegaliaLabel,
-                       userPostQuickMenuButton])
+        add(subviews: [userPhotoImage,
+                       userNameLabel,
+                       userRegaliaLabel,
+                       userPostMenuButton])
         
-        userPostPhotoImageView.snp.makeConstraints { make in
+        userPhotoImage.snp.makeConstraints { make in
             make.size.equalTo(32)
             make.top.leading.bottom.equalToSuperview()
         }
         
-        userPostNameLabel.snp.makeConstraints { make in
+        userNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalTo(userPostPhotoImageView.snp.trailing).offset(8)
+            make.leading.equalTo(userPhotoImage.snp.trailing).offset(8)
         }
         
-        userPostRegaliaLabel.snp.makeConstraints { make in
-            make.leading.equalTo(userPostPhotoImageView.snp.trailing).offset(8)
-            make.top.equalTo(userPostNameLabel.snp.bottom)
-            make.centerX.equalTo(userPostNameLabel)
+        userRegaliaLabel.snp.makeConstraints { make in
+            make.leading.equalTo(userPhotoImage.snp.trailing).offset(8)
+            make.top.equalTo(userNameLabel.snp.bottom)
+            make.centerX.equalTo(userNameLabel)
         }
         
-        userPostQuickMenuButton.snp.makeConstraints { make in
+        userPostMenuButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
         }
@@ -113,6 +114,18 @@ private extension ProfilePostUserInfoView {
     func setupContent() {
         backgroundColor = .SocialNetworkColor.clearBackground
         
-        userPostPhotoImageView.layer.cornerRadius = userPostPhotoImageView.frame.height / 2
+        userPhotoImage.layer.cornerRadius = userPhotoImage.frame.height / 2
+    }
+    
+    func setupUserPostButtonMenu() {
+        let postMenu = UIMenu(children: [
+            UIAction(title: "Редактировать", image: UIImage(systemName: "square.and.pencil")) {_ in },
+            UIAction(title: "Архивировать", image: UIImage(systemName: "archivebox")) {_ in },
+            UIAction(title: "Закрепить", image: UIImage(systemName: "pin")) {_ in },
+            UIAction(title: "Удалить запись", image: UIImage(systemName: "trash"), attributes: .destructive) {_ in }
+        ])
+        
+        userPostMenuButton.showsMenuAsPrimaryAction = true
+        userPostMenuButton.menu = postMenu
     }
 }

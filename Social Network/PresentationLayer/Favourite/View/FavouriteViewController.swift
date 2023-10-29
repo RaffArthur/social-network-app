@@ -101,7 +101,7 @@ private extension FavouriteViewController {
     @objc func deleteAllButtonTapped() {
         let pathes = favouritePosts.enumerated().map { IndexPath(row: $0.offset, section: 0) }
         
-        CoreDataManager.shared.deletAll()
+//        CoreDataManager.shared.deletAll()
         
         favouritePosts.removeAll()
         
@@ -130,7 +130,7 @@ private extension FavouriteViewController {
     func deleteFavouritePost(_ sender: UITapGestureRecognizer) {
         let indexPath = favouriteView.getTableViewTouchPointIndexPath(sender: sender)
         
-        CoreDataManager.shared.removePostFrom(favouritePosts: favouritePosts[indexPath.item])
+//        CoreDataManager.shared.removePostFrom(favouritePosts: favouritePosts[indexPath.item])
         
         favouritePosts.remove(at: indexPath.row)
         
@@ -142,7 +142,7 @@ private extension FavouriteViewController {
         
         favouritePosts.forEach { favPost in
             if filteredFavouritePosts.contains(where: { $0.title == favPost.title }) {
-                CoreDataManager.shared.removePostFrom(favouritePosts: favPost)
+//                CoreDataManager.shared.removePostFrom(favouritePosts: favPost)
             }
         }
         
@@ -152,15 +152,15 @@ private extension FavouriteViewController {
     }
     
     func fetchFavouritePosts() {
-        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
-            DispatchQueue.main.async { [weak self] in
-                self?.favouritePosts = favouritePosts
-                
-                self?.favouriteView.tableViewReloadData()
-                                
-                self?.navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
-            }
-        }
+//        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
+//            DispatchQueue.main.async { [weak self] in
+//                self?.favouritePosts = favouritePosts
+//                
+//                self?.favouriteView.tableViewReloadData()
+//                                
+//                self?.navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
+//            }
+//        }
     }
     
     func filterContentForSearchBy(text: String) {
