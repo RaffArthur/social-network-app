@@ -290,8 +290,8 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
         delegate?.userMoreInfoButtonWasTapped()
     }
     
-    func userEditInfoButtonTapped() {
-        delegate?.userEditInfoButtonWasTapped()
+    func userPublishPostButtonWasTapped() {
+        delegate?.userPublishPostButtonWasTapped()
     }
 }
 

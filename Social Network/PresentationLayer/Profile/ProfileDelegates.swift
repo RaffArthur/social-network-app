@@ -12,12 +12,12 @@ protocol ProfileViewControllerDelegate: AnyObject {
     func menuButtonWasTapped()
     func photoLibraryWasTapped()
 //    func postWasAddedToFavourite(post: Post)
-    func userEditInfoButtonWasTapped()
+    func userPublishPostButtonWasTapped()
     func userMoreInfoButtonWasTapped()
 }
 
 protocol ProfileHeaderViewDelegate: AnyObject {
-    func userEditInfoButtonTapped()
+    func userPublishPostButtonWasTapped()
     func userMoreInfoButtonTapped()
 }
 

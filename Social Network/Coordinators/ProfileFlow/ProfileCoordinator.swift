@@ -56,12 +56,7 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
         childCoordinators.append(coordinator)
     }
     
-    func userEditInfoButtonWasTapped() {
-//        let coordinator = MainProfileInfoCoordinator(navigationController)
-//        coordinator.start()
-//        
-//        childCoordinators.append(coordinator)
-        
+    func userPublishPostButtonWasTapped() {
         let coordinator = PostCreatingCoordinator(navigationController)
         coordinator.start()
         
