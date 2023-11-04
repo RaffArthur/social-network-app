@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias GetUserPostsResult = (Result<[UserPost], UserPostError>) -> Void
+typealias GetUserPostsResult = (Result<UserPosts, UserPostError>) -> Void
 typealias SaveUserPostResult = (Result<Any, UserPostError>) -> Void
 
 protocol UserPostsService: AnyObject {
