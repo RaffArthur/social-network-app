@@ -46,6 +46,7 @@ final class ProfilePostTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        delegate = .none
     }
 }
 

@@ -15,7 +15,8 @@ final class ProfileViewController: UIViewController {
     private lazy var photosAdapter = PhotosAdapter()
     private lazy var userDataService = Services.userDataService()
     private lazy var userPostServicce = Services.userPostsService()
-        
+    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
+
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
     
@@ -29,7 +30,7 @@ final class ProfileViewController: UIViewController {
     private lazy var userSurname = String()
     private lazy var userRegalia = String()
     
-    private lazy var userPosts: [UserPost] = []
+    private lazy var userPosts: UserPosts = UserPosts(posts: [:])
     
     private lazy var menuButton: UIButton = {
         let button = UIButton()
@@ -236,7 +237,9 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : userPosts.count
+        guard let posts = userPosts.posts else { return 0 }
+        
+        return section == 0 ? 1 : posts.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -262,7 +265,11 @@ extension ProfileViewController: UITableViewDataSource {
             
             cell?.selectionStyle = .none
                         
-            let post = userPosts[indexPath.row]
+            guard let post = userPosts.posts?.compactMap({ $0.value })[indexPath.row]
+            else {
+                return UITableViewCell()
+            }
+            
             
             cell?.configure(userPost: post,
                             userName: "\(userName) \(userSurname)",
@@ -297,10 +304,9 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 
 extension ProfileViewController: ProfilePostTableViewCellDelegate {
     func postLikesButtonWasTapped(indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            isPostLiked.toggle()
-            profileView.tableViewReloadData()
-        }
+        isPostLiked.toggle()
+        
+        profileView.tableViewReloadData()
     }
     
     func postCommentsButtonWasTapped(indexPath: IndexPath) {
@@ -308,6 +314,13 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
     }
     
     func postAddToFavouritesButtonWasTapped(indexPath: IndexPath) {
+        isPostLiked.toggle()
+        profileView.tableViewReloadData()
+        
+//        userFavouritePostsService.saveUserPostToFavourite(withID: "") { result in
+//            
+//        }
+        
 //        let indexPath = profileView.tableViewIndexPath(sender: sender)
 //        
 //        print(indexPath)

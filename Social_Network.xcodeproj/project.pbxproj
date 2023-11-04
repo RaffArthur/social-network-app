@@ -36,6 +36,8 @@
 		753768162AED65BE00D6B6A4 /* PostCreatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768152AED65BE00D6B6A4 /* PostCreatingViewController.swift */; };
 		753768192AED6F2100D6B6A4 /* PostCreatingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768182AED6F2100D6B6A4 /* PostCreatingCoordinator.swift */; };
 		7537681B2AED8CAB00D6B6A4 /* PostCreatingDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537681A2AED8CAB00D6B6A4 /* PostCreatingDelegates.swift */; };
+		7537681E2AEEBB8B00D6B6A4 /* UserFavouritePostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537681D2AEEBB8B00D6B6A4 /* UserFavouritePostsService.swift */; };
+		753768212AEEBC2000D6B6A4 /* UserFavouritePostsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753768202AEEBC2000D6B6A4 /* UserFavouritePostsServiceImpl.swift */; };
 		7538C2A326CC240600935B7C /* PhotosAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7538C2A226CC240600935B7C /* PhotosAdapter.swift */; };
 		754B85E827148B0200400F95 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E727148B0200400F95 /* AppCoordinator.swift */; };
 		754B85EA27148FF000400F95 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B85E927148FF000400F95 /* LoginCoordinator.swift */; };
@@ -150,6 +152,8 @@
 		753768152AED65BE00D6B6A4 /* PostCreatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatingViewController.swift; sourceTree = "<group>"; };
 		753768182AED6F2100D6B6A4 /* PostCreatingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatingCoordinator.swift; sourceTree = "<group>"; };
 		7537681A2AED8CAB00D6B6A4 /* PostCreatingDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatingDelegates.swift; sourceTree = "<group>"; };
+		7537681D2AEEBB8B00D6B6A4 /* UserFavouritePostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavouritePostsService.swift; sourceTree = "<group>"; };
+		753768202AEEBC2000D6B6A4 /* UserFavouritePostsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavouritePostsServiceImpl.swift; sourceTree = "<group>"; };
 		7538C2A226CC240600935B7C /* PhotosAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAdapter.swift; sourceTree = "<group>"; };
 		754B85E727148B0200400F95 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		754B85E927148FF000400F95 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 			children = (
 				75E564732ADDE678004496C9 /* Services.swift */,
 				7537680A2AED4DBF00D6B6A4 /* UserPosts */,
+				7537681C2AEEBB5300D6B6A4 /* UserFavouritePosts */,
 				75098DD12ADDB7B100D928ED /* UserData */,
 			);
 			path = Services;
@@ -372,6 +377,23 @@
 				753768132AED65B000D6B6A4 /* PostCreatingView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7537681C2AEEBB5300D6B6A4 /* UserFavouritePosts */ = {
+			isa = PBXGroup;
+			children = (
+				7537681D2AEEBB8B00D6B6A4 /* UserFavouritePostsService.swift */,
+				7537681F2AEEBC0C00D6B6A4 /* Implementation */,
+			);
+			path = UserFavouritePosts;
+			sourceTree = "<group>";
+		};
+		7537681F2AEEBC0C00D6B6A4 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				753768202AEEBC2000D6B6A4 /* UserFavouritePostsServiceImpl.swift */,
+			);
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 		7538C2A126CC23E200935B7C /* Adapters */ = {
@@ -933,6 +955,7 @@
 				75B3732627109B0A00EEE6E8 /* Coordinator.swift in Sources */,
 				75B444E125C70CEE00B3C586 /* AuthenticationReviewer.swift in Sources */,
 				753768112AED540F00D6B6A4 /* UserPostError.swift in Sources */,
+				753768212AEEBC2000D6B6A4 /* UserFavouritePostsServiceImpl.swift in Sources */,
 				751753642717528D00C80FB9 /* FavouriteCoordinator.swift in Sources */,
 				755ADFC625E51A19008E92A3 /* ImageDownloader+UIImageView.swift in Sources */,
 				75D8A24727CE81700056E78B /* AuthErrorCodeConverterImpl.swift in Sources */,
@@ -949,6 +972,7 @@
 				75B444D125C70CEE00B3C586 /* ProfileUserHeaderView.swift in Sources */,
 				75B444CF25C70CEE00B3C586 /* ProfileViewController.swift in Sources */,
 				75F9D97C2AE46814004C2C5C /* ProfileDetailedInfoViewController.swift in Sources */,
+				7537681E2AEEBB8B00D6B6A4 /* UserFavouritePostsService.swift in Sources */,
 				75F2D473271B260B00CC2CE9 /* PasswordToggle+UITextField.swift in Sources */,
 				75CE1E2B2846711E0034C96C /* UIColor+SocialNetwork.swift in Sources */,
 				75B444C725C70CEE00B3C586 /* ProfilePhotosPreviewTableViewCell.swift in Sources */,

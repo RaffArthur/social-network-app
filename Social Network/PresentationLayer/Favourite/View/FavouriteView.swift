@@ -10,10 +10,11 @@ import UIKit
 
 final class FavouriteView: UIView {
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(ProfilePostTableViewCell.self,
                            forCellReuseIdentifier: String(describing: ProfilePostTableViewCell.self))
         tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = .SocialNetworkColor.mainBackground
                 
         return tableView
     }()
@@ -42,14 +43,6 @@ extension FavouriteView {
     func tableViewDeleteRowsAt(indexPath: [IndexPath], withAnimation: UITableView.RowAnimation) {
         tableView.deleteRows(at: indexPath, with: withAnimation)
     }
-    
-    func getTableViewTouchPointIndexPath(sender: UITapGestureRecognizer) -> IndexPath {
-        let touchPoint = sender.location(in: tableView)
-        
-        guard let indexPath = tableView.indexPathForRow(at: touchPoint) else { return IndexPath() }
-        
-        return indexPath
-    }
 }
 
 private extension FavouriteView {
@@ -69,6 +62,6 @@ private extension FavouriteView {
     }
     
     func setupContent() {
-        backgroundColor = .systemBackground
+        backgroundColor = .SocialNetworkColor.mainBackground
     }
 }

@@ -18,10 +18,12 @@ final class ProfilePostsHeaderView: UIView {
         
         return label
     }()
+    
     private lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
         return sb
     }()
+    
     private lazy var searchButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)

@@ -45,10 +45,6 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
         childCoordinators.append(coordinator)
     }
     
-//    func postWasAddedToFavourite(post: Post) {
-//        CoreDataManager.shared.saveToFavourite(post: post)
-//    }
-    
     func photoLibraryWasTapped() {
         let coordinator = PhotosCoordinator(navigationController)
         coordinator.start()

@@ -31,12 +31,12 @@ final class UserPostsServiceImpl: UserPostsService {
             return
         }
         
-        let postUUID = UUID().uuidString
+        let dict = ["body": body,
+                    "images": userPost.images ?? [String](),
+                    "likeCount": userPost.likeCount ?? Int(),
+                    "commentCount": userPost.commentCount ?? Int()] as [String : Any]
         
-        ref.child("user").child(uid).child("posts").child("\(postUUID)").setValue(["body": body,
-                                                                                   "images": userPost.images ?? [String](),
-                                                                                   "likeCount": userPost.likeCount ?? Int(),
-                                                                                   "commentCount": userPost.commentCount ?? Int()])
+        ref.child("user").child(uid).child("posts").childByAutoId().setValue(dict)
         
         completion(.success(userPost))
     }
@@ -50,20 +50,21 @@ final class UserPostsServiceImpl: UserPostsService {
         ref.child("user").child(uid).child("posts").observeSingleEvent(of: .value) { snapshot in
             let values = snapshot.value as? NSDictionary
             
-            var userPosts = [UserPost]()
+            var userPosts = UserPosts(posts: [:])
             
-            values?.forEach { key, value in
-                let value = value as? NSDictionary
+            values?.forEach { postID, post in
+                let post = post as? NSDictionary
+                guard let postID = postID as? String else { return }
                 
-                let body = value?["body"] as? String ?? ""
-                let images = value?["images"] as? [String] ?? [""]
-                let likeCount = value?["likeCount"] as? Int ?? 0
-                let commentCount = value?["commentCount"] as? Int ?? 0
+                let body = post?["body"] as? String ?? ""
+                let images = post?["images"] as? [String] ?? [""]
+                let likeCount = post?["likeCount"] as? Int ?? 0
+                let commentCount = post?["commentCount"] as? Int ?? 0
                 
-                userPosts.insert(UserPost(body: body,
-                                          images: images,
-                                          likeCount: likeCount,
-                                          commentCount: commentCount), at: 0)
+                userPosts.posts?.updateValue(UserPost(body: body,
+                                                     images: images,
+                                                     likeCount: likeCount,
+                                                     commentCount: commentCount), forKey: postID)
             }
             
             completion(.success(userPosts))
