@@ -15,7 +15,6 @@ final class ProfileViewController: UIViewController {
     private lazy var photosAdapter = PhotosAdapter()
     private lazy var userDataService = Services.userDataService()
     private lazy var userPostServicce = Services.userPostsService()
-    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
 
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
@@ -29,8 +28,10 @@ final class ProfileViewController: UIViewController {
     private lazy var userName = String()
     private lazy var userSurname = String()
     private lazy var userRegalia = String()
+    private lazy var userID = String()
+    private lazy var postID = String()
     
-    private lazy var userPosts: UserPosts = UserPosts(posts: [:])
+    private lazy var userPosts = UserPosts(post: [:])
     
     private lazy var menuButton: UIButton = {
         let button = UIButton()
@@ -39,7 +40,6 @@ final class ProfileViewController: UIViewController {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         
-                
         return button
     }()
     
@@ -61,7 +61,8 @@ final class ProfileViewController: UIViewController {
         userDataService.getUserData { [weak self] result in
             switch result {
             case .success(let data):
-                guard let nickname = data.nickname,
+                guard let uid = data.userID,
+                      let nickname = data.nickname,
                       let name = data.name,
                       let surname = data.surname,
                       let regalia = data.regalia
@@ -69,6 +70,7 @@ final class ProfileViewController: UIViewController {
                     return
                 }
                 
+                self?.userID = uid
                 self?.nickName = nickname
                 self?.userName = name
                 self?.userSurname = surname
@@ -126,7 +128,6 @@ private extension ProfileViewController {
             Storages.photos.append(contentsOf: photos)
             
             self?.profileView.tableViewReloadData()
-            
         }
     }
 }
@@ -224,9 +225,28 @@ extension ProfileViewController: UITableViewDelegate {
                    didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard indexPath.section == 0 else { return }
+        if indexPath.section == 0 {
+            delegate?.photoLibraryWasTapped()
+        }
         
-        delegate?.photoLibraryWasTapped()
+        if indexPath.section == 1 {
+            guard let currentPost = userPosts.post?.compactMap({ $0.value })[indexPath.row],
+                  let currentPostID = userPosts.post?.compactMap({ $0.key })[indexPath.row]
+            else {
+                return
+            }
+            
+            postID = currentPostID
+            
+            delegate?.userPostWasTapped(userID: userID,
+                                        postID: currentPostID,
+                                        post: currentPost,
+                                        userName: userName,
+                                        userRegalia: userRegalia,
+                                        indexPath: indexPath,
+                                        isPostLiked: isPostLiked,
+                                        isPostAddedToFavourite: isPostAddedToFavourite)
+        }
     }
 }
 
@@ -237,7 +257,7 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        guard let posts = userPosts.posts else { return 0 }
+        guard let posts = userPosts.post else { return 0 }
         
         return section == 0 ? 1 : posts.count
     }
@@ -265,7 +285,7 @@ extension ProfileViewController: UITableViewDataSource {
             
             cell?.selectionStyle = .none
                         
-            guard let post = userPosts.posts?.compactMap({ $0.value })[indexPath.row]
+            guard let post = userPosts.post?.compactMap({ $0.value })[indexPath.row]
             else {
                 return UITableViewCell()
             }
@@ -305,6 +325,8 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 extension ProfileViewController: ProfilePostTableViewCellDelegate {
     func postLikesButtonWasTapped(indexPath: IndexPath) {
         isPostLiked.toggle()
+        
+        userPostServicce.likeAUsersPost(userID: userID, postID: postID)
         
         profileView.tableViewReloadData()
     }

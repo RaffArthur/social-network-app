@@ -383,7 +383,8 @@ extension MainProfileInfoView {
               let maleGender = userMaleButton.titleLabel?.text,
               let femaleGender = userFemaleButton.titleLabel?.text
         else {
-            return UserData(name: nil,
+            return UserData(userID: nil,
+                            name: nil,
                             surname: nil,
                             nickname: nil,
                             regalia: nil,
@@ -406,7 +407,8 @@ extension MainProfileInfoView {
             selectedGender = femaleGender
         }
         
-        return UserData(name: userNameField.text,
+        return UserData(userID: nil,
+                        name: userNameField.text,
                         surname: userSurnameField.text,
                         nickname: "@\(userName)_\(userSurname)".lowercased(),
                         regalia: userRegalia,

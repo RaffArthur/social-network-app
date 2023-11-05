@@ -6,11 +6,31 @@
 //
 
 struct UserPosts: Codable {
-    var posts: [String: UserPost]?
+    var post: [String: UserPost]?
 }
+
 struct UserPost: Codable {
     let body: String?
     let images: [String]?
-    let likeCount: Int?
-    let commentCount: Int?
+    let postLikes: [String]?
+    var postComments: [String: Comment]?
+}
+
+struct Comment: Codable {
+    let userID: String?
+    let userPhoto: String?
+    let userFullname: String?
+    let text: String?
+    let date: String?
+    let likes: Int?
+    var subcomments: [String: Subcomment]?
+}
+
+struct Subcomment: Codable {
+    let userID: String?
+    let userPhoto: String?
+    let userFullname: String?
+    let text: String?
+    let date: String?
+    let likes: Int?
 }

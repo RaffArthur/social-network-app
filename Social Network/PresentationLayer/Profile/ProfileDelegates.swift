@@ -13,6 +13,14 @@ protocol ProfileViewControllerDelegate: AnyObject {
     func photoLibraryWasTapped()
     func userPublishPostButtonWasTapped()
     func userMoreInfoButtonWasTapped()
+    func userPostWasTapped(userID: String,
+                           postID: String,
+                           post: UserPost,
+                           userName: String,
+                           userRegalia: String,
+                           indexPath: IndexPath,
+                           isPostLiked: Bool,
+                           isPostAddedToFavourite: Bool)
 }
 
 protocol ProfileHeaderViewDelegate: AnyObject {

@@ -124,8 +124,8 @@ private extension PostCreatingView {
 extension PostCreatingView {
     func getPostData() -> UserPost {
         return UserPost(body: bodyField.text,
-                        images: nil,
-                        likeCount: nil,
-                        commentCount: nil)
+                        images: [],
+                        postLikes: [""],
+                        postComments: [:])
     }
 }

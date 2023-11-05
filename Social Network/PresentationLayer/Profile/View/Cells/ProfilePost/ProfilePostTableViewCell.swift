@@ -59,8 +59,8 @@ extension ProfilePostTableViewCell {
                    isPostAddedToFavourite: Bool) {
         guard let postbody = userPost.body,
               let postImages = userPost.images,
-              let postLikeCount = userPost.likeCount,
-              let postCommentCount = userPost.commentCount
+              let postLikeCount = userPost.postLikes?.count,
+              let postCommentCount = userPost.postComments?.count
         else {
             return
         }

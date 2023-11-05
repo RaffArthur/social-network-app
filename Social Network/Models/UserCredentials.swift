@@ -14,7 +14,12 @@ struct UserCredentials: Codable {
     let loggedIn: Bool?
 }
 
+struct Users: Codable {
+    var user: [String: UserData]?
+}
+
 struct UserData: Codable {
+    let userID: String?
     let name: String?
     let surname: String?
     let nickname: String?
