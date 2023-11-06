@@ -14,16 +14,16 @@ final class ProfileViewController: UIViewController {
     
     private lazy var photosAdapter = PhotosAdapter()
     private lazy var userDataService = Services.userDataService()
-    private lazy var userPostServicce = Services.userPostsService()
+    private lazy var userPostService = Services.userPostsService()
 
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
+    private lazy var profileView = ProfileView()
+
     
     private lazy var isPostLiked: Bool = false
     private lazy var isPostAddedToFavourite: Bool = false
-    
-    private lazy var profileView = ProfileView()
-    
+        
     private lazy var nickName = String()
     private lazy var userName = String()
     private lazy var userSurname = String()
@@ -31,7 +31,7 @@ final class ProfileViewController: UIViewController {
     private lazy var userID = String()
     private lazy var postID = String()
     
-    private lazy var userPosts = UserPosts(post: [:])
+    private lazy var userPosts: [UserPost] = []
     
     private lazy var menuButton: UIButton = {
         let button = UIButton()
@@ -88,7 +88,7 @@ final class ProfileViewController: UIViewController {
             }
         }
         
-        userPostServicce.getUserPosts { [weak self] result in
+        userPostService.getUserPosts { [weak self] result in
             switch result {
             case .success(let data):
                 self?.userPosts = data
@@ -230,13 +230,12 @@ extension ProfileViewController: UITableViewDelegate {
         }
         
         if indexPath.section == 1 {
-            guard let currentPost = userPosts.post?.compactMap({ $0.value })[indexPath.row],
-                  let currentPostID = userPosts.post?.compactMap({ $0.key })[indexPath.row]
+            let currentPost = userPosts[indexPath.item]
+
+            guard let currentPostID = currentPost.id
             else {
                 return
             }
-            
-            postID = currentPostID
             
             delegate?.userPostWasTapped(userID: userID,
                                         postID: currentPostID,
@@ -257,9 +256,8 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        guard let posts = userPosts.post else { return 0 }
         
-        return section == 0 ? 1 : posts.count
+        return section == 0 ? 1 : userPosts.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -284,19 +282,22 @@ extension ProfileViewController: UITableViewDataSource {
             cell?.delegate = self
             
             cell?.selectionStyle = .none
-                        
-            guard let post = userPosts.post?.compactMap({ $0.value })[indexPath.row]
+            
+            let currentPost = userPosts[indexPath.item]
+
+            guard let currentPostID = currentPost.id
             else {
                 return UITableViewCell()
             }
             
+            postID = currentPostID
             
-            cell?.configure(userPost: post,
-                            userName: "\(userName) \(userSurname)",
-                            userRegalia: userRegalia,
-                            indexPath: indexPath,
-                            isPostLiked: isPostLiked,
-                            isPostAddedToFavourite: isPostAddedToFavourite)
+            cell?.configureWith(cellIndex: indexPath.row,
+                                userPost: currentPost,
+                                userName: "\(userName) \(userSurname)",
+                                userRegalia: userRegalia,
+                                isPostLiked: isPostLiked,
+                                isPostAddedToFavourite: isPostAddedToFavourite)
             
             return cell ?? UITableViewCell()
         }
@@ -323,20 +324,18 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 }
 
 extension ProfileViewController: ProfilePostTableViewCellDelegate {
-    func postLikesButtonWasTapped(indexPath: IndexPath) {
+    func postLikesButtonWasTappedAt(index: Int) {
         isPostLiked.toggle()
-        
-        userPostServicce.likeAUsersPost(userID: userID, postID: postID)
-        
+                
         profileView.tableViewReloadData()
     }
     
-    func postCommentsButtonWasTapped(indexPath: IndexPath) {
+    func postCommentsButtonWasTappedAt(index: Int) {
         
     }
     
-    func postAddToFavouritesButtonWasTapped(indexPath: IndexPath) {
-        isPostLiked.toggle()
+    func postAddToFavouritesButtonWasTappedAt(index: Int) {
+        isPostAddedToFavourite.toggle()
         profileView.tableViewReloadData()
         
 //        userFavouritePostsService.saveUserPostToFavourite(withID: "") { result in

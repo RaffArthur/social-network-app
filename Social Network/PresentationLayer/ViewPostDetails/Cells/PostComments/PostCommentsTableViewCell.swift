@@ -188,6 +188,7 @@ private extension PostCommentsTableViewCell {
 
 extension PostCommentsTableViewCell {
     func configure(comment: Comment) {
+        
         userCommentText.text = comment.text
         userNameLabel.text = comment.userFullname
         commentDate.text = comment.date

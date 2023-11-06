@@ -19,7 +19,7 @@ final class PostDetailsViewController: UIViewController {
     
     private lazy var postComments = [Comment]()
     
-    private var userPost = UserPost(body: nil, images: nil, postLikes: nil, postComments: nil)
+    private var userPost = UserPost(id: nil, body: nil, image: nil, postLikes: nil, postComments: nil)
     private var userName = String()
     private var userRegalia = String()
     private var indexPath = IndexPath()
@@ -86,12 +86,12 @@ extension PostDetailsViewController: UITableViewDataSource {
             
             cell?.selectionStyle = .none
             
-            cell?.configure(userPost: userPost,
-                            userName: userName,
-                            userRegalia: userRegalia,
-                            indexPath: indexPath,
-                            isPostLiked: isPostLiked,
-                            isPostAddedToFavourite: isPostAddedToFavourite)
+            cell?.configureWith(cellIndex: indexPath.row,
+                                userPost: userPost,
+                                userName: userName,
+                                userRegalia: userRegalia,
+                                isPostLiked: isPostLiked,
+                                isPostAddedToFavourite: isPostAddedToFavourite)
             
             return cell ?? UITableViewCell()
         } 
@@ -142,12 +142,14 @@ private extension PostDetailsViewController {
 
 extension PostDetailsViewController: PostDetailsViewDelegate {
     func sendCommentButtonWasTapped(withText: String) {
-        let comment = Comment(userID: userID,
+        let comment = Comment(id: nil,
+                              userCommentedID: userID,
                               userPhoto: "",
                               userFullname: userName,
                               text: withText,
-                              date: "22.12.23",
-                              likes: 0)
+                              date: "10.10.110",
+                              likes: 0,
+                              subcomments: nil)
         
         service.saveUserComment(comment: comment,
                                 userID: userID,

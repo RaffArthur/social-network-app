@@ -11,10 +11,8 @@ import UIKit
 final class ProfilePostQuickActionsPanelView: UIView {
     weak var delegate: ProfilePostQuickActionsPanelViewDelegate?
     
-    private lazy var indexPath: IndexPath = IndexPath()
-    
     private lazy var postLikesButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .custom)
         button.backgroundColor = .SocialNetworkColor.primaryForeground
         button.tintColor = .SocialNetworkColor.tintIcon
         button.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -23,7 +21,6 @@ final class ProfilePostQuickActionsPanelView: UIView {
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
-        button.setTitle("0", for: .normal)
         button.setTitleColor(.SocialNetworkColor.tintIcon, for: .normal)
         button.titleLabel?.font = .SocialNetworkFont.caption2
         button.titleLabel?.textAlignment = .left
@@ -35,7 +32,7 @@ final class ProfilePostQuickActionsPanelView: UIView {
     }()
     
     private lazy var postCommentsButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .custom)
         button.backgroundColor = .SocialNetworkColor.primaryForeground
         button.tintColor = .SocialNetworkColor.tintIcon
         button.setImage(UIImage(systemName: "message"), for: .normal)
@@ -43,7 +40,6 @@ final class ProfilePostQuickActionsPanelView: UIView {
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
-        button.setTitle("0", for: .normal)
         button.setTitleColor(.SocialNetworkColor.tintIcon, for: .normal)
         button.titleLabel?.font = .SocialNetworkFont.caption2
         button.titleLabel?.textAlignment = .left
@@ -55,7 +51,7 @@ final class ProfilePostQuickActionsPanelView: UIView {
     }()
     
     private lazy var postAddToFavouritesButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .custom)
         button.backgroundColor = .SocialNetworkColor.primaryForeground
         button.tintColor = .SocialNetworkColor.tintIcon
         button.setImage(UIImage(systemName: "bookmark"), for: .normal)
@@ -130,32 +126,36 @@ private extension ProfilePostQuickActionsPanelView {
         postAddToFavouritesButton.addTarget(self, action: #selector(postAddToFavouritesButtonWasTapped), for: .touchUpInside)
     }
     
-    @objc func postLikesButtonWasTapped() {
-        delegate?.postLikesButtonWasTapped(indexPath: indexPath)
+    @objc func postLikesButtonWasTapped(_ sender: UIButton) {
+        delegate?.postLikesButtonWasTappedAt(index: sender.tag)
     }
     
-    @objc func postCommentsButtonWasTapped() {
-        delegate?.postCommentsButtonWasTapped(indexPath: indexPath)
+    @objc func postCommentsButtonWasTapped(_ sender: UIButton) {
+        delegate?.postCommentsButtonWasTappedAt(index: sender.tag)
     }
     
-    @objc func postAddToFavouritesButtonWasTapped() {
-        delegate?.postAddToFavouritesButtonWasTapped(indexPath: indexPath)
+    @objc func postAddToFavouritesButtonWasTapped(_ sender: UIButton) {
+        delegate?.postAddToFavouritesButtonWasTappedAt(index: sender.tag)
     }
 }
 
 extension ProfilePostQuickActionsPanelView {
-    func configurePostQuickActionsPanel(postLikes: String,
-                                        postComments: String,
-                                        indexPath: IndexPath,
-                                        isPostLiked: Bool,
-                                        isPostAddedToFavourite: Bool) {
-        self.indexPath = indexPath
+    func configurePostQuickActionsPanelWith(cellIndex: Int,
+                                            postLikes: String,
+                                            postComments: String,
+                                            isPostLiked: Bool,
+                                            isPostAddedToFavourite: Bool) {
+        
+        postLikesButton.tag = cellIndex
+        postCommentsButton.tag = cellIndex
+        postAddToFavouritesButton.tag = cellIndex
         
         postLikesButton.setTitle(postLikes, for: .normal)
         postCommentsButton.setTitle(postComments, for: .normal)
         
         postLikesButton.isSelected = isPostLiked
         postAddToFavouritesButton.isSelected = isPostAddedToFavourite
+        
         
         if postLikesButton.isSelected == true {
             postLikesButton.tintColor = .SocialNetworkColor.likedForeground
@@ -174,5 +174,19 @@ extension ProfilePostQuickActionsPanelView {
             postAddToFavouritesButton.tintColor = .SocialNetworkColor.tintIcon
             postAddToFavouritesButton.backgroundColor = .SocialNetworkColor.primaryForeground
         }
+    }
+    
+    func prepareForReuse() {
+        postLikesButton.tintColor = .none
+        postLikesButton.backgroundColor = .none
+        postLikesButton.setTitleColor(.none, for: .normal)
+        postLikesButton.setTitle(.none, for: .normal)
+        
+        postCommentsButton.setTitle(.none, for: .normal)
+        
+        postAddToFavouritesButton.tintColor = .none
+        postAddToFavouritesButton.backgroundColor = .none
+        postAddToFavouritesButton.setTitleColor(.none, for: .normal)
+        postAddToFavouritesButton.setTitle(.none, for: .normal)
     }
 }

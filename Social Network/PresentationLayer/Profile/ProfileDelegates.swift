@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func menuButtonWasTapped()
@@ -29,13 +28,13 @@ protocol ProfileHeaderViewDelegate: AnyObject {
 }
 
 protocol ProfilePostQuickActionsPanelViewDelegate: AnyObject {
-    func postLikesButtonWasTapped(indexPath: IndexPath)
-    func postCommentsButtonWasTapped(indexPath: IndexPath)
-    func postAddToFavouritesButtonWasTapped(indexPath: IndexPath)
+    func postLikesButtonWasTappedAt(index: Int)
+    func postCommentsButtonWasTappedAt(index: Int)
+    func postAddToFavouritesButtonWasTappedAt(index: Int)
 }
 
 protocol ProfilePostTableViewCellDelegate: AnyObject {
-    func postLikesButtonWasTapped(indexPath: IndexPath)
-    func postCommentsButtonWasTapped(indexPath: IndexPath)
-    func postAddToFavouritesButtonWasTapped(indexPath: IndexPath)
+    func postLikesButtonWasTappedAt(index: Int)
+    func postCommentsButtonWasTappedAt(index: Int)
+    func postAddToFavouritesButtonWasTappedAt(index: Int)
 }

@@ -5,29 +5,33 @@
 //  Created by Arthur Raff on 15.08.2021.
 //
 
-struct UserPosts: Codable {
-    var post: [String: UserPost]?
+struct UserPost: Codable {
+    let id: String?
+    let body: String?
+    let image: String?
+    let postLikes: [Like]?
+    let postComments: [Comment]?
 }
 
-struct UserPost: Codable {
-    let body: String?
-    let images: [String]?
-    let postLikes: [String]?
-    var postComments: [String: Comment]?
+struct Like: Codable {
+    let id: String
+    let likedUserID: String?
 }
 
 struct Comment: Codable {
-    let userID: String?
+    let id: String?
+    let userCommentedID: String?
     let userPhoto: String?
     let userFullname: String?
     let text: String?
     let date: String?
     let likes: Int?
-    var subcomments: [String: Subcomment]?
+    let subcomments: [Subcomment]?
 }
 
 struct Subcomment: Codable {
-    let userID: String?
+    let id: String?
+    let userSubcommentedID: String?
     let userPhoto: String?
     let userFullname: String?
     let text: String?

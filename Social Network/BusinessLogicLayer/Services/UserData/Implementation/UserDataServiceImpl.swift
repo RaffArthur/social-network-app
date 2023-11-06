@@ -25,14 +25,14 @@ final class UserDataServiceImpl: UserDataService {
                 let user = user as? NSDictionary
                 guard let userID = userID as? String else { return }
                 
-                let uid = value?["userID"] as? String ?? ""
-                let name = value?["name"] as? String ?? ""
-                let surname = value?["surname"] as? String ?? ""
-                let nickname = value?["nickname"] as? String ?? ""
-                let birthDate = value?["birthDate"] as? String ?? ""
-                let gender = value?["gender"] as? String ?? ""
-                let regalia = value?["regalia"] as? String ?? ""
-                let hometown = value?["hometown"] as? String ?? ""
+                let uid = user?["userID"] as? String ?? ""
+                let name = user?["name"] as? String ?? ""
+                let surname = user?["surname"] as? String ?? ""
+                let nickname = user?["nickname"] as? String ?? ""
+                let birthDate = user?["birthDate"] as? String ?? ""
+                let gender = user?["gender"] as? String ?? ""
+                let regalia = user?["regalia"] as? String ?? ""
+                let hometown = user?["hometown"] as? String ?? ""
                 
                 let userData = UserData(userID: uid,
                                         name: name,
