@@ -11,6 +11,8 @@ import UIKit
 final class PostCreatingView: UIView {
     weak var delegate: PostCreatingViewDelegate?
     
+    lazy var commentText: String = { return commentTextView.text }()
+    
     private lazy var contentView: UIView = {
         let view = UIView()
         
@@ -23,18 +25,19 @@ final class PostCreatingView: UIView {
         return sv
     }()
     
-    private lazy var bodyField: UITextView = {
-        let tf = UITextView()
-        tf.text = "Что у вас нового?"
-        tf.font = .SocialNetworkFont.t2
-        tf.textColor = .SocialNetworkColor.primaryText
-        tf.backgroundColor = .SocialNetworkColor.clearBackground
-        tf.keyboardType = .alphabet
-        tf.translatesAutoresizingMaskIntoConstraints = true
-        tf.textAlignment = .left
-        tf.sizeToFit()
+    private lazy var commentTextView: UITextView = {
+        let tv = UITextView()
+        tv.text = "Что у вас нового?"
+        tv.font = .SocialNetworkFont.t2
+        tv.textColor = .SocialNetworkColor.primaryText
+        tv.backgroundColor = .SocialNetworkColor.clearBackground
+        tv.keyboardType = .alphabet
+        tv.translatesAutoresizingMaskIntoConstraints = true
+        tv.textAlignment = .left
+        tv.sizeToFit()
+        tv.keyboardType = .alphabet
         
-        return tf
+        return tv
     }()
     
     private lazy var addImageButton: UIButton = {
@@ -77,7 +80,7 @@ private extension PostCreatingView {
         
         scrollView.addSubview(contentView)
         
-        contentView.add(subviews: [bodyField,
+        contentView.add(subviews: [commentTextView,
                                   addImageButton])
         
         scrollView.snp.makeConstraints { make in
@@ -94,7 +97,7 @@ private extension PostCreatingView {
             }.offset(-16)
         }
         
-        bodyField.snp.makeConstraints { make in
+        commentTextView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalTo(addImageButton.snp.top).offset(-16)
         }
@@ -118,14 +121,5 @@ private extension PostCreatingView {
     
     @objc func addimageButtonTapped() {
         delegate?.addImageButtonWasTapped()
-    }
-}
-
-extension PostCreatingView {
-    func getPostData() -> UserPost {
-        return UserPost(body: bodyField.text,
-                        images: nil,
-                        likeCount: nil,
-                        commentCount: nil)
     }
 }

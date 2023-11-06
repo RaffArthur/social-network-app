@@ -42,6 +42,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         print("Активность приложения будет прекращена")
-        UIColor.SocialNetworkColor.mainBackground
     }
 }

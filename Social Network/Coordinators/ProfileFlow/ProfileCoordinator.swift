@@ -33,6 +33,27 @@ final class ProfileCoordinator: Coordinator {
 }
 
 extension ProfileCoordinator: ProfileViewControllerDelegate {
+    func userPostWasTapped(userID: String,
+                           postID: String,
+                           post: UserPost,
+                           userName: String,
+                           userRegalia: String,
+                           indexPath: IndexPath,
+                           isPostLiked: Bool,
+                           isPostAddedToFavourite: Bool) {
+        let coordinator = PostDetailsCoordinator(navigationController)
+        coordinator.startWith(userID: userID,
+                              postID: postID,
+                              post: post,
+                              userName: userName,
+                              userRegalia: userRegalia,
+                              indexPath: indexPath,
+                              isPostLiked: isPostLiked,
+                              isPostAddedToFavourite: isPostAddedToFavourite)
+        
+        childCoordinators.append(coordinator)
+    }
+    
     func menuButtonWasTapped() {
         let coordinator = ProfileMenuCoordinator(navigationController)
         coordinator.start()

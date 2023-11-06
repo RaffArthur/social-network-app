@@ -62,7 +62,13 @@ private extension PostCreatingViewController {
     }
     
     @objc func publishPostButtonWasTapped() {
-        service.saveUserPost(userPost: postCreatingView.getPostData()) { [weak self] result in
+        let userPost = UserPost(id: String(),
+                                body: postCreatingView.commentText,
+                                image: String(),
+                                postLikes: [],
+                                postComments: [])
+        
+        service.saveUserPost(userPost: userPost) { [weak self] result in
             switch result {
             case .success:
                 self?.delegate?.publishPostButtonWasTapped()

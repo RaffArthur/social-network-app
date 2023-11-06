@@ -47,32 +47,34 @@ final class ProfilePostTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         delegate = .none
+        postQuickActionsPanelView.prepareForReuse()
     }
 }
 
 extension ProfilePostTableViewCell {
-    func configure(userPost: UserPost,
-                   userName: String,
-                   userRegalia: String,
-                   indexPath: IndexPath,
-                   isPostLiked: Bool,
-                   isPostAddedToFavourite: Bool) {
+    func configureWith(cellIndex: Int,
+                       userPost: UserPost,
+                       userName: String,
+                       userRegalia: String,
+                       isPostLiked: Bool,
+                       isPostAddedToFavourite: Bool) {
         guard let postbody = userPost.body,
-              let postImages = userPost.images,
-              let postLikeCount = userPost.likeCount,
-              let postCommentCount = userPost.commentCount
+              let postImage = userPost.image,
+              let postLikeCount = userPost.postLikes?.count,
+              let postCommentCount = userPost.postComments?.count
         else {
             return
         }
         
+        print(postImage)
         postMainInfoView.configurePostMainInfo(body: postbody.firstUppercased,
                                                image: nil)
         
-        postQuickActionsPanelView.configurePostQuickActionsPanel(postLikes: String(describing: postLikeCount),
-                                                                 postComments: String(describing: postCommentCount),
-                                                                 indexPath: indexPath,
-                                                                 isPostLiked: isPostLiked,
-                                                                 isPostAddedToFavourite: isPostAddedToFavourite)
+        postQuickActionsPanelView.configurePostQuickActionsPanelWith(cellIndex: cellIndex,
+                                                                     postLikes: String(describing: postLikeCount),
+                                                                     postComments: String(describing: postCommentCount),
+                                                                     isPostLiked: isPostLiked,
+                                                                     isPostAddedToFavourite: isPostAddedToFavourite)
         
         postUserInfoView.configurePostUserInfo(name: userName,
                                                regalia: userRegalia)
@@ -80,18 +82,16 @@ extension ProfilePostTableViewCell {
 }
 
 extension ProfilePostTableViewCell: ProfilePostQuickActionsPanelViewDelegate {
-    func postLikesButtonWasTapped(indexPath: IndexPath) {
-        delegate?.postLikesButtonWasTapped(indexPath: indexPath)
-
+    func postLikesButtonWasTappedAt(index: Int) {
+        delegate?.postLikesButtonWasTappedAt(index: index)
     }
     
-    func postCommentsButtonWasTapped(indexPath: IndexPath) {
-        delegate?.postCommentsButtonWasTapped(indexPath: indexPath)
+    func postCommentsButtonWasTappedAt(index: Int) {
+        delegate?.postCommentsButtonWasTappedAt(index: index)
     }
     
-    func postAddToFavouritesButtonWasTapped(indexPath: IndexPath) {
-        delegate?.postAddToFavouritesButtonWasTapped(indexPath: indexPath)
-
+    func postAddToFavouritesButtonWasTappedAt(index: Int) {
+        delegate?.postAddToFavouritesButtonWasTappedAt(index: index)
     }
 }
 
