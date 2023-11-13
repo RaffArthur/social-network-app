@@ -8,128 +8,139 @@ import Foundation
 import UIKit
 
 final class FavouriteViewController: UIViewController {
-//    private var favouritePosts: [UserPost] = []
-//    private var filteredFavouritePosts: [UserPost] = []
-//    
-//    private lazy var userDataService = Services.userDataService()
-//    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
-//    
-//    private lazy var favouriteView = FavouriteView()
-//    
-//    private lazy var userName = String()
-//    private lazy var userSurname = String()
-//    private lazy var userRegalia = String()
-//    
-//    private lazy var deleteAllButton: UIBarButtonItem = {
-//        let bbi = UIBarButtonItem()
-//        bbi.image = UIImage(systemName: "trash")
-//        bbi.style = .done
-//        
-//        return bbi
-//    }()
-//    
-//    private lazy var searchController: UISearchController = {
-//        let sc = UISearchController(searchResultsController: nil)
-//        sc.searchBar.placeholder = .localized(key: .favouritesSearchPlaceholder)
-//        sc.obscuresBackgroundDuringPresentation = false
-//        sc.searchResultsUpdater = self
-//        
-//        return sc
-//    }()
-//    
-//    private var serachBarIsEmpty: Bool {
-//        return searchController.searchBar.text?.isEmpty ?? true
-//    }
-//    
-//    private var isFiltering: Bool {
-//        return searchController.isActive && !serachBarIsEmpty
-//    }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        fetchFavouritePosts()
-//        
-//        userDataService.getUserData { [weak self] result in
-//            switch result {
-//            case .success(let data):
-//                guard let name = data.name,
-//                      let surname = data.surname,
-//                      let regalia = data.regalia
-//                else {
-//                    return
-//                }
-//                
-//                self?.userName = name
-//                self?.userSurname = surname
-//                self?.userRegalia = regalia
-//                
-//                self?.favouriteView.tableViewReloadData()
-//
-//            case .failure(let error):
-//                self?.show(mainProfileError: error)
-//            }
-//        }
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        setupContent()
-//        setupActions()
-//        
-//        favouriteView.tableView(delegate: self, dataSource: self)
-//    }
-//    
-//    override func loadView() {
-//        view = favouriteView
-//    }
-//}
-//
-//private extension FavouriteViewController {
-//    func setupContent() {
-//        navigationItem.rightBarButtonItem = deleteAllButton
-//        
-//        navigationItem.searchController = searchController
-//        
-//        definesPresentationContext = true
-//        
-//        view.backgroundColor = .SocialNetworkColor.mainBackground
-//    }
-//}
-//
-//private extension FavouriteViewController {
-//    @objc func deleteAllButtonTapped() {
-//        let pathes = favouritePosts.enumerated().map { IndexPath(row: $0.offset, section: 0) }
-//        
-//        userFavouritePostsService.removeAllFavouritePosts()
-//        
-//        favouritePosts.removeAll()
-//        
-//        favouriteView.tableViewDeleteRowsAt(indexPath: pathes, withAnimation: .automatic)
-//        
-//        navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
-//    }
-//    
-//    @objc func didTapPost(_ sender: UITapGestureRecognizer) {
-//        if isFiltering {
-//            deleteFilteredFavouritePost(sender)
+    private var favouritePosts: [UserPost] = []
+    private var filteredFavouritePosts: [UserPost] = []
+    
+    private lazy var userDataService = Services.userDataService()
+    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
+    
+    private lazy var favouriteView = FavouriteView()
+    
+    private lazy var userName = String()
+    private lazy var userSurname = String()
+    private lazy var userRegalia = String()
+    
+    private lazy var deleteAllButton: UIBarButtonItem = {
+        let bbi = UIBarButtonItem()
+        bbi.image = UIImage(systemName: "trash")
+        bbi.style = .done
+        
+        return bbi
+    }()
+    
+    private lazy var searchController: UISearchController = {
+        let sc = UISearchController(searchResultsController: nil)
+        sc.searchBar.placeholder = .localized(key: .favouritesSearchPlaceholder)
+        sc.obscuresBackgroundDuringPresentation = false
+        sc.searchResultsUpdater = self
+        
+        return sc
+    }()
+    
+    private var serachBarIsEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    private var isFiltering: Bool {
+        return searchController.isActive && !serachBarIsEmpty
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadFavouritePosts()
+        loadUserData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupContent()
+        setupActions()
+        
+        favouriteView.tableView(delegate: self, dataSource: self)
+    }
+    
+    override func loadView() {
+        view = favouriteView
+    }
+}
+
+private extension FavouriteViewController {
+    func setupContent() {
+        navigationItem.rightBarButtonItem = deleteAllButton
+        
+        navigationItem.searchController = searchController
+        
+        definesPresentationContext = true
+        
+        view.backgroundColor = .SocialNetworkColor.mainBackground
+        
+//        if favouritePosts.isEmpty {
+//            deleteAllButton.isEnabled = false
+//            deleteAllButton.tintColor = .SocialNetworkColor.secondaryBackground
 //        } else {
-//            deleteFavouritePost(sender)
-//        }
-//    }
-//    
-//    func setupActions() {
-//        deleteAllButton.target = self
-//        deleteAllButton.action = #selector(deleteAllButtonTapped)
-//    }
-//}
+//            deleteAllButton.isEnabled = true
+//            deleteAllButton.tintColor = .SocialNetworkColor.accent
 //
-//private extension FavouriteViewController {
+//        }
+    }
+}
+
+private extension FavouriteViewController {
+    @objc func deleteAllButtonTapped() {
+        userFavouritePostsService.removeAllUserPostFromFavourite()
+        
+        loadFavouritePosts()        
+    }
+    
+    func setupActions() {
+        deleteAllButton.target = self
+        deleteAllButton.action = #selector(deleteAllButtonTapped)
+    }
+    
+    func loadFavouritePosts() {
+        userFavouritePostsService.getUserFavouritePosts { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.favouritePosts = data
+                self?.navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(data.count)"
+                self?.favouriteView.tableViewReloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func loadUserData() {
+        userDataService.getUserData { [weak self] result in
+            switch result {
+            case .success(let data):
+                guard let name = data.name,
+                      let surname = data.surname,
+                      let regalia = data.regalia
+                else {
+                    return
+                }
+                
+                self?.userName = name
+                self?.userSurname = surname
+                self?.userRegalia = regalia
+                
+                self?.favouriteView.tableViewReloadData()
+
+            case .failure(let error):
+                self?.show(mainProfileError: error)
+            }
+        }
+    }
+}
+
+private extension FavouriteViewController {
 //    func deleteFavouritePost(_ sender: UITapGestureRecognizer) {
 //        let indexPath = favouriteView.getTableViewTouchPointIndexPath(sender: sender)
 //        
-////        CoreDataManager.shared.removePostFrom(favouritePosts: favouritePosts[indexPath.item])
+//        CoreDataManager.shared.removePostFrom(favouritePosts: favouritePosts[indexPath.item])
 //        
 //        favouritePosts.remove(at: indexPath.row)
 //        
@@ -141,7 +152,7 @@ final class FavouriteViewController: UIViewController {
 //        
 //        favouritePosts.forEach { favPost in
 //            if filteredFavouritePosts.contains(where: { $0.body == favPost.body }) {
-////                CoreDataManager.shared.removePostFrom(favouritePosts: favPost)
+//                CoreDataManager.shared.removePostFrom(favouritePosts: favPost)
 //            }
 //        }
 //        
@@ -149,112 +160,88 @@ final class FavouriteViewController: UIViewController {
 //        
 //        favouriteView.tableViewDeleteRowsAt(indexPath: [indexPath], withAnimation: .automatic)
 //    }
-//    
-//    func fetchFavouritePosts() {
-//        userFavouritePostsService.getUserFavouritePosts { [weak self] result in
-//            switch result {
-//            case .success(let data):
-//                self?.favouritePosts = data
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-////        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
-////            DispatchQueue.main.async { [weak self] in
-////                self?.favouritePosts = favouritePosts
-////                
-////                self?.favouriteView.tableViewReloadData()
-////                                
-////                self?.navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
-////            }
-////        }
-////    }
-//    
-//    func filterContentForSearchBy(text: String) {
-//        filteredFavouritePosts = favouritePosts.filter {
-//            guard let title = $0.body else { return false }
-//            
-//            return title.lowercased().contains(text.lowercased())
-//        }
-//        
-//        favouriteView.tableViewReloadData()
-//    }
-//}
-//
-//extension FavouriteViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView,
-//                   heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//    
-//    func tableView(_ tableView: UITableView,
-//                   didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        
-//        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(didTapPost))
-//        doubleTapGestureRecognizer.numberOfTapsRequired = 2
-//        tableView.addGestureRecognizer(doubleTapGestureRecognizer)
-//    }
-//}
-//
-//extension FavouriteViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView,
-//                   numberOfRowsInSection section: Int) -> Int {
-//        if isFiltering {
-//            return filteredFavouritePosts.count
-//        }
-//        
-//        return favouritePosts.count
-//    }
-//    
-//    func tableView(_ tableView: UITableView,
-//                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let identifier = String(describing: ProfilePostTableViewCell.self)
-//        let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
-//                                                 for: indexPath) as? ProfilePostTableViewCell
-//        
-//        var favouritePost: UserPost
-//        
-//        if isFiltering {
-//            favouritePost = filteredFavouritePosts[indexPath.row]
-//        } else {
-//            favouritePost = favouritePosts[indexPath.row]
-//        }
-//        
-//        cell?.configure(userPost: favouritePost,
-//                        userName: <#T##String#>,
-//                        userRegalia: <#T##String#>,
-//                        indexPath: <#T##IndexPath#>,
-//                        isPostLiked: <#T##Bool#>,
-//                        isPostAddedToFavourite: <#T##Bool#>)
-//        
-//        return cell ?? UITableViewCell()
-//    }
-//}
-//
-//extension FavouriteViewController: UISearchResultsUpdating {
-//    func updateSearchResults(for searchController: UISearchController) {
-//        if !isFiltering {
-//            fetchFavouritePosts()
-//        }
-//        
-//        guard let text = searchController.searchBar.text else { return }
-//        
-//        filterContentForSearchBy(text: text)
-//    }
-//}
-//
-//extension FavouriteViewController {
-//    func show(mainProfileError: UserMainProfileInfoError) {
-//        let alertController = UIAlertController(title: mainProfileError.title,
-//                                                 message: mainProfileError.message,
-//                                                 preferredStyle: .alert)
-//        let action = UIAlertAction(title: "ОК",
-//                                   style: .cancel,
-//                                   handler: nil)
-//        
-//        alertController.addAction(action)
-//        
-//        present(alertController, animated: true, completion: nil)
-//    }
+    
+    func filterContentForSearchBy(text: String) {
+        filteredFavouritePosts = favouritePosts.filter {
+            guard let title = $0.body else { return false }
+            
+            return title.lowercased().contains(text.lowercased())
+        }
+        
+        favouriteView.tableViewReloadData()
+    }
+}
+
+extension FavouriteViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension FavouriteViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredFavouritePosts.count
+        }
+        
+        return favouritePosts.count
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = String(describing: ProfilePostTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
+                                                 for: indexPath) as? ProfilePostTableViewCell
+        
+        var favouritePost: UserPost
+        
+        if isFiltering {
+            favouritePost = filteredFavouritePosts[indexPath.row]
+        } else {
+            favouritePost = favouritePosts[indexPath.row]
+        }
+        
+        cell?.configureWith(indexPath: indexPath,
+                            userPost: favouritePost,
+                            userName: userName,
+                            userRegalia: userRegalia,
+                            isPostLiked: false,
+                            isPostAddedToFavourite: false)
+        
+        return cell ?? UITableViewCell()
+    }
+}
+
+extension FavouriteViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if !isFiltering {
+            loadFavouritePosts()
+        }
+        
+        guard let text = searchController.searchBar.text else { return }
+        
+        filterContentForSearchBy(text: text)
+    }
+}
+
+extension FavouriteViewController {
+    func show(mainProfileError: UserMainProfileInfoError) {
+        let alertController = UIAlertController(title: mainProfileError.title,
+                                                 message: mainProfileError.message,
+                                                 preferredStyle: .alert)
+        let action = UIAlertAction(title: "ОК",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }

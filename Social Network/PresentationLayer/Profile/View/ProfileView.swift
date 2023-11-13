@@ -43,6 +43,10 @@ extension ProfileView {
         tableView.delegate = delegate
         tableView.dataSource = dataSource
     }
+    
+    func tableViewIndexPathFor(cell: UITableViewCell) -> IndexPath {        
+        return tableView.indexPath(for: cell) ?? IndexPath()
+    }
 }
 
 private extension ProfileView {

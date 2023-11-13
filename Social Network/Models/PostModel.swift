@@ -26,15 +26,4 @@ struct Comment: Codable {
     let text: String?
     let date: String?
     let likes: Int?
-    let subcomments: [Subcomment]?
-}
-
-struct Subcomment: Codable {
-    let id: String?
-    let userSubcommentedID: String?
-    let userPhoto: String?
-    let userFullname: String?
-    let text: String?
-    let date: String?
-    let likes: Int?
 }

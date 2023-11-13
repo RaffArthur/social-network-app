@@ -38,7 +38,7 @@ final class PostDetailsViewController: UIViewController {
         postDetailesView.tableView(delegate: self, dataSource: self)
         postDetailesView.delegate = self
         
-        title = "Запись"
+        setupContent()
         
         postDetailesView.tableViewReloadData()
     }
@@ -86,7 +86,7 @@ extension PostDetailsViewController: UITableViewDataSource {
             
             cell?.selectionStyle = .none
             
-            cell?.configureWith(cellIndex: indexPath.row,
+            cell?.configureWith(indexPath: indexPath,
                                 userPost: userPost,
                                 userName: userName,
                                 userRegalia: userRegalia,
@@ -126,6 +126,14 @@ extension PostDetailsViewController: UITableViewDataSource {
 }
 
 private extension PostDetailsViewController {
+    func setupContent() {
+        title = "Запись"
+        
+        view.backgroundColor = .SocialNetworkColor.mainBackground
+    }
+}
+
+private extension PostDetailsViewController {
     func loadPostComments() {
         service.getPostComments(postID: postID) { [weak self] result in
             switch result {
@@ -148,8 +156,7 @@ extension PostDetailsViewController: PostDetailsViewDelegate {
                               userFullname: userName,
                               text: withText,
                               date: "10.10.110",
-                              likes: 0,
-                              subcomments: nil)
+                              likes: 0)
         
         service.saveUserComment(comment: comment,
                                 userID: userID,
