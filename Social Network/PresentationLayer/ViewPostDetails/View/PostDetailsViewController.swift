@@ -38,7 +38,7 @@ final class PostDetailsViewController: UIViewController {
         postDetailesView.tableView(delegate: self, dataSource: self)
         postDetailesView.delegate = self
         
-        title = "Запись"
+        setupContent()
         
         postDetailesView.tableViewReloadData()
     }
@@ -122,6 +122,14 @@ extension PostDetailsViewController: UITableViewDataSource {
         }
         
         return UIView()
+    }
+}
+
+private extension PostDetailsViewController {
+    func setupContent() {
+        title = "Запись"
+        
+        view.backgroundColor = .SocialNetworkColor.mainBackground
     }
 }
 

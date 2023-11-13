@@ -109,6 +109,7 @@ private extension PostCommentPanelView {
 private extension PostCommentPanelView {
     @objc func sendCommentButtonWasTapped() {
         delegate?.sendCommentButtonWasTapped(withText: commentText)
+        commentField.resignFirstResponder()
     }
     
     func setupActions() {
