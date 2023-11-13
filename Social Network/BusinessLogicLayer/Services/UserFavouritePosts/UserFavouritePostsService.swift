@@ -11,7 +11,8 @@ typealias GetUserFavouritePostsResult = (Result<[UserPost], UserPostError>) -> V
 typealias SaveToFavouriteUserPostResult = (Result<Any, UserPostError>) -> Void
 
 protocol UserFavouritePostsService: AnyObject {
-    func addUserPostToFavourite(userID: String, postID: String, completion: @escaping SaveToFavouriteUserPostResult)
-    func removeFromFavourite(userPost: UserPost)
-    func removeAllFavouritePosts()
+    func addUserPostToFavourite(userPost: UserPost, completion: @escaping SaveToFavouriteUserPostResult)
+    func getUserFavouritePosts(completion: @escaping GetUserFavouritePostsResult)
+    func removeUserPostFromFavourite(favouritePostID: String)
+    func removeAllUserPostFromFavourite()
 }

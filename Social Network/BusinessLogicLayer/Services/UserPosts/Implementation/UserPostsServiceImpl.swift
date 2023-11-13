@@ -78,29 +78,6 @@ final class UserPostsServiceImpl: UserPostsService {
                 let text = comment?["text"] as? String ?? ""
                 let userFullname = comment?["userFullname"] as? String ?? ""
                 let userPhoto = comment?["userPhoto"] as? String ?? ""
-                let subcommentsDict = comment?["subcomments"] as? NSDictionary
-                
-                var subcomments = [Subcomment]()
-                
-                subcommentsDict?.forEach { id, subcomment in
-                    let subcomment = subcomment as? NSDictionary
-                    
-                    let id = subcomment?["id"] as? String ?? ""
-                    let userSubcommentedID = subcomment?["userSubcommentedID"] as? String ?? ""
-                    let userPhoto = subcomment?["userPhoto"] as? String ?? ""
-                    let userFullname = subcomment?["userFullname"] as? String ?? ""
-                    let text = subcomment?["text"] as? String ?? ""
-                    let date = subcomment?["date"] as? String ?? ""
-                    let likes = subcomment?["likes"] as? Int ?? 0
-                    
-                    subcomments.insert(Subcomment(id: id,
-                                                  userSubcommentedID: userSubcommentedID,
-                                                  userPhoto: userPhoto,
-                                                  userFullname: userFullname,
-                                                  text: text,
-                                                  date: date,
-                                                  likes: likes), at: 0)
-                }
                 
                 comments.insert(Comment(id: id,
                                         userCommentedID: userCommentedID,
@@ -108,8 +85,7 @@ final class UserPostsServiceImpl: UserPostsService {
                                         userFullname: userFullname,
                                         text: text,
                                         date: date,
-                                        likes: likes,
-                                        subcomments: subcomments),at: 0)
+                                        likes: likes),at: 0)
             }
             
             completion(.success(comments))
@@ -197,29 +173,6 @@ final class UserPostsServiceImpl: UserPostsService {
                     let text = comment?["text"] as? String ?? ""
                     let userFullname = comment?["userFullname"] as? String ?? ""
                     let userPhoto = comment?["userPhoto"] as? String ?? ""
-                    let subcommentsDict = comment?["subcomments"] as? NSDictionary
-                    
-                    var subcomments = [Subcomment]()
-                    
-                    subcommentsDict?.forEach { id, subcomment in
-                        let subcomment = subcomment as? NSDictionary
-                        
-                        let id = subcomment?["id"] as? String ?? ""
-                        let userSubcommentedID = subcomment?["userSubcommentedID"] as? String ?? ""
-                        let userPhoto = subcomment?["userPhoto"] as? String ?? ""
-                        let userFullname = subcomment?["userFullname"] as? String ?? ""
-                        let text = subcomment?["text"] as? String ?? ""
-                        let date = subcomment?["date"] as? String ?? ""
-                        let likes = subcomment?["likes"] as? Int ?? 0
-                        
-                        subcomments.insert(Subcomment(id: id,
-                                                      userSubcommentedID: userSubcommentedID,
-                                                      userPhoto: userPhoto,
-                                                      userFullname: userFullname,
-                                                      text: text,
-                                                      date: date,
-                                                      likes: likes), at: 0)
-                    }
                     
                     postComments.insert(Comment(id: id,
                                                 userCommentedID: userCommentedID,
@@ -227,8 +180,7 @@ final class UserPostsServiceImpl: UserPostsService {
                                                 userFullname: userFullname,
                                                 text: text,
                                                 date: date,
-                                                likes: likes,
-                                                subcomments: subcomments),at: 0)
+                                                likes: likes),at: 0)
                 }
                 
                 postLikesDict?.forEach { id, like in

@@ -156,8 +156,7 @@ extension PostDetailsViewController: PostDetailsViewDelegate {
                               userFullname: userName,
                               text: withText,
                               date: "10.10.110",
-                              likes: 0,
-                              subcomments: nil)
+                              likes: 0)
         
         service.saveUserComment(comment: comment,
                                 userID: userID,

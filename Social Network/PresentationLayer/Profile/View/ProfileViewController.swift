@@ -15,6 +15,7 @@ final class ProfileViewController: UIViewController {
     private lazy var photosAdapter = PhotosAdapter()
     private lazy var userDataService = Services.userDataService()
     private lazy var userPostService = Services.userPostsService()
+    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
 
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
@@ -31,6 +32,7 @@ final class ProfileViewController: UIViewController {
     private lazy var postID = String()
     
     private lazy var userPosts: [UserPost] = []
+    private lazy var favouriteUserPosts: [UserPost] = []
     
     private lazy var menuButton: UIButton = {
         let button = UIButton()
@@ -371,32 +373,48 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
     }
     
     func postAddToFavouritesButtonWasTappedAt(indexPath: IndexPath) {
-        isPostAddedToFavourite.toggle()
-        profileView.tableViewReloadData()
+        guard let postID = userPosts[indexPath.row].id,
+              let body = userPosts[indexPath.row].body
+        else {
+            return
+        }
         
-        //        userFavouritePostsService.saveUserPostToFavourite(withID: "") { result in
-        //
-        //        }
+        userFavouritePostsService.addUserPostToFavourite(userPost: UserPost(id: postID,
+                                                                            body: body,
+                                                                            image: nil,
+                                                                            postLikes: nil,
+                                                                            postComments: nil)) { [weak self] result in
+            switch result {
+            case .success(let data):
+                guard let userPost = self?.userPosts[indexPath.row] else { return }
                 
-        //        let indexPath = profileView.tableViewIndexPath(sender: sender)
-        //
-        //        print(indexPath)
-        //
-        //        let post = Storages.posts[indexPath.item]
-        //
-        //        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
-        //            DispatchQueue.main.async { [weak self] in
-        //                if favouritePosts.isEmpty {
-        //                    self?.delegate?.postWasAddedToFavourite(post: post)
-        //                } else {
-        //                    if favouritePosts.contains(where: { $0.title == post.title }) {
-        //                        self?.showAlreadyInFavouritesAlert()
-        //                    } else {
-        //                        self?.delegate?.postWasAddedToFavourite(post: post)
-        //                    }
-        //                }
-        //            }
-        //        }
+                print(data)
+                self?.favouriteUserPosts.insert(userPost, at: 0)
+                self?.profileView.tableViewReloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+//        favouriteUserPosts.forEach {
+//            guard let id = $0.id else { return }
+//            
+//            if id.contains(postID) {
+//                userFavouritePostsService.removeUserPostFromFavourite(favouritePostID: "")
+//            } else {
+//                userFavouritePostsService.addUserPostToFavourite(userPost: userPosts[indexPath.row]) { [weak self] result in
+//                    switch result {
+//                    case .success(_):
+//                        guard let userPost = self?.userPosts[indexPath.row] else { return }
+//                        
+//                        self?.favouriteUserPosts.insert(userPost, at: 0)
+//                        self?.profileView.tableViewReloadData()
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
+//            }
+//        }
     }
 }
 
