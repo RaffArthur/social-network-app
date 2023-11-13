@@ -13,7 +13,8 @@ typealias SaveUserPostResult = (Result<Any, UserPostError>) -> Void
 typealias GetPostCommentsResult = (Result<[Comment], UserPostError>) -> Void
 typealias SaveUserCommentResult = (Result<Any, UserPostError>) -> Void
 
-typealias TrackPostLikeResult = (Result<Any, UserPostError>) -> Void
+typealias GetPostLikesResult = (Result<[Like], UserPostError>) -> Void
+typealias SavePostLikeResult = (Result<Any, UserPostError>) -> Void
 
 protocol UserPostsService: AnyObject {
     func saveUserPost(userPost: UserPost,
@@ -21,10 +22,13 @@ protocol UserPostsService: AnyObject {
     
     func getUserPosts(completion: @escaping GetUserPostsResult)
 
-    func trackUserLike(like: Like,
-                       userID: String,
-                       postID: String,
-                       completion: @escaping TrackPostLikeResult)
+    func savePostLike(like: Like,
+                      userID: String,
+                      postID: String,
+                      completion: @escaping SavePostLikeResult)
+    
+    func getPostLikes(postID: String,
+                      completion: @escaping GetPostLikesResult)
         
     func saveUserComment(comment: Comment,
                          userID: String,

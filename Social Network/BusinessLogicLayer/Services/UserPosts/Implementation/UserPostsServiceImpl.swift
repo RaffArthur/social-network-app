@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseDatabase
 
-final class UserPostsServiceImpl: UserPostsService {    
+final class UserPostsServiceImpl: UserPostsService {
     private var ref = Database.database().reference()
     
     func saveUserComment(comment: Comment,
@@ -181,11 +181,66 @@ final class UserPostsServiceImpl: UserPostsService {
                 let id = post?["id"] as? String ?? ""
                 let body = post?["body"] as? String ?? ""
                 let image = post?["image"] as? String ?? ""
+                let postCommentsDict = post?["postComments"] as? NSDictionary
+                let postLikesDict = post?["postLikes"] as? NSDictionary
                 
                 var postLikes: [Like] = []
                 var postComments: [Comment] = []
-
-                                
+                
+                postCommentsDict?.forEach { id, comment in
+                    let comment = comment as? NSDictionary
+                    
+                    let id = comment?["id"] as? String ?? ""
+                    let userCommentedID = comment?["userCommentedID"] as? String ?? ""
+                    let date = comment?["date"] as? String ?? ""
+                    let likes = comment?["likes"] as? Int ?? 0
+                    let text = comment?["text"] as? String ?? ""
+                    let userFullname = comment?["userFullname"] as? String ?? ""
+                    let userPhoto = comment?["userPhoto"] as? String ?? ""
+                    let subcommentsDict = comment?["subcomments"] as? NSDictionary
+                    
+                    var subcomments = [Subcomment]()
+                    
+                    subcommentsDict?.forEach { id, subcomment in
+                        let subcomment = subcomment as? NSDictionary
+                        
+                        let id = subcomment?["id"] as? String ?? ""
+                        let userSubcommentedID = subcomment?["userSubcommentedID"] as? String ?? ""
+                        let userPhoto = subcomment?["userPhoto"] as? String ?? ""
+                        let userFullname = subcomment?["userFullname"] as? String ?? ""
+                        let text = subcomment?["text"] as? String ?? ""
+                        let date = subcomment?["date"] as? String ?? ""
+                        let likes = subcomment?["likes"] as? Int ?? 0
+                        
+                        subcomments.insert(Subcomment(id: id,
+                                                      userSubcommentedID: userSubcommentedID,
+                                                      userPhoto: userPhoto,
+                                                      userFullname: userFullname,
+                                                      text: text,
+                                                      date: date,
+                                                      likes: likes), at: 0)
+                    }
+                    
+                    postComments.insert(Comment(id: id,
+                                                userCommentedID: userCommentedID,
+                                                userPhoto: userPhoto,
+                                                userFullname: userFullname,
+                                                text: text,
+                                                date: date,
+                                                likes: likes,
+                                                subcomments: subcomments),at: 0)
+                }
+                
+                postLikesDict?.forEach { id, like in
+                    let like = like as? NSDictionary
+                    
+                    let id = like?["id"] as? String ?? ""
+                    let likedUserID = like?["likedUserID"] as? String ?? ""
+                    
+                    postLikes.insert(Like(id: id,
+                                          likedUserID: likedUserID), at: 0)
+                }
+                
                 userPosts.insert(UserPost(id: id,
                                           body: body,
                                           image: image,
@@ -199,10 +254,10 @@ final class UserPostsServiceImpl: UserPostsService {
         }
     }
     
-    func trackUserLike(like: Like,
-                       userID: String,
-                       postID: String,
-                       completion: @escaping TrackPostLikeResult) {
+    func savePostLike(like: Like,
+                      userID: String,
+                      postID: String,
+                      completion: @escaping SavePostLikeResult) {
         guard let uid = Auth.auth().currentUser?.uid,
               let childAutoID = ref.childByAutoId().key
         else {
@@ -224,6 +279,35 @@ final class UserPostsServiceImpl: UserPostsService {
         ref.setValue(dict)
         
         completion(.success(dict))
+    }
+    
+    func getPostLikes(postID: String,
+                      completion: @escaping GetPostLikesResult) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
+            .child("userStorage")
+            .child("user")
+            .child(uid)
+            .child("posts")
+            .child(postID)
+            .child("postLikes")
+        
+        ref.observeSingleEvent(of: .value) { snapshot in
+            let postLikesDict = snapshot.value as? NSDictionary
+            
+            var postLikes = [Like]()
+            
+            postLikesDict?.forEach { id, like in
+                let like = like as? NSDictionary
+                
+                let id = like?[""] as? String ?? ""
+                let likedUserID = like?[""] as? String ?? ""
+                
+                postLikes.insert(Like(id: id,
+                                      likedUserID: likedUserID), at: 0)
+            }
+        }
     }
 }
 

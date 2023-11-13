@@ -19,7 +19,6 @@ final class ProfileViewController: UIViewController {
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
     private lazy var profileView = ProfileView()
-
     
     private lazy var isPostLiked: Bool = false
     private lazy var isPostAddedToFavourite: Bool = false
