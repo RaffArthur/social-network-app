@@ -52,7 +52,7 @@ final class ProfilePostTableViewCell: UITableViewCell {
 }
 
 extension ProfilePostTableViewCell {
-    func configureWith(cellIndex: Int,
+    func configureWith(indexPath: IndexPath,
                        userPost: UserPost,
                        userName: String,
                        userRegalia: String,
@@ -66,11 +66,10 @@ extension ProfilePostTableViewCell {
             return
         }
         
-        print(postImage)
         postMainInfoView.configurePostMainInfo(body: postbody.firstUppercased,
                                                image: nil)
         
-        postQuickActionsPanelView.configurePostQuickActionsPanelWith(cellIndex: cellIndex,
+        postQuickActionsPanelView.configurePostQuickActionsPanelWith(indexPath: indexPath,
                                                                      postLikes: String(describing: postLikeCount),
                                                                      postComments: String(describing: postCommentCount),
                                                                      isPostLiked: isPostLiked,
@@ -82,16 +81,16 @@ extension ProfilePostTableViewCell {
 }
 
 extension ProfilePostTableViewCell: ProfilePostQuickActionsPanelViewDelegate {
-    func postLikesButtonWasTappedAt(index: Int) {
-        delegate?.postLikesButtonWasTappedAt(index: index)
+    func postLikesButtonWasTappedAt(indexPath: IndexPath) {
+        delegate?.postLikesButtonWasTappedAt(indexPath: indexPath)
     }
     
-    func postCommentsButtonWasTappedAt(index: Int) {
-        delegate?.postCommentsButtonWasTappedAt(index: index)
+    func postCommentsButtonWasTappedAt(indexPath: IndexPath) {
+        delegate?.postCommentsButtonWasTappedAt(indexPath: indexPath)
     }
     
-    func postAddToFavouritesButtonWasTappedAt(index: Int) {
-        delegate?.postAddToFavouritesButtonWasTappedAt(index: index)
+    func postAddToFavouritesButtonWasTappedAt(indexPath: IndexPath) {
+        delegate?.postAddToFavouritesButtonWasTappedAt(indexPath: indexPath)
     }
 }
 

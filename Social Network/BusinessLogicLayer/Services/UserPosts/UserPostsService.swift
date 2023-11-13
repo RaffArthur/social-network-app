@@ -22,14 +22,17 @@ protocol UserPostsService: AnyObject {
     
     func getUserPosts(completion: @escaping GetUserPostsResult)
 
-    func savePostLike(like: Like,
-                      userID: String,
+    func savePostLike(userID: String,
                       postID: String,
                       completion: @escaping SavePostLikeResult)
     
     func getPostLikes(postID: String,
                       completion: @escaping GetPostLikesResult)
-        
+    
+    func removePostLike(userID: String,
+                        postID: String,
+                        likeID: String)
+    
     func saveUserComment(comment: Comment,
                          userID: String,
                          postID: String,

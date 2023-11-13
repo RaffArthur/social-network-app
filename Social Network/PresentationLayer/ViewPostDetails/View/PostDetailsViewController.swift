@@ -86,7 +86,7 @@ extension PostDetailsViewController: UITableViewDataSource {
             
             cell?.selectionStyle = .none
             
-            cell?.configureWith(cellIndex: indexPath.row,
+            cell?.configureWith(indexPath: indexPath,
                                 userPost: userPost,
                                 userName: userName,
                                 userRegalia: userRegalia,

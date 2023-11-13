@@ -57,6 +57,55 @@ final class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
+        loadUserData()
+        loadUserPosts()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadFullUserData()
+        
+        setupContent()
+        setupActions()
+        
+        profileUserHeaderView.delegate = self
+        profileView.tableView(delegate: self, dataSource: self)
+        
+        
+    }
+    
+    override func loadView() {
+        view = profileView
+    }
+}
+
+private extension ProfileViewController {
+    func loadFullUserData() {
+        photosAdapter.getPhotos { [weak self] result in
+            let photos = result.photos.map {
+                return Photo(url: $0.url, thumbnailURL: $0.thumbnailURL)
+            }
+            
+            Storages.photos.append(contentsOf: photos)
+            
+            self?.profileView.tableViewReloadData()
+        }
+    }
+    
+    func loadUserPosts() {
+        userPostService.getUserPosts { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.userPosts = data
+                self?.profileView.tableViewReloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func loadUserData() {
         userDataService.getUserData { [weak self] result in
             switch result {
             case .success(let data):
@@ -85,48 +134,6 @@ final class ProfileViewController: UIViewController {
             case .failure(let error):
                 self?.show(mainProfileError: error)
             }
-        }
-        
-        userPostService.getUserPosts { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.userPosts = data
-                self?.profileView.tableViewReloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-        
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        loadFullUserData()
-        
-        setupContent()
-        setupActions()
-        
-        profileUserHeaderView.delegate = self
-        profileView.tableView(delegate: self, dataSource: self)
-    }
-    
-    override func loadView() {
-        view = profileView
-    }
-}
-
-private extension ProfileViewController {
-    func loadFullUserData() {
-        photosAdapter.getPhotos { [weak self] result in
-            let photos = result.photos.map {
-                return Photo(url: $0.url, thumbnailURL: $0.thumbnailURL)
-            }
-            
-            Storages.photos.append(contentsOf: photos)
-            
-            self?.profileView.tableViewReloadData()
         }
     }
 }
@@ -291,7 +298,7 @@ extension ProfileViewController: UITableViewDataSource {
             
             postID = currentPostID
             
-            cell?.configureWith(cellIndex: indexPath.row,
+            cell?.configureWith(indexPath: indexPath,
                                 userPost: currentPost,
                                 userName: "\(userName) \(userSurname)",
                                 userRegalia: userRegalia,
@@ -323,43 +330,73 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 }
 
 extension ProfileViewController: ProfilePostTableViewCellDelegate {
-    func postLikesButtonWasTappedAt(index: Int) {
-        isPostLiked.toggle()
-                
-        profileView.tableViewReloadData()
-    }
-    
-    func postCommentsButtonWasTappedAt(index: Int) {
+    func postLikesButtonWasTappedAt(indexPath: IndexPath) {
+        guard let postID = userPosts[indexPath.row].id,
+              let postLikeIDs = userPosts[indexPath.row].postLikes?.compactMap({ $0.id }),
+              let postLikedUserIDs = userPosts[indexPath.row].postLikes?.compactMap({ $0.likedUserID })
+        else {
+            return
+        }
         
+        if postLikedUserIDs.contains(userID) {
+            postLikeIDs.forEach { userPostService.removePostLike(userID: userID, postID: postID, likeID: $0) }
+        } else {
+            userPostService.savePostLike(userID: userID, postID: postID) { [weak self] result in
+                switch result {
+                case .success(_):
+                    self?.loadUserData()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+        loadUserPosts()
     }
     
-    func postAddToFavouritesButtonWasTappedAt(index: Int) {
+    func postCommentsButtonWasTappedAt(indexPath: IndexPath) {
+        guard let currentPostID = userPosts[indexPath.row].id
+        else {
+            return
+        }
+
+        delegate?.userPostWasTapped(userID: userID,
+                                    postID: currentPostID,
+                                    post: userPosts[indexPath.row],
+                                    userName: userName,
+                                    userRegalia: userRegalia,
+                                    indexPath: indexPath,
+                                    isPostLiked: isPostLiked,
+                                    isPostAddedToFavourite: isPostAddedToFavourite)
+    }
+    
+    func postAddToFavouritesButtonWasTappedAt(indexPath: IndexPath) {
         isPostAddedToFavourite.toggle()
         profileView.tableViewReloadData()
         
-//        userFavouritePostsService.saveUserPostToFavourite(withID: "") { result in
-//            
-//        }
-        
-//        let indexPath = profileView.tableViewIndexPath(sender: sender)
-//        
-//        print(indexPath)
-//        
-//        let post = Storages.posts[indexPath.item]
-//        
-//        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
-//            DispatchQueue.main.async { [weak self] in
-//                if favouritePosts.isEmpty {
-//                    self?.delegate?.postWasAddedToFavourite(post: post)
-//                } else {
-//                    if favouritePosts.contains(where: { $0.title == post.title }) {
-//                        self?.showAlreadyInFavouritesAlert()
-//                    } else {
-//                        self?.delegate?.postWasAddedToFavourite(post: post)
-//                    }
-//                }
-//            }
-//        }
+        //        userFavouritePostsService.saveUserPostToFavourite(withID: "") { result in
+        //
+        //        }
+                
+        //        let indexPath = profileView.tableViewIndexPath(sender: sender)
+        //
+        //        print(indexPath)
+        //
+        //        let post = Storages.posts[indexPath.item]
+        //
+        //        CoreDataManager.shared.fetchFavouritePosts { favouritePosts in
+        //            DispatchQueue.main.async { [weak self] in
+        //                if favouritePosts.isEmpty {
+        //                    self?.delegate?.postWasAddedToFavourite(post: post)
+        //                } else {
+        //                    if favouritePosts.contains(where: { $0.title == post.title }) {
+        //                        self?.showAlreadyInFavouritesAlert()
+        //                    } else {
+        //                        self?.delegate?.postWasAddedToFavourite(post: post)
+        //                    }
+        //                }
+        //            }
+        //        }
     }
 }
 

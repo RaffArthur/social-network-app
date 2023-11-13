@@ -235,7 +235,7 @@ final class UserPostsServiceImpl: UserPostsService {
                     let like = like as? NSDictionary
                     
                     let id = like?["id"] as? String ?? ""
-                    let likedUserID = like?["likedUserID"] as? String ?? ""
+                    let likedUserID = like?["userLikedID"] as? String ?? ""
                     
                     postLikes.insert(Like(id: id,
                                           likedUserID: likedUserID), at: 0)
@@ -254,8 +254,7 @@ final class UserPostsServiceImpl: UserPostsService {
         }
     }
     
-    func savePostLike(like: Like,
-                      userID: String,
+    func savePostLike(userID: String,
                       postID: String,
                       completion: @escaping SavePostLikeResult) {
         guard let uid = Auth.auth().currentUser?.uid,
@@ -308,6 +307,21 @@ final class UserPostsServiceImpl: UserPostsService {
                                       likedUserID: likedUserID), at: 0)
             }
         }
+    }
+    
+    func removePostLike(userID: String,
+                        postID: String,
+                        likeID: String) {
+        ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
+            .child("userStorage")
+            .child("user")
+            .child(userID)
+            .child("posts")
+            .child(postID)
+            .child("postLikes")
+            .child(likeID)
+        
+        ref.removeValue()
     }
 }
 

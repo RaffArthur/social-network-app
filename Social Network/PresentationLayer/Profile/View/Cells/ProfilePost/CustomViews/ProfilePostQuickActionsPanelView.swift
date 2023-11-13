@@ -11,6 +11,8 @@ import UIKit
 final class ProfilePostQuickActionsPanelView: UIView {
     weak var delegate: ProfilePostQuickActionsPanelViewDelegate?
     
+    private lazy var cellIndexPath = IndexPath()
+    
     private lazy var postLikesButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .SocialNetworkColor.primaryForeground
@@ -127,29 +129,27 @@ private extension ProfilePostQuickActionsPanelView {
     }
     
     @objc func postLikesButtonWasTapped(_ sender: UIButton) {
-        delegate?.postLikesButtonWasTappedAt(index: sender.tag)
+        delegate?.postLikesButtonWasTappedAt(indexPath: cellIndexPath)
     }
     
     @objc func postCommentsButtonWasTapped(_ sender: UIButton) {
-        delegate?.postCommentsButtonWasTappedAt(index: sender.tag)
+        delegate?.postCommentsButtonWasTappedAt(indexPath: cellIndexPath)
     }
     
     @objc func postAddToFavouritesButtonWasTapped(_ sender: UIButton) {
-        delegate?.postAddToFavouritesButtonWasTappedAt(index: sender.tag)
+        delegate?.postAddToFavouritesButtonWasTappedAt(indexPath: cellIndexPath)
     }
 }
 
 extension ProfilePostQuickActionsPanelView {
-    func configurePostQuickActionsPanelWith(cellIndex: Int,
+    func configurePostQuickActionsPanelWith(indexPath: IndexPath,
                                             postLikes: String,
                                             postComments: String,
                                             isPostLiked: Bool,
                                             isPostAddedToFavourite: Bool) {
         
-        postLikesButton.tag = cellIndex
-        postCommentsButton.tag = cellIndex
-        postAddToFavouritesButton.tag = cellIndex
         
+        cellIndexPath = indexPath
         postLikesButton.setTitle(postLikes, for: .normal)
         postCommentsButton.setTitle(postComments, for: .normal)
         
