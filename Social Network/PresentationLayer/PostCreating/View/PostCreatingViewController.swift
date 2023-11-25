@@ -37,6 +37,7 @@ final class PostCreatingViewController: UIViewController {
         view = postCreatingView
         
         postCreatingView.delegate = self
+        postCreatingView.textView(delegate: self)
         
         setupScreen()
         setupActions()
@@ -52,7 +53,7 @@ private extension PostCreatingViewController {
 
 extension PostCreatingViewController: PostCreatingViewDelegate {
     func addImageButtonWasTapped() {
-        print("изображение добавлено")
+        
     }
 }
 
@@ -98,5 +99,19 @@ private extension PostCreatingViewController {
         alertController.addAction(action)
         
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension PostCreatingViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        postCreatingView.textView(isEditing: !textView.text.isEmpty)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        postCreatingView.textView(isEditing: true)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        postCreatingView.textView(isEditing: !textView.text.isEmpty)
     }
 }
