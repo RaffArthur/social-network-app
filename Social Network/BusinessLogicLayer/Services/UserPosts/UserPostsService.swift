@@ -16,6 +16,10 @@ typealias SaveUserCommentResult = (Result<Any, UserPostError>) -> Void
 typealias GetPostLikesResult = (Result<[Like], UserPostError>) -> Void
 typealias SavePostLikeResult = (Result<Any, UserPostError>) -> Void
 
+typealias GetPostFavouritesResult = (Result<[UserPost], UserPostError>) -> Void
+typealias SavePostFavouritesResult = (Result<Any, UserPostError>) -> Void
+
+
 protocol UserPostsService: AnyObject {
     func saveUserPost(userPost: UserPost,
                       completion: @escaping SaveUserPostResult)
@@ -26,6 +30,18 @@ protocol UserPostsService: AnyObject {
                       postID: String,
                       isLiked: Bool,
                       completion: @escaping SavePostLikeResult)
+    
+    func saveToFavourite(userID: String,
+                         postID: String,
+                         isAddedToFavourite: Bool,
+                         completion: @escaping SavePostFavouritesResult)
+    
+    func getFavouritePosts(completion: @escaping GetPostFavouritesResult)
+    
+    func removeFromFavourite(userID: String,
+                             postID: String,
+                             favouriteID: String)
+
     
     func getPostLikes(postID: String,
                       completion: @escaping GetPostLikesResult)

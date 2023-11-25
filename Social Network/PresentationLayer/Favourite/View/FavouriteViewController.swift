@@ -12,7 +12,7 @@ final class FavouriteViewController: UIViewController {
     private var filteredFavouritePosts: [UserPost] = []
     
     private lazy var userDataService = Services.userDataService()
-    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
+    private lazy var userPostsService = Services.userPostsService()
     
     private lazy var favouriteView = FavouriteView()
     
@@ -50,6 +50,14 @@ final class FavouriteViewController: UIViewController {
         
         loadFavouritePosts()
         loadUserData()
+        
+        if favouritePosts.isEmpty {
+            deleteAllButton.isEnabled = false
+            deleteAllButton.tintColor = .SocialNetworkColor.secondaryBackground
+        } else {
+            deleteAllButton.isEnabled = true
+            deleteAllButton.tintColor = .SocialNetworkColor.accent
+        }
     }
     
     override func viewDidLoad() {
@@ -75,23 +83,14 @@ private extension FavouriteViewController {
         definesPresentationContext = true
         
         view.backgroundColor = .SocialNetworkColor.mainBackground
-        
-//        if favouritePosts.isEmpty {
-//            deleteAllButton.isEnabled = false
-//            deleteAllButton.tintColor = .SocialNetworkColor.secondaryBackground
-//        } else {
-//            deleteAllButton.isEnabled = true
-//            deleteAllButton.tintColor = .SocialNetworkColor.accent
-//
-//        }
     }
 }
 
 private extension FavouriteViewController {
     @objc func deleteAllButtonTapped() {
-        userFavouritePostsService.removeAllUserPostFromFavourite()
+//        userFavouritePostsService.removeAllUserPostFromFavourite()
         
-        loadFavouritePosts()        
+        loadFavouritePosts()
     }
     
     func setupActions() {
@@ -100,7 +99,7 @@ private extension FavouriteViewController {
     }
     
     func loadFavouritePosts() {
-        userFavouritePostsService.getUserFavouritePosts { [weak self] result in
+        userPostsService.getFavouritePosts { [weak self] result in
             switch result {
             case .success(let data):
                 self?.favouritePosts = data
@@ -201,19 +200,26 @@ extension FavouriteViewController: UITableViewDataSource {
                                                  for: indexPath) as? ProfilePostTableViewCell
         
         var favouritePost: UserPost
+        var isLiked = Bool()
+        var isAddedToFavourite = Bool()
+        
         
         if isFiltering {
             favouritePost = filteredFavouritePosts[indexPath.row]
+            favouritePost.postFavourites?.forEach { isAddedToFavourite = $0.isAddedToFavourite! }
+            favouritePost.postLikes?.forEach { isLiked = $0.isLiked! }
         } else {
             favouritePost = favouritePosts[indexPath.row]
+            favouritePost.postFavourites?.forEach { isAddedToFavourite = $0.isAddedToFavourite! }
+            favouritePost.postLikes?.forEach { isLiked = $0.isLiked! }
         }
         
         cell?.configureWith(indexPath: indexPath,
                             userPost: favouritePost,
                             userName: userName,
                             userRegalia: userRegalia,
-                            isPostLiked: false,
-                            isPostAddedToFavourite: false)
+                            isPostLiked: isLiked,
+                            isPostAddedToFavourite: isAddedToFavourite)
         
         return cell ?? UITableViewCell()
     }

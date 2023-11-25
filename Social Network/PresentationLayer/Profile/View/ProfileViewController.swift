@@ -15,7 +15,7 @@ final class ProfileViewController: UIViewController {
     private lazy var photosAdapter = PhotosAdapter()
     private lazy var userDataService = Services.userDataService()
     private lazy var userPostService = Services.userPostsService()
-    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
+//    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
 
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
@@ -29,7 +29,6 @@ final class ProfileViewController: UIViewController {
     private lazy var postID = String()
     
     private lazy var userPosts: [UserPost] = []
-    private lazy var favouriteUserPosts: [UserPost] = []
     
     private lazy var menuButton: UIButton = {
         let button = UIButton()
@@ -243,9 +242,10 @@ extension ProfileViewController: UITableViewDelegate {
             }
             
             var isLiked = Bool()
-            var istAddedToFavourite = Bool()
+            var isAddedToFavourite = Bool()
             
-            currentPost.postLikes?.forEach({ isLiked = $0.isLiked!})
+            currentPost.postLikes?.forEach { isLiked = $0.isLiked! }
+            currentPost.postFavourites?.forEach { isAddedToFavourite = $0.isAddedToFavourite! }
             
             delegate?.userPostWasTapped(userID: userID,
                                         postID: currentPostID,
@@ -254,7 +254,7 @@ extension ProfileViewController: UITableViewDelegate {
                                         userRegalia: userRegalia,
                                         indexPath: indexPath,
                                         isPostLiked: isLiked,
-                                        isPostAddedToFavourite: istAddedToFavourite)
+                                        isPostAddedToFavourite: isAddedToFavourite)
         }
     }
 }
@@ -299,7 +299,8 @@ extension ProfileViewController: UITableViewDataSource {
             var isAddedToFavourite = Bool()
             
             currentPost.postLikes?.forEach({ isLiked = $0.isLiked!})
-            
+            currentPost.postFavourites?.forEach { isAddedToFavourite = $0.isAddedToFavourite! }
+
             guard let currentPostID = currentPost.id
             else {
                 return UITableViewCell()
@@ -340,17 +341,17 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 
 extension ProfileViewController: ProfilePostTableViewCellDelegate {
     func postLikesButtonWasTappedAt(indexPath: IndexPath) {
-        guard let postID = userPosts[indexPath.row].id,
-              let postLikeIDs = userPosts[indexPath.row].postLikes?.compactMap({ $0.id }),
-              let postLikedUserIDs = userPosts[indexPath.row].postLikes?.compactMap({ $0.likedUserID })
+        guard let currentPostID = userPosts[indexPath.row].id,
+              let currentPostLikeIDs = userPosts[indexPath.row].postLikes?.compactMap({ $0.id }),
+              let currentPostLikedUserIDs = userPosts[indexPath.row].postLikes?.compactMap({ $0.likedUserID })
         else {
             return
         }
         
-        if postLikedUserIDs.contains(userID) {
-            postLikeIDs.forEach { userPostService.removePostLike(userID: userID, postID: postID, likeID: $0) }
+        if currentPostLikedUserIDs.contains(userID) {
+            currentPostLikeIDs.forEach { userPostService.removePostLike(userID: userID, postID: currentPostID, likeID: $0) }
         } else {
-            userPostService.savePostLike(userID: userID, postID: postID, isLiked: true) { [weak self] result in
+            userPostService.savePostLike(userID: userID, postID: currentPostID, isLiked: true) { [weak self] result in
                 switch result {
                 case .success(_):
                     self?.loadUserData()
@@ -374,6 +375,7 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
         var isAddedToFavourite = Bool()
         
         currentPostLikes.forEach({ isLiked = $0.isLiked!})
+        userPosts[indexPath.row].postFavourites?.forEach { isAddedToFavourite = $0.isAddedToFavourite! }
         
         delegate?.userPostWasTapped(userID: userID,
                                     postID: currentPostID,
@@ -387,29 +389,30 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
     
     func postAddToFavouritesButtonWasTappedAt(indexPath: IndexPath) {
         guard let currentPostID = userPosts[indexPath.row].id,
-              let currentPostBody = userPosts[indexPath.row].body,
-              let currentPostImage = userPosts[indexPath.row].image,
-              let currentPostLikes = userPosts[indexPath.row].postLikes,
-              let currentPostComments = userPosts[indexPath.row].postComments
+              let currentPostFavouriteIDs = userPosts[indexPath.row].postFavourites?.compactMap({ $0.id }),
+              let currentPostAddedToFavouriteUserIDs = userPosts[indexPath.row].postFavourites?.compactMap({ $0.addedToFavouriteUserID })
         else {
             return
         }
         
-        userFavouritePostsService.addUserPostToFavourite(userPost: UserPost(id: currentPostID,
-                                                                            body: currentPostBody,
-                                                                            image: currentPostImage,
-                                                                            postLikes: currentPostLikes,
-                                                                            postComments: currentPostComments)) { [weak self] result in
-            switch result {
-            case .success:
-                guard let userPost = self?.userPosts[indexPath.row] else { return }
-                
-                self?.favouriteUserPosts.insert(userPost, at: 0)
-                self?.profileView.tableViewReloadData()
-            case .failure(let error):
-                print(error)
+        if currentPostAddedToFavouriteUserIDs.contains(userID) {
+            currentPostFavouriteIDs.forEach { userPostService.removeFromFavourite(userID: userID,
+                                                                                  postID: currentPostID,
+                                                                                  favouriteID: $0)}
+        } else {
+            userPostService.saveToFavourite(userID: userID,
+                                            postID: currentPostID,
+                                            isAddedToFavourite: true) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
+        
+        loadUserPosts()
     }
 }
 

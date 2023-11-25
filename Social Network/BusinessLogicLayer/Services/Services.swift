@@ -16,7 +16,7 @@ struct Services {
         return UserPostsServiceImpl()
     }
     
-    static func userFavouritePostsService() -> UserFavouritePostsService {
-        return UserFavouritePostsServiceImpl()
-    }
+//    static func userFavouritePostsService() -> UserFavouritePostsService {
+//        return UserFavouritePostsServiceImpl()
+//    }
 }

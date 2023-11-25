@@ -66,7 +66,8 @@ private extension PostCreatingViewController {
                                 body: postCreatingView.commentText,
                                 image: String(),
                                 postLikes: [],
-                                postComments: [])
+                                postComments: [],
+                                postFavourites: [])
         
         service.saveUserPost(userPost: userPost) { [weak self] result in
             switch result {
