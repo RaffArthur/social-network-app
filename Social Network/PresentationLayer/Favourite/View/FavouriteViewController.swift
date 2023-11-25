@@ -203,7 +203,6 @@ extension FavouriteViewController: UITableViewDataSource {
         var isLiked = Bool()
         var isAddedToFavourite = Bool()
         
-        
         if isFiltering {
             favouritePost = filteredFavouritePosts[indexPath.row]
             favouritePost.postFavourites?.forEach { isAddedToFavourite = $0.isAddedToFavourite! }
