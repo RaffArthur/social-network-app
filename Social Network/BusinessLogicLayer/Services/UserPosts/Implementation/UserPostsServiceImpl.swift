@@ -188,9 +188,12 @@ final class UserPostsServiceImpl: UserPostsService {
                     
                     let id = like?["id"] as? String ?? ""
                     let likedUserID = like?["userLikedID"] as? String ?? ""
+                    let isLiked = like?["isLiked"] as? Bool ?? false
+
                     
                     postLikes.insert(Like(id: id,
-                                          likedUserID: likedUserID), at: 0)
+                                          likedUserID: likedUserID,
+                                          isLiked: isLiked), at: 0)
                 }
                 
                 userPosts.insert(UserPost(id: id,
@@ -208,6 +211,7 @@ final class UserPostsServiceImpl: UserPostsService {
     
     func savePostLike(userID: String,
                       postID: String,
+                      isLiked: Bool,
                       completion: @escaping SavePostLikeResult) {
         guard let uid = Auth.auth().currentUser?.uid,
               let childAutoID = ref.childByAutoId().key
@@ -216,7 +220,8 @@ final class UserPostsServiceImpl: UserPostsService {
         }
         
         let dict = ["id": childAutoID,
-                    "userLikedID": uid]
+                    "userLikedID": uid,
+                    "isLiked": isLiked] as [String : Any]
         
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
             .child("userStorage")
@@ -254,9 +259,11 @@ final class UserPostsServiceImpl: UserPostsService {
                 
                 let id = like?[""] as? String ?? ""
                 let likedUserID = like?[""] as? String ?? ""
+                let isLiked = like?["isLiked"] as? Bool ?? false
                 
                 postLikes.insert(Like(id: id,
-                                      likedUserID: likedUserID), at: 0)
+                                      likedUserID: likedUserID,
+                                      isLiked: isLiked), at: 0)
             }
         }
     }

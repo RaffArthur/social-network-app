@@ -20,10 +20,7 @@ final class ProfileViewController: UIViewController {
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
     private lazy var profileView = ProfileView()
-    
-    private lazy var isPostLiked: Bool = false
-    private lazy var isPostAddedToFavourite: Bool = false
-        
+            
     private lazy var nickName = String()
     private lazy var userName = String()
     private lazy var userSurname = String()
@@ -66,7 +63,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadFullUserData()
+        loadUserPhotos()
         
         setupContent()
         setupActions()
@@ -83,7 +80,7 @@ final class ProfileViewController: UIViewController {
 }
 
 private extension ProfileViewController {
-    func loadFullUserData() {
+    func loadUserPhotos() {
         photosAdapter.getPhotos { [weak self] result in
             let photos = result.photos.map {
                 return Photo(url: $0.url, thumbnailURL: $0.thumbnailURL)
@@ -239,11 +236,16 @@ extension ProfileViewController: UITableViewDelegate {
         
         if indexPath.section == 1 {
             let currentPost = userPosts[indexPath.item]
-
+            
             guard let currentPostID = currentPost.id
             else {
                 return
             }
+            
+            var isLiked = Bool()
+            var istAddedToFavourite = Bool()
+            
+            currentPost.postLikes?.forEach({ isLiked = $0.isLiked!})
             
             delegate?.userPostWasTapped(userID: userID,
                                         postID: currentPostID,
@@ -251,8 +253,8 @@ extension ProfileViewController: UITableViewDelegate {
                                         userName: userName,
                                         userRegalia: userRegalia,
                                         indexPath: indexPath,
-                                        isPostLiked: isPostLiked,
-                                        isPostAddedToFavourite: isPostAddedToFavourite)
+                                        isPostLiked: isLiked,
+                                        isPostAddedToFavourite: istAddedToFavourite)
         }
     }
 }
@@ -292,7 +294,12 @@ extension ProfileViewController: UITableViewDataSource {
             cell?.selectionStyle = .none
             
             let currentPost = userPosts[indexPath.item]
-
+            
+            var isLiked = Bool()
+            var isAddedToFavourite = Bool()
+            
+            currentPost.postLikes?.forEach({ isLiked = $0.isLiked!})
+            
             guard let currentPostID = currentPost.id
             else {
                 return UITableViewCell()
@@ -304,8 +311,8 @@ extension ProfileViewController: UITableViewDataSource {
                                 userPost: currentPost,
                                 userName: "\(userName) \(userSurname)",
                                 userRegalia: userRegalia,
-                                isPostLiked: isPostLiked,
-                                isPostAddedToFavourite: isPostAddedToFavourite)
+                                isPostLiked: isLiked,
+                                isPostAddedToFavourite: isAddedToFavourite)
             
             return cell ?? UITableViewCell()
         }
@@ -343,7 +350,7 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
         if postLikedUserIDs.contains(userID) {
             postLikeIDs.forEach { userPostService.removePostLike(userID: userID, postID: postID, likeID: $0) }
         } else {
-            userPostService.savePostLike(userID: userID, postID: postID) { [weak self] result in
+            userPostService.savePostLike(userID: userID, postID: postID, isLiked: true) { [weak self] result in
                 switch result {
                 case .success(_):
                     self?.loadUserData()
@@ -357,64 +364,52 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
     }
     
     func postCommentsButtonWasTappedAt(indexPath: IndexPath) {
-        guard let currentPostID = userPosts[indexPath.row].id
+        guard let currentPostLikes = userPosts[indexPath.row].postLikes,
+              let currentPostID = userPosts[indexPath.row].id
         else {
             return
         }
-
+        
+        var isLiked = Bool()
+        var isAddedToFavourite = Bool()
+        
+        currentPostLikes.forEach({ isLiked = $0.isLiked!})
+        
         delegate?.userPostWasTapped(userID: userID,
                                     postID: currentPostID,
                                     post: userPosts[indexPath.row],
                                     userName: userName,
                                     userRegalia: userRegalia,
                                     indexPath: indexPath,
-                                    isPostLiked: isPostLiked,
-                                    isPostAddedToFavourite: isPostAddedToFavourite)
+                                    isPostLiked: isLiked,
+                                    isPostAddedToFavourite: isAddedToFavourite)
     }
     
     func postAddToFavouritesButtonWasTappedAt(indexPath: IndexPath) {
-        guard let postID = userPosts[indexPath.row].id,
-              let body = userPosts[indexPath.row].body
+        guard let currentPostID = userPosts[indexPath.row].id,
+              let currentPostBody = userPosts[indexPath.row].body,
+              let currentPostImage = userPosts[indexPath.row].image,
+              let currentPostLikes = userPosts[indexPath.row].postLikes,
+              let currentPostComments = userPosts[indexPath.row].postComments
         else {
             return
         }
         
-        userFavouritePostsService.addUserPostToFavourite(userPost: UserPost(id: postID,
-                                                                            body: body,
-                                                                            image: nil,
-                                                                            postLikes: nil,
-                                                                            postComments: nil)) { [weak self] result in
+        userFavouritePostsService.addUserPostToFavourite(userPost: UserPost(id: currentPostID,
+                                                                            body: currentPostBody,
+                                                                            image: currentPostImage,
+                                                                            postLikes: currentPostLikes,
+                                                                            postComments: currentPostComments)) { [weak self] result in
             switch result {
-            case .success(let data):
+            case .success:
                 guard let userPost = self?.userPosts[indexPath.row] else { return }
                 
-                print(data)
                 self?.favouriteUserPosts.insert(userPost, at: 0)
                 self?.profileView.tableViewReloadData()
             case .failure(let error):
                 print(error)
             }
         }
-        
-//        favouriteUserPosts.forEach {
-//            guard let id = $0.id else { return }
-//            
-//            if id.contains(postID) {
-//                userFavouritePostsService.removeUserPostFromFavourite(favouritePostID: "")
-//            } else {
-//                userFavouritePostsService.addUserPostToFavourite(userPost: userPosts[indexPath.row]) { [weak self] result in
-//                    switch result {
-//                    case .success(_):
-//                        guard let userPost = self?.userPosts[indexPath.row] else { return }
-//                        
-//                        self?.favouriteUserPosts.insert(userPost, at: 0)
-//                        self?.profileView.tableViewReloadData()
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//                }
-//            }
-//        }
     }
 }
 

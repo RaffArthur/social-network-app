@@ -24,6 +24,7 @@ protocol UserPostsService: AnyObject {
 
     func savePostLike(userID: String,
                       postID: String,
+                      isLiked: Bool,
                       completion: @escaping SavePostLikeResult)
     
     func getPostLikes(postID: String,

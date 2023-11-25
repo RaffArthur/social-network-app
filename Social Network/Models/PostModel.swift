@@ -16,6 +16,7 @@ struct UserPost: Codable {
 struct Like: Codable {
     let id: String
     let likedUserID: String?
+    let isLiked: Bool?
 }
 
 struct Comment: Codable {

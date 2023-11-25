@@ -39,6 +39,10 @@ extension ProfileView {
         tableView.reloadData()
     }
     
+    func tableviewReloadRowsAt(indexPathes: [IndexPath], with: UITableView.RowAnimation) {
+        tableView.reloadRows(at: indexPathes, with: with)
+    }
+    
     func tableView(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
         tableView.delegate = delegate
         tableView.dataSource = dataSource

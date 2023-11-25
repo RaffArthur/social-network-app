@@ -95,7 +95,6 @@
 		75B444E525C70CEE00B3C586 /* AuthenticationReviewerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AE25C70CED00B3C586 /* AuthenticationReviewerImpl.swift */; };
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
 		75B6E95B28AC2BDD00A58A32 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6E95A28AC2BDD00A58A32 /* LocalAuthorizationService.swift */; };
-		75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */; };
 		75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */; };
 		75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2B284288EE008CF9C1 /* Storages.swift */; };
 		75CE1E2B2846711E0034C96C /* UIColor+SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */; };
@@ -220,7 +219,6 @@
 		75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75B6E95A28AC2BDD00A58A32 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
-		75BBAA25284259B4008CF9C1 /* FavouritePost.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouritePost.xcdatamodel; sourceTree = "<group>"; };
 		75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		75BBAA2B284288EE008CF9C1 /* Storages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storages.swift; sourceTree = "<group>"; };
 		75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+SocialNetwork.swift"; sourceTree = "<group>"; };
@@ -675,7 +673,6 @@
 		75B4448225C70CED00B3C586 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				75BBAA2328425979008CF9C1 /* CoreData */,
 				754D79B926C6F39500ED19F8 /* PhotoModel.swift */,
 				754D79BD26C9A17F00ED19F8 /* PostModel.swift */,
 				752BC25E283AC4380063A5E0 /* UserCredentials.swift */,
@@ -755,14 +752,6 @@
 				75026E612AD19CB800A082F3 /* FavouriteView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		75BBAA2328425979008CF9C1 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */,
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		75CE1E25284663300034C96C /* PresentationLayer */ = {
@@ -1032,7 +1021,6 @@
 				75CE1E2B2846711E0034C96C /* UIColor+SocialNetwork.swift in Sources */,
 				75B444C725C70CEE00B3C586 /* ProfilePhotosPreviewTableViewCell.swift in Sources */,
 				75D8A24D27CFDC850056E78B /* ProfileDelegates.swift in Sources */,
-				75BBAA26284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld in Sources */,
 				752991A62AD1C2F800C65E8C /* ProfileView.swift in Sources */,
 				75B444C125C70CEE00B3C586 /* AppDelegate.swift in Sources */,
 				753768192AED6F2100D6B6A4 /* PostCreatingCoordinator.swift in Sources */,
@@ -1439,19 +1427,6 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		75BBAA24284259B4008CF9C1 /* SocialNetworkCoreData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				75BBAA25284259B4008CF9C1 /* FavouritePost.xcdatamodel */,
-			);
-			currentVersion = 75BBAA25284259B4008CF9C1 /* FavouritePost.xcdatamodel */;
-			path = SocialNetworkCoreData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 060782A6250CE27700A87020 /* Project object */;
 }

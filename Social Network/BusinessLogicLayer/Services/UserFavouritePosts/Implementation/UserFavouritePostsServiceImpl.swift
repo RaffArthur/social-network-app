@@ -78,7 +78,6 @@ final class UserFavouritePostsServiceImpl: UserFavouritePostsService {
                     let text = comment?["text"] as? String ?? ""
                     let userFullname = comment?["userFullname"] as? String ?? ""
                     let userPhoto = comment?["userPhoto"] as? String ?? ""
-                    let subcommentsDict = comment?["subcomments"] as? NSDictionary
                     
                     postComments.insert(Comment(id: id,
                                                 userCommentedID: userCommentedID,
@@ -94,9 +93,11 @@ final class UserFavouritePostsServiceImpl: UserFavouritePostsService {
                     
                     let id = like?["id"] as? String ?? ""
                     let likedUserID = like?["userLikedID"] as? String ?? ""
+                    let isLiked = like?["isLiked"] as? Bool ?? false
                     
                     postLikes.insert(Like(id: id,
-                                          likedUserID: likedUserID), at: 0)
+                                          likedUserID: likedUserID,
+                                          isLiked: isLiked), at: 0)
                 }
                 
                 userPosts.insert(UserPost(id: id,
