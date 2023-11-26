@@ -19,7 +19,12 @@ final class PostDetailsViewController: UIViewController {
     
     private lazy var postComments = [Comment]()
     
-    private var userPost = UserPost(id: nil, body: nil, image: nil, postLikes: nil, postComments: nil)
+    private var userPost = UserPost(id: nil,
+                                    body: nil,
+                                    image: nil,
+                                    postLikes: nil,
+                                    postComments: nil,
+                                    postFavourites: nil)
     private var userName = String()
     private var userRegalia = String()
     private var indexPath = IndexPath()

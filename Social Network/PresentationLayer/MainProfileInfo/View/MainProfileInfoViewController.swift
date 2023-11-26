@@ -65,6 +65,7 @@ final class MainProfileInfoViewController: UIViewController {
         setupContent()
         setupActions()
         
+        mainProfileInfoView.textField(delegate: self)
         mainProfileInfoView.delegate = self
     }
     
@@ -136,5 +137,17 @@ extension MainProfileInfoViewController: MainProfileInfoViewDelegate {
         }
                 
         mainProfileInfoView.userBirthDate = "\(day).\(month).\(year)"
+    }
+}
+
+extension MainProfileInfoViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.SocialNetworkColor.accent.cgColor
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = .nan
+        textField.layer.borderColor = .none
     }
 }

@@ -148,14 +148,12 @@ extension ProfilePostQuickActionsPanelView {
                                             isPostLiked: Bool,
                                             isPostAddedToFavourite: Bool) {
         
-        
         cellIndexPath = indexPath
         postLikesButton.setTitle(postLikes, for: .normal)
         postCommentsButton.setTitle(postComments, for: .normal)
         
         postLikesButton.isSelected = isPostLiked
         postAddToFavouritesButton.isSelected = isPostAddedToFavourite
-        
         
         if postLikesButton.isSelected == true {
             postLikesButton.tintColor = .SocialNetworkColor.likedForeground

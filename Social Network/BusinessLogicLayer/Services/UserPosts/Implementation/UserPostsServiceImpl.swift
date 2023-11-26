@@ -12,6 +12,73 @@ import FirebaseDatabase
 
 final class UserPostsServiceImpl: UserPostsService {
     private var ref = Database.database().reference()
+
+    func getFavouritePosts(completion: @escaping GetPostFavouritesResult) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        var favouritePosts: [UserPost] = []
+        
+        getUserPosts { result in
+            switch result {
+            case .success(let data):
+                let userFavoritePosts = data.filter { post in
+                    if let postFavourites = post.postFavourites {
+                        return postFavourites.contains(where: { $0.addedToFavouriteUserID == uid })
+                    }
+                    return false
+                }
+
+                favouritePosts = userFavoritePosts
+                
+                completion(.success(favouritePosts))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+        
+    func saveToFavourite(userID: String,
+                         postID: String,
+                         isAddedToFavourite: Bool,
+                         completion: @escaping SavePostFavouritesResult) {
+        guard let uid = Auth.auth().currentUser?.uid,
+              let childAutoID = ref.childByAutoId().key
+        else {
+            return
+        }
+        
+        let dict = ["id": childAutoID,
+                    "addedToFavouriteUserID": uid,
+                    "isAddedToFavourite": isAddedToFavourite] as [String : Any]
+        
+        ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
+            .child("userStorage")
+            .child("user")
+            .child(userID)
+            .child("posts")
+            .child(postID)
+            .child("postFavourites")
+            .child(childAutoID)
+        
+        ref.setValue(dict)
+        
+        completion(.success(dict))
+    }
+    
+    func removeFromFavourite(userID: String,
+                             postID: String,
+                             favouriteID: String) {
+        ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
+            .child("userStorage")
+            .child("user")
+            .child(userID)
+            .child("posts")
+            .child(postID)
+            .child("postFavourites")
+            .child(favouriteID)
+        
+        ref.removeValue()
+    }
     
     func saveUserComment(comment: Comment,
                          userID: String,
@@ -159,9 +226,11 @@ final class UserPostsServiceImpl: UserPostsService {
                 let image = post?["image"] as? String ?? ""
                 let postCommentsDict = post?["postComments"] as? NSDictionary
                 let postLikesDict = post?["postLikes"] as? NSDictionary
+                let postFavouritesDict = post?["postFavourites"] as? NSDictionary
                 
                 var postLikes: [Like] = []
                 var postComments: [Comment] = []
+                var postFavourites: [Favourite] = []
                 
                 postCommentsDict?.forEach { id, comment in
                     let comment = comment as? NSDictionary
@@ -188,16 +257,32 @@ final class UserPostsServiceImpl: UserPostsService {
                     
                     let id = like?["id"] as? String ?? ""
                     let likedUserID = like?["userLikedID"] as? String ?? ""
+                    let isLiked = like?["isLiked"] as? Bool ?? false
+
                     
                     postLikes.insert(Like(id: id,
-                                          likedUserID: likedUserID), at: 0)
+                                          likedUserID: likedUserID,
+                                          isLiked: isLiked), at: 0)
+                }
+                
+                postFavouritesDict?.forEach { id, favourite in
+                    let favourite = favourite as? NSDictionary
+                    
+                    let id = favourite?["id"] as? String ?? ""
+                    let addedToFavouriteUserID = favourite?["addedToFavouriteUserID"] as? String ?? ""
+                    let isAddedToFavourite = favourite?["isAddedToFavourite"] as? Bool ?? false
+                    
+                    postFavourites.insert(Favourite(id: id,
+                                                    addedToFavouriteUserID: addedToFavouriteUserID,
+                                                    isAddedToFavourite: isAddedToFavourite), at: 0)
                 }
                 
                 userPosts.insert(UserPost(id: id,
                                           body: body,
                                           image: image,
                                           postLikes: postLikes,
-                                          postComments: postComments), at: 0)
+                                          postComments: postComments,
+                                          postFavourites: postFavourites), at: 0)
             }
             
             completion(.success(userPosts))
@@ -208,6 +293,7 @@ final class UserPostsServiceImpl: UserPostsService {
     
     func savePostLike(userID: String,
                       postID: String,
+                      isLiked: Bool,
                       completion: @escaping SavePostLikeResult) {
         guard let uid = Auth.auth().currentUser?.uid,
               let childAutoID = ref.childByAutoId().key
@@ -216,7 +302,8 @@ final class UserPostsServiceImpl: UserPostsService {
         }
         
         let dict = ["id": childAutoID,
-                    "userLikedID": uid]
+                    "userLikedID": uid,
+                    "isLiked": isLiked] as [String : Any]
         
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
             .child("userStorage")
@@ -254,9 +341,11 @@ final class UserPostsServiceImpl: UserPostsService {
                 
                 let id = like?[""] as? String ?? ""
                 let likedUserID = like?[""] as? String ?? ""
+                let isLiked = like?["isLiked"] as? Bool ?? false
                 
                 postLikes.insert(Like(id: id,
-                                      likedUserID: likedUserID), at: 0)
+                                      likedUserID: likedUserID,
+                                      isLiked: isLiked), at: 0)
             }
         }
     }

@@ -25,17 +25,27 @@ final class PostCreatingView: UIView {
         return sv
     }()
     
+    private lazy var commentPlaceholderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Что у вас нового?"
+        label.font = .SocialNetworkFont.t2
+        label.textColor = .SocialNetworkColor.secondaryText
+        label.backgroundColor = .SocialNetworkColor.clearBackground
+        label.sizeToFit()
+        
+        return label
+    }()
+    
     private lazy var commentTextView: UITextView = {
         let tv = UITextView()
-        tv.text = "Что у вас нового?"
         tv.font = .SocialNetworkFont.t2
         tv.textColor = .SocialNetworkColor.primaryText
         tv.backgroundColor = .SocialNetworkColor.clearBackground
         tv.keyboardType = .alphabet
         tv.translatesAutoresizingMaskIntoConstraints = true
         tv.textAlignment = .left
-        tv.sizeToFit()
         tv.keyboardType = .alphabet
+        tv.sizeToFit()
         
         return tv
     }()
@@ -61,6 +71,7 @@ final class PostCreatingView: UIView {
         
         setupView()
         setupActions()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -75,13 +86,14 @@ private extension PostCreatingView {
     }
     
     func setupLayout() {
-        
         addSubview(scrollView)
         
         scrollView.addSubview(contentView)
         
         contentView.add(subviews: [commentTextView,
                                   addImageButton])
+        
+        commentTextView.addSubview(commentPlaceholderLabel)
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -100,6 +112,13 @@ private extension PostCreatingView {
         commentTextView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalTo(addImageButton.snp.top).offset(-16)
+        }
+        
+        commentPlaceholderLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-5)
+            make.bottom.equalToSuperview().offset(-8)
         }
         
         addImageButton.snp.makeConstraints { make in
@@ -121,5 +140,15 @@ private extension PostCreatingView {
     
     @objc func addimageButtonTapped() {
         delegate?.addImageButtonWasTapped()
+    }
+}
+
+extension PostCreatingView {
+    func textView(delegate: UITextViewDelegate) {
+        commentTextView.delegate = delegate
+    }
+    
+    func textView(isEditing: Bool) {
+        commentPlaceholderLabel.isHidden = isEditing
     }
 }

@@ -11,11 +11,19 @@ struct UserPost: Codable {
     let image: String?
     let postLikes: [Like]?
     let postComments: [Comment]?
+    let postFavourites: [Favourite]?
 }
 
 struct Like: Codable {
     let id: String
     let likedUserID: String?
+    let isLiked: Bool?
+}
+
+struct Favourite: Codable {
+    let id: String
+    let addedToFavouriteUserID: String?
+    let isAddedToFavourite: Bool?
 }
 
 struct Comment: Codable {

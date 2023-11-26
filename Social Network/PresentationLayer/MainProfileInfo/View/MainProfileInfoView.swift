@@ -130,7 +130,11 @@ final class MainProfileInfoView: UIView {
     }()
     
     private lazy var datePicker: UIDatePicker = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+
         let dp = UIDatePicker()
+        dp.maximumDate = dateFormatter.date(from: "2008/01/01")
         dp.preferredDatePickerStyle = .wheels
         dp.datePickerMode = .date
         
@@ -443,5 +447,15 @@ extension MainProfileInfoView {
             userMaleButton.isSelected = false
             userFemaleButton.isSelected = true
         }
+    }
+}
+
+extension MainProfileInfoView {
+    func textField(delegate: UITextFieldDelegate) {
+        userNameField.delegate = delegate
+        userSurnameField.delegate = delegate
+        userBirthDateField.delegate = delegate
+        userHometownField.delegate = delegate
+        userRegaliaField.delegate = delegate
     }
 }
