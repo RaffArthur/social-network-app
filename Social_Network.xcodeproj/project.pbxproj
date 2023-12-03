@@ -95,6 +95,7 @@
 		75B444E525C70CEE00B3C586 /* AuthenticationReviewerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444AE25C70CED00B3C586 /* AuthenticationReviewerImpl.swift */; };
 		75B444E725C70CEE00B3C586 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */; };
 		75B6E95B28AC2BDD00A58A32 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6E95A28AC2BDD00A58A32 /* LocalAuthorizationService.swift */; };
+		75B7245B2B138598003F29C5 /* FirebaseDatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B7245A2B138598003F29C5 /* FirebaseDatabaseError.swift */; };
 		75BBAA2A28425B55008CF9C1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */; };
 		75BBAA2C284288EE008CF9C1 /* Storages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBAA2B284288EE008CF9C1 /* Storages.swift */; };
 		75CE1E2B2846711E0034C96C /* UIColor+SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */; };
@@ -219,6 +220,7 @@
 		75B444B125C70CED00B3C586 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		75B444B425C70CED00B3C586 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75B6E95A28AC2BDD00A58A32 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
+		75B7245A2B138598003F29C5 /* FirebaseDatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseError.swift; sourceTree = "<group>"; };
 		75BBAA2928425B55008CF9C1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		75BBAA2B284288EE008CF9C1 /* Storages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storages.swift; sourceTree = "<group>"; };
 		75CE1E2A2846711E0034C96C /* UIColor+SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+SocialNetwork.swift"; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 		7574B7B52610D2C700A349E0 /* ErrorDomains */ = {
 			isa = PBXGroup;
 			children = (
+				75B7245A2B138598003F29C5 /* FirebaseDatabaseError.swift */,
 				7574B7BF2610D30A00A349E0 /* UserAuthError.swift */,
 				75E564752ADEC124004496C9 /* UserMainProfileInfoError.swift */,
 				753768102AED540F00D6B6A4 /* UserPostError.swift */,
@@ -1054,6 +1057,7 @@
 				754D79BA26C6F39500ED19F8 /* PhotoModel.swift in Sources */,
 				752BC25F283AC4380063A5E0 /* UserCredentials.swift in Sources */,
 				752BC25B283AAFE40063A5E0 /* RealmUserCredentialsDataProvider.swift in Sources */,
+				75B7245B2B138598003F29C5 /* FirebaseDatabaseError.swift in Sources */,
 				7537680C2AED4E6200D6B6A4 /* UserPostsService.swift in Sources */,
 				75F0E9AA28A02F5A00638A81 /* Locilizable+String.swift in Sources */,
 				75098DCD2ADC602100D928ED /* MainProfileInfoCoordinator.swift in Sources */,

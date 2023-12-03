@@ -15,7 +15,6 @@ final class ProfileViewController: UIViewController {
     private lazy var photosAdapter = PhotosAdapter()
     private lazy var userDataService = Services.userDataService()
     private lazy var userPostService = Services.userPostsService()
-//    private lazy var userFavouritePostsService = Services.userFavouritePostsService()
 
     private lazy var profileUserHeaderView = ProfileUserHeaderView()
     private lazy var profilePostsHeaderView = ProfilePostsHeaderView()
@@ -92,14 +91,11 @@ private extension ProfileViewController {
     }
     
     func loadUserPosts() {
-        userPostService.getUserPosts { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.userPosts = data
-                self?.profileView.tableViewReloadData()
-            case .failure(let error):
-                print(error)
-            }
+        userPostService.getUserPosts { [weak self] error in
+            print(error)
+        } success: { [weak self] userPosts in
+            self?.userPosts = userPosts
+            self?.profileView.tableViewReloadData()
         }
     }
     
@@ -349,15 +345,22 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
         }
         
         if currentPostLikedUserIDs.contains(userID) {
-            currentPostLikeIDs.forEach { userPostService.removePostLike(userID: userID, postID: currentPostID, likeID: $0) }
-        } else {
-            userPostService.savePostLike(userID: userID, postID: currentPostID, isLiked: true) { [weak self] result in
-                switch result {
-                case .success(_):
-                    self?.loadUserData()
-                case .failure(let error):
+            currentPostLikeIDs.forEach {
+                userPostService.removePostLike(userID: userID,
+                                               postID: currentPostID,
+                                               likeID: $0) { [weak self] error in
                     print(error)
+                } success: { [weak self] data in
+                    print("remove with: \(data)")
                 }
+            }
+        } else {
+            userPostService.savePostLike(userID: userID,
+                                         postID: currentPostID,
+                                         isLiked: true) { [weak self] error in
+                print(error)
+            } success: { [weak self] data in
+                print("save with: \(data)")
             }
         }
         
@@ -396,19 +399,22 @@ extension ProfileViewController: ProfilePostTableViewCellDelegate {
         }
         
         if currentPostAddedToFavouriteUserIDs.contains(userID) {
-            currentPostFavouriteIDs.forEach { userPostService.removeFromFavourite(userID: userID,
-                                                                                  postID: currentPostID,
-                                                                                  favouriteID: $0)}
+            currentPostFavouriteIDs.forEach {
+                userPostService.removeFromFavourite(userID: userID,
+                                                    postID: currentPostID,
+                                                    favouriteID: $0) { error in
+                    print(error)
+                } success: { favouritePostID in
+                    print(favouritePostID)
+                }
+            }
         } else {
             userPostService.saveToFavourite(userID: userID,
                                             postID: currentPostID,
-                                            isAddedToFavourite: true) { [weak self] result in
-                switch result {
-                case .success(let data):
-                    print(data)
-                case .failure(let error):
-                    print(error)
-                }
+                                            isAddedToFavourite: true) { error in
+                print(error)
+            } success: { favouritePostID in
+                print(favouritePostID)
             }
         }
         

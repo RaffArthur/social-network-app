@@ -12,38 +12,44 @@ import FirebaseDatabase
 
 final class UserPostsServiceImpl: UserPostsService {
     private var ref = Database.database().reference()
-
-    func getFavouritePosts(completion: @escaping GetPostFavouritesResult) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-
+    
+    func getFavouritePosts(failure: @escaping UserPostFailureBlock,
+                           success: @escaping UserPostsSuccessBlock) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            failure(.currentUserIDMissing)
+            return
+        }
+        
         var favouritePosts: [UserPost] = []
         
-        getUserPosts { result in
-            switch result {
-            case .success(let data):
-                let userFavoritePosts = data.filter { post in
-                    if let postFavourites = post.postFavourites {
-                        return postFavourites.contains(where: { $0.addedToFavouriteUserID == uid })
-                    }
-                    return false
+        getUserPosts { error in
+            failure(error)
+        } success: { userPosts in
+            let userFavoritePosts = userPosts.filter { post in
+                if let postFavourites = post.postFavourites {
+                    return postFavourites.contains(where: { $0.addedToFavouriteUserID == uid })
                 }
-
-                favouritePosts = userFavoritePosts
-                
-                completion(.success(favouritePosts))
-            case .failure(let error):
-                completion(.failure(error))
+                return false
             }
+
+            favouritePosts = userFavoritePosts
+            
+            success(favouritePosts)
         }
     }
-        
+    
     func saveToFavourite(userID: String,
                          postID: String,
                          isAddedToFavourite: Bool,
-                         completion: @escaping SavePostFavouritesResult) {
-        guard let uid = Auth.auth().currentUser?.uid,
-              let childAutoID = ref.childByAutoId().key
-        else {
+                         failure: @escaping UserPostFailureBlock,
+                         success: @escaping PostSuccessBlock) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            failure(.currentUserIDMissing)
+            return
+        }
+        
+        guard let childAutoID = ref.childByAutoId().key else {
+            failure(.childByAutoIDMissing)
             return
         }
         
@@ -60,14 +66,20 @@ final class UserPostsServiceImpl: UserPostsService {
             .child("postFavourites")
             .child(childAutoID)
         
-        ref.setValue(dict)
-        
-        completion(.success(dict))
+        ref.setValue(dict) { error, ref in
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
+            } else {
+                success(childAutoID)
+            }
+        }
     }
     
     func removeFromFavourite(userID: String,
                              postID: String,
-                             favouriteID: String) {
+                             favouriteID: String,
+                             failure: @escaping UserPostFailureBlock,
+                             success: @escaping PostSuccessBlock) {
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
             .child("userStorage")
             .child("user")
@@ -77,14 +89,29 @@ final class UserPostsServiceImpl: UserPostsService {
             .child("postFavourites")
             .child(favouriteID)
         
-        ref.removeValue()
+        ref.removeValue { error, ref in
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
+            } else {
+                success(favouriteID)
+            }
+        }
     }
     
     func saveUserComment(comment: Comment,
                          userID: String,
                          postID: String,
-                         completion: @escaping SaveUserPostResult) {
-        guard let childAutoID = ref.childByAutoId().key else { return }
+                         failure: @escaping UserPostFailureBlock,
+                         success: @escaping CommentSuccessBlock) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            failure(.currentUserIDMissing)
+            return
+        }
+        
+        guard let childAutoID = ref.childByAutoId().key else {
+            failure(.childByAutoIDMissing)
+            return
+        }
         
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
             .child("userStorage")
@@ -95,8 +122,7 @@ final class UserPostsServiceImpl: UserPostsService {
             .child("postComments")
             .child(childAutoID)
         
-        guard let userCommentedID = comment.userCommentedID,
-              let userPhoto = comment.userPhoto,
+        guard let userPhoto = comment.userPhoto,
               let userFullname = comment.userFullname,
               let text = comment.text,
               let date = comment.date,
@@ -106,21 +132,30 @@ final class UserPostsServiceImpl: UserPostsService {
         }
         
         let dict = ["id": childAutoID,
-                    "userCommentedID": userCommentedID,
+                    "userCommentedID": uid,
                     "userPhoto": userPhoto,
                     "userFullname": userFullname,
                     "text": text,
                     "date": date,
                     "likes": likes] as [String : Any]
-
-        ref.setValue(dict)
         
-        completion(.success(dict))
+        ref.setValue(dict) { error, ref in
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
+            } else {
+                success(childAutoID)
+            }
+        }
+        
     }
     
     func getPostComments(postID: String,
-                         completion: @escaping GetPostCommentsResult) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+                         failure: @escaping UserPostFailureBlock,
+                         success: @escaping PostCommentsSuccessBlock) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            failure(.currentUserIDMissing)
+            return
+        }
         
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
             .child("userStorage")
@@ -155,17 +190,24 @@ final class UserPostsServiceImpl: UserPostsService {
                                         likes: likes),at: 0)
             }
             
-            completion(.success(comments))
+            success(comments)
         } withCancel: { error in
-            completion(.failure(.unknownError))
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
+            }
         }
     }
-        
+    
     func saveUserPost(userPost: UserPost,
-                      completion: @escaping SaveUserPostResult) {
-        guard let childAutoID = ref.childByAutoId().key,
-              let uid = Auth.auth().currentUser?.uid
-        else {
+                      failure: @escaping UserPostFailureBlock,
+                      success: @escaping PostSuccessBlock) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            failure(.currentUserIDMissing)
+            return
+        }
+        
+        guard let childAutoID = ref.childByAutoId().key else {
+            failure(.childByAutoIDMissing)
             return
         }
 
@@ -187,7 +229,7 @@ final class UserPostsServiceImpl: UserPostsService {
         let inputDataValidationError = userPostsValidation(body: body)
         
         guard inputDataValidationError == nil else {
-            inputDataValidationError.flatMap { completion(.failure($0))}
+            inputDataValidationError.flatMap { failure($0) }
             
             return
         }
@@ -199,13 +241,21 @@ final class UserPostsServiceImpl: UserPostsService {
                     "postComments": postComments,] as [String: Any]
         
         
-        ref.setValue(dict)
-        
-        completion(.success(userPost))
+        ref.setValue(dict) { error, ref in
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
+            } else {
+                success(childAutoID)
+            }
+        }
     }
     
-    func getUserPosts(completion: @escaping GetUserPostsResult) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+    func getUserPosts(failure: @escaping UserPostFailureBlock,
+                      success: @escaping UserPostsSuccessBlock) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            failure(.currentUserIDMissing)
+            return
+        }
         
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
             .child("userStorage")
@@ -285,19 +335,26 @@ final class UserPostsServiceImpl: UserPostsService {
                                           postFavourites: postFavourites), at: 0)
             }
             
-            completion(.success(userPosts))
+            success(userPosts)
         } withCancel: { error in
-            completion(.failure(.unknownError))
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
+            }
         }
     }
     
     func savePostLike(userID: String,
                       postID: String,
                       isLiked: Bool,
-                      completion: @escaping SavePostLikeResult) {
-        guard let uid = Auth.auth().currentUser?.uid,
-              let childAutoID = ref.childByAutoId().key
-        else {
+                      failure: @escaping UserPostFailureBlock,
+                      success: @escaping LikeSuccessBlock) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            failure(.currentUserIDMissing)
+            return
+        }
+        
+        guard let childAutoID = ref.childByAutoId().key else {
+            failure(.childByAutoIDMissing)
             return
         }
         
@@ -314,14 +371,22 @@ final class UserPostsServiceImpl: UserPostsService {
             .child("postLikes")
             .child(childAutoID)
         
-        ref.setValue(dict)
-        
-        completion(.success(dict))
+        ref.setValue(dict) { error, ref in
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
+            } else {
+                success(childAutoID)
+            }
+        }
     }
     
     func getPostLikes(postID: String,
-                      completion: @escaping GetPostLikesResult) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+                      failure: @escaping UserPostFailureBlock,
+                      success: @escaping PostLikesSuccessBlock) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            failure(.currentUserIDMissing)
+            return
+        }
         
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
             .child("userStorage")
@@ -339,20 +404,27 @@ final class UserPostsServiceImpl: UserPostsService {
             postLikesDict?.forEach { id, like in
                 let like = like as? NSDictionary
                 
-                let id = like?[""] as? String ?? ""
-                let likedUserID = like?[""] as? String ?? ""
+                let id = like?["id"] as? String ?? ""
+                let likedUserID = like?["likedUserID"] as? String ?? ""
                 let isLiked = like?["isLiked"] as? Bool ?? false
                 
                 postLikes.insert(Like(id: id,
                                       likedUserID: likedUserID,
                                       isLiked: isLiked), at: 0)
+                success(postLikes)
+            }
+        } withCancel: { error in
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
             }
         }
     }
     
     func removePostLike(userID: String,
                         postID: String,
-                        likeID: String) {
+                        likeID: String,
+                        failure: @escaping UserPostFailureBlock,
+                        success: @escaping LikeSuccessBlock) {
         ref = Database.database(url: "https://social-network-ea509-default-rtdb.firebaseio.com/").reference()
             .child("userStorage")
             .child("user")
@@ -362,12 +434,18 @@ final class UserPostsServiceImpl: UserPostsService {
             .child("postLikes")
             .child(likeID)
         
-        ref.removeValue()
+        ref.removeValue { error, ref in
+            if let error = error as? FirebaseDatabaseError {
+                failure(error)
+            } else {
+                success(likeID)
+            }
+        }
     }
 }
 
 private extension UserPostsServiceImpl {
-    func userPostsValidation(body: String) -> UserPostError? {
+    func userPostsValidation(body: String) -> FirebaseDatabaseError? {
         if body.isEmpty {
             return .emptyBody
         }
