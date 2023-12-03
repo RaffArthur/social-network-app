@@ -7,54 +7,66 @@
 
 import Foundation
 
-typealias GetUserPostsResult = (Result<[UserPost], UserPostError>) -> Void
-typealias SaveUserPostResult = (Result<Any, UserPostError>) -> Void
+typealias UserPostFailureBlock = (FirebaseDatabaseError) -> Void
 
-typealias GetPostCommentsResult = (Result<[Comment], UserPostError>) -> Void
-typealias SaveUserCommentResult = (Result<Any, UserPostError>) -> Void
+typealias PostCommentsSuccessBlock = ([Comment]) -> Void
+typealias CommentSuccessBlock = (Any) -> Void
 
-typealias GetPostLikesResult = (Result<[Like], UserPostError>) -> Void
-typealias SavePostLikeResult = (Result<Any, UserPostError>) -> Void
+typealias PostLikesSuccessBlock = ([Like]) -> Void
+typealias LikeSuccessBlock = (Any) -> Void
 
-typealias GetPostFavouritesResult = (Result<[UserPost], UserPostError>) -> Void
-typealias SavePostFavouritesResult = (Result<Any, UserPostError>) -> Void
-
+typealias UserPostsSuccessBlock = ([UserPost]) -> Void
+typealias PostSuccessBlock = (Any) -> Void
 
 protocol UserPostsService: AnyObject {
+    // MARK: - UserPost
     func saveUserPost(userPost: UserPost,
-                      completion: @escaping SaveUserPostResult)
+                      failure: @escaping UserPostFailureBlock,
+                      success: @escaping PostSuccessBlock)
     
-    func getUserPosts(completion: @escaping GetUserPostsResult)
+    func getUserPosts(failure: @escaping UserPostFailureBlock,
+                      success: @escaping UserPostsSuccessBlock)
 
-    func savePostLike(userID: String,
-                      postID: String,
-                      isLiked: Bool,
-                      completion: @escaping SavePostLikeResult)
-    
+    // MARK: - Favourite
     func saveToFavourite(userID: String,
                          postID: String,
                          isAddedToFavourite: Bool,
-                         completion: @escaping SavePostFavouritesResult)
+                         failure: @escaping UserPostFailureBlock,
+                         success: @escaping PostSuccessBlock)
     
-    func getFavouritePosts(completion: @escaping GetPostFavouritesResult)
+    func getFavouritePosts(failure: @escaping UserPostFailureBlock,
+                           success: @escaping UserPostsSuccessBlock)
     
     func removeFromFavourite(userID: String,
                              postID: String,
-                             favouriteID: String)
+                             favouriteID: String,
+                             failure: @escaping UserPostFailureBlock,
+                             success: @escaping PostSuccessBlock)
 
+    // MARK: - Likes
+    func savePostLike(userID: String,
+                      postID: String,
+                      isLiked: Bool,
+                      failure: @escaping UserPostFailureBlock,
+                      success: @escaping LikeSuccessBlock)
     
     func getPostLikes(postID: String,
-                      completion: @escaping GetPostLikesResult)
+                      failure: @escaping UserPostFailureBlock,
+                      success: @escaping PostLikesSuccessBlock)
     
     func removePostLike(userID: String,
                         postID: String,
-                        likeID: String)
-    
+                        likeID: String,
+                        failure: @escaping UserPostFailureBlock,
+                        success: @escaping LikeSuccessBlock)
+    // MARK: - Comments
     func saveUserComment(comment: Comment,
                          userID: String,
                          postID: String,
-                         completion: @escaping SaveUserPostResult)
+                         failure: @escaping UserPostFailureBlock,
+                         success: @escaping CommentSuccessBlock)
     
     func getPostComments(postID: String,
-                         completion: @escaping GetPostCommentsResult)
+                         failure: @escaping UserPostFailureBlock,
+                         success: @escaping PostCommentsSuccessBlock)
 }

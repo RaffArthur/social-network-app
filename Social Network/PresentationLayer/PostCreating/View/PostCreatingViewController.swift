@@ -11,7 +11,7 @@ import UIKit
 final class PostCreatingViewController: UIViewController {
     weak var delegate: PostCreatingViewControllerDelegate?
     
-    private lazy var service = Services.userPostsService()
+    private lazy var userPostsService = Services.userPostsService()
     
     private lazy var postCreatingView = PostCreatingView()
     
@@ -70,13 +70,10 @@ private extension PostCreatingViewController {
                                 postComments: [],
                                 postFavourites: [])
         
-        service.saveUserPost(userPost: userPost) { [weak self] result in
-            switch result {
-            case .success:
-                self?.delegate?.publishPostButtonWasTapped()
-            case .failure(let error):
-                self?.show(error: error)
-            }
+        userPostsService.saveUserPost(userPost: userPost) { [weak self] error in
+            self?.show(error: .emptyBody)
+        } success: { [weak self] postID in
+            self?.delegate?.publishPostButtonWasTapped()
         }
     }
     

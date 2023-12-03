@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class PostDetailsViewController: UIViewController {
-    private lazy var service = Services.userPostsService()
+    private lazy var userPostService = Services.userPostsService()
     
     private lazy var postDetailesView = PostDetailsView()
     private lazy var commentsHeaderView = PostCommentsHeaderView()
@@ -140,15 +140,12 @@ private extension PostDetailsViewController {
 
 private extension PostDetailsViewController {
     func loadPostComments() {
-        service.getPostComments(postID: postID) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.postComments = data
-                
-                self?.postDetailesView.tableViewReloadData()
-            case .failure(let error):
-                print(error)
-            }
+        userPostService.getPostComments(postID: postID) { [weak self] error in
+            print(error)
+        } success: { [weak self] comments in
+            self?.postComments = comments
+            
+            self?.postDetailesView.tableViewReloadData()
         }
     }
 }
@@ -156,22 +153,21 @@ private extension PostDetailsViewController {
 extension PostDetailsViewController: PostDetailsViewDelegate {
     func sendCommentButtonWasTapped(withText: String) {
         let comment = Comment(id: nil,
-                              userCommentedID: userID,
+                              userCommentedID: nil,
                               userPhoto: "",
                               userFullname: userName,
                               text: withText,
                               date: "10.10.110",
                               likes: 0)
         
-        service.saveUserComment(comment: comment,
-                                userID: userID,
-                                postID: postID) { [weak self] result in
-            switch result {
-            case .success:
-                self?.postDetailesView.tableViewReloadData()
-            case .failure(let error):
-                print(error)
-            }
+        userPostService.saveUserComment(comment: comment,
+                                        userID: userID,
+                                        postID: postID) { [weak self] error in
+            print(error)
+        } success: { [weak self] commentID in
+            self?.postDetailesView.tableViewReloadData()
+
+            print(commentID)
         }
         
         loadPostComments()

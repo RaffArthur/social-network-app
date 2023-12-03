@@ -99,15 +99,12 @@ private extension FavouriteViewController {
     }
     
     func loadFavouritePosts() {
-        userPostsService.getFavouritePosts { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.favouritePosts = data
-                self?.navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(data.count)"
-                self?.favouriteView.tableViewReloadData()
-            case .failure(let error):
-                print(error)
-            }
+        userPostsService.getFavouritePosts { [weak self] error in
+            print(error)
+        } success: { [weak self] favouritePosts in
+            self?.favouritePosts = favouritePosts
+            self?.navigationItem.title = "\(String.localized(key: .favouritesCounterTitle)) \(favouritePosts.count)"
+            self?.favouriteView.tableViewReloadData()
         }
     }
     
